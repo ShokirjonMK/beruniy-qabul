@@ -11,6 +11,7 @@ use common\models\Lang;
 use common\models\EduType;
 use common\models\EduForm;
 use common\models\Status;
+use common\models\DirectionSubject;
 
 /** @var yii\web\View $this */
 /** @var common\models\EduDirectionSearch $searchModel */
@@ -22,6 +23,7 @@ $breadcrumbs['item'][] = [
     'label' => Yii::t('app', 'Bosh sahifa'),
     'url' => ['/'],
 ];
+
 $directions = Direction::find()
     ->where(['is_deleted' => 0 , 'status' => 1])->all();
 $langs = Lang::find()
@@ -133,6 +135,17 @@ $eduForms = EduForm::find()
                'format' => 'raw',
                'value' => function($model) {
                    return $model->price;
+               },
+            ],
+            [
+               'attribute' => 'Fanlar soni',
+               'contentOptions' => ['date-label' => 'Fanlar soni'],
+               'format' => 'raw',
+               'value' => function($model) {
+                if ($model->edu_type_id == 1) {
+                    return DirectionSubject::find()
+                    ->where(['is_deleted' => 0 , 'status' => 1, 'edu_direction_id' => $model->id])->count();
+                }
                },
             ],
             [

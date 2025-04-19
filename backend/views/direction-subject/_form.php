@@ -34,12 +34,12 @@ $subjects = Subjects::find()
             <?= $form->field($model, 'ball')->textInput() ?>
         </div>
         <div class='col-12 col-md-6'>
-            <?= $form->field($model, 'count')->textInput() ?>
+            <?= $form->field($model, 'count')->textInput(['value' => $model->isNewRecord ? 30 : $model->count]) ?>
         </div>
         <div class='col-12 col-md-6'>
             <?= $form->field($model, 'status')->widget(Select2::classname(), [
                 'data' => Status::accessStatus(),
-                'options' => ['placeholder' => 'Status tanlang ...'],
+                // 'options' => ['placeholder' => 'Status tanlang ...'],
                 'pluginOptions' => [
                     'allowClear' => true
                 ],
