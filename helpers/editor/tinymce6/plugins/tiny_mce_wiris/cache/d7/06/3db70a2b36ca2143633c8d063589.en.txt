@@ -1,0 +1,1 @@
+{"result":{"text":"negative fraction numerator square root of 3 over denominator 2 end fraction"},"status":"ok"}

@@ -1,0 +1,1 @@
+{"result":{"text":"square root of 23432 space plus space 1 half plus open vertical bar negative 89 close vertical bar"},"status":"ok"}

@@ -1,0 +1,393 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root
+{
+    /*--bg-color: #eaedf2;*/
+    --bg-color: #edf2fb;
+    --color-text: #001b48;
+    /*--color-blue: #0E86FE;*/
+    /*--color-blue: #015c92;*/
+    /*--color-blue: rgba(53, 79, 149, 1);*/
+    --color-blue: #09588E;
+    /*--color-blue: #1d679f;*/
+    --color-basic: #c1dadf;
+    --color-white: #ffffff;
+    --color-red: #6E0F27;
+    --color-red-rgba: rgba(110,15,39,0.65);
+    --color-view: #8bc1d1;
+
+    --yellow: #25C172;
+    --logo-color: #1c89c1;
+    --red-color:  #d6273e;
+
+    --color-border: rgba(193,218,223,0.55);
+    --color-label: #787F95;
+
+    /*--link-hover: rgba(53, 79, 149, 1);*/
+    --link-hover: #09588E;
+
+    --fs14: 14px;
+
+    --transition-click: 0.3s;
+    --transition: all 0.2s linear;
+    --font: 'Poppins', sans-serif;
+}
+::-webkit-scrollbar
+{
+    width: 5px;
+    height: 5px;
+    background: #fff;
+}
+::-webkit-scrollbar-thumb
+{
+    border-radius: 5px;
+    background: var(--link-hover);
+}
+
+a{
+    text-decoration: none;
+}
+
+body
+{
+    background-color: var(--bg-color);
+}
+p,h1,h2,h3,h4,h5,h6,a
+{
+    margin: 0;
+    padding: 0;
+    font-family: var(--font);
+}
+p{
+    font-size: 14px;
+}
+.title {
+    font-size: 16px;
+    color: var(--color-text);
+    font-weight: 600;
+}
+
+
+
+.pageLoading {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-blue);
+    z-index: 99999999999999999999999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.ik_loader {
+    width: 160px;
+    height: 160px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
+.ik_load {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-top: 5px dotted var(--color-blue);
+    border-bottom: 5px dotted var(--color-blue);
+    border-left: 5px dotted #fff;
+    border-right: 5px dotted #fff;
+    border-radius: 50%;
+    animation-name: ikLoad;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+}
+
+.ik_loader svg {
+    max-width: 50%;
+}
+
+.pageLoading h5 {
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: bold;
+    color: #fff;
+    margin-top: 40px;
+    letter-spacing: 0.7px;
+}
+
+@keyframes ikLoad {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
+.top30 {
+    margin-top: 30px;
+}
+.bottom30 {
+    margin-bottom: 30px;
+}
+
+
+
+.form-control
+{
+    padding: 0.55rem;
+}
+.form-control:focus
+{
+    box-shadow: none;
+}
+
+/*.row*/
+/*{*/
+/*    --bs-gutter-x: 0;*/
+/*    margin: 0;*/
+/*    padding: 0;*/
+/*}*/
+
+.swal2-icon.swal2-success [class^=swal2-success-line]
+{
+    background: var(--color-blue)!important;
+}
+
+.swal2-icon.swal2-success .swal2-success-ring
+{
+    border-color: var(--link-hover)!important;
+}
+
+.swal2-title
+{
+    font-family: var(--font)!important;
+    color: var(--color-text)!important;
+}
+
+
+
+
+
+.visually-hidden {
+    clip: rect(0 0 0 0);
+    clip-path: inset(50%);
+    height: 1px;
+    overflow: hidden;
+    position: absolute;
+    white-space: nowrap;
+    width: 1px;
+}
+
+
+@keyframes swing {
+    0% {
+        transform: rotate(0deg);
+    }
+    10% {
+        transform: rotate(10deg);
+    }
+    30% {
+        transform: rotate(0deg);
+    }
+    40% {
+        transform: rotate(-10deg);
+    }
+    50% {
+        transform: rotate(0deg);
+    }
+    60% {
+        transform: rotate(5deg);
+    }
+    70% {
+        transform: rotate(0deg);
+    }
+    80% {
+        transform: rotate(-5deg);
+    }
+    100% {
+        transform: rotate(0deg);
+    }
+}
+
+.root
+{
+    width: 100%;
+    position: relative;
+}
+
+#exampleModal
+{
+    z-index: 32!important;
+}
+.modal-backdrop.show {
+    opacity: 1!important;
+    background: rgba(25,150,244,0.12)!important;
+}
+.modal-content {
+    border: none;
+    border-radius: 10px;
+}
+.model-content-item {
+    width: 100%;
+    height: 100%;
+    border-radius: 10px;
+    border: 1px solid var(--bg-color);
+}
+.modal-header , .modal-footer {
+    border: none;
+}
+.btn-close {
+    cursor: pointer;
+}
+.content
+{
+    width: 100%;
+    padding-bottom: 30px;
+    position: relative;
+}
+.main-content
+{
+    width: 100%;
+    padding: 15px 23px 5px 23px;
+}
+
+
+.bgWhite {
+    width: 100%;
+    background: #fff;
+    padding: 2px;
+}
+.bgWhiteItem {
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--bg-color);
+}
+
+.education-name
+{
+    padding: 5px 0;
+    border-bottom: 1px solid #fff;
+    display: flex;
+    flex-wrap: wrap;
+}
+.education-name h2
+{
+    display: inline-block;
+    padding: 0;
+}
+.education-name h2 a
+{
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background: rgb(219,231,255);
+    background: linear-gradient(0deg, rgba(219,231,255,1) 0%, rgba(45,66,85,1) 42%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+}
+.title-h2
+{
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: var(--color-text);
+}
+.form-title {
+    font-size: 16px;
+    color: var(--color-text);
+}
+
+@media screen and (max-width:600px) {
+    .main-content
+    {
+        padding: 0px 10px 5px 10px;
+    }
+    .title-h2
+    {
+        font-size: 12px;
+    }
+    .education-name h2 a
+    {
+        font-size: 16px;
+    }
+}
+
+ul.pagination
+{
+    margin: 20px 5px;
+}
+ul.pagination li
+{
+    width: 34px;
+    height: 34px;
+    text-align: center;
+    margin-right: 10px;
+}
+
+ul.pagination li.disabled
+{
+    display: none;
+}
+ul.pagination li a
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    font-size: 12px;
+    justify-content: center;
+    align-items: center;
+    transition: var(--transition);
+    border: 1px solid var(--color-blue);
+    color: var(--color-blue);
+    border-radius: 4px;
+}
+ul.pagination li.active a
+{
+    background: var(--color-blue);
+    color: #fff;
+}
+ul.pagination li a:hover
+{
+    background: var(--color-blue);
+    color: #fff;
+}
+
+
+.page_export {
+    display: flex;
+}
+.page_export li {
+    list-style-type: none;
+    display: none;
+}
+.page_export li:last-child {
+    display: block;
+}
+
+.type-warning .modal-body {
+    display: none;
+}
+
+
+
+

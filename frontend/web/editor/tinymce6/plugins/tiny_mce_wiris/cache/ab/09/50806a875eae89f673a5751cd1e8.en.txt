@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator t g a over denominator sin b end fraction"},"status":"ok"}

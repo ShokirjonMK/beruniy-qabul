@@ -1,0 +1,1 @@
+{"result":{"text":"30 asterisk times 2 asterisk times 4 to the power of 19 asterisk times 5 to the power of 38"},"status":"ok"}

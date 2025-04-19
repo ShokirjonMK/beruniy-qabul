@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator 9 x squared space plus space 4 over denominator 27 x cubed space minus space 64 end fraction"},"status":"ok"}

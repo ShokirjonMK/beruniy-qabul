@@ -1,0 +1,28 @@
+name: PHP Composer
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+permissions:
+  contents: read
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: executing remote ssh commands using password
+      uses: appleboy/ssh-action@v0.1.7
+      with:
+        host: ${{ secrets.SERVER_HOST }}
+        port: ${{ secrets.SERVER_HOST_PORT }}
+        username: ${{ secrets.SERVER_USERNAME }}
+        password: ${{ secrets.SERVER_PASSWORD }}
+        script: |
+          cd /apps/qabul-zarmed/
+          git reset --hard
+          git pull origin main
+          #docker compose exec php bash -c "php yii migrate"

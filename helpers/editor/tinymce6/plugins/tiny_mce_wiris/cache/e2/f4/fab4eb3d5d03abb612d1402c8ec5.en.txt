@@ -1,0 +1,1 @@
+{"result":{"text":"� � � left parenthesis negative 4 5 to the power of ring operator right parenthesis plus � � � left parenthesis 4 0 5 to the power of ring operator right parenthesis plus � � left parenthesis negative 9 4 5 to the power of ring operator right parenthesis"},"status":"ok"}

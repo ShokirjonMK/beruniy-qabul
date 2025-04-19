@@ -1,0 +1,1 @@
+{"result":{"text":"67 over 103"},"status":"ok"}

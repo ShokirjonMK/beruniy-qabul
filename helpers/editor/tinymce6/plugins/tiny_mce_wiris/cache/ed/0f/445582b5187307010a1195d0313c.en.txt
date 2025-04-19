@@ -1,0 +1,1 @@
+{"result":{"text":"cos left parenthesis negative 600 degree right parenthesis"},"status":"ok"}

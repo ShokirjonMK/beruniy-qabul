@@ -1,0 +1,1 @@
+{"result":{"text":"1 half space plus space square root of 4 space"},"status":"ok"}

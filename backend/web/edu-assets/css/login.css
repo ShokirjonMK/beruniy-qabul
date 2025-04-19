@@ -1,0 +1,162 @@
+
+.site-login {
+    width: 100%;
+    height: 100vh;
+}
+.login_content {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.login_main {
+    width: 1024px;
+    display: flex;
+    flex-direction: row-reverse;
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+    .login_main {
+        width: 768px;
+    }
+}
+
+.login_left,
+.login_right {
+    width: 50%;
+    position: relative;
+}
+.login_left img
+{
+    width: 100%;
+}
+.login_right {
+    background: #fff;
+    padding: 2px 2px 2px 0px;
+}
+.login_shape
+{
+    width: 90px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.login_form {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-right: 1px solid var(--bg-color);
+    border-top: 1px solid var(--bg-color);
+    border-bottom: 1px solid var(--bg-color);
+}
+.login_title {
+    color: rgba(0 , 43, 72 ,1);
+    text-align: center;
+    font-weight: 600;
+}
+.title_text {
+    color: var(--color-label);
+    font-size: 13px;
+    text-align: center;
+}
+.title_text a {
+    color: var(--color-text);
+    font-size: 14px;
+}
+.login_form div:nth-child(1) {
+    width: 80%;
+}
+.login_form form {
+    width: 100%;
+}
+.login_form input {
+    padding-left: 45px;
+    font-size: 13px;
+    color: var(--color-text)!important;
+    border: 1px solid var(--color-border);
+}
+.login_form input::placeholder {
+    color: var(--color-label);
+}
+
+.login_form input:focus ~ label.form-label,
+.login_form input:focus ~ #eyePassword {
+    color: var(--color-blue);
+}
+.login_form input.is-invalid:focus ~ label.form-label {
+    color: var(--color-red);
+}
+.login_form .form-label {
+    position: absolute;
+    left: 15px;
+    top: 9px;
+    color: var(--color-text);
+}
+.field-loginform-username,
+.field-eye_password
+{
+    position: relative;
+}
+.is-invalid ~ label.form-label,
+.is-invalid ~ #eyePassword  {
+    color: var(--color-red);
+}
+.is-valid ~ label.form-label,
+.is-valid ~ #eyePassword {
+    color: var(--color-blue);
+}
+.sign_in button {
+    width: 100%;
+}
+#login-form {
+    position: relative;
+}
+#eyePassword {
+    position: absolute;
+    right: 10px;
+    top: 12px;
+    z-index: 2;
+}
+
+.eyeSlashPassword {
+    position: absolute;
+    right: 20px;
+    top: 40px;
+    z-index: 2;
+}
+
+#eye_password.is-invalid ~ #eyePassword {
+    right: 30px;
+}
+
+@media screen and (max-width: 768px) {
+    .login_main {
+        width: 100%;
+        display: block;
+    }
+    .login_left,
+    .login_right {
+        width: 100%;
+        margin: 0 auto;
+    }
+    .login_right {
+        height: 100%;
+        padding-left: 2px;
+    }
+    .site-login {
+        height: min-content;
+    }
+    .login_form div:nth-child(1) {
+        width: 95%;
+        padding: 100px 0px;
+    }
+    .login_left img {
+        height: 100%;
+    }
+    .login_form {
+        border-left: 1px solid var(--bg-color);
+    }
+}

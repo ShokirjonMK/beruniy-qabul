@@ -1,0 +1,1 @@
+{"result":{"text":"2 straight pi straight r squared plus 2 straight pi rh"},"status":"ok"}

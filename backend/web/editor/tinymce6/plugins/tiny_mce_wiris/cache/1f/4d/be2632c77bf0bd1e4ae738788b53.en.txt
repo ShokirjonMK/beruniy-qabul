@@ -1,0 +1,1 @@
+{"result":{"text":"2 cube root of 4 space less than space 0"},"status":"ok"}

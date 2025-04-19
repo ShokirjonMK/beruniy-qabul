@@ -1,0 +1,20 @@
+
+
+
+.nav-link.active
+{
+    text-decoration: none;
+    background: var(--color-blue)!important;
+}
+button.nav-link {
+    font-size: 14px;
+    color: var(--color-text);
+    transition: var(--transition);
+}
+button.nav-link.created
+{
+    color: var(--color-blue);
+}
+button.nav-link:hover {
+    color: var(--color-blue);
+}

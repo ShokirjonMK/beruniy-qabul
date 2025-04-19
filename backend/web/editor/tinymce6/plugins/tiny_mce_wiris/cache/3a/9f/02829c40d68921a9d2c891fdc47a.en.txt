@@ -1,0 +1,1 @@
+{"result":{"text":"square root of 81 plus square root of 9 cross times 1 over 8"},"status":"ok"}

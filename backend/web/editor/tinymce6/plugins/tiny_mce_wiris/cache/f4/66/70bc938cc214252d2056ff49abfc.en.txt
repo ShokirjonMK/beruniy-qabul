@@ -1,0 +1,1 @@
+{"result":{"text":"log subscript x squared minus sign 8 end subscript open parentheses 0 comma 8 close parentheses less than 0"},"status":"ok"}

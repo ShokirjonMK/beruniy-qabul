@@ -1,0 +1,1 @@
+{"result":{"text":"left parenthesis 5 semicolon plus infinity right parenthesis"},"status":"ok"}

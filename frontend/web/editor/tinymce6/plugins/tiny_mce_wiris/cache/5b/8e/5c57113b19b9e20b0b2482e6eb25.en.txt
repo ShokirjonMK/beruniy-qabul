@@ -1,0 +1,1 @@
+{"result":{"text":"1998 to the power of 2002 space plus space 1997 to the power of 2001"},"status":"ok"}

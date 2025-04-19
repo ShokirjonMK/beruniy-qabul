@@ -1,0 +1,1 @@
+{"result":{"text":"square root of 32 space less than space 000"},"status":"ok"}

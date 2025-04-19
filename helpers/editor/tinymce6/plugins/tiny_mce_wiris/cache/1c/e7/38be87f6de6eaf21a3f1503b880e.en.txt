@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator t g left parenthesis begin display style straight pi over 2 end style space plus space a right parenthesis over denominator cos left parenthesis 2 straight pi space minus space straight b right parenthesis end fraction"},"status":"ok"}

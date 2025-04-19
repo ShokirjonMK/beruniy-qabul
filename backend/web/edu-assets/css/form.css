@@ -1,0 +1,371 @@
+
+
+
+.form-item
+{
+    padding: 2px;
+    background: #fff;
+}
+.f-item
+{
+    border: 1px solid var(--bg-color);
+    padding: 10px;
+}
+.form-element
+{
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+}
+
+
+
+.form-section
+{
+    width: 100%;
+    position: relative;
+    padding: 2px;
+    border-radius: 3px;
+    background: var(--color-white);
+}
+.form-section_item
+{
+    width: 100%;
+    height: 100%;
+    padding: 10px 15px;
+    border-radius: 3px;
+    /*padding-top: 5px;*/
+    border: 1px solid var(--bg-color);
+}
+.form-section_item .modal-header,
+.form-section_item .modal-body {
+    padding: 0;
+}
+.form-section_item .modal-body {
+    padding-bottom: 0;
+}
+.form-section_item .form-group{
+    width: 100%;
+    padding: 5px 2px;
+}
+.field-upload {
+    padding: 0!important;
+}
+
+.form-section_item .form-group input,
+.bg-none .form-group input,
+.form-section_item .form-group textarea,
+.bg-none .form-group textarea,
+.form-section_item .form-group select,
+.bg-none .form-group select,
+.form-section_item .form-group .select2,
+.bg-none .form-group .select2 {
+    outline: none!important;
+    font-size: 13px;
+    color: var(--color-text);
+    border: 1px solid var(--color-border)!important;
+}
+.form-section_item .form-group .select2,
+.bg-none .form-group .select2
+{
+    display: block;
+    width: 100%;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    /*color: var(--bs-body-color);*/
+    /*-webkit-appearance: none;*/
+    /*-moz-appearance: none;*/
+    /*appearance: none;*/
+    background-color: var(--bs-body-bg);
+    background-clip: padding-box;
+    /*border: var(--bs-border-width) solid var(--bs-border-color);*/
+    border-radius: var(--bs-border-radius);
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+
+.select2-container--krajee-bs5 .select2-selection
+{
+    box-shadow: none;
+    border: none;
+    /*border-radius: none;*/
+}
+.select2-container--krajee-bs5.select2-container--open:not(.select2-container--disabled) .select2-selection, .select2-container--krajee-bs5:not(.select2-container--disabled) .select2-selection:focus
+{
+    border: none!important;
+    box-shadow: none;
+}
+.form-section_item .form-group label,
+.bg-none .form-group label
+{
+    font-size: 13px;
+    color: var(--color-label);
+}
+.form-section_item .form-group .help-block,
+.bg-none .form-group .help-block
+{
+    font-size: 13px;
+    color: var(--color-red);
+}
+.form-section_item .has-error input ,
+.bg-none .has-error input ,
+.form-section_item .has-error textarea,
+.bg-none .has-error textarea
+{
+    border: 1px solid var(--color-red);
+}
+.form-section_item .has-error label,
+.bg-none .has-error label
+{
+    color: var(--color-red);
+}
+
+
+
+/*bootstrap*/
+.invalid-feedback
+{
+    font-size: 13px;
+    color: var(--color-red)!important;
+}
+.was-validated .form-control:invalid, .form-control.is-invalid
+{
+    border-color: var(--color-red)!important;
+}
+.was-validated .form-control:valid, .form-control.is-valid
+{
+    background-image: none!important;
+    border-color: var(--color-blue)!important;
+
+}
+.was-validated .form-control:valid, .form-control.is-valid:focus
+{
+    box-shadow: none!important;
+}
+/*bootstrap*/
+
+
+
+.upload_file
+{
+    width: 100%;
+    cursor: pointer;
+    text-align: center;
+    background: var(--bg-color);
+    padding-bottom: 10px;
+    padding-top: 5px;
+    border-radius: 8px;
+    border: 3px dashed var(--color-border);
+}
+.upload_icon
+{
+    font-size: 48px;
+    color: var(--link-hover);
+}
+
+
+
+
+/*checkbox*/
+
+.checkbox-flex
+{
+    width: 100%;
+    padding: 10px;
+}
+
+.checkbox_label
+{
+    width: 90%;
+    margin: 0 auto;
+    height: 95px;
+    border-radius: 5px;
+    border: 1px solid var(--color-border);
+    position: relative;
+    cursor: pointer;
+}
+.check_span
+{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 25px;
+    height: 25px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-border);
+    border-radius: 100%;
+    color: #fff;
+}
+.check_icon
+{
+    margin-left: 10px;
+    margin-top: 30px;
+    color: var(--color-border);
+    font-size: 35px;
+}
+.checkbox_label p
+{
+    text-align: center;
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+
+#register:checked ~ .checkbox-flex .row  .ch_register
+{
+    border: 1px solid  var(--color-blue);
+}
+#register:checked ~ .checkbox-flex .row  .ch_register .check_span
+{
+    background: var(--color-blue);
+}
+#register:checked ~ .checkbox-flex .row  .ch_register .check_icon
+{
+    color: var(--color-blue);
+}
+
+
+
+#payment:checked ~ .checkbox-flex .row  .ch_payment
+{
+    border: 1px solid  var(--color-blue);
+}
+#payment:checked ~ .checkbox-flex .row  .ch_payment .check_span
+{
+    background: var(--color-blue);
+}
+#payment:checked ~ .checkbox-flex .row  .ch_payment .check_icon
+{
+    color: var(--color-blue);
+}
+
+
+
+
+
+#attendance:checked ~ .checkbox-flex .row  .ch_attendance
+{
+    border: 1px solid  var(--color-blue);
+}
+#attendance:checked ~ .checkbox-flex .row  .ch_attendance .check_span
+{
+    background: var(--color-blue);
+}
+#attendance:checked ~ .checkbox-flex .row  .ch_attendance .check_icon
+{
+    color: var(--color-blue);
+}
+
+
+
+
+
+#holiday:checked ~ .checkbox-flex .row  .ch_holiday
+{
+    border: 1px solid  var(--color-blue);
+}
+#holiday:checked ~ .checkbox-flex .row  .ch_holiday .check_span
+{
+    background: var(--color-blue);
+}
+#holiday:checked ~ .checkbox-flex .row  .ch_holiday .check_icon
+{
+    color: var(--color-blue);
+}
+
+
+
+
+#debt:checked ~ .checkbox-flex .row  .ch_debt
+{
+    border: 1px solid  var(--color-blue);
+}
+#debt:checked ~ .checkbox-flex .row  .ch_debt .check_span
+{
+    background: var(--color-blue);
+}
+#debt:checked ~ .checkbox-flex .row  .ch_debt .check_icon
+{
+    color: var(--color-blue);
+}
+/*checkbox*/
+
+@media screen and (max-width: 560px) {
+    .form-section_item {
+        padding: 10px 5px;
+    }
+}
+
+
+
+/*student tabs*/
+
+.page-tabs {
+    display: flex;
+    justify-content: center;
+}
+.page-tabs .nav-item {
+    width: 20%;
+}
+.page-tabs button.nav-link {
+    width: 100%;
+    padding: 2px;
+    border-radius: 0;
+    background: #fff;
+    color: var(--color-text);
+    clip-path: polygon(10% 0, 100% 0, 100% 0, 90% 100%, 0 100%, 0 100%);
+}
+.page-tabs button.nav-link:hover {
+    color: var(--color-text);
+}
+.page-tabs button.nav-link.active {
+    color: #fff;
+}
+.page-tabs button.nav-link.active span {
+    border: 1px solid #fff;
+}
+.page-left-tabs {
+    transform: translateX(15px);
+}
+.page-right-tabs {
+    transform: translateX(-15px);
+}
+.page-tabs button.nav-link span {
+    border: 1px solid var(--bg-color);
+    width: 100%;
+    height: 100%;
+    padding: 6px 0;
+    display: block;
+    clip-path: polygon(10% 0, 100% 0, 100% 0, 90% 100%, 0 100%, 0 100%);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*student tabs*/
+
+
+
+
+

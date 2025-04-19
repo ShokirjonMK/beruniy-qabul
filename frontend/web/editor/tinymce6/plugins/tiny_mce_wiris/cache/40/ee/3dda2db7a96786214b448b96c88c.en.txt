@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator 2 to the power of 19 space asterisk times space 27 cubed space plus space 15 space asterisk times space 4 to the power of 9 space asterisk times space 9 to the power of 4 space over denominator 6 to the power of 9 space asterisk times space 2 to the power of 10 space plus space 12 to the power of 10 end fraction\n"},"status":"ok"}

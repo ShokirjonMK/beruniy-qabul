@@ -1,0 +1,1 @@
+{"result":{"text":"1 half plus square root of 16 cross times 8 to the power of 9 plus cube root of 81 plus 150 over 500"},"status":"ok"}

@@ -1,0 +1,1 @@
+{"result":{"text":"x to the power of 5 minus x cubed equals 0"},"status":"ok"}

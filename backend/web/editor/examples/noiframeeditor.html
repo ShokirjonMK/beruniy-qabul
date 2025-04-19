@@ -1,0 +1,80 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Test editor without iframe</title>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/mode/xml/xml.min.js"></script>
+
+	<!-- Editor Plugin -->
+	<link type="text/css" rel="stylesheet" href="''"/>
+	<script type="text/javascript" src="../tinymce5/tinymce.min.js"></script>
+
+	<!-- Style for html code -->
+	<link type="text/css" rel="stylesheet" href="../css/prism.css" />
+
+	<!-- Style -->
+	<link rel="stylesheet" href="../css/style.css">
+
+	<!-- Roboto Font -->
+	<link href='https://fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+	<h1>Editor without iframe</h1>
+	<div id="editorContainer">
+		<form method="post">
+			<div class="myeditablediv">
+				<p>In elementary algebra, the <b>quadratic formula</b> is the solution of the quadratic equation.</p>
+
+				<p style="text-align: center;">
+				<math xmlns="http://www.w3.org/1998/Math/MathML"><mi>x</mi><mo>=</mo><mfrac><mrow><mo>-</mo><mi>b</mi><mo>±</mo><msqrt><msup><mi>b</mi><mn>2</mn></msup><mo>-</mo><mn>4</mn><mi>a</mi><mi>c</mi></msqrt></mrow><mrow><mn>2</mn><mi>a</mi></mrow></mfrac></math>
+				</p>
+
+				<p><b>Water is made from two molecules</b> - Hydrogen and Oxygen. If you put the two gasses together, along with energy, you can make water.</p>
+
+				<p style="text-align: center;">
+				<math class="wrs_chemistry" xmlns="http://www.w3.org/1998/Math/MathML"><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><mfenced><mi mathvariant="normal">g</mi></mfenced><mo>+</mo><msub><mi mathvariant="normal">O</mi><mn>2</mn></msub><mfenced><mi mathvariant="normal">g</mi></mfenced><mo>⇌</mo><mn>2</mn><msub><mi mathvariant="normal">H</mi><mn>2</mn></msub><mi mathvariant="normal">O</mi><mfenced><mi mathvariant="normal">l</mi></mfenced></math>
+				</p>
+
+				<p>The entire formula for the surface area of a cylinder is
+				<math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2</mn><msup><mi>πr</mi><mn>2</mn></msup><mo>+</mo><mn>2</mn><mi>πrh</mi></math>
+				</p>
+			</div>
+		</form>
+	</div>
+
+	<script type="text/javascript" src="../tinymce6/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image"></script>
+	<script>
+
+		// Global variables. For demo purposes.
+		// This variables should be configurated on configuration.ini file.
+		// Fore more information about custom configuration see http://www.wiris.com/plugins/docs/resources/configuration-table
+		// We overwrite them in order to show the changes.
+
+		tinymce.init({
+			inline: true,
+			selector: '.myeditablediv',
+			language: 'en',
+			directionality : 'ltr',
+			menubar : false,
+			plugins: 'tiny_mce_wiris',
+			toolbar: 'bold italic underline | copy paste | undo redo | fontselect fontsizeselect | tiny_mce_wiris_formulaEditor tiny_mce_wiris_formulaEditorChemistry',
+			setup : function(ed)
+			{
+				ed.on('init', function()
+				{
+					this.getDoc().body.style.fontSize = '16px';
+					this.getDoc().body.style.fontFamily = 'Arial, "Helvetica Neue", Helvetica, sans-serif';
+				});
+			},
+
+		});
+	</script>
+
+</body>
+</html>

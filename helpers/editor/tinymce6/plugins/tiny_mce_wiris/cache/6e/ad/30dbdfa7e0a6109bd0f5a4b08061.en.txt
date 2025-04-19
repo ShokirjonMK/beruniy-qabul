@@ -1,0 +1,1 @@
+{"result":{"text":"3 straight x squared minus 15 straight x greater or equal than 0"},"status":"ok"}

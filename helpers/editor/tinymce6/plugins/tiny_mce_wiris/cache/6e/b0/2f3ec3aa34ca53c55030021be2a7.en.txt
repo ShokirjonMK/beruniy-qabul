@@ -1,0 +1,1 @@
+{"result":{"text":"log subscript 3 left parenthesis log subscript 3 x right parenthesis equals negative 1"},"status":"ok"}

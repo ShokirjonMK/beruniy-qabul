@@ -1,0 +1,1 @@
+{"result":{"text":"open parentheses square root of 4 minus square root of 7 end root space plus space square root of 4 plus square root of 7 end root close parentheses squared"},"status":"ok"}

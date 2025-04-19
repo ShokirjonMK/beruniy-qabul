@@ -1,0 +1,1 @@
+{"result":{"text":"ctg straight beta minus fraction numerator cos straight beta minus 1 over denominator sin straight beta end fraction"},"status":"ok"}

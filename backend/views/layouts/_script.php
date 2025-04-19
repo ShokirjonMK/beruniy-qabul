@@ -1,0 +1,1 @@
+<script type="text/javascript" src="/backend/web/editor/tinymce6/plugins/tiny_mce_wiris/integration/WIRISplugins.js?viewer=image"></script>

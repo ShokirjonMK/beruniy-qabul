@@ -1,0 +1,370 @@
+
+.summary
+{
+    display: none;
+}
+.grid-view
+/*.table-parent*/
+{
+    width: 100%;
+    padding: 2px;
+    border-radius: 3px;
+    background: var(--color-white);
+}
+/*.grid-view,*/
+.table
+{
+    border: 1px solid var(--bg-color)!important;
+}
+.table
+{
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    font-size: 0.85rem;
+    padding: 0;
+    margin: 0;
+    --bs-table-striped-bg: none;
+}
+.table-button
+{
+    width: 100%;
+    display: flex;
+    padding: 14px 7px;
+    border: 1px solid var(--bg-color);
+    border-bottom: none;
+}
+.table thead
+{
+    vertical-align: middle;
+}
+.table thead tr th a,
+.table thead tr th,
+.table tbody tr th
+{
+    color: var(--color-blue);
+    font-weight: 600;
+    text-transform: uppercase;
+}
+.table>:not(caption)>*>*
+{
+    padding: 0.8rem 0.5rem;
+}
+.table-number1
+{
+    width: 35px;
+    display: block;
+    text-align: center;
+    padding: 3px 0px;
+    border-radius: 4px;
+    font-size: 12px;
+    color:var(--color-blue);
+    background: var(--bg-color);
+}
+
+.table tbody tr:hover td,
+.table tbody tr:hover th
+{
+    background: var(--bg-color) !important;
+    /*color: #fff!important;*/
+    cursor: pointer;
+}
+
+.table tbody tr td
+{
+    transition: var(--transition);
+    color: var(--color-text)!important;
+    vertical-align: middle;
+}
+.table tbody tr th  {
+    transition: var(--transition);
+}
+
+.gridActionColumn a {
+    margin-left: 10px;
+}
+
+
+.tableIcon {
+    color: var(--color-text);
+}
+.sub_link {
+    color: var(--color-blue);
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+
+
+
+@media screen and (max-width:1024px) {
+    table
+    {
+        padding: 0;
+    }
+    .table thead tr
+    {
+        display: none;
+    }
+    .table tbody {
+        background: var(--bg-color);
+    }
+    .table tbody tr:hover td,
+    .table tbody tr:hover th
+    {
+        background: var(--color-white) !important;
+    }
+    .table tbody td
+    {
+        width: 100%;
+        display: block;
+        /*padding-top: 10px;*/
+        /*padding-bottom: 10px;*/
+        text-align: right;
+        /*position: relative;*/
+    }
+    .table tbody tr
+    {
+        display: block;
+        justify-content: flex-end;
+        margin-bottom: 30px;
+    }
+    .table tbody tr:last-child
+    {
+        margin-bottom: 0;
+    }
+    .table tbody td:before
+    {
+        width: 100%;
+        display: block;
+        content: attr(date-label);
+        /*margin-bottom: 10px;*/
+        text-align: left;
+        color: var(--color-blue);
+    }
+    .table tbody td:nth-child(1)
+    {
+        display: flex;
+        justify-content: flex-end;
+    }
+    .tableIcon {
+        margin-left: 15px;
+    }
+}
+@media screen and (max-width:560px) {
+    .table
+    {
+        font-size: 12px;
+    }
+}
+
+.detail-view tbody tr th:first-child
+{
+    color: var(--color-blue);
+    text-transform: uppercase;
+    font-weight: 500;
+}
+.detail-view tbody tr td
+{
+    color: var(--color-text);
+}
+
+.datail-view-active
+{
+    padding: 2px 15px;
+    border-radius: 4px;
+    background: var(--color-blue);
+    color: #fff;
+}
+.datail-view-inactive
+{
+    padding: 2px 15px;
+    border-radius: 4px;
+    background: var(--color-red);
+    color: #fff;
+}
+
+
+
+/*time table  */
+
+
+
+.time-table {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+    overflow: scroll;
+    padding: 2px;
+    background: #fff;
+}
+
+.time-table table {
+    position: relative;
+}
+.time-table table tr th:first-child {
+    z-index: 2;
+}
+.time-table table tr th {
+    position: sticky;
+    top: -4px;
+    font-size: 12px;
+}
+.time-table table tr th ,
+.time-table table tr td {
+    min-width: 150px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--bg-color);
+}
+.time-table table tr td {
+    color: var(--color-red)!important;
+}
+.time-table table tr th,
+.time-table table tr td:first-child {
+    position: sticky;
+    left: -4px;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid var(--bg-color)!important;
+}
+.time-table table tr td:first-child {
+    color: var(--color-blue)!important;
+    /*font-weight: 500;*/
+}
+.time-table table tr th:first-child,
+.time-table table tr td:first-child {
+    width: 100px;
+}
+.time-table table tr:hover td:first-child {
+    background: #fff!important;
+}
+.td_firstChild p:nth-child(1) {
+    text-align: right;
+    font-size: 12px;
+    padding-right: 10px;
+}
+.td_firstChild p:nth-child(2) {
+    text-align: left;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+
+#trueLesson {
+    position: relative;
+}
+#trueLesson a {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    display: flex;
+    align-items: center;
+    color: var(--color-blue)!important;
+    justify-content: center;
+}
+
+
+/*time table  */
+
+
+.attends-table {
+    width: 100%;
+    position: relative;
+    overflow: scroll;
+    padding: 4px;
+    background: #fff;
+}
+
+.attends-table table {
+    position: relative;
+    border-collapse: revert;
+    border: 1px solid var(--bg-color)!important;
+}
+.attends-table table tr th:first-child {
+    z-index: 2;
+    min-width: 250px;
+}
+.attends-table table tr th {
+    position: sticky;
+    top: -4px;
+    font-size: 12px;
+}
+.attends-table table tr th ,
+.attends-table table tr td {
+    min-width: 150px;
+    text-align: center;
+    background: #fff;
+    border: 1px solid var(--bg-color);
+}
+.attends-table table tr td i {
+    font-size: 18px;
+}
+.attends-table table tr td i.bi-person-check {
+    color: var(--color-blue);
+}
+.attends-table table tr td {
+    color: var(--color-red)!important;
+}
+.attends-table table tr th,
+.attends-table table tr td:first-child {
+    position: sticky;
+    left: -4px;
+    z-index: 1;
+    background: #fff;
+    border: 1px solid var(--bg-color)!important;
+}
+.attends-table table tr td:first-child {
+    color: var(--color-blue)!important;
+    min-width: 250px;
+    text-align: left;
+    /*font-weight: 500;*/
+}
+.attends-table table tr th:first-child,
+.attends-table table tr td:first-child {
+    width: 100px;
+}
+.attends-table table tr:hover td:first-child {
+    background: #fff!important;
+}
+.td_firstChild p:nth-child(1) {
+    text-align: right;
+    font-size: 12px;
+    padding-right: 10px;
+}
+.td_firstChild p:nth-child(2) {
+    text-align: left;
+    font-size: 12px;
+    padding-left: 10px;
+}
+
+
+.table_actions a {
+    margin-left: 30px;
+}
+.table_actions a:first-child {
+    margin-left: 0;
+}
+
+.wid250 {
+    max-width: 250px;
+    white-space: normal;
+}
+
+@media screen and (max-width: 1024px) {
+    .wid250 {
+        max-width: 100%!important;
+    }
+}
+
+
+
+
+
+
+
+
+

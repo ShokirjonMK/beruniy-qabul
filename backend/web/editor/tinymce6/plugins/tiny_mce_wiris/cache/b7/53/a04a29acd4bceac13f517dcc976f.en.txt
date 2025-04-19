@@ -1,0 +1,1 @@
+{"result":{"text":"log subscript 2 open parentheses 2 close parentheses less than 0"},"status":"ok"}

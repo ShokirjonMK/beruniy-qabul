@@ -1,0 +1,1 @@
+{"result":{"text":"left parenthesis 1 minus 1 over 5 squared right parenthesis asterisk times left parenthesis 1 minus 1 over 6 squared right parenthesis asterisk times space... space asterisk times space left parenthesis 1 minus 1 over 103 squared right parenthesis"},"status":"ok"}

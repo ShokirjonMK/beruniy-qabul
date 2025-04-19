@@ -4,3 +4,17 @@ protected/runtime/*
 !protected/runtime/.gitignore
 protected/data/*.db
 themes/classic/views/
+
+# docker/*
+
+# docker
+/docker/mysql/db
+/docker/nginx/logs
+/docker/php/bash_history
+frontend/web/uploads/*
+.idea/workspace.xml
+.idea/workspace.xml
+
+vendor/
+
+!vendor/yiisoft/yii2-bootstrap5/src/BootstrapAsset.php

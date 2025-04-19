@@ -1,0 +1,1 @@
+{"result":{"text":"integral subscript 1 superscript 2 5 italic a d x"},"status":"ok"}

@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator negative 12 x over denominator 27 x cubed space plus space 64 end fraction"},"status":"ok"}

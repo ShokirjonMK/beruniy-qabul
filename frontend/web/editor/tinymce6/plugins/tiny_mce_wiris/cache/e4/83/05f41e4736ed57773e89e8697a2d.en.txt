@@ -1,0 +1,1 @@
+{"result":{"text":"y space equals space left parenthesis x squared space plus space x space plus space 5 right parenthesis cubed space plus left parenthesis x squared space plus space x space plus space 6 right parenthesis squared space plus space x squared space plus space x"},"status":"ok"}

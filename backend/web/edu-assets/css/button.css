@@ -1,0 +1,117 @@
+
+
+.b-btn
+{
+    padding: 8px 22px;
+    text-transform: uppercase;
+    font-size: 14px;
+    cursor: pointer;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    transition: all 0.3s ease-in-out;
+    border: none;
+    outline: none;
+    position: relative;
+    border-radius: 4px;
+    color: var(--color-text);
+    text-decoration: none;
+    background-color: var(--color-basic);
+}
+.b-btn i
+{
+    /*margin-right: 10px;*/
+}
+.b-primary
+{
+    /*background-color: rgba(53, 79, 149, 1);*/
+    background-color: var(--color-blue);
+    color: var(--color-white);
+}
+.b-danger
+{
+    background-color: var(--color-red);
+    color: var(--color-white);
+}
+.b-btn::before
+{
+    content: '';
+    position: absolute;
+    left: -1px;
+    border-radius: 4px;
+    top: -1px;
+    bottom: -1px;
+    right: -1px;
+    transition: var(--transition);
+    border: 1px solid var(--color-white);
+}
+.b-btn:hover::before
+{
+    left: 2px;
+    top: 2px;
+    right: 2px;
+    bottom: 2px;
+}
+
+
+.td_view,
+.td_update,
+.td_delete
+{
+    padding: 3px 7px;
+    border-radius: 4px;
+    transition: var(--transition);
+    background: var(--color-white);
+}
+.td_view
+{
+    color: var(--color-view);
+    /*border: 1px solid var(--color-view);*/
+}
+.td_view:hover
+{
+    color: var(--color-white);
+    background: var(--color-view);
+}
+.td_update
+{
+    color: var(--color-blue);
+    border: 1px solid var(--color-blue);
+}
+.td_update:hover
+{
+    color: var(--color-white);
+    background: var(--color-blue);
+}
+.td_delete
+{
+    color: var(--color-red);
+    /*border: 1px solid var(--color-red);*/
+}
+.td_delete:hover
+{
+    color: var(--color-white);
+    background: var(--color-red);
+}
+
+.clicMenu {
+    width: 120px;
+    height: 120px;
+    border: 1px solid red;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.menuToggle {
+    width: 50px;
+    height: 50px;
+    border: 1px solid red;
+}
+
+
+
+
+
+
+
+
+

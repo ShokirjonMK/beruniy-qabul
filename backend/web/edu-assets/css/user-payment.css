@@ -1,0 +1,70 @@
+
+.userInfo {
+    width: 100%;
+    display: flex;
+}
+.userInfoLeft {
+    width: 65px;
+    height: 65px;
+    padding: 4px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid var(--bg-color);
+}
+.userInfoLeft img
+{
+    width: 100%;
+    max-height: 100%;
+}
+.userInfoRight {
+    width: calc(100% - 65px);
+    padding-left: 10px;
+}
+.userInfoRight a {
+    color: var(--color-blue);
+}
+.userInfoRight .full_name
+{
+    font-size: 15px;
+}
+.userInfoRight p span {
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: var(--color-blue);
+    display: inline-block;
+}
+.dashed
+{
+    width: 100%;
+    margin: 0 auto;
+    height: 1px;
+    border-top: 1px dashed var(--bg-color);
+}
+.paymentP p {
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed var(--color-border);
+}
+
+.table-control {
+    max-width: 90%;
+    padding: 3px 10px;
+    outline: none;
+    font-size: 13px;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}
+.paymentDate {
+    width: 48%;
+}
+.select {
+    width: 100%;
+    padding: 3px 10px;
+    outline: none;
+    font-size: 13px;
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+}

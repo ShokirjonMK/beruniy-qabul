@@ -1,0 +1,1 @@
+{"result":{"text":"plus-or-minus a r c t g 7 plus 2 straight pi straight n space comma space straight n element of straight Z"},"status":"ok"}

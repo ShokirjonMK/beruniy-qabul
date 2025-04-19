@@ -1,0 +1,1 @@
+{"result":{"text":"sin squared left parenthesis 3570 degree right parenthesis"},"status":"ok"}

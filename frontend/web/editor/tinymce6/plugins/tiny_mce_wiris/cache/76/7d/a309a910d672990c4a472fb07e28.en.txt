@@ -1,0 +1,1 @@
+{"result":{"text":"sin left parenthesis negative 45 degree right parenthesis space plus space cos left parenthesis 405 degree right parenthesis space plus space t g left parenthesis negative 945 degree right parenthesis"},"status":"ok"}

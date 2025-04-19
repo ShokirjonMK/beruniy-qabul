@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator begin display style 1 half end style plus square root of 81 plus cube root of 81 cross times open vertical bar negative 52 close vertical bar over denominator 100 end fraction"},"status":"ok"}

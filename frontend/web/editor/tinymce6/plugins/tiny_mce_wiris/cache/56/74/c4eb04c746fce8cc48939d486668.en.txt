@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator negative 18 a over denominator 9 a squared space minus space 4 b squared end fraction"},"status":"ok"}

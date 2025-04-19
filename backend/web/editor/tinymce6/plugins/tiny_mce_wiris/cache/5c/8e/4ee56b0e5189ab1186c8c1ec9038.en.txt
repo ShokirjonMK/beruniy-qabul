@@ -1,0 +1,1 @@
+{"result":{"text":"fraction numerator 4 a squared space minus space 12 a b space plus space 9 b squared over denominator 2 a squared space minus space 5 a b space plus space 3 b squared end fraction"},"status":"ok"}
