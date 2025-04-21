@@ -87,11 +87,11 @@ $student->update(false);
 
 $filial = Branch::findOne($student->branch_id);
 
-$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key='.$link.'&type=2'))->setSize(120, 120)
+$qr = (new QrCode('https://qabul.arbu.uz/site/contract?key='.$link.'&type=2'))->setSize(120, 120)
     ->setMargin(10);
 $img = $qr->writeDataUri();
 
-$lqr = (new QrCode('https://license.gov.uz/registry/48a00e41-6370-49d6-baf7-ea67247beeb6'))->setSize(100, 100)
+$lqr = (new QrCode('https://license.gov.uz/registry/a858d97e-3283-4aef-b3a7-9fc0b382f8a2'))->setSize(100, 100)
     ->setMargin(10);
 $limg = $lqr->writeDataUri();
 ?>

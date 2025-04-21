@@ -107,10 +107,10 @@ $flagMap = [
             <div class="mb_menu_list">
                 <p><?= Yii::t("app", "a5") ?></p>
                 <ul>
-                    <li><a href="https://www.instagram.com/tgfu_uz/?igshid=MzRlODBiNWFlZA%3D%3D"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://t.me/tgfu_uzb"><i class="fa-brands fa-telegram"></i></a></li>
-                    <li><a href="https://www.facebook.com/tgfu.uz?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="https://youtube.com/@tgfuofficial?si=teblBgMHa0fG-nus"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="https://www.instagram.com/arbu_rasmiy"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://t.me/ARBU_RASMIY"><i class="fa-brands fa-telegram"></i></a></li>
+                    <li><a href="https://www.facebook.com/share/1Ee5NUp3fb/?mibextid=wwXIfr"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://youtube.com/@arbu_rasmiy"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
 

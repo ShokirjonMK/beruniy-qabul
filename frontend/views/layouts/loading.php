@@ -5,7 +5,7 @@
             <img src="/frontend/web/images/logo_blue.svg" alt="">
         </div>
         <div class="circle-text2">
-            <p>TOSHKENT * GUMANITAR * FANLAR * UNIVERSITETI *</p>
+            <p>ABU RAYHON  * BERUNIY * UNIVERSITETI *</p>
         </div>
     </div>
 </div>

@@ -11,7 +11,7 @@ use common\models\ExamDate;
 
 
 
-$this->title = 'TOSHKENT GUMANITAR FANLAR UNIVERSITETI';
+$this->title = 'ABU RAYHON BERUNIY UNIVERSITETI';
 ?>
 
 <div class="ik_title_h5 mt-2 mb-4">
