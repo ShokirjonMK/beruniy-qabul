@@ -13,6 +13,7 @@ use Yii;
  * @property float|null $ball
  * @property int|null $count
  * @property int|null $status
+ * @property int $type
  * @property int|null $created_at
  * @property int|null $updated_at
  * @property int|null $created_by
@@ -40,8 +41,9 @@ class DirectionSubject extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['subject_id', 'edu_direction_id', 'count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted'], 'integer'],
+            [['type', 'subject_id', 'edu_direction_id', 'count', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted'], 'integer'],
             [['ball'], 'number'],
+            ['type', 'in', 'range' => [0, 1]],
             [['edu_direction_id'], 'exist', 'skipOnError' => true, 'targetClass' => EduDirection::class, 'targetAttribute' => ['edu_direction_id' => 'id']],
             [['subject_id'], 'exist', 'skipOnError' => true, 'targetClass' => Subjects::class, 'targetAttribute' => ['subject_id' => 'id']],
             [

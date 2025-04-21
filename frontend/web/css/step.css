@@ -312,9 +312,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(9,88,142);
-    background: linear-gradient(180deg, rgba(9,88,142,0.9051995798319328) 30%, rgba(255,255,255,1) 100%);
-
+    background: rgb(255, 255, 255);
+    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(27, 50, 117, 1) 60%);
 }
 
 .cstep_box {
@@ -363,7 +362,7 @@
     border-radius: 5px;
 }
 .cstep_head_left img {
-    width: 186px;
+    width: 80px;
 }
 
 .cstep_head_right {

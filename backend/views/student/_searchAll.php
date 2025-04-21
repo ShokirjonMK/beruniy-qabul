@@ -12,11 +12,21 @@ use common\models\EduType;
 use common\models\EduForm;
 use common\models\EduDirection;
 use common\models\Lang;
+use common\models\Branch;
+use common\models\Consulting;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentPerevotSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 /** @var \common\models\EduType $eduType */
+
+$branchs = Branch::find()
+    ->where(['in', 'id', getBranchOneIk()])
+    ->all();
+
+$cons = Consulting::find()
+    ->where(['in', 'id', getConsOneIk()])
+    ->all();
 
 ?>
 
@@ -45,7 +55,7 @@ use common\models\Lang;
                         <?= $form->field($model, 'middle_name') ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'username')
                             ->widget(\yii\widgets\MaskedInput::class, [
@@ -75,7 +85,7 @@ use common\models\Lang;
                         ]) ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'user_status')->widget(Select2::classname(), [
                             'data' => Status::userStatusUpdate(),
@@ -86,6 +96,31 @@ use common\models\Lang;
                         ])->label('User status <span>*</span>'); ?>
                     </div>
                 </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($branchs, 'id', 'name_uz'),
+                            'options' => ['placeholder' => 'Filial tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Filial <span>*</span>');; ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'cons_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($cons, 'id', 'name'),
+                            'options' => ['placeholder' => 'Xamkorlar tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Xamkorlar <span>*</span>');; ?>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group d-flex justify-content-end gap-2">

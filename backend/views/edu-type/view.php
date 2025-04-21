@@ -6,24 +6,45 @@ use yii\widgets\DetailView;
 /** @var yii\web\View $this */
 /** @var common\models\EduType $model */
 
-$this->title = $model->id;
-$this->params['breadcrumbs'][] = ['label' => Yii::t('app', 'Edu Types'), 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Ko\'rish';
+$breadcrumbs = [];
+$breadcrumbs['item'][] = [
+    'label' => Yii::t('app', 'Bosh sahifa'),
+    'url' => ['/'],
+];
+$breadcrumbs['item'][] = [
+    'label' => Yii::t('app', 'Ta\'lim turi'),
+    'url' => ['index'],
+];
 \yii\web\YiiAsset::register($this);
 ?>
 <div class="edu-type-view">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <?php foreach ($breadcrumbs['item'] as $item) : ?>
+                <li class='breadcrumb-item'>
+                    <?= Html::a($item['label'], $item['url'], ['class' => '']) ?>
+                </li>
+            <?php endforeach; ?>
+            <li class="breadcrumb-item active" aria-current="page"><?= Html::encode($this->title) ?></li>
+        </ol>
+    </nav>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+    <p class="mb-3">
+        <?php if (permission('edu-type', 'update')): ?>
+            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b-btn b-primary']) ?>
+        <?php endif; ?>
+
+        <?php if (permission('edu-type', 'delete')): ?>
+            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => 'b-btn b-danger',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php endif; ?>
     </p>
 
     <?= DetailView::widget([

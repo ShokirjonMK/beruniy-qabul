@@ -39,19 +39,27 @@ $questions = $dataProvider->getModels();
     </nav>
 
     <div class="mb-3 mt-4">
-        <?= Html::a(Yii::t('app', 'Savol qo\'shish'), ['create' , 'id' => $subject->id], ['class' => 'b-btn b-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Savol yuklash excel'), ['upload',  'id' => $subject->id],
-            [
-                "data-bs-toggle" => "modal",
-                "data-bs-target" => "#studentInfo",
-                'class' => 'b-btn b-primary'
-            ])
-        ?>
-        <?= Html::a(Yii::t('app', 'Barcha savollarni o\'chirish'), ['subjects/delete-questions',  'id' => $subject->id],
-            [
-                'class' => 'b-btn b-danger'
-            ])
-        ?>
+        <?php if (permission('questions', 'create')): ?>
+            <?= Html::a(Yii::t('app', 'Savol qo\'shish'), ['create' , 'id' => $subject->id], ['class' => 'b-btn b-primary']) ?>
+        <?php endif; ?>
+
+        <?php if (permission('questions', 'upload')): ?>
+            <?= Html::a(Yii::t('app', 'Savol yuklash excel'), ['upload',  'id' => $subject->id],
+                [
+                    "data-bs-toggle" => "modal",
+                    "data-bs-target" => "#studentInfo",
+                    'class' => 'b-btn b-primary'
+                ])
+            ?>
+        <?php endif; ?>
+
+        <?php if (permission('subjects', 'delete-questions')): ?>
+            <?= Html::a(Yii::t('app', 'Barcha savollarni o\'chirish'), ['subjects/delete-questions',  'id' => $subject->id],
+                [
+                    'class' => 'b-btn b-danger'
+                ])
+            ?>
+        <?php endif; ?>
     </div>
 
     <?= GridView::widget([
@@ -75,47 +83,50 @@ $questions = $dataProvider->getModels();
                         if ($model->status == 1) {
                             return false;
                         } else {
-                            $url = Url::to(['check', 'id' => $model->id]);
-                            return Html::a('<i class="fa-solid fa-check"></i>', $url, [
-                                'title'        => 'Tasdiqlash',
-                                'class' => 'tableIcon',
-                                'data-confirm' => Yii::t('yii', 'Savol tasdiqlansinmi?'),
-                                'data-method'  => 'post',
-                            ]);
+                            if (permission('questions', 'check')) {
+                                $url = Url::to(['check', 'id' => $model->id]);
+                                return Html::a('<i class="fa-solid fa-check"></i>', $url, [
+                                    'title'        => 'Tasdiqlash',
+                                    'class' => 'tableIcon',
+                                    'data-confirm' => Yii::t('yii', 'Savol tasdiqlansinmi?'),
+                                    'data-method'  => 'post',
+                                ]);
+                            }
                         }
                     },
                     'view'   => function ($url, $model) {
-                        $url = Url::to(['view', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-eye"></i>', $url, [
-                            'title' => 'view',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('questions', 'view')) {
+                            $url = Url::to(['view', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-eye"></i>', $url, [
+                                'title' => 'view',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'update' => function ($url, $model) {
-                        if ($model->status == 1) {
-                            return false;
-                        } else {
+                        if (permission('questions', 'update')) {
                             $url = Url::to(['update', 'id' => $model->id]);
                             return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
                                 'title' => 'update',
                                 'class' => 'tableIcon',
                             ]);
                         }
+                        return false;
                     },
                     'delete' => function ($url, $model) {
-                        if ($model->status == 1) {
-                            return false;
-                        } else {
+                        if (permission('questions', 'delete')) {
                             $url = Url::to(['delete', 'id' => $model->id]);
                             return Html::a('<i class="fa fa-trash"></i>', $url, [
-                                'title'        => 'delete',
+                                'title' => 'delete',
                                 'class' => 'tableIcon',
-                                'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
+                                'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
                                 'data-method'  => 'post',
                             ]);
                         }
+                        return false;
                     },
-                ]
+                ],
             ],
         ],
     ]); ?>

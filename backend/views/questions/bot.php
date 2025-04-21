@@ -35,9 +35,13 @@ $questions = $dataProvider->getModels();
             <li class="breadcrumb-item active" aria-current="page"><?= Html::encode($this->title) ?></li>
         </ol>
     </nav>
-    <div class="mb-3 mt-4">
-        <?= Html::a(Yii::t('app', 'Savol qo\'shish'), ['bot-create' , 'id' => $subject->id], ['class' => 'b-btn b-primary']) ?>
-    </div>
+
+    <?php if (permission('questions', 'bot-create')): ?>
+        <div class="mb-3 mt-4">
+            <?= Html::a(Yii::t('app', 'Savol qo\'shish'), ['bot-create' , 'id' => $subject->id], ['class' => 'b-btn b-primary']) ?>
+        </div>
+    <?php endif; ?>
+
     <?php if (count($questions) > 0): ?>
         <?php foreach ($questions as $question): ?>
             <div class="questions_page">
@@ -49,22 +53,30 @@ $questions = $dataProvider->getModels();
                             </div>
                             <div class="qs_head_right">
                                 <?php if ($question->status != 1) : ?>
-                                    <?= Html::a(Yii::t('app', '<i class="far fa-check-circle"></i>'), ['bot-check', 'id' => $question->id], [
+                                    <?php if (permission('questions', 'bot-check')): ?>
+                                        <?= Html::a(Yii::t('app', '<i class="far fa-check-circle"></i>'), ['bot-check', 'id' => $question->id], [
+                                            'class' => '',
+                                            'data' => [
+                                                'confirm' => Yii::t('app', 'Savol tasdiqlansinmi?'),
+                                                'method' => 'post',
+                                            ],
+                                        ]) ?>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+
+                                <?php if (permission('questions', 'bot-update')): ?>
+                                    <a href="<?= Url::to(['bot-update' , 'id' => $question->id]) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <?php endif; ?>
+
+                                <?php if (permission('questions', 'delete')): ?>
+                                    <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['delete', 'id' => $question->id], [
                                         'class' => '',
                                         'data' => [
-                                            'confirm' => Yii::t('app', 'Savol tasdiqlansinmi?'),
+                                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
                                             'method' => 'post',
                                         ],
                                     ]) ?>
                                 <?php endif; ?>
-                                <a href="<?= Url::to(['bot-update' , 'id' => $question->id]) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
-                                <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['delete', 'id' => $question->id], [
-                                    'class' => '',
-                                    'data' => [
-                                        'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                        'method' => 'post',
-                                    ],
-                                ]) ?>
                             </div>
                         </div>
                         <div class="qs_body">
@@ -77,16 +89,15 @@ $questions = $dataProvider->getModels();
                                 <div class="qs_content">
                                     <div class="qs_image">
                                         <img src="/backend/web/uploads/questions/<?= $question->image ?>">
-                                        <!--                                --><?php //if ($model->status != 1) : ?>
-                                        <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['img-delete', 'id' => $question->id], [
-                                            'class' => '',
-                                            'data' => [
-                                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                                'method' => 'post',
-                                            ],
-                                        ]) ?>
-                                        <!--                                --><?php //endif; ?>
-
+                                        <?php if (permission('questions', 'img-delete')): ?>
+                                            <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['img-delete', 'id' => $question->id], [
+                                                'class' => '',
+                                                'data' => [
+                                                    'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                                    'method' => 'post',
+                                                ],
+                                            ]) ?>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             <?php endif; ?>

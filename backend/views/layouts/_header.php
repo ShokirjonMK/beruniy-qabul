@@ -82,7 +82,7 @@ $cons = $user->cons;
         </div>
         <div class="education-name">
             <h2>
-                <a href="<?= Url::to(['site/index']) ?>">ZARMED UNIVERSITETI < <?= $cons->name ?> ></a>
+                <a href="<?= Url::to(['site/index']) ?>">TOSHKENT GUMANITAR FANLAR UNIVERSITETI < <?= $cons->name ?> ></a>
             </h2>
         </div>
     </div>

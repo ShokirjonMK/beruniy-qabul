@@ -46,9 +46,11 @@ $eduForms = EduForm::find()
         </ol>
     </nav>
 
-    <p class="mb-3 mt-4">
-        <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
-    </p>
+    <?php if (permission('edu-direction', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
 
     <?= $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -172,21 +174,30 @@ $eduForms = EduForm::find()
                 'contentOptions' => ['data-label' => 'Harakatlar'],
                 'format' => 'raw',
                 'value' => function ($model) {
-                    $view = Html::a('Ko\'rish', Url::to(['view', 'id' => $model->id]), [
-                        'title' => 'view',
-                        'class' => 'badge-table-div active',
-                    ]);
-                    $update = Html::a('Tahrirlash', Url::to(['update', 'id' => $model->id]), [
-                        'title' => 'update',
-                        'class' => 'badge-table-div active mt-2',
-                    ]);
-                    $delete = Html::a('O\'chirish', Url::to(['delete', 'id' => $model->id]), [
-                        'title' => 'delete',
-                        'class' => 'badge-table-div danger mt-2',
-                        'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
-                        'data-method'  => 'post',
-                    ]);
-                    return $view."<br>".$update."<br>".$delete;
+                    $view = '';
+                    if (permission('edu-direction', 'view')) {
+                        $view = Html::a('Ko\'rish', Url::to(['view', 'id' => $model->id]), [
+                            'title' => 'view',
+                            'class' => 'badge-table-div active',
+                        ])."<br>";
+                    }
+                    $update = '';
+                    if (permission('edu-direction', 'update')) {
+                        $update = Html::a('Tahrirlash', Url::to(['update', 'id' => $model->id]), [
+                            'title' => 'update',
+                            'class' => 'badge-table-div active mt-2',
+                        ])."<br>";
+                    }
+                    $delete = '';
+                    if (permission('edu-direction', 'delete')) {
+                        $delete = Html::a('O\'chirish', Url::to(['delete', 'id' => $model->id]), [
+                            'title' => 'delete',
+                            'class' => 'badge-table-div danger mt-2',
+                            'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                            'data-method'  => 'post',
+                        ]);
+                    }
+                    return $view.$update.$delete;
                 },
             ],
         ],

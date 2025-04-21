@@ -32,11 +32,11 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <div class="mb-3 mt-4">
-        <?= Html::a(Yii::t('app', 'Qo\'shish'), ['create'], ['class' => 'b-btn b-primary']) ?>
-    </div>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php if (permission('subjects', 'create')): ?>
+        <div class="mb-3 mt-4">
+            <?= Html::a(Yii::t('app', 'Qo\'shish'), ['create'], ['class' => 'b-btn b-primary']) ?>
+        </div>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -78,36 +78,48 @@ $breadcrumbs['item'][] = [
                 'header'=> 'Harakatlar',
                 'buttons'  => [
                     'entered' => function ($url, $model) {
-                        $url = Url::to(['questions/index', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-question"></i>', $url, [
-                            'title' => 'Savollar',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('questions', 'index')) {
+                            $url = Url::to(['questions/index', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-question"></i>', $url, [
+                                'title' => 'Savollar',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'view'   => function ($url, $model) {
-                        $url = Url::to(['view', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-eye"></i>', $url, [
-                            'title' => 'view',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('subjects', 'view')) {
+                            $url = Url::to(['view', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-eye"></i>', $url, [
+                                'title' => 'view',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'update' => function ($url, $model) {
-                        $url = Url::to(['update', 'id' => $model->id]);
-                        return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
-                            'title' => 'update',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('subjects', 'update')) {
+                            $url = Url::to(['update', 'id' => $model->id]);
+                            return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
+                                'title' => 'update',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'delete' => function ($url, $model) {
-                        $url = Url::to(['delete', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-trash"></i>', $url, [
-                            'title' => 'delete',
-                            'class' => 'tableIcon',
-                            'data-confirm' => Yii::t('yii', 'Are you sure you want to delete this item?'),
-                            'data-method'  => 'post',
-                        ]);
+                        if (permission('subjects', 'delete')) {
+                            $url = Url::to(['delete', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-trash"></i>', $url, [
+                                'title' => 'delete',
+                                'class' => 'tableIcon',
+                                'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                                'data-method'  => 'post',
+                            ]);
+                        }
+                        return false;
                     },
-                ]
+                ],
             ],
         ],
     ]); ?>

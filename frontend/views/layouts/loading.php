@@ -5,7 +5,7 @@
             <img src="/frontend/web/images/logo_blue.svg" alt="">
         </div>
         <div class="circle-text2">
-            <p>QABUL * ZARMED * UNIVERSITY *</p>
+            <p>TOSHKENT * GUMANITAR * FANLAR * UNIVERSITETI *</p>
         </div>
     </div>
 </div>

@@ -10,7 +10,7 @@ return [
     'a7' => 'Telefon raqam',
     'a8' => 'Telefon raqam 2:',
     'a9' => 'Manzil:',
-    'a10' => 'Toshkent shahar, Yunusobod tumani, Bog’ishamol ko’chasi 220-uy. Joylashuvni ko\'rish uchun bosing!',
+    'a10' => 'Toshkent shahri, Yangixayot tumani, Choshtepa MFY, Choshtepa ko’chasi, 381-uy',
     'a11' => 'Qabul tizimi',
     'a12' => 'Ta\'lim yo\'nalishlari',
     'a13' => '2025 - 2026 o\'quv yili uchun qabul qilinadigan ta\'lim yo\'nalishlari va mutaxasisliklar',

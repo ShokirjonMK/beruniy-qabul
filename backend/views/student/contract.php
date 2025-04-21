@@ -45,7 +45,15 @@ $breadcrumbs['item'][] = [
             'contentOptions' => ['date-label' => 'F.I.O' ,'class' => 'wid250'],
             'format' => 'raw',
             'value' => function($model) {
-                return $model->fullName.' | '.$model->passport_serial.' '.$model->passport_number.' | '.$model->passport_pin;
+                return $model->fullName;
+            },
+        ],
+        [
+            'attribute' => 'Pasport ma\'lumoti',
+            'contentOptions' => ['date-label' => 'Pasport ma\'lumoti' ,'class' => 'wid250'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->passport_serial.' '.$model->passport_number.' | '.$model->passport_pin;
             },
         ],
         [
@@ -81,6 +89,22 @@ $breadcrumbs['item'][] = [
             },
         ],
         [
+            'attribute' => 'Shartnoma summasi',
+            'contentOptions' => ['date-label' => 'Shartnoma summasi'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->contractPrice;
+            },
+        ],
+        [
+            'attribute' => 'Shartnoma sanasi',
+            'contentOptions' => ['date-label' => 'Shartnoma sanasi'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->contractConfirmDate;
+            },
+        ],
+        [
             'attribute' => 'Bosqich',
             'contentOptions' => ['date-label' => 'F.I.O' ,'class' => 'Ta\'lim shakli'],
             'format' => 'raw',
@@ -98,8 +122,7 @@ $breadcrumbs['item'][] = [
             'format' => 'raw',
             'value' => function($model) {
                 $user = $model->user;
-                $text = "<br><div class='badge-table-div active mt-2'>".date("Y-m-d H:i:s" , $user->created_at)."</div>";
-                return $user->username.$text;
+                return $user->username ?? null;
             },
         ],
         [
@@ -111,12 +134,24 @@ $breadcrumbs['item'][] = [
             },
         ],
         [
+            'attribute' => 'CONSULTING',
+            'contentOptions' => ['date-label' => 'CONSULTING'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $cons = $model->user->cons;
+                $branch = $model->branch->name_uz ?? '- - - -';
+                return "<a href='https://{$cons->domen}' class='badge-table-div active'>".$cons->domen."</a><br><div class='badge-table-div active mt-2'>".$branch."</div>";
+            },
+        ],
+        [
             'attribute' => 'Batafsil',
             'contentOptions' => ['date-label' => 'Status'],
             'format' => 'raw',
             'value' => function($model) {
-                $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active mt-2'>Batafsil</a>";
-                return $readMore;
+                if (permission('student', 'view')) {
+                    $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active mt-2'>Batafsil</a>";
+                    return $readMore;
+                }
             },
         ],
     ]; ?>

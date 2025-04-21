@@ -38,11 +38,11 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <p class="mb-3 mt-4">
-        <?= Html::a('Qo\'shish', ['create' , 'id' => $eduDirection->id], ['class' => 'b-btn b-primary']) ?>
-    </p>
-
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
+    <?php if (permission('direction-course', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create', 'id' => $eduDirection->id], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -70,27 +70,36 @@ $breadcrumbs['item'][] = [
                 'header'=> 'Harakatlar',
                 'buttons'  => [
                     'view'   => function ($url, $model) {
-                        $url = Url::to(['view', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-eye"></i>', $url, [
-                            'title' => 'view',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('direction-course', 'view')) {
+                            $url = Url::to(['view', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-eye"></i>', $url, [
+                                'title' => 'view',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'update' => function ($url, $model) {
-                        $url = Url::to(['update', 'id' => $model->id]);
-                        return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
-                            'title' => 'update',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('direction-course', 'update')) {
+                            $url = Url::to(['update', 'id' => $model->id]);
+                            return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
+                                'title' => 'update',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'delete' => function ($url, $model) {
-                        $url = Url::to(['delete', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-trash"></i>', $url, [
-                            'title' => 'delete',
-                            'class' => 'tableIcon',
-                            'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
-                            'data-method'  => 'post',
-                        ]);
+                        if (permission('direction-course', 'delete')) {
+                            $url = Url::to(['delete', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-trash"></i>', $url, [
+                                'title' => 'delete',
+                                'class' => 'tableIcon',
+                                'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                                'data-method'  => 'post',
+                            ]);
+                        }
+                        return false;
                     },
                 ],
             ],

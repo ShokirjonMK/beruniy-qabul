@@ -13,6 +13,8 @@ use common\models\EduForm;
 use common\models\EduDirection;
 use common\models\Lang;
 use common\models\ExamDate;
+use common\models\Branch;
+use common\models\Consulting;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentPerevotSearch $model */
@@ -24,6 +26,14 @@ $examDates = ExamDate::find()
     ->all();
 
 $status = Status::eStatus();
+
+$branchs = Branch::find()
+    ->where(['in', 'id', getBranchOneIk()])
+    ->all();
+
+$cons = Consulting::find()
+    ->where(['in', 'id', getConsOneIk()])
+    ->all();
 
 ?>
 
@@ -52,7 +62,7 @@ $status = Status::eStatus();
                         <?= $form->field($model, 'middle_name') ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'username')
                             ->widget(\yii\widgets\MaskedInput::class, [
@@ -82,7 +92,7 @@ $status = Status::eStatus();
                         ]) ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'user_status')->widget(Select2::classname(), [
                             'data' => Status::userStatusUpdate(),
@@ -94,7 +104,7 @@ $status = Status::eStatus();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'exam_date_id')->widget(Select2::classname(), [
                             'data' => ArrayHelper::map($examDates, 'id', 'name'),
@@ -106,7 +116,7 @@ $status = Status::eStatus();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'exam_date_status')->widget(Select2::classname(), [
                             'data' => $status,
@@ -115,6 +125,30 @@ $status = Status::eStatus();
                                 'allowClear' => true
                             ],
                         ])->label('Imtixon xolati');; ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($branchs, 'id', 'name_uz'),
+                            'options' => ['placeholder' => 'Filial tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Filial <span>*</span>');; ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'cons_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($cons, 'id', 'name'),
+                            'options' => ['placeholder' => 'Xamkorlar tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Xamkorlar <span>*</span>');; ?>
                     </div>
                 </div>
             </div>

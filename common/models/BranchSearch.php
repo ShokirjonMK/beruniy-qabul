@@ -40,7 +40,9 @@ class BranchSearch extends Branch
      */
     public function search($params)
     {
-        $query = Branch::find()->where(['is_deleted' => 0]);
+        $query = Branch::find()
+            ->where(['is_deleted' => 0])
+            ->andWhere(['in', 'id' , getBranchOneIk()]);
 
         // add conditions that should always apply here
 

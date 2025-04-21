@@ -11,6 +11,7 @@ use common\models\ExamSubject;
 use common\models\Options;
 use common\models\Questions;
 use common\models\StepFour;
+use common\models\StepOneThree;
 use common\models\StepOneTwo;
 use common\models\Student;
 use common\models\StudentDtm;
@@ -208,7 +209,17 @@ class CabinetController extends Controller
             }
         }
         if ($id == 1) {
-            $model = new StepOneTwo();
+            if (Yii::$app->params['ikIntegration'] == 1) {
+                $model = new StepOne();
+            } elseif (Yii::$app->params['ikIntegration'] == 2) {
+                $model = new StepOneTwo();
+            } elseif (Yii::$app->params['ikIntegration'] == 3) {
+                $model = new StepOneThree();
+            } else {
+                $errors[] = ['Birinchi bosqichni boshlay olmaysiz.'];
+                Yii::$app->session->setFlash('error', $errors);
+                return $this->redirect(['site/index']);
+            }
         } elseif ($id == 2) {
             $model = new StepTwo();
         } elseif ($id == 3) {
@@ -261,21 +272,11 @@ class CabinetController extends Controller
             \Yii::$app->session->setFlash('error', $errors);
             return $this->redirect(\Yii::$app->request->referrer);
         }
-        if ($type == 2) {
-            $eduDirection = $student->eduDirection;
-            if ($eduDirection->edu_type_id == 4) {
-                $action = 'master';
-            } elseif ($eduDirection->edu_form_id == 2) {
-                $action = 'contract2';
-            } elseif ($eduDirection->edu_form_id == 1) {
-                $action = 'contract2';
-            } else {
-                $errors[] = ['Shartnoma mavjud emas!'];
-                \Yii::$app->session->setFlash('error', $errors);
-                return $this->redirect(\Yii::$app->request->referrer);
-            }
-        } else {
-            $errors[] = ['Type not\'g\'ri tanlandi!'];
+        $eduDirection = $student->eduDirection;
+        if ($eduDirection->edu_type_id != 4) {
+            $action = 'contract';
+        }  else {
+            $errors[] = ['Shartnoma mavjud emas!'];
             \Yii::$app->session->setFlash('error', $errors);
             return $this->redirect(\Yii::$app->request->referrer);
         }

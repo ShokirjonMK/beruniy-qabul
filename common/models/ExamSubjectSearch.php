@@ -45,14 +45,14 @@ class ExamSubjectSearch extends ExamSubject
      */
     public function search($params)
     {
-        $user = \Yii::$app->user->identity;
         $query = ExamSubject::find()
-            ->joinWith(['student', 'user'])
+            ->joinWith(['student s', 'user u'])
             ->where([
                 'exam_subject.is_deleted' => 0,
-                'user.status' => [9,10],
-                'user.cons_id' => $user->cons_id,
-            ])->andWhere(['not in', 'file_status', [0]]);
+                'u.status' => [9,10],
+            ])
+            ->andWhere(getConsIk())
+            ->andWhere(['not in', 'exam_subject.file_status', [0]]);
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -65,10 +65,10 @@ class ExamSubjectSearch extends ExamSubject
         }
         $query->andFilterWhere(['exam_subject.file_status' => $this->file_status]);
 
-        $query->andFilterWhere(['like', 'student.first_name', $this->first_name])
-            ->andFilterWhere(['like', 'student.last_name', $this->last_name])
-            ->andFilterWhere(['like', 'student.middle_name', $this->middle_name])
-            ->andFilterWhere(['like', 'student.username', $this->phone]);
+        $query->andFilterWhere(['like', 's.first_name', $this->first_name])
+            ->andFilterWhere(['like', 's.last_name', $this->last_name])
+            ->andFilterWhere(['like', 's.middle_name', $this->middle_name])
+            ->andFilterWhere(['like', 's.username', $this->phone]);
 
         return $dataProvider;
     }

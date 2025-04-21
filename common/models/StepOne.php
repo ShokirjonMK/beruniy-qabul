@@ -52,49 +52,33 @@ class StepOne extends Model
 
             self::deleteNull($student->id);
 
-            $client = new Client();
-            $url = '';
+            $integration = new Integration();
+            $integration->pinfl = $this->jshshr;
+            $data = $integration->checkPinfl();
+            if ($data['is_ok']) {
+                $data = $data['data'];
+                $student->first_name = $data['first_name'];
+                $student->last_name = $data['last_name'];
+                $student->middle_name = $data['middle_name'];
+                $student->passport_number = $data['passport_number'];
+                $student->passport_serial = $data['passport_serial'];
+                $student->passport_pin = (string)$data['passport_pin'];
+                $student->birthday = $data['birthday'];
+                $student->gender = $data['gender'];
 
-            $params = [
-                'passport_pin' => $this->jshshr,
-                'phone' => $student->username,
-            ];
+                if (!$student->validate()){
+                    $errors[] = $this->simple_errors($student->errors);
+                }
 
-            $response = $client->createRequest()
-                ->setMethod('POST')
-                ->setUrl($url)
-                ->setData($params)
-                ->addHeaders(['content-type' => 'application/json'])
-                ->send();
-
-            if ($response->data) {
-                $data = $response->data;
-                if ($data['status'] == 1) {
-                    $data = $data['data'];
-                    $student->first_name = $data['first_name'];
-                    $student->last_name = $data['last_name'];
-                    $student->middle_name = $data['middle_name'];
-                    $student->passport_number = $data['passport_number'];
-                    $student->passport_serial = $data['passport_serial'];
-                    $student->passport_pin = $data['passport_pin'];
-                    $student->birthday = $data['birthday'];
-                    $student->gender = $data['gender'];
-                    if (!$student->validate()){
-                        $errors[] = $this->simple_errors($student->errors);
-                    }
-
-                    $amo = CrmPush::processType(3, $student, $user);
-                    if (!$amo['is_ok']) {
-                        $transaction->rollBack();
-                        return ['is_ok' => false , 'errors' => $amo['errors']];
-                    }
-
-                } else {
+                $amo = CrmPush::processType(3, $student, $user);
+                if (!$amo['is_ok']) {
                     $transaction->rollBack();
-                    return ['is_ok' => false, 'errors' => $data['errors']];
+                    return ['is_ok' => false , 'errors' => $amo['errors']];
                 }
             } else {
                 $errors[] = ['Ma\'lumotlarni olishda xatolik yuz berdi.'];
+                $transaction->rollBack();
+                return ['is_ok' => false, 'errors' => $errors];
             }
         }
 

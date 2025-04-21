@@ -32,6 +32,19 @@ class Status
     }
 
 
+    public static function rolType($id = null)
+    {
+        $statuses = [
+            1 => 'Filial hammasi && Consulting hammasi',
+            2 => 'Filial bitta && Consulting hammasi',
+            3 => 'Filial hammasi && Consulting bitta',
+            4 => 'Filial bitta && Consulting bitta',
+        ];
+
+        return $id === null ? $statuses : ($statuses[$id] ?? null);
+    }
+
+
     public static function ofertaStatus($id = null)
     {
         $statuses = [
@@ -162,6 +175,15 @@ class Status
             return $data;
         }
         return $data[$id];
+    }
+
+    public static function testPractical($id = null)
+    {
+        $statuses = [
+            0 => 'Test',
+            1 => 'Amaliy',
+        ];
+        return $id === null ? $statuses : ($statuses[$id] ?? null);
     }
 
     public static function botStatus($id = null)

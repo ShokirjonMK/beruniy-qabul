@@ -3,7 +3,7 @@ use yii\helpers\Url;
 
 /** @var yii\web\View $this */
 
-$this->title = 'QABUL ZARMED UNIVERSITY';
+$this->title = 'TOSHKENT GUMANITAR FANLAR UNIVERSITETI';
 ?>
 
 <div class="mainPage">
@@ -11,8 +11,9 @@ $this->title = 'QABUL ZARMED UNIVERSITY';
         <div class="banner">
             <div class="banner-center" data-aos="fade-up" data-aos-duration="3000">
 <!--                <h3>GLOBAL</h3>-->
-                <h1>ZARMED</h1>
-                <h3>UNIVERSITY <?= Yii::t("app" , "a11") ?></h3>
+                <h1>TOSHKENT</h1>
+                <h3>GUMANITAR FANLAR UNIVERSITETI</h3>
+                <h3><?= Yii::t("app" , "a11") ?></h3>
                 <div class="banner-link">
                     <a href="<?= Url::to(['site/login']) ?>">
                         <?= Yii::t("app" , "a4") ?>
@@ -34,7 +35,7 @@ $this->title = 'QABUL ZARMED UNIVERSITY';
                         <img src="/frontend/web/images/logo_blue.svg" alt="">
                     </div>
                     <div class="circle-text">
-                        <p>QABUL * ZARMED * UNIVERSITY *</p>
+                        <p>TOSHKENT * GUMANITAR * FANLAR * UNIVERSITETI *</p>
                     </div>
                 </div>
             </div>

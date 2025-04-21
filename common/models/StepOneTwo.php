@@ -15,30 +15,23 @@ use yii\httpclient\Client;
  */
 class StepOneTwo extends Model
 {
-    public $last_name;
-    public $first_name;
-    public $middle_name;
-
     public $birthday;
-    public $passport_serial;
-    public $passport_number;
-    public $passport_pin;
+    public $seria;
+    public $number;
+
 
     public function rules()
     {
         return [
-            [['last_name', 'first_name', 'birthday', 'passport_serial', 'passport_number','passport_pin'], 'required'],
-            [['passport_pin'], 'string', 'min' => 14, 'max' => 14, 'message' => 'Pasport pin 14 xonali bo\'lishi kerak'],
-            [['passport_pin'], 'match', 'pattern' => '/^\d{14}$/', 'message' => 'Pasport pin faqat 14 ta raqamdan iborat bo‘lishi kerak'],
-
-            [['last_name', 'first_name', 'middle_name'], 'string' , 'max' => 100],
-            [['passport_serial'], 'string', 'min' => 2, 'max' => 2, 'message' => 'Pasport seria 2 xonali bo\'lishi kerak'],
-            ['passport_serial', 'match', 'pattern' => '/^[^\d]*$/', 'message' => 'Pasport seriasi faqat raqamlardan iborat bo\'lmasligi kerak'],
+            [['birthday', 'seria', 'number'], 'required'],
+            [['seria'], 'string', 'min' => 2, 'max' => 2, 'message' => 'Pasport seria 2 xonali bo\'lishi kerak'],
+            ['seria', 'match', 'pattern' => '/^[^\d]*$/', 'message' => 'Pasport seriasi raqamlardan iborat bo\'lmasligi kerak'],
             [['birthday'], 'safe'],
-            [['passport_number'], 'string', 'min' => 7, 'max' => 7, 'message' => 'Pasport raqam 7 xonali bo\'lishi kerak'],
-            ['passport_number', 'match', 'pattern' => '/^\d{7}$/', 'message' => 'Pasport raqam faqat raqamlardan iborat bo\'lishi kerak'],
+            [['number'], 'string', 'min' => 7, 'max' => 7, 'message' => 'Pasport raqam 7 xonali bo\'lishi kerak'],
+            ['number', 'match', 'pattern' => '/^\d{7}$/', 'message' => 'Pasport raqam faqat raqamlardan iborat bo\'lishi kerak'],
         ];
     }
+
 
     function simple_errors($errors) {
         $result = [];
@@ -54,7 +47,8 @@ class StepOneTwo extends Model
     {
         $transaction = Yii::$app->db->beginTransaction();
         $errors = [];
-        $pinfl = $student->passport_pin;
+        $seriaNumber = $student->passport_serial.$student->passport_number;
+        $sn = $this->seria.$this->number;
 
         if (!$this->validate()) {
             $errors[] = $this->simple_errors($this->errors);
@@ -62,38 +56,41 @@ class StepOneTwo extends Model
             return ['is_ok' => false , 'errors' => $errors];
         }
 
-        if ($pinfl != $this->passport_pin) {
+        if ($sn != $seriaNumber) {
+
             self::deleteNull($student->id);
 
-            $student->last_name = $this->last_name;
-            $student->first_name = $this->first_name;
-            $student->middle_name = $this->middle_name;
-            $student->birthday = $this->birthday;
-            $student->passport_serial = $this->passport_serial;
-            $student->passport_number = $this->passport_number;
-            $student->passport_pin = $this->passport_pin;
-            $student->gender = 1;
+            $integration = new Integration();
+            $integration->birthDate = date("d-m-Y" , strtotime($this->birthday));
+            $integration->series = $this->seria;
+            $integration->number = $this->number;
+            $data = $integration->checkPassport();
+            if ($data['is_ok']) {
+                $data = $data['data'];
+                $student->first_name = $data['first_name'];
+                $student->last_name = $data['last_name'];
+                $student->middle_name = $data['middle_name'];
+                $student->passport_number = $data['passport_number'];
+                $student->passport_serial = $data['passport_serial'];
+                $student->passport_pin = (string)$data['passport_pin'];
+                $student->birthday = $data['birthday'];
+                $student->gender = $data['gender'];
 
-            $amo = CrmPush::processType(3, $student, $user);
-            if (!$amo['is_ok']) {
+                if (!$student->validate()){
+                    $errors[] = $this->simple_errors($student->errors);
+                }
+
+                $amo = CrmPush::processType(3, $student, $user);
+                if (!$amo['is_ok']) {
+                    $transaction->rollBack();
+                    return ['is_ok' => false , 'errors' => $amo['errors']];
+                }
+            } else {
+                $errors[] = ['Ma\'lumotlarni olishda xatolik yuz berdi.'];
                 $transaction->rollBack();
-                return ['is_ok' => false , 'errors' => $amo['errors']];
+                return ['is_ok' => false, 'errors' => $errors];
             }
         }
-
-        $new = new CrmPush();
-        $new->student_id = $student->id;
-        $new->type = 101;
-        $new->lead_id = $user->lead_id;
-        $new->data = json_encode([
-            CrmPush::FAMILYA => $student->last_name,
-            CrmPush::ISM => $student->first_name,
-            CrmPush::OTASI => $student->middle_name,
-            CrmPush::SERIYA => $student->passport_serial,
-            CrmPush::NOMER => $student->passport_number,
-            CrmPush::BIRTHDAY => $student->birthday,
-        ], JSON_UNESCAPED_UNICODE);
-        $new->save(false);
 
         $student->update(false);
         $user->step = 2;
@@ -122,6 +119,7 @@ class StepOneTwo extends Model
                 'edu_name' => null,
                 'edu_direction' => null,
                 'exam_type' => 0,
+                'exam_date_id' => null,
             ], ['id' => $studentId]);
 
             foreach (['common\models\Exam', 'common\models\ExamSubject','common\models\StudentDtm', 'common\models\StudentPerevot', 'common\models\StudentMaster', 'common\models\StudentOferta'] as $table) {

@@ -5,6 +5,7 @@ use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
 use yii\grid\GridView;
+use common\models\Status;
 
 /** @var yii\web\View $this */
 /** @var common\models\AuthItemSearch $searchModel */
@@ -30,15 +31,17 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <p class="mb-3 mt-4">
-        <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
-    </p>
+    <?php if (permission('auth-item', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
+
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
             [
@@ -48,6 +51,22 @@ $breadcrumbs['item'][] = [
                'value' => function($model) {
                    return $model->name;
                },
+            ],
+            [
+                'attribute' => 'type',
+                'contentOptions' => ['date-label' => 'type'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return Status::rolType($model->type);
+                },
+            ],
+            [
+                'attribute' => 'branch_id',
+                'contentOptions' => ['date-label' => 'branch_id'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->branch->name_uz ?? null;
+                },
             ],
             [
                'attribute' => 'description',
@@ -62,34 +81,20 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'Ruxsatlar'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return "<a href='". Url::to(['actions/permission' , 'role' => $model->name]) ."' class='badge-table-div active'><span>Ruxsatlar</span></a>";
+                    if (permission('actions', 'permission')) {
+                        return "<a href='". Url::to(['actions/permission' , 'name' => $model->name]) ."' class='badge-table-div active'><span>Ruxsatlar</span></a>";
+                    }
                 },
             ],
             [
-                'class' => ActionColumn::className(),
-                'contentOptions' => ['date-label' => 'Harakatlar' , 'class' => 'd-flex justify-content-around'],
-                'header'=> 'Harakatlar',
-                'buttons'  => [
-                    'view'   => function () {
-                        return false;
-                    },
-                    'update' => function ($url, $model) {
-                        $url = Url::to(['update', 'name' => $model->name]);
-                        return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
-                            'title' => 'update',
-                            'class' => 'tableIcon',
-                        ]);
-                    },
-                    'delete' => function ($url, $model) {
-                        $url = Url::to(['delete', 'name' => $model->name]);
-                        return Html::a('<i class="fa fa-trash"></i>', $url, [
-                            'title' => 'delete',
-                            'class' => 'tableIcon',
-                            'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
-                            'data-method'  => 'post',
-                        ]);
-                    },
-                ],
+                'attribute' => 'Harakatlar',
+                'contentOptions' => ['date-label' => 'Harakatlar'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    if (permission('auth-item', 'update')) {
+                        return "<a href='". Url::to(['update' , 'name' => $model->name]) ."' class='badge-table-div active'><span>Tahrirlash</span></a>";
+                    }
+                },
             ],
         ],
     ]); ?>

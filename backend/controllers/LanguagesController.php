@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Direction;
 use common\models\Languages;
 use common\models\LanguagesSearch;
 use yii\base\NotSupportedException;

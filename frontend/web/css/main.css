@@ -6,13 +6,13 @@
     box-sizing: border-box;
 }
 :root {
-    --bg-color: #09588E;
+    --bg-color: #021B66;
     /*--main-color: #1c89c1;*/
     --main-color2: #244e7a;
-    --main-color: #09588E;
+    --main-color: #021B66;
     /*--logo-color: #1c89c1;*/
     --logo-color: #1c89c1;
-    --red-color: #8D1E1C;
+    --red-color: #fdb338;
     --color-text: #001b48;
     --color-label: #787F95;
     --yellow: #25C172;
@@ -72,8 +72,8 @@ ul {
 ::-webkit-scrollbar-thumb
 {
     border-radius: 5px;
-    background: rgb(214,39,62);
-    background: linear-gradient(0deg, rgba(214,39,62,1) 50%, rgba(255,255,255,1) 100%);
+    background: #FDB338;
+    background: linear-gradient(0deg,rgba(253, 179, 56, 1) 50%, rgba(255, 255, 255, 1) 100%);
 }
 
 .link-hover {

@@ -2,6 +2,9 @@
 
 use common\models\{Student, Status, Course, Exam};
 use yii\helpers\Url;
+use common\models\StudentPerevot;
+use common\models\StudentDtm;
+use common\models\StudentMaster;
 
 /** @var $student */
 
@@ -9,6 +12,43 @@ $lang = Yii::$app->language;
 $this->title = Yii::t("app", "a40");
 $eduDirection = $student->eduDirection;
 $direction = $eduDirection->direction;
+$t = false;
+$online = true;
+if ($student->edu_type_id == 1) {
+    $exam = Exam::findOne([
+        'student_id' => $student->id,
+        'edu_direction_id' => $eduDirection->id,
+        'is_deleted' => 0
+    ]);
+    if ($exam->status == 3) {
+        $t = true;
+        if ($student->exam_type == 1) {
+            $online = false;
+        }
+    }
+} elseif ($student->edu_type_id == 2) {
+    $exam = StudentPerevot::findOne([
+        'student_id' => $student->id,
+        'edu_direction_id' => $eduDirection->id,
+        'status' => 1,
+        'is_deleted' => 0
+    ]);
+    if ($exam->file_status == 2) {
+        $t = true;
+    }
+    $courseId = $student->course_id + 1;
+    $course = Course::findOne(['id' => $courseId]);
+} elseif ($student->edu_type_id == 3) {
+    $exam = StudentDtm::findOne([
+        'student_id' => $student->id,
+        'edu_direction_id' => $eduDirection->id,
+        'status' => 1,
+        'is_deleted' => 0
+    ]);
+    if ($exam->file_status == 2) {
+        $t = true;
+    }
+}
 ?>
 
 <div class="ika_page_box">
@@ -18,6 +58,10 @@ $direction = $eduDirection->direction;
                 <h6><?= Yii::t("app", "a40") ?></h6>
                 <span></span>
             </div>
+
+            <?php if ($t && $online) : ?>
+                <?= $this->render('_contract'); ?>
+            <?php endif; ?>
 
             <div class="ika_user_page">
                 <div class="row">

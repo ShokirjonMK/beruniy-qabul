@@ -10,17 +10,32 @@ use yii\grid\GridView;
 /** @var common\models\OptionsSearch $searchModel */
 /** @var yii\data\ActiveDataProvider $dataProvider */
 
-$this->title = Yii::t('app', 'Options');
-$this->params['breadcrumbs'][] = $this->title;
+$this->title = 'Variantlar';
+$breadcrumbs = [];
+$breadcrumbs['item'][] = [
+    'label' => Yii::t('app', 'Bosh sahifa'),
+    'url' => ['/'],
+];
 ?>
 <script src="https://www.wiris.net/demo/plugins/app/WIRISplugins.js?viewer=image"></script>
 <div class="options-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <?php foreach ($breadcrumbs['item'] as $item) : ?>
+                <li class='breadcrumb-item'>
+                    <?= Html::a($item['label'], $item['url'], ['class' => '']) ?>
+                </li>
+            <?php endforeach; ?>
+            <li class="breadcrumb-item active" aria-current="page"><?= Html::encode($this->title) ?></li>
+        </ol>
+    </nav>
 
-    <p>
-        <?= Html::a(Yii::t('app', 'Create Options'), ['create'], ['class' => 'btn btn-success']) ?>
-    </p>
+    <?php if (permission('options', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 

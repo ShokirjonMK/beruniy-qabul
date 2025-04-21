@@ -12,6 +12,8 @@ use common\models\EduType;
 use common\models\EduForm;
 use common\models\EduDirection;
 use common\models\Lang;
+use common\models\Branch;
+use common\models\Consulting;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentPerevotSearch $model */
@@ -22,6 +24,14 @@ $languages = Lang::find()->where(['is_deleted' => 0 , 'status' => 1])->all();
 $eduForm = EduForm::find()->where(['is_deleted' => 0 , 'status' => 1])->all();
 $eduType = EduType::find()->where(['is_deleted' => 0 , 'status' => 1])->all();
 $direction = Direction::find()->where(['is_deleted' => 0])->all();
+
+$branchs = Branch::find()
+    ->where(['in', 'id', getBranchOneIk()])
+    ->all();
+
+$cons = Consulting::find()
+    ->where(['in', 'id', getConsOneIk()])
+    ->all();
 
 ?>
 
@@ -50,7 +60,7 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                         <?= $form->field($model, 'middle_name') ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'username')
                             ->widget(\yii\widgets\MaskedInput::class, [
@@ -81,7 +91,7 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'edu_type_id')->widget(Select2::classname(), [
                             'data' =>  ArrayHelper::map($eduType, 'id', 'name_uz'),
@@ -93,7 +103,7 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'lang_id')->widget(Select2::classname(), [
                             'data' => ArrayHelper::map($languages, 'id', 'name_uz'),
@@ -105,7 +115,7 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'edu_form_id')->widget(Select2::classname(), [
                             'data' =>  ArrayHelper::map($eduForm, 'id', 'name_uz'),
@@ -117,7 +127,7 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'direction_id')->widget(Select2::classname(), [
                             'data' => ArrayHelper::map($direction, 'id', 'name'),
@@ -129,30 +139,30 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
                             'options' => ['placeholder' => 'Start date ...'],
                             'pluginOptions' => [
                                 'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ])->label('Start Date <span>*</span>'); ?>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'end_date')->widget(DatePicker::classname(), [
                             'options' => ['placeholder' => 'End date ...'],
                             'pluginOptions' => [
                                 'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ])->label('End Date <span>*</span>'); ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'status')->widget(Select2::classname(), [
                             'data' => Status::contractStatus(),
@@ -161,6 +171,29 @@ $direction = Direction::find()->where(['is_deleted' => 0])->all();
                                 'allowClear' => true
                             ],
                         ])->label('Status <span>*</span>'); ?>
+                    </div>
+                </div>
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($branchs, 'id', 'name_uz'),
+                            'options' => ['placeholder' => 'Filial tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Filial <span>*</span>');; ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'cons_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($cons, 'id', 'name'),
+                            'options' => ['placeholder' => 'Xamkorlar tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Xamkorlar <span>*</span>');; ?>
                     </div>
                 </div>
             </div>

@@ -30,11 +30,12 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <p class="mb-3 mt-4">
-        <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
-    </p>
+    <?php if (permission('consulting', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
 
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -66,10 +67,10 @@ $breadcrumbs['item'][] = [
             ],
             [
                 'attribute' => 'Domen',
-                'contentOptions' => ['date-label' => 'adress'],
+                'contentOptions' => ['date-label' => 'Domen'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return "<a class='badge-table-div active' href='$model->domen'>".str_replace("https://", "", $model->domen)."</a>";
+                    return "<a class='badge-table-div active' href='https://{$model->domen}'>".$model->domen."</a>";
                 },
             ],
             [
@@ -77,7 +78,9 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'Almashish'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return "<a href='". Url::to(['constalting/replace' , 'id' => $model->id]) ."' class='badge-table-div active'><span><i class='fa-solid fa-arrows-rotate p-0'></i></span></a>";
+                    if (permission('consulting', 'replace')) {
+                        return "<a href='". Url::to(['consulting/replace' , 'id' => $model->id]) ."' class='badge-table-div active'><span><i class='fa-solid fa-arrows-rotate p-0'></i></span></a>";
+                    }
                 },
             ],
             [
@@ -85,28 +88,37 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'Harakatlar' , 'class' => 'd-flex justify-content-around'],
                 'header'=> 'Harakatlar',
                 'buttons'  => [
-                    'view'   => function ($url, $model) {
-                        $url = Url::to(['view', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-eye"></i>', $url, [
-                            'title' => 'view',
-                            'class' => 'tableIcon',
-                        ]);
+                    'view' => function ($url, $model) {
+                        if (permission('consulting', 'view')) {
+                            $url = Url::to(['view', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-eye"></i>', $url, [
+                                'title' => 'view',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'update' => function ($url, $model) {
-                        $url = Url::to(['update', 'id' => $model->id]);
-                        return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
-                            'title' => 'update',
-                            'class' => 'tableIcon',
-                        ]);
+                        if (permission('consulting', 'update')) {
+                            $url = Url::to(['update', 'id' => $model->id]);
+                            return Html::a('<i class="fa-solid fa-pen-to-square"></i>', $url, [
+                                'title' => 'update',
+                                'class' => 'tableIcon',
+                            ]);
+                        }
+                        return false;
                     },
                     'delete' => function ($url, $model) {
-                        $url = Url::to(['delete', 'id' => $model->id]);
-                        return Html::a('<i class="fa fa-trash"></i>', $url, [
-                            'title' => 'delete',
-                            'class' => 'tableIcon',
-                            'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
-                            'data-method'  => 'post',
-                        ]);
+                        if (permission('consulting', 'delete')) {
+                            $url = Url::to(['delete', 'id' => $model->id]);
+                            return Html::a('<i class="fa fa-trash"></i>', $url, [
+                                'title' => 'delete',
+                                'class' => 'tableIcon',
+                                'data-confirm' => Yii::t('yii', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                                'data-method'  => 'post',
+                            ]);
+                        }
+                        return false;
                     },
                 ],
             ],

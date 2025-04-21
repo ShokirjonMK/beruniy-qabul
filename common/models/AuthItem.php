@@ -9,6 +9,8 @@ use Yii;
  *
  * @property string $name
  * @property int $type
+ * @property int $status
+ * @property int $branch_id
  * @property string|null $description
  * @property string|null $rule_name
  * @property resource|null $data
@@ -22,6 +24,7 @@ use Yii;
  * @property Menu[] $menus
  * @property AuthItem[] $parents
  * @property AuthRule $ruleName
+ * @property Branch $branch
  */
 class AuthItem extends \yii\db\ActiveRecord
 {
@@ -41,11 +44,14 @@ class AuthItem extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['name'], 'required'],
-            [['type', 'created_at', 'updated_at'], 'integer'],
+            [['name' ,'type', 'description'], 'required'],
+            [['type', 'created_at', 'updated_at' , 'branch_id', 'status'], 'integer'],
+            ['status', 'in', 'range' => [0, 1]],
+            ['type', 'in', 'range' => [1, 2, 3, 4]],
             [['description', 'data'], 'string'],
             [['name', 'rule_name'], 'string', 'max' => 64],
             [['name'], 'unique'],
+            [['branch_id'], 'exist', 'skipOnError' => true, 'targetClass' => Branch::class, 'targetAttribute' => ['branch_id' => 'id']],
 //            [['rule_name'], 'exist', 'skipOnError' => true, 'targetClass' => AuthRule::class, 'targetAttribute' => ['rule_name' => 'name']],
         ];
     }
@@ -64,6 +70,11 @@ class AuthItem extends \yii\db\ActiveRecord
             'created_at' => Yii::t('app', 'Created At'),
             'updated_at' => Yii::t('app', 'Updated At'),
         ];
+    }
+
+    public function getBranch()
+    {
+        return $this->hasOne(Branch::class, ['id' => 'branch_id']);
     }
 
     /**
@@ -140,7 +151,6 @@ class AuthItem extends \yii\db\ActiveRecord
     public static function createItem($model, $post) {
         $transaction = Yii::$app->db->beginTransaction();
         $errors = [];
-        $model->type = 1;
 
         if (!$model->validate()) {
             $errors[] = $model->simple_errors($model->errors);
@@ -168,7 +178,6 @@ class AuthItem extends \yii\db\ActiveRecord
     public static function updateItem($model, $post) {
         $transaction = Yii::$app->db->beginTransaction();
         $errors = [];
-        $model->type = 1;
 
         if (!$model->validate()) {
             $errors[] = $model->simple_errors($model->errors);

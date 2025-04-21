@@ -238,13 +238,10 @@ class Student extends \yii\db\ActiveRecord
     public function getIpCheck()
     {
         if ($this->exam_type == 1) {
-            $ip = getIpMK();
-            $ipAddress = IkIp::findOne([
-                'ip_address' => $ip,
-                'status' => 1,
-                'is_deleted' => 0
-            ]);
-            return $ipAddress !== null;
+            if (checkAllowedIP()) {
+                return true;
+            }
+            return false;
         }
         return true;
     }
@@ -297,6 +294,89 @@ class Student extends \yii\db\ActiveRecord
             } else {
                 if (isset($record->file_status) && $record->file_status == 2) {
                     $text = !empty($record->down_time) ? 'Shartnoma oldi' : 'Shartnoma olmadi';
+                }
+            }
+        }
+
+        return "<div class='badge-table-div active'><span>$text</span></div>";
+    }
+
+
+    public function getContractPrice() {
+        $text = 'Shartnoma yo\'q';
+
+        switch ($this->edu_type_id) {
+            case 1:
+                $model = Exam::class;
+                break;
+            case 2:
+                $model = StudentPerevot::class;
+                break;
+            case 3:
+                $model = StudentDtm::class;
+                break;
+            case 4:
+                $model = StudentMaster::class;
+                break;
+            default:
+                return "<div class='badge-table-div active'><span>$text</span></div>";
+        }
+
+        $record = $model::findOne([
+            'student_id' => $this->id,
+            'edu_direction_id' => $this->edu_direction_id,
+            'is_deleted' => 0
+        ]);
+
+        if ($record) {
+            if ($model == Exam::class) {
+                if ($record->status == 3) {
+                    $text = $record->contract_price;
+                }
+            } else {
+                if (isset($record->file_status) && $record->file_status == 2) {
+                    $text = $record->contract_price;
+                }
+            }
+        }
+
+        return "<div class='badge-table-div active'><span>$text</span></div>";
+    }
+
+    public function getContractConfirmDate() {
+        $text = '----';
+
+        switch ($this->edu_type_id) {
+            case 1:
+                $model = Exam::class;
+                break;
+            case 2:
+                $model = StudentPerevot::class;
+                break;
+            case 3:
+                $model = StudentDtm::class;
+                break;
+            case 4:
+                $model = StudentMaster::class;
+                break;
+            default:
+                return "<div class='badge-table-div active'><span>$text</span></div>";
+        }
+
+        $record = $model::findOne([
+            'student_id' => $this->id,
+            'edu_direction_id' => $this->edu_direction_id,
+            'is_deleted' => 0
+        ]);
+
+        if ($record) {
+            if ($model == Exam::class) {
+                if ($record->status == 3) {
+                    $text = $record->confirm_date;
+                }
+            } else {
+                if (isset($record->file_status) && $record->file_status == 2) {
+                    $text = $record->confirm_date;
                 }
             }
         }

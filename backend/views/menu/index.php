@@ -30,9 +30,11 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <div class="mb-3 mt-4">
-        <?= Html::a(Yii::t('app', 'Qo\'shish'), ['create'], ['class' => 'b-btn b-primary']) ?>
-    </div>
+    <?php if (permission('menu', 'create')): ?>
+        <p class="mb-3 mt-4">
+            <?= Html::a('Qo\'shish', ['create'], ['class' => 'b-btn b-primary']) ?>
+        </p>
+    <?php endif; ?>
 
     <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
@@ -59,11 +61,13 @@ $breadcrumbs['item'][] = [
                 'format' => 'raw',
                 'value' => function ($model) {
                     if ($model->action_id == null) {
-                        $url = Url::to(['menu/sub-menu', 'id' => $model->id]);
-                        return Html::a('Ichki menyu', $url, [
-                            'title' => 'Pastki menyular ro\'yhati',
-                            'class' => "badge-table-div active",
-                        ]);
+                        if (permission('menu', 'sub-menu')) {
+                            $url = Url::to(['menu/sub-menu', 'id' => $model->id]);
+                            return Html::a('Ichki menyu', $url, [
+                                'title' => 'Pastki menyular ro\'yhati',
+                                'class' => "badge-table-div active",
+                            ]);
+                        }
                     } else {
                         return "<div class='badge-table-div active'>url</div>";
                     }
@@ -74,10 +78,12 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'Tahrirlash'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::a(Yii::t('app', 'Tahrirlash'), ['update',  'id' => $model->id],
-                        [
-                            "class" => "badge-table-div active",
-                        ]);
+                    if (permission('menu', 'update')) {
+                        return Html::a(Yii::t('app', 'Tahrirlash'), ['update',  'id' => $model->id],
+                            [
+                                "class" => "badge-table-div active",
+                            ]);
+                    }
                 },
             ],
             [
@@ -85,12 +91,14 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'O\'chirish'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::a(Yii::t('app', 'O\'chirish'), ['delete',  'id' => $model->id],
-                        [
-                            "data-method" => "post",
-                            "data-confirm" => "Siz rostdan ma\'lumotni o\'chirmoqchimisiz?",
-                            "class" => "badge-table-div danger",
-                        ]);
+                    if (permission('menu', 'delete')) {
+                        return Html::a(Yii::t('app', 'O\'chirish'), ['delete',  'id' => $model->id],
+                            [
+                                "data-method" => "post",
+                                "data-confirm" => "Siz rostdan ma\'lumotni o\'chirmoqchimisiz?",
+                                "class" => "badge-table-div danger",
+                            ]);
+                    }
                 },
             ],
         ],

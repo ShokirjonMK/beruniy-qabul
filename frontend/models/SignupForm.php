@@ -156,7 +156,7 @@ class SignupForm extends Model
                     if ($consulting) {
                         $user->cons_id = $consulting->id;
                     } else {
-                        $user->cons_id = 1;
+                        $user->cons_id = $cons->id;
                     }
                 }
             }

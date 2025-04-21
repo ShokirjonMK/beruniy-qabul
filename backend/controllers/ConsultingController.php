@@ -69,7 +69,7 @@ class ConsultingController extends Controller
         $model = $this->findModel($id);
         $user->cons_id = $model->id;
         $user->save(false);
-        Yii::$app->session->setFlash('success');
+        \Yii::$app->session->setFlash('success');
         return $this->redirect(['index']);
     }
 

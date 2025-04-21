@@ -88,12 +88,24 @@ $breadcrumbs['item'][] = [
             },
         ],
         [
+            'attribute' => 'CONSULTING',
+            'contentOptions' => ['date-label' => 'CONSULTING'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $cons = $model->user->cons;
+                $branch = $model->branch->name_uz ?? '- - - -';
+                return "<a href='https://{$cons->domen}' class='badge-table-div active'>".$cons->domen."</a><br><div class='badge-table-div active mt-2'>".$branch."</div>";
+            },
+        ],
+        [
             'attribute' => 'Batafsil',
             'contentOptions' => ['date-label' => 'Status'],
             'format' => 'raw',
             'value' => function($model) {
-                $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active mt-2'>Batafsil</a>";
-                return $readMore;
+                if (permission('student', 'view')) {
+                    $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active mt-2'>Batafsil</a>";
+                    return $readMore;
+                }
             },
         ],
     ]; ?>

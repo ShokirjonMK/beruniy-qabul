@@ -16,13 +16,15 @@ class StudentSearch extends Student
     public $user_status;
     public $step;
     public $exam_date_status;
+    public $branch_id;
+    public $cons_id;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
+            [['branch_id', 'cons_id', 'id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
             [['first_name', 'last_name', 'middle_name', 'student_phone', 'username', 'password', 'birthday', 'passport_number', 'passport_serial', 'passport_pin', 'passport_issued_date', 'passport_given_date', 'passport_given_by', 'adress', 'edu_name', 'edu_direction','user_status','end_date' ,'start_date'], 'safe'],
             [['passport_serial'], 'string', 'min' => 2, 'max' => 2, 'message' => 'Pasport seria 2 xonali bo\'lishi kerak'],
             [['passport_number'], 'string', 'min' => 7, 'max' => 7, 'message' => 'Pasport raqam 7 xonali bo\'lishi kerak'],
@@ -46,8 +48,6 @@ class StudentSearch extends Student
      */
     public function search($params, $eduType)
     {
-        $user = \Yii::$app->user->identity;
-
         $query = Student::find()
             ->alias('s')
             ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
@@ -56,8 +56,8 @@ class StudentSearch extends Student
                 'u.step' => 5,
                 'u.status' => 10,
                 'u.user_role' => 'student',
-                'u.cons_id' => $user->cons_id
-            ]);
+            ])
+            ->andWhere(getConsIk());
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
@@ -144,6 +144,8 @@ class StudentSearch extends Student
             's.direction_course_id' => $this->direction_course_id,
             's.course_id' => $this->course_id,
             's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])
@@ -165,15 +167,14 @@ class StudentSearch extends Student
 
     public function chala($params)
     {
-        $user = \Yii::$app->user->identity;
         $query = Student::find()
             ->alias('s')
             ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
             ->where([
                 'u.status' => [9,10],
                 'u.user_role' => 'student',
-                'u.cons_id' => $user->cons_id
             ])
+            ->andWhere(getConsIk())
             ->andWhere(['<', 'step' ,5]);
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
@@ -230,6 +231,8 @@ class StudentSearch extends Student
             's.direction_course_id' => $this->direction_course_id,
             's.course_id' => $this->course_id,
             's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])
@@ -251,8 +254,6 @@ class StudentSearch extends Student
 
     public function contract($params)
     {
-        $user = \Yii::$app->user->identity;
-
         $query = Student::find()
             ->alias('s')
             ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
@@ -264,9 +265,9 @@ class StudentSearch extends Student
                 'u.step' => 5,
                 'u.status' => [9, 10],
                 'u.user_role' => 'student',
-                'u.cons_id' => $user->cons_id,
                 's.is_deleted' => 0,
             ])
+            ->andWhere(getConsIk())
             ->andWhere([
                 'or',
                 ['not', ['e.student_id' => null]],
@@ -306,6 +307,8 @@ class StudentSearch extends Student
             's.direction_course_id' => $this->direction_course_id,
             's.course_id' => $this->course_id,
             's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])
@@ -333,7 +336,8 @@ class StudentSearch extends Student
             ->where([
                 'u.status' => [0, 5, 9, 10],
                 'u.user_role' => 'student',
-            ]);
+            ])
+            ->andWhere(getConsIk());
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
@@ -372,6 +376,8 @@ class StudentSearch extends Student
             's.direction_course_id' => $this->direction_course_id,
             's.course_id' => $this->course_id,
             's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])
@@ -451,6 +457,8 @@ class StudentSearch extends Student
             's.course_id' => $this->course_id,
             's.exam_date_id' => $this->exam_date_id,
             's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])

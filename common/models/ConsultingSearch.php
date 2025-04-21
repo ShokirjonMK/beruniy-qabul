@@ -40,7 +40,9 @@ class ConsultingSearch extends Consulting
      */
     public function search($params)
     {
-        $query = Consulting::find()->where(['is_deleted' => 0]);
+        $query = Consulting::find()
+            ->where(['is_deleted' => 0])
+            ->andWhere(['in', 'id' , getConsOneIk()]);
 
         // add conditions that should always apply here
 

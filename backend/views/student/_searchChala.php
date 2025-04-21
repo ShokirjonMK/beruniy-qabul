@@ -12,11 +12,21 @@ use common\models\EduType;
 use common\models\EduForm;
 use common\models\EduDirection;
 use common\models\Lang;
+use common\models\Branch;
+use common\models\Consulting;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentPerevotSearch $model */
 /** @var yii\widgets\ActiveForm $form */
 /** @var \common\models\EduType $eduType */
+
+$branchs = Branch::find()
+    ->where(['in', 'id', getBranchOneIk()])
+    ->all();
+
+$cons = Consulting::find()
+    ->where(['in', 'id', getConsOneIk()])
+    ->all();
 
 ?>
 
@@ -45,7 +55,7 @@ use common\models\Lang;
                         <?= $form->field($model, 'middle_name') ?>
                     </div>
                 </div>
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'username')
                             ->widget(\yii\widgets\MaskedInput::class, [
@@ -76,7 +86,7 @@ use common\models\Lang;
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'status')->widget(Select2::classname(), [
                             'data' => Status::step(),
@@ -88,25 +98,25 @@ use common\models\Lang;
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
                             'options' => ['placeholder' => 'Start date ...'],
                             'pluginOptions' => [
                                 'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ])->label('Start Date <span>*</span>'); ?>
                     </div>
                 </div>
 
-                <div class="col-lg-3 col-md-6">
+                <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'end_date')->widget(DatePicker::classname(), [
                             'options' => ['placeholder' => 'End date ...'],
                             'pluginOptions' => [
                                 'autoclose' => true,
-                                'format' => 'yyyy-mm-dd'
+                                'format' => 'dd-mm-yyyy'
                             ]
                         ])->label('End Date <span>*</span>'); ?>
                     </div>
@@ -121,6 +131,30 @@ use common\models\Lang;
                                 'allowClear' => true
                             ],
                         ])->label('User status <span>*</span>'); ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($branchs, 'id', 'name_uz'),
+                            'options' => ['placeholder' => 'Filial tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Filial <span>*</span>');; ?>
+                    </div>
+                </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'cons_id')->widget(Select2::classname(), [
+                            'data' =>  ArrayHelper::map($cons, 'id', 'name'),
+                            'options' => ['placeholder' => 'Xamkorlar tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Xamkorlar <span>*</span>');; ?>
                     </div>
                 </div>
             </div>

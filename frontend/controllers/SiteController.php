@@ -255,18 +255,16 @@ class SiteController extends Controller
     {
         $errors = [];
         $contract = false;
+
         if ($type == 2) {
-            if ($key == 4) {
-                $action = 'master';
-                $contract = StudentMaster::findOne($id);
-            } elseif ($key == 3) {
-                $action = 'contract2';
+            if ($key == 3) {
+                $action = 'contract';
                 $contract = StudentDtm::findOne($id);
             } elseif ($key == 2) {
-                $action = 'contract2';
+                $action = 'contract';
                 $contract = StudentPerevot::findOne($id);
             } elseif ($key == 1) {
-                $action = 'contract2';
+                $action = 'contract';
                 $contract = Exam::findOne($id);
             } else {
                 $errors[] = ['Shartnoma mavjud emas!'];

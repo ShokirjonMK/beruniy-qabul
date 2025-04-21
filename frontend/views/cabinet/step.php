@@ -45,10 +45,25 @@ use yii\bootstrap5\Html;
 
 
 <?php if ($id == 1) : ?>
-    <?= $this->render('_form-step1' , [
-        'model' => $model,
-        'student' => $student
-    ]) ?>
+    <?php if (Yii::$app->params['ikIntegration'] == 1): ?>
+        <?= $this->render('_form-step1' , [
+            'model' => $model,
+            'student' => $student
+        ]) ?>
+    <?php endif; ?>
+    <?php if (Yii::$app->params['ikIntegration'] == 2): ?>
+        <?= $this->render('_form-step12' , [
+            'model' => $model,
+            'student' => $student
+        ]) ?>
+    <?php endif; ?>
+    <?php if (Yii::$app->params['ikIntegration'] == 3): ?>
+        <?= $this->render('_form-step13' , [
+            'model' => $model,
+            'student' => $student
+        ]) ?>
+    <?php endif; ?>
+
 <?php elseif ($id == 2): ?>
     <?= $this->render('_form-step2' , [
         'model' => $model,

@@ -5,6 +5,10 @@ use yii\widgets\ActiveForm;
 use common\models\AuthItem;
 use common\models\AuthItemChild;
 use common\models\AuthChild;
+use common\models\Status;
+use common\models\Branch;
+use kartik\select2\Select2;
+use yii\helpers\ArrayHelper;
 
 /** @var yii\web\View $this */
 /** @var common\models\AuthItem $model */
@@ -13,6 +17,9 @@ use common\models\AuthChild;
 $authItems = AuthItem::find()
     ->where(['not in' , 'name' , 'super_admin'])
     ->all();
+
+$branchs = Branch::find()
+    ->where(['is_deleted' => 0 , 'status' => 1])->all();
 ?>
 
 <div class="auth-item-form">
@@ -25,6 +32,25 @@ $authItems = AuthItem::find()
                 <div class="form-section_item">
                     <div class="form-group">
                         <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'type')->dropDownList(
+                            Status::rolType(),
+                            ['class'=>'form-select form-control']) ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'branch_id')->widget(Select2::classname(), [
+                            'data' => ArrayHelper::map($branchs, 'id', 'name_uz'),
+                            'options' => ['placeholder' => 'Filial tanlang'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Filial tanlang'); ?>
+                    </div>
+                    <div class="form-group">
+                        <?= $form->field($model, 'status')->dropDownList(
+                            Status::accessStatus(),
+                            ['class'=>'form-select form-control']) ?>
                     </div>
                     <div class="form-group">
                         <?= $form->field($model, 'description')->textarea(['rows' => 6]) ?>

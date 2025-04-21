@@ -39,9 +39,11 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <div class="mb-3 mt-4">
-        <?= Html::a(Yii::t('app', 'Variant qo\'shish'), ['options/create' , 'id' => $model->id], ['class' => 'b-btn b-primary']) ?>
-    </div>
+    <?php if (permission('options', 'create')): ?>
+        <div class="mb-3 mt-4">
+            <?= Html::a(Yii::t('app', 'Variant qo\'shish'), ['options/create' , 'id' => $model->id], ['class' => 'b-btn b-primary']) ?>
+        </div>
+    <?php endif; ?>
 
     <div class="questions_page">
         <div class="form-section">
@@ -52,15 +54,22 @@ $breadcrumbs['item'][] = [
                     </div>
                     <div class="qs_head_right">
                         <?php if ($model->status != 1) : ?>
-                            <?= Html::a(Yii::t('app', '<i class="far fa-check-circle"></i>'), ['check', 'id' => $model->id], [
-                            'class' => '',
-                            'data' => [
-                                'confirm' => Yii::t('app', 'Savol tasdiqlansinmi?'),
-                                'method' => 'post',
-                                ],
-                            ]) ?>
+                            <?php if (permission('questions', 'check')): ?>
+                                <?= Html::a(Yii::t('app', '<i class="far fa-check-circle"></i>'), ['check', 'id' => $model->id], [
+                                'class' => '',
+                                'data' => [
+                                    'confirm' => Yii::t('app', 'Savol tasdiqlansinmi?'),
+                                    'method' => 'post',
+                                    ],
+                                ]) ?>
+                            <?php endif; ?>
                         <?php endif; ?>
+
+                        <?php if (permission('questions', 'update')): ?>
                             <a href="<?= Url::to(['update' , 'id' => $model->id]) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                        <?php endif; ?>
+
+                        <?php if (permission('questions', 'delete')): ?>
                             <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['delete', 'id' => $model->id], [
                                 'class' => '',
                                 'data' => [
@@ -68,6 +77,7 @@ $breadcrumbs['item'][] = [
                                     'method' => 'post',
                                 ],
                             ]) ?>
+                        <?php endif; ?>
                     </div>
                 </div>
                 <div class="qs_body">
@@ -80,7 +90,7 @@ $breadcrumbs['item'][] = [
                         <div class="qs_content">
                             <div class="qs_image">
                                 <img src="/backend/web/uploads/questions/<?= $model->image ?>">
-<!--                                --><?php //if ($model->status != 1) : ?>
+                                <?php if (permission('questions', 'img-delete')): ?>
                                     <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['img-delete', 'id' => $model->id], [
                                         'class' => '',
                                         'data' => [
@@ -88,8 +98,7 @@ $breadcrumbs['item'][] = [
                                             'method' => 'post',
                                         ],
                                     ]) ?>
-<!--                                --><?php //endif; ?>
-
+                                <?php endif; ?>
                             </div>
                         </div>
                     <?php endif; ?>
@@ -103,8 +112,11 @@ $breadcrumbs['item'][] = [
                                     <p>Variant ID: &nbsp; <strong><?= $option->id ?></strong></p>
                                 </div>
                                 <div class="qs_option_right">
-<!--                                    --><?php //if ($model->status != 1) : ?>
+                                    <?php if (permission('options', 'update')): ?>
                                         <a href="<?= Url::to(['options/update' , 'id' => $option->id]) ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <?php endif; ?>
+
+                                    <?php if (permission('options', 'delete')): ?>
                                         <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['options/delete', 'id' => $option->id], [
                                             'class' => '',
                                             'data' => [
@@ -112,7 +124,8 @@ $breadcrumbs['item'][] = [
                                                 'method' => 'post',
                                             ],
                                         ]) ?>
-<!--                                    --><?php //endif; ?>
+                                    <?php endif; ?>
+
                                 </div>
                             </div>
                             <div class="qs_option_body">
@@ -122,8 +135,7 @@ $breadcrumbs['item'][] = [
                                 <?php if ($option->image != null) : ?>
                                     <div class="qs_option_image <?php if ($option->text != null) { echo "mtop10";} ?>">
                                         <img src="/backend/web/uploads/options/<?= $option->image ?>">
-
-<!--                                        --><?php //if ($model->status != 1) : ?>
+                                        <?php if (permission('options', 'img-delete')): ?>
                                             <?= Html::a(Yii::t('app', '<i class="fa-solid fa-trash"></i>'), ['options/img-delete', 'id' => $option->id], [
                                                 'class' => '',
                                                 'data' => [
@@ -131,8 +143,7 @@ $breadcrumbs['item'][] = [
                                                     'method' => 'post',
                                                 ],
                                             ]) ?>
-<!--                                        --><?php //endif; ?>
-
+                                        <?php endif; ?>
                                     </div>
                                 <?php endif; ?>
                             </div>

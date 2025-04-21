@@ -57,10 +57,12 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'Tahrirlash'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::a(Yii::t('app', 'Tahrirlash'), ['sub-menu-update',  'id' => $model->id],
-                        [
-                            "class" => "badge-table-div active",
-                        ]);
+                    if (permission('menu', 'sub-menu-update')) {
+                        return Html::a(Yii::t('app', 'Tahrirlash'), ['sub-menu-update',  'id' => $model->id],
+                            [
+                                "class" => "badge-table-div active",
+                            ]);
+                    }
                 },
             ],
             [
@@ -68,12 +70,14 @@ $breadcrumbs['item'][] = [
                 'contentOptions' => ['date-label' => 'O\'chirish'],
                 'format' => 'raw',
                 'value' => function($model) {
-                    return Html::a(Yii::t('app', 'O\'chirish'), ['delete',  'id' => $model->id],
-                        [
-                            "data-method" => "post",
-                            "data-confirm" => "Siz rostdan ma\'lumotni o\'chirmoqchimisiz?",
-                            "class" => "badge-table-div danger",
-                        ]);
+                    if (permission('menu', 'delete')) {
+                        return Html::a(Yii::t('app', 'O\'chirish'), ['delete',  'id' => $model->id],
+                            [
+                                "data-method" => "post",
+                                "data-confirm" => "Siz rostdan ma\'lumotni o\'chirmoqchimisiz?",
+                                "class" => "badge-table-div danger",
+                            ]);
+                    }
                 },
             ],
         ],

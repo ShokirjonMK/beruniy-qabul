@@ -1,4 +1,10 @@
 <?php
+use common\models\AuthItem;
+use common\models\Consulting;
+use common\models\Branch;
+use common\models\Actions;
+use common\models\Permission;
+
 
 function current_user()
 {
@@ -111,4 +117,149 @@ function getIpMK()
     else
         $mainIp = 'UNKNOWN';
     return $mainIp;
+}
+
+
+// Is IP in allowed  List
+function checkAllowedIP()
+{
+    // return true;
+    $userIp = getIpMK();
+    $sam = '10.0';
+   
+    $allowedIps = [
+        '45.150.24.183',
+        '89.104.102.200',
+    ];
+
+    if (in_array($userIp, $allowedIps)) {
+        return true;
+    } elseif (str_starts_with($userIp, $sam)) {
+        return true;
+    } elseif ($userIp == '127.0.0.1') {
+        return true;
+    }
+    return false;
+}
+
+function getConsIk()
+{
+    $user = Yii::$app->user->identity;
+    $role = $user->user_role;
+    $authItem = AuthItem::findOne(['name' => $role]);
+
+    $data = [
+        's.branch_id' => null,
+        'u.cons_id' => null,
+    ];
+
+    if ($authItem) {
+        $cons = Consulting::find()
+            ->select('id')
+            ->column();
+
+        $branch = Branch::find()
+            ->select('id')
+            ->column();
+
+        if ($authItem->type == 1) {
+            $data = [
+                's.branch_id' => $branch,
+                'u.cons_id' => $cons,
+            ];
+        } elseif ($authItem->type == 2) {
+            $data = [
+                's.branch_id' => $authItem->branch_id,
+                'u.cons_id' => $cons,
+            ];
+        } elseif ($authItem->type == 3) {
+            $data = [
+                's.branch_id' => $branch,
+                'u.cons_id' => $user->cons_id,
+            ];
+        } elseif ($authItem->type == 4) {
+            $data = [
+                's.branch_id' => $authItem->branch_id,
+                'u.cons_id' => $user->cons_id,
+            ];
+        }
+    }
+
+    return $data;
+}
+
+function getBranchOneIk()
+{
+    $user = Yii::$app->user->identity;
+    $role = $user->user_role;
+    $authItem = AuthItem::findOne(['name' => $role]);
+
+    $data = null;
+
+    if ($authItem) {
+        $branch = Branch::find()
+            ->select('id')
+            ->column();
+
+        if ($authItem->type == 1) {
+            $data = $branch;
+        } elseif ($authItem->type == 2) {
+            $data = $authItem->branch_id;
+        } elseif ($authItem->type == 3) {
+            $data = $branch;
+        } elseif ($authItem->type == 4) {
+            $data = $authItem->branch_id;
+        }
+    }
+
+    return $data;
+}
+
+function getConsOneIk()
+{
+    $user = Yii::$app->user->identity;
+    $role = $user->user_role;
+    $authItem = AuthItem::findOne(['name' => $role]);
+
+    $data = null;
+
+    if ($authItem) {
+        $cons = Consulting::find()
+            ->select('id')
+            ->column();
+
+        if ($authItem->type == 1) {
+            $data = $cons;
+        } elseif ($authItem->type == 2) {
+            $data = $cons;
+        } elseif ($authItem->type == 3) {
+            $data = $user->cons_id;
+        } elseif ($authItem->type == 4) {
+            $data = $user->cons_id;
+        }
+    }
+
+    return $data;
+}
+
+function permission($controller, $action)
+{
+    $act = Actions::findOne([
+        'controller' => $controller,
+        'action' => $action,
+        'status' => 0
+    ]);
+
+    if ($act) {
+        $userRole = Yii::$app->user->identity->user_role;
+        return Permission::find()
+            ->where([
+                'role_name' => $userRole,
+                'action_id' => $act->id,
+                'status' => 1
+            ])
+            ->exists();
+    }
+
+    return false;
 }

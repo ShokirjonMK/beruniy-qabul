@@ -36,14 +36,19 @@ $breadcrumbs['item'][] = [
     </nav>
 
     <p class="mb-3">
-        <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b-btn b-primary']) ?>
-        <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
-            'class' => 'b-btn b-danger',
-            'data' => [
-                'confirm' => Yii::t('app', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
-                'method' => 'post',
-            ],
-        ]) ?>
+        <?php if (permission('direction-course', 'update')): ?>
+            <?= Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'b-btn b-primary mb-3']) ?>
+        <?php endif; ?>
+
+        <?php if (permission('direction-course', 'delete')): ?>
+            <?= Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                'class' => 'b-btn b-danger',
+                'data' => [
+                    'confirm' => Yii::t('app', 'Ma\'lumotni o\'chirishni xoxlaysizmi?'),
+                    'method' => 'post',
+                ],
+            ]) ?>
+        <?php endif; ?>
     </p>
 
     <div class="grid-view">
