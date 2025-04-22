@@ -5,8 +5,7 @@ echo "[INFO] MySQL zaxira jarayoni boshlanyapti..."
 now=$(date +%Y-%m-%d_%H-%M-%S)
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 
-# === REPO_DIR_API aniqlash ===
-#REPO_DIR_API="$(dirname "$SCRIPT_DIR")"
+REPO_DIR_API="/apps/beruniy-qabul"
 ENV_FILE="$REPO_DIR_API/.env"
 
 # === .env yuklash ===
@@ -23,7 +22,7 @@ DB_NAME=${DOCKER_PROJECT_NAME}
 MYSQL_PASSWORD=${DATABASE_PASSWORD}
 DOCKERFILE="$REPO_DIR_API/docker-compose.yml"
 
-BACKUP_DIR="$REPO_DIR_API/backup"
+BACKUP_DIR="/apps/backup"
 SQL_FILE="$BACKUP_DIR/$PROJECT_NAME-$now.sql"
 ARCHIVE_FILE="$BACKUP_DIR/$PROJECT_NAME-$now.tar.gz"
 

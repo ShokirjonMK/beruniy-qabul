@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # === Sozlamalar ===
-SOURCE_FILE="./backup/mk.sh"
-TARGET_DIR="/home/backup"
+SOURCE_FILE="mk.sh"
+TARGET_DIR="/apps/backup"
 ENV_FILE=".env"
 REPO_VAR_LINE="REPO_DIR_API=\"$(pwd)\""
 
@@ -18,6 +18,7 @@ else
     echo "[INFO] .env dan PROJECT_NAME: $PROJECT_NAME"
 fi
 
+BACKUP_DIR_PATH="/apps/backup"
 TARGET_FILE="$TARGET_DIR/$PROJECT_NAME.sh"
 
 # === Manba fayl mavjudligini tekshirish ===
@@ -26,12 +27,14 @@ if [ ! -f "$SOURCE_FILE" ]; then
     exit 1
 fi
 
-# === REPO_DIR_API yangilash ===
+# === REPO_DIR_API va BACKUP_DIR ni commentga olish va yangilarini kiritish ===
 sed -i '/^REPO_DIR_API=/s/^/#/' "$SOURCE_FILE"
-sed -i "1i$REPO_VAR_LINE" "$SOURCE_FILE"
+sed -i '/^BACKUP_DIR=/s/^/#/' "$SOURCE_FILE"
+sed -i "1iREPO_DIR_API=\"$(pwd)\"" "$SOURCE_FILE"
+sed -i "2iBACKUP_DIR=\"$BACKUP_DIR_PATH\"" "$SOURCE_FILE"
 
 # === Target katalogini yaratish ===
-mkdir -p "$TARGET_DIR"
+mkdir -p "$BACKUP_DIR_PATH"
 
 # === Faylni ko‘chirish va bajariladigan qilish ===
 rm -f "$TARGET_FILE"
