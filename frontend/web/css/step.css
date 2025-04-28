@@ -312,8 +312,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background: rgb(255, 255, 255);
-    background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(27, 50, 117, 1) 60%);
+    background: #FFFFFF;
+    background: linear-gradient(0deg,rgba(255, 255, 255, 1) 0%, rgba(17, 54, 70, 1) 60%);
 }
 
 .cstep_box {
