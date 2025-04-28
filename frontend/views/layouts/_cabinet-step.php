@@ -131,7 +131,7 @@ if (!Yii::$app->user->isGuest) {
                     </div>
                 </div>
                 <div class="cstep_box_right order-1">
-                    <img src="/frontend/web/images/logo_b2.svg" alt="">
+                    <img src="/frontend/web/images/login_logo.svg" alt="">
                 </div>
             </div>
         </div>
