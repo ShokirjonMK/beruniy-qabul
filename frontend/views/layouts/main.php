@@ -27,8 +27,8 @@ AppAsset::register($this);
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
-    <link href="/frontend/web/images/beruniy_logo_oq.png" rel="icon">
-    <link href="/frontend/web/images/beruniy_logo_oq.png" rel="apple-touch-icon">
+    <link href="/frontend/web/images/logo_blue.svg" rel="icon">
+    <link href="/frontend/web/images/logo_blue.svg" rel="apple-touch-icon">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
     <?php $this->head() ?>
 </head>

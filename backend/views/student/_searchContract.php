@@ -127,17 +127,6 @@ $cons = Consulting::find()
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-6">
-                    <div class="form-group">
-                        <?= $form->field($model, 'direction_id')->widget(Select2::classname(), [
-                            'data' => ArrayHelper::map($direction, 'id', 'name'),
-                            'options' => ['placeholder' => 'Yo\'nalish tanlang ...'],
-                            'pluginOptions' => [
-                                'allowClear' => true
-                            ],
-                        ])->label('Ta\'lim Yo\'nalishi <span>*</span>');; ?>
-                    </div>
-                </div>
 
                 <div class="col-lg-2 col-md-6">
                     <div class="form-group">
@@ -164,7 +153,7 @@ $cons = Consulting::find()
                 </div>
                 <div class="col-lg-2 col-md-6">
                     <div class="form-group">
-                        <?= $form->field($model, 'status')->widget(Select2::classname(), [
+                        <?= $form->field($model, 'is_down')->widget(Select2::classname(), [
                             'data' => Status::contractStatus(),
                             'options' => ['placeholder' => 'Status tanlang ...'],
                             'pluginOptions' => [

@@ -36,10 +36,10 @@ if ($student->edu_type_id == 2) {
 } elseif ($student->edu_type_id == 4) {
     $documents[] = [
         'model' => StudentMaster::findOne([ 'edu_direction_id' => $eduDirection->id, 'student_id' => $student->id, 'status' => 1, 'is_deleted' => 0 ]),
-        'title' => Yii::t("app", "a148"),
-        'button' => Yii::t("app", "a150"),
-        'upload_url' => 'file/create-dtm',
-        'delete_url' => 'file/del-dtm',
+        'title' => Yii::t("app", "a162"),
+        'button' => Yii::t("app", "a164"),
+        'upload_url' => 'file/create-master',
+        'delete_url' => 'file/del-master',
         'text' => false
     ];
 }

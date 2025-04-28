@@ -143,17 +143,6 @@ $cons = Consulting::find()
                     </div>
                 </div>
 
-                <div class="col-lg-2 col-md-6">
-                    <div class="form-group">
-                        <?= $form->field($model, 'direction_id')->widget(Select2::classname(), [
-                            'data' => $data,
-                            'options' => ['placeholder' => 'Yo\'nalish tanlang ...'],
-                            'pluginOptions' => [
-                                'allowClear' => true
-                            ],
-                        ])->label('Ta\'lim Yo\'nalishi <span>*</span>');; ?>
-                    </div>
-                </div>
 
                 <div class="col-lg-2 col-md-6">
                     <div class="form-group">

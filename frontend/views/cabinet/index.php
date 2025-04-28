@@ -48,6 +48,16 @@ if ($student->edu_type_id == 1) {
     if ($exam->file_status == 2) {
         $t = true;
     }
+} elseif ($student->edu_type_id == 4) {
+    $master = StudentMaster::findOne([
+        'student_id' => $student->id,
+        'edu_direction_id' => $eduDirection->id,
+        'status' => 1,
+        'is_deleted' => 0
+    ]);
+    if ($master->file_status == 2) {
+        $t = true;
+    }
 }
 ?>
 
@@ -60,7 +70,11 @@ if ($student->edu_type_id == 1) {
             </div>
 
             <?php if ($t && $online) : ?>
-                <?= $this->render('_contract'); ?>
+                <?php if ($student->edu_type_id == 1) : ?>
+                    <?= $this->render('_contract'); ?>
+                <?php else: ?>
+                    <?= $this->render('_no-contract'); ?>
+                <?php endif; ?>
             <?php endif; ?>
 
             <div class="ika_user_page">

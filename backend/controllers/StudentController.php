@@ -156,6 +156,17 @@ class StudentController extends Controller
         ]);
     }
 
+    public function actionArchive()
+    {
+        $searchModel = new StudentSearch();
+        $dataProvider = $searchModel->archive($this->request->queryParams);
+
+        return $this->render('archive', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider
+        ]);
+    }
+
     /**
      * Displays a single Student model.
      * @param int $id ID

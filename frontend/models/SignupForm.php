@@ -144,8 +144,8 @@ class SignupForm extends Model
             } else {
                 $cons = $branch->cons;
                 $domen = $_SERVER['HTTP_HOST'];
-                
-                if ($cons && $cons->domen == $domen) {
+
+                if ($cons->domen == $domen) {
                     $user->cons_id = $cons->id;
                 } else {
                     $consulting = Consulting::findOne([
@@ -156,7 +156,7 @@ class SignupForm extends Model
                     if ($consulting) {
                         $user->cons_id = $consulting->id;
                     } else {
-                        $user->cons_id = $consulting ? $consulting->id : null;
+                        $user->cons_id = $cons->id;
                     }
                 }
             }

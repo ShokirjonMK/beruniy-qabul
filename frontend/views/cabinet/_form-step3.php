@@ -116,15 +116,15 @@ if ($model->edu_direction_id != null) {
         ])->label(Yii::t("app" , "a62").' <span>*</span>');; ?>
     </div>
 
-    <div class="form-group">
-        <?= $form->field($model, 'exam_type')->widget(Select2::classname(), [
-            'data' => $exam,
-            'options' => ['placeholder' => Yii::t("app" , "a63")],
-            'pluginOptions' => [
-                'allowClear' => true
-            ],
-        ])->label(Yii::t("app" , "a64").' <span>*</span>');; ?>
-    </div>
+<!--    <div class="form-group">-->
+<!--        --><?php //= $form->field($model, 'exam_type')->widget(Select2::classname(), [
+//            'data' => $exam,
+//            'options' => ['placeholder' => Yii::t("app" , "a63")],
+//            'pluginOptions' => [
+//                'allowClear' => true
+//            ],
+//        ])->label(Yii::t("app" , "a64").' <span>*</span>');; ?>
+<!--    </div>-->
 
     <div class="examDateIk">
         <?php if ($student->exam_type != 0) : ?>

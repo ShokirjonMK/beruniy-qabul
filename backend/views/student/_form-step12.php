@@ -25,7 +25,7 @@ $model->number = $student->passport_number;
 
     <div class="form-group">
         <?= $form->field($model, 'birthday')->widget(DatePicker::classname(), [
-            'options' => ['placeholder' => Yii::t("app" , "a53")],
+            'options' => ['placeholder' => Yii::t("app" , "Tug'ilgan sana")],
             'pluginOptions' => [
                 'autoclose' => true,
                 'format' => 'dd-mm-yyyy'

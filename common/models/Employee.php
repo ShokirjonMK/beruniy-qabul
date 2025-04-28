@@ -55,17 +55,9 @@ class Employee extends \yii\db\ActiveRecord
             // Username
             ['username', 'trim'],
             ['username', 'required', 'message' => 'Foydalanuvchi nomi majburiy.'],
-            ['username', 'unique',
-                'targetClass' => User::class,
-                'message' => 'Bu username avval ro\'yhatdan o\'tgan.',
-                'when' => function ($model) {
-                    return User::find()
-                        ->where(['username' => $model->username])
-                        ->andWhere(['<>', 'id', $model->user_id])
-                        ->exists();
-                }
-            ],
-            ['username', 'string', 'min' => 5, 'max' => 20, 'message' => 'Username 5 dan 20 tagacha belgidan iborat bo\'lishi kerak.'],
+            ['username', 'string', 'min' => 5, 'max' => 20],
+
+            ['username', 'validateUsernameUniqueness'],
 
             // Role
             ['role', 'required', 'message' => 'Rol tanlanishi kerak.'],
@@ -124,6 +116,20 @@ class Employee extends \yii\db\ActiveRecord
                 'message' => 'Konsultatsiya topilmadi.'
             ],
         ];
+    }
+
+    public function validateUsernameUniqueness($attribute, $params)
+    {
+        $query = User::find()->where(['username' => $this->$attribute]);
+
+        if ($this->user_id) {
+            // O‘zidan tashqari boshqa username bo‘lishini tekshiradi
+            $query->andWhere(['<>', 'id', $this->user_id]);
+        }
+
+        if ($query->exists()) {
+            $this->addError($attribute, 'Bu username avval ro\'yhatdan o\'tgan.');
+        }
     }
 
     public function attributeLabels()

@@ -40,8 +40,8 @@ class DirectionSearch extends Direction
      */
     public function search($params)
     {
-        $query = Direction::find()
-            ->where(['is_deleted' => 0]);
+        $query = Direction::find();
+//            ->where(['is_deleted' => 0]);
 
         // add conditions that should always apply here
 

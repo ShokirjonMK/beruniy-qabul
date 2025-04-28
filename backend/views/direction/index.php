@@ -67,6 +67,18 @@ $breadcrumbs['item'][] = [
                },
             ],
             [
+                'attribute' => 'status',
+                'contentOptions' => ['date-label' => 'status'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    if ($model->status == 1) {
+                        return "<div class='badge-table-div active'><span>Faol</span></div>";
+                    } elseif ($model->status == 0) {
+                        return "<div class='badge-table-div danger'><span>No faol</span></div>";
+                    }
+                }
+            ],
+            [
                 'class' => ActionColumn::className(),
                 'contentOptions' => ['date-label' => 'Harakatlar' , 'class' => 'd-flex justify-content-around'],
                 'header'=> 'Harakatlar',

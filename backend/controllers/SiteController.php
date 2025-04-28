@@ -59,10 +59,7 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-        $currentUser = Yii::$app->user->identity;
-        return $this->render('index' , [
-            'currentUser' => $currentUser
-        ]);
+        return $this->render('index');
     }
 
     public function actionLogin()

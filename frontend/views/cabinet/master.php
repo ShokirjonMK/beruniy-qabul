@@ -87,18 +87,18 @@ $perevot = StudentMaster::findOne(['student_id' => $student->id, 'edu_direction_
                     <?php endif; ?>
                     <div class="cfile_box_head">
                         <div class="cfile_box_head_left">
-                            <h5> <span></span> <?= Yii::t("app" , "a148") ?></h5>
+                            <h5> <span></span> <?= Yii::t("app" , "a162") ?></h5>
                         </div>
                     </div>
 
                     <?php if ($perevot->file_status == 0) : ?>
                         <div class="cfile_box_content_question">
-                            <p><span><i class="fa-solid fa-question"></i></span> <?= Yii::t("app" , "a149") ?></p>
+                            <p><span><i class="fa-solid fa-question"></i></span> <?= Yii::t("app" , "a163") ?></p>
                         </div>
                         <div class="cfile_box_content_upload">
                             <?php
                             $url = Url::to(['file/create-master', 'id' => $perevot->id]);
-                            echo Html::a(Yii::t("app" , "a150"), $url, [
+                            echo Html::a(Yii::t("app" , "a164"), $url, [
                                 "data-bs-toggle" => "modal",
                                 "data-bs-target" => "#studentTrCreate",
                             ]);
@@ -132,7 +132,7 @@ $perevot = StudentMaster::findOne(['student_id' => $student->id, 'edu_direction_
                     <?php endif; ?>
                 </div>
 
-                <?php if ($direction->oferta == 1) : ?>
+                <?php if ($eduDirection->is_oferta == 1) : ?>
                     <div class="cfile_box">
                         <?php if ($oferta->file_status == 0) : ?>
                             <div class="cfile_box_head_right danger">

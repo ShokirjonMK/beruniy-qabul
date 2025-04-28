@@ -140,6 +140,18 @@ $eduForms = EduForm::find()
                },
             ],
             [
+                'attribute' => 'status',
+                'contentOptions' => ['date-label' => 'status'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    if ($model->status == 1) {
+                        return "<div class='badge-table-div active'><span>Faol</span></div>";
+                    } elseif ($model->status == 0) {
+                        return "<div class='badge-table-div danger'><span>No faol</span></div>";
+                    }
+                }
+            ],
+            [
                'attribute' => 'Fanlar soni',
                'contentOptions' => ['date-label' => 'Fanlar soni'],
                'format' => 'raw',

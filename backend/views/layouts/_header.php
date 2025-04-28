@@ -6,7 +6,7 @@ use common\models\Student;
 use common\models\Employee;
 
 $user = Yii::$app->user->identity;
-$logo = "/frontend/web/images/beruniy_logo_oq.png";
+$logo = "/frontend/web/images/logo_blue.svg";
 $employee = Employee::findOne(['user_id' => $user->id]);
 $full_name = $employee->last_name . " " . $employee->first_name;
 $postion = $user->authItem->description;
@@ -82,7 +82,7 @@ $cons = $user->cons;
         </div>
         <div class="education-name">
             <h2>
-                <a href="<?= Url::to(['site/index']) ?>">ABU RAYHON BERUNIY UNIVERSITETI < <?= $cons->name ?> ></a>
+                <a href="<?= Url::to(['site/index']) ?>">TOSHKENT GUMANITAR FANLAR UNIVERSITETI < <?= $cons->name ?> ></a>
             </h2>
         </div>
     </div>

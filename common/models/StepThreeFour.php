@@ -23,40 +23,34 @@ class StepThreeFour extends Model
             // `edu_type_id` butun son bo'lishi kerak
             [['filial_id' , 'lang_id' ,'edu_form_id' , 'edu_direction_id'], 'integer'],
 
-            [['filial_id'], 'exist',
-                'skipOnError' => true,
-                'targetClass' => Branch::class,
-                'targetAttribute' => ['filial_id' => 'id'],
-                'filter' => ['status' => 1, 'is_deleted' => 0],
-                'message' => 'Tanlangan filial mavjud emas.'
-            ],
-            [['lang_id'], 'exist',
-                'skipOnError' => true,
-                'targetClass' => Lang::class,
-                'targetAttribute' => ['lang_id' => 'id'],
-                'filter' => ['status' => 1, 'is_deleted' => 0],
-                'message' => 'Tanlangan filial mavjud emas.'
-            ],
-            [['edu_direction_id'], 'exist',
-                'skipOnError' => true,
-                'targetClass' => EduDirection::class,
-                'targetAttribute' => ['edu_direction_id' => 'id'],
-                'filter' => [
+            [['filial_id'], function ($attribute) {
+                if (!Branch::find()->where(['id' => $this->$attribute, 'status' => 1, 'is_deleted' => 0])->exists()) {
+                    $this->addError($attribute, 'Tanlangan filial mavjud emas.');
+                }
+            }],
+            [['lang_id'], function ($attribute) {
+                if (!Lang::find()->where(['id' => $this->$attribute, 'status' => 1, 'is_deleted' => 0])->exists()) {
+                    $this->addError($attribute, 'Tanlangan til mavjud emas.');
+                }
+            }],
+            [['edu_form_id'], function ($attribute) {
+                if (!EduForm::find()->where(['id' => $this->$attribute, 'status' => 1, 'is_deleted' => 0])->exists()) {
+                    $this->addError($attribute, 'Tanlangan taʼlim shakli mavjud emas.');
+                }
+            }],
+            [['edu_direction_id'], function ($attribute) {
+                if (!EduDirection::find()->where([
+                    'id' => $this->$attribute,
+                    'branch_id' => $this->filial_id,
                     'edu_form_id' => $this->edu_form_id,
                     'edu_type_id' => $this->edu_type_id,
                     'lang_id' => $this->lang_id,
                     'status' => 1,
-                    'is_deleted' => 0,
-                ],
-                'message' => 'Tanlangan ta\'lim yo\'nalishi mavjud emas.'
-            ],
-            [['edu_form_id'], 'exist',
-                'skipOnError' => true,
-                'targetClass' => EduForm::class,
-                'targetAttribute' => ['edu_form_id' => 'id'],
-                'filter' => ['status' => 1, 'is_deleted' => 0],
-                'message' => 'Tanlangan ta\'lim shakli mavjud emas.'
-            ],
+                    'is_deleted' => 0
+                ])->exists()) {
+                    $this->addError($attribute, 'Tanlangan taʼlim yo‘nalishi mavjud emas.');
+                }
+            }],
         ];
     }
 

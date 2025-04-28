@@ -120,6 +120,9 @@ class EmployeeController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
+        $user = $model->user;
+        $model->username = $user->username;
+        $model->role = $user->user_role;
 
         if ($this->request->isPost) {
             $post = $this->request->post();

@@ -97,9 +97,15 @@ $breadcrumbs['item'][] = [
             'contentOptions' => ['date-label' => 'Telefon raqami'],
             'format' => 'raw',
             'value' => function($model) {
-                $user = $model->user;
-                $text = "<br><div class='badge-table-div active mt-2'>".date("Y-m-d H:i:s" , $user->created_at)."</div>";
-                return $user->username.$text;
+                return $model->username;
+            },
+        ],
+        [
+            'attribute' => 'Ro\'yhatga olingan sana',
+            'contentOptions' => ['date-label' => 'Ro\'yhatga olingan sana'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return "<div class='badge-table-div active'>".date("Y-m-d H:i:s" , $model->user->created_at)."</div>";
             },
         ],
         [

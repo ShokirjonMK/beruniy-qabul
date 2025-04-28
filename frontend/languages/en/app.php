@@ -180,6 +180,12 @@ return [
     'a159' => 'You can register for the master\'s degree online',
     'a160' => 'Branch',
     'a161' => 'Passport number',
+
+    'a162' => 'Master\'s information',
+    'a163' => 'Please upload Master\'s information!',
+    'a164' => 'Click to upload Master\'s information',
+
+    'a165' => 'Do you allow us to use your personal information?',
 ];
 
 

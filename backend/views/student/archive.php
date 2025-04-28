@@ -36,7 +36,7 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
-    <?= $this->render('_searchAll', ['model' => $searchModel]); ?>
+    <?= $this->render('_searchArchive', ['model' => $searchModel]); ?>
 
     <?php $data = [
         ['class' => 'yii\grid\SerialColumn'],

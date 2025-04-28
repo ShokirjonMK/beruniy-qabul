@@ -33,6 +33,10 @@ use Yii;
  * @property int|null $is_deleted
  *
  * @property User[] $users
+ * @property $chalaStudentsCount
+ * @property $studentsCount
+ * @property $contractLoad
+ * @property $contract
  */
 class Consulting extends \yii\db\ActiveRecord
 {
@@ -101,6 +105,86 @@ class Consulting extends \yii\db\ActiveRecord
     public function getUsers()
     {
         return $this->hasMany(User::class, ['cons_id' => 'id']);
+    }
+
+    public function getStudentsCount()
+    {
+        return Student::find()
+            ->alias('s')
+            ->innerJoin('user u', 's.user_id = u.id')
+            ->where([
+                'u.user_role' => 'student',
+                'u.status' => [9,10],
+                's.is_deleted' => 0,
+                'u.step' => 5,
+                'u.cons_id' => $this->id,
+            ])->count();
+    }
+
+    public function getChalaStudentsCount()
+    {
+        return Student::find()
+            ->alias('s')
+            ->innerJoin('user u', 's.user_id = u.id')
+            ->where([
+                'u.user_role' => 'student',
+                'u.status' => [9,10],
+                's.is_deleted' => 0,
+                'u.cons_id' => $this->id,
+            ])
+            ->andWhere(['<', 'u.step' , 5])
+            ->count();
+    }
+
+    public function getContract()
+    {
+        return Student::find()
+            ->alias('s')
+            ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
+            ->leftJoin(Exam::tableName() . ' e', 's.id = e.student_id AND e.status = 3 AND e.is_deleted = 0')
+            ->leftJoin(StudentPerevot::tableName() . ' sp', 's.id = sp.student_id AND sp.file_status = 2 AND sp.is_deleted = 0')
+            ->leftJoin(StudentDtm::tableName() . ' sd', 's.id = sd.student_id AND sd.file_status = 2 AND sd.is_deleted = 0')
+            ->leftJoin(StudentMaster::tableName() . ' sm', 's.id = sm.student_id AND sm.file_status = 2 AND sm.is_deleted = 0')
+            ->where([
+                'u.step' => 5,
+                'u.status' => [9, 10],
+                'u.user_role' => 'student',
+                's.is_deleted' => 0,
+                'u.cons_id' => $this->id,
+            ])
+            ->andWhere([
+                'or',
+                ['not', ['e.student_id' => null]],
+                ['not', ['sp.student_id' => null]],
+                ['not', ['sd.student_id' => null]],
+                ['not', ['sm.student_id' => null]]
+            ])->count();
+    }
+
+    public function getContractLoad()
+    {
+        return Student::find()
+            ->alias('s')
+            ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
+            ->leftJoin(Exam::tableName() . ' e', 's.id = e.student_id AND e.status = 3 AND e.is_deleted = 0')
+            ->leftJoin(StudentPerevot::tableName() . ' sp', 's.id = sp.student_id AND sp.file_status = 2 AND sp.is_deleted = 0')
+            ->leftJoin(StudentDtm::tableName() . ' sd', 's.id = sd.student_id AND sd.file_status = 2 AND sd.is_deleted = 0')
+            ->leftJoin(StudentMaster::tableName() . ' sm', 's.id = sm.student_id AND sm.file_status = 2 AND sm.is_deleted = 0')
+            ->where([
+                'u.step' => 5,
+                'u.status' => [9, 10],
+                'u.user_role' => 'student',
+                's.is_deleted' => 0,
+                'u.cons_id' => $this->id,
+                's.is_down' => 1,
+            ])
+            ->andWhere([
+                'or',
+                ['not', ['e.student_id' => null]],
+                ['not', ['sp.student_id' => null]],
+                ['not', ['sd.student_id' => null]],
+                ['not', ['sm.student_id' => null]]
+            ])->count();
     }
 
     public static function saveItem($model, $post, $isNew = true) {

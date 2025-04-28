@@ -24,7 +24,7 @@ class StudentSearch extends Student
     public function rules()
     {
         return [
-            [['branch_id', 'cons_id', 'id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
+            [['branch_id', 'is_down','is_down', 'cons_id', 'id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
             [['first_name', 'last_name', 'middle_name', 'student_phone', 'username', 'password', 'birthday', 'passport_number', 'passport_serial', 'passport_pin', 'passport_issued_date', 'passport_given_date', 'passport_given_by', 'adress', 'edu_name', 'edu_direction','user_status','end_date' ,'start_date'], 'safe'],
             [['passport_serial'], 'string', 'min' => 2, 'max' => 2, 'message' => 'Pasport seria 2 xonali bo\'lishi kerak'],
             [['passport_number'], 'string', 'min' => 7, 'max' => 7, 'message' => 'Pasport raqam 7 xonali bo\'lishi kerak'],
@@ -57,7 +57,7 @@ class StudentSearch extends Student
                 'u.status' => 10,
                 'u.user_role' => 'student',
             ])
-            ->andWhere(getConsIk());
+            ->andWhere(getConsIk())->orderBy('s.id desc');
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
@@ -113,11 +113,15 @@ class StudentSearch extends Student
         }
 
         if ($this->start_date != null) {
-            $query->andWhere(['>=', 'u.created_at', strtotime($this->start_date)]);
+            $start = $this->start_date.' 00:00:00';
+            $query->andWhere(['>=', 'u.created_at', strtotime($start)]);
         }
         if ($this->end_date != null) {
-            $query->andWhere(['<=', 'u.created_at', strtotime($this->end_date)]);
+            $end = $this->start_date.' 23:59:59';
+            $query->andWhere(['<=', 'u.created_at', strtotime($end)]);
         }
+
+
         if ($this->user_status != null) {
             $query->andWhere(['u.status' => $this->user_status]);
         }
@@ -175,7 +179,7 @@ class StudentSearch extends Student
                 'u.user_role' => 'student',
             ])
             ->andWhere(getConsIk())
-            ->andWhere(['<', 'step' ,5]);
+            ->andWhere(['<', 'step' ,5])->orderBy('s.id desc');
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
@@ -189,7 +193,7 @@ class StudentSearch extends Student
         }
 
         if ($this->step != null) {
-            $step = $this->step - 1;
+            $step = $this->step;
             if ($this->step < 5) {
                 $query->andWhere(['u.step' => $step]);
             } elseif ($this->step == 5) {
@@ -200,11 +204,14 @@ class StudentSearch extends Student
         }
 
         if ($this->start_date != null) {
-            $query->andWhere(['>=', 'u.created_at', strtotime($this->start_date)]);
+            $start = $this->start_date.' 00:00:00';
+            $query->andWhere(['>=', 'u.created_at', strtotime($start)]);
         }
         if ($this->end_date != null) {
-            $query->andWhere(['<=', 'u.created_at', strtotime($this->end_date)]);
+            $end = $this->start_date.' 23:59:59';
+            $query->andWhere(['<=', 'u.created_at', strtotime($end)]);
         }
+
         if ($this->user_status != null) {
             $query->andWhere(['u.status' => $this->user_status]);
         }
@@ -274,7 +281,7 @@ class StudentSearch extends Student
                 ['not', ['sp.student_id' => null]],
                 ['not', ['sd.student_id' => null]],
                 ['not', ['sm.student_id' => null]]
-            ]);
+            ])->orderBy('s.id desc');
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
@@ -289,6 +296,38 @@ class StudentSearch extends Student
         if ($this->username != '+998 (__) ___-__-__') {
             $query->andFilterWhere(['like', 'u.username', $this->username]);
         }
+
+        if ($this->start_date || $this->end_date) {
+            $dateConditions = [];
+
+            if ($this->start_date && $this->end_date) {
+                $start = strtotime($this->start_date . ' 00:00:00');
+                $end = strtotime($this->end_date . ' 23:59:59');
+
+                $dateConditions[] = ['and', ['not', ['e.student_id' => null]], ['between', 'e.confirm_date', $start, $end]];
+                $dateConditions[] = ['and', ['not', ['sp.student_id' => null]], ['between', 'sp.confirm_date', $start, $end]];
+                $dateConditions[] = ['and', ['not', ['sd.student_id' => null]], ['between', 'sd.confirm_date', $start, $end]];
+                $dateConditions[] = ['and', ['not', ['sm.student_id' => null]], ['between', 'sm.confirm_date', $start, $end]];
+            } elseif ($this->start_date) {
+                $start = strtotime($this->start_date . ' 00:00:00');
+
+                $dateConditions[] = ['and', ['not', ['e.student_id' => null]], ['>=', 'e.confirm_date', $start]];
+                $dateConditions[] = ['and', ['not', ['sp.student_id' => null]], ['>=', 'sp.confirm_date', $start]];
+                $dateConditions[] = ['and', ['not', ['sd.student_id' => null]], ['>=', 'sd.confirm_date', $start]];
+                $dateConditions[] = ['and', ['not', ['sm.student_id' => null]], ['>=', 'sm.confirm_date', $start]];
+            } elseif ($this->end_date) {
+                $end = strtotime($this->end_date . ' 23:59:59');
+
+                $dateConditions[] = ['and', ['not', ['e.student_id' => null]], ['<=', 'e.confirm_date', $end]];
+                $dateConditions[] = ['and', ['not', ['sp.student_id' => null]], ['<=', 'sp.confirm_date', $end]];
+                $dateConditions[] = ['and', ['not', ['sd.student_id' => null]], ['<=', 'sd.confirm_date', $end]];
+                $dateConditions[] = ['and', ['not', ['sm.student_id' => null]], ['<=', 'sm.confirm_date', $end]];
+            }
+
+            $query->andWhere(['or', ...$dateConditions]);
+        }
+
+
 
         $query->andFilterWhere([
             's.id' => $this->id,
@@ -309,6 +348,7 @@ class StudentSearch extends Student
             's.exam_type' => $this->exam_type,
             'u.cons_id' => $this->cons_id,
             's.branch_id' => $this->branch_id,
+            's.is_down' => $this->is_down,
         ]);
 
         $query->andFilterWhere(['like', 's.first_name', $this->first_name])
@@ -334,10 +374,11 @@ class StudentSearch extends Student
             ->alias('s')
             ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
             ->where([
-                'u.status' => [0, 5, 9, 10],
+                'u.status' => [5, 9, 10],
                 'u.user_role' => 'student',
             ])
-            ->andWhere(getConsIk());
+            ->andWhere(getConsIk())
+            ->orderBy('s.id desc');
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
@@ -421,12 +462,92 @@ class StudentSearch extends Student
 
         if ($this->exam_date_status != null) {
             $query->innerJoin(Exam::tableName() . ' e', 's.id = e.student_id');
-            if ($this->status <= 4) {
+            if ($this->exam_date_status <= 4) {
                 $query->andWhere(['e.status' => $this->exam_date_status]);
-            } elseif ($this->status == 5) {
-                $query->andWhere(['e.status' => 3])->andWhere(['>', 'e.down_time', 0]);
-            } elseif ($this->status == 6) {
-                $query->andWhere(['e.status' => 3, 'e.down_time' => null]);
+            } elseif ($this->exam_date_status == 5) {
+                $query->andWhere(['e.status' => 3, 's.is_down' => 1]);
+            } elseif ($this->exam_date_status == 6) {
+                $query->andWhere(['e.status' => 3, 's.is_down' => 0]);
+            }
+        }
+
+        if ($this->user_status != null) {
+            $query->andWhere(['u.status' => $this->user_status]);
+        }
+
+        if ($this->username != '+998 (__) ___-__-__') {
+            $query->andFilterWhere(['like', 'u.username', $this->username]);
+        }
+
+        $query->andFilterWhere([
+            's.id' => $this->id,
+            's.user_id' => $this->user_id,
+            's.gender' => $this->gender,
+            's.birthday' => $this->birthday,
+            's.created_at' => $this->created_at,
+            's.updated_at' => $this->updated_at,
+            's.created_by' => $this->created_by,
+            's.updated_by' => $this->updated_by,
+            's.is_deleted' => $this->is_deleted,
+            's.edu_type_id' => $this->edu_type_id,
+            's.edu_form_id' => $this->edu_form_id,
+            's.direction_id' => $this->direction_id,
+            's.edu_direction_id' => $this->edu_direction_id,
+            's.lang_id' => $this->lang_id,
+            's.direction_course_id' => $this->direction_course_id,
+            's.course_id' => $this->course_id,
+            's.exam_date_id' => $this->exam_date_id,
+            's.exam_type' => $this->exam_type,
+            'u.cons_id' => $this->cons_id,
+            's.branch_id' => $this->branch_id,
+        ]);
+
+        $query->andFilterWhere(['like', 's.first_name', $this->first_name])
+            ->andFilterWhere(['like', 's.last_name', $this->last_name])
+            ->andFilterWhere(['like', 's.middle_name', $this->middle_name])
+            ->andFilterWhere(['like', 's.student_phone', $this->student_phone])
+            ->andFilterWhere(['like', 's.passport_number', $this->passport_number])
+            ->andFilterWhere(['like', 's.passport_serial', $this->passport_serial])
+            ->andFilterWhere(['like', 's.passport_pin', $this->passport_pin])
+            ->andFilterWhere(['like', 's.passport_issued_date', $this->passport_issued_date])
+            ->andFilterWhere(['like', 's.passport_given_date', $this->passport_given_date])
+            ->andFilterWhere(['like', 's.passport_given_by', $this->passport_given_by])
+            ->andFilterWhere(['like', 's.adress', $this->adress])
+            ->andFilterWhere(['like', 's.edu_name', $this->edu_name])
+            ->andFilterWhere(['like', 's.edu_direction', $this->edu_direction]);
+
+        return $dataProvider;
+    }
+
+    public function archive($params)
+    {
+        $query = Student::find()
+            ->alias('s')
+            ->innerJoin(User::tableName() . ' u', 's.user_id = u.id')
+            ->where([
+                'u.status' => [0],
+                'u.user_role' => 'student',
+            ])->orderBy('s.id desc');
+
+        // Ma'lumotlarni chiqarish uchun ActiveDataProvider
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        $this->load($params);
+
+        if (!$this->validate()) {
+            return $dataProvider;
+        }
+
+        if ($this->exam_date_status != null) {
+            $query->innerJoin(Exam::tableName() . ' e', 's.id = e.student_id');
+            if ($this->exam_date_status <= 4) {
+                $query->andWhere(['e.status' => $this->exam_date_status]);
+            } elseif ($this->exam_date_status == 5) {
+                $query->andWhere(['e.status' => 3, 's.is_down' => 1]);
+            } elseif ($this->exam_date_status == 6) {
+                $query->andWhere(['e.status' => 3, 's.is_down' => 0]);
             }
         }
 

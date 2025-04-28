@@ -6,7 +6,7 @@ use common\models\Permission;
 
 $user = Yii::$app->user->identity;
 $role = $user->authItem;
-$logo = "/frontend/web/images/beruniy_logo_oq.png";
+$logo = "/frontend/web/images/logo_blue.svg";
 
 function getActive($cont, $act)
 {

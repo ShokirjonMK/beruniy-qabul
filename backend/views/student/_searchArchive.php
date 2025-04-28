@@ -32,7 +32,7 @@ $cons = Consulting::find()
 
 <div class="student-perevot-search">
     <?php $form = ActiveForm::begin([
-        'action' => ['chala'],
+        'action' => ['all'],
         'method' => 'get',
     ]); ?>
 
@@ -85,43 +85,6 @@ $cons = Consulting::find()
                         ]) ?>
                     </div>
                 </div>
-
-                <div class="col-lg-2 col-md-6">
-                    <div class="form-group">
-                        <?= $form->field($model, 'step')->widget(Select2::classname(), [
-                            'data' => Status::step(),
-                            'options' => ['placeholder' => 'Status tanlang ...'],
-                            'pluginOptions' => [
-                                'allowClear' => true
-                            ],
-                        ])->label('Status <span>*</span>');; ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6">
-                    <div class="form-group">
-                        <?= $form->field($model, 'start_date')->widget(DatePicker::classname(), [
-                            'options' => ['placeholder' => 'Start date ...'],
-                            'pluginOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd-mm-yyyy'
-                            ]
-                        ])->label('Start Date <span>*</span>'); ?>
-                    </div>
-                </div>
-
-                <div class="col-lg-2 col-md-6">
-                    <div class="form-group">
-                        <?= $form->field($model, 'end_date')->widget(DatePicker::classname(), [
-                            'options' => ['placeholder' => 'End date ...'],
-                            'pluginOptions' => [
-                                'autoclose' => true,
-                                'format' => 'dd-mm-yyyy'
-                            ]
-                        ])->label('End Date <span>*</span>'); ?>
-                    </div>
-                </div>
-
                 <div class="col-lg-2 col-md-6">
                     <div class="form-group">
                         <?= $form->field($model, 'user_status')->widget(Select2::classname(), [
@@ -157,11 +120,12 @@ $cons = Consulting::find()
                         ])->label('Xamkorlar <span>*</span>');; ?>
                     </div>
                 </div>
+
             </div>
 
             <div class="form-group d-flex justify-content-end gap-2">
                 <?= Html::submitButton(Yii::t('app', 'Qidirish'), ['class' => 'b-btn b-primary']) ?>
-                <?= Html::a(Yii::t('app', 'Reset'), ['chala'], ['class' => 'b-btn b-secondary']) ?>
+                <?= Html::a(Yii::t('app', 'Reset'), ['archive'], ['class' => 'b-btn b-secondary']) ?>
             </div>
         </div>
     </div>

@@ -60,7 +60,7 @@
         </div>
         <div class="sidebar-bottom-right">
             <p>Savolingiz bormi?</p>
-            <a href="https://t.me/zarmeduniadmin">Murojaat etish</a>
+            <a href="https://t.me/tgfu_uzb">Murojaat etish</a>
         </div>
     </div>
 </div>

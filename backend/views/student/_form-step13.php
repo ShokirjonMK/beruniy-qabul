@@ -59,7 +59,13 @@ $model->passport_pin = $student->passport_pin;
     </div>
 
     <div class="form-group">
-        <?= $form->field($model, 'birthday')->textInput(['type' => 'date'])->label(Yii::t("app" , "Tug'ilgan sana").' <span>*</span>'); ?>
+        <?= $form->field($model, 'birthday')->widget(DatePicker::classname(), [
+            'options' => ['placeholder' => Yii::t("app" , "Tug'ilgan sana")],
+            'pluginOptions' => [
+                'autoclose' => true,
+                'format' => 'dd-mm-yyyy'
+            ]
+        ])->label(Yii::t("app" , "Tug\'ilgan sana").' <span>*</span>'); ?>
     </div>
 
     <div class="form-group">

@@ -179,6 +179,12 @@ return [
     'a159' => 'Magistratura uchun online ro\'yxatdan o\'tishingiz mumkin',
     'a160' => 'Filial',
     'a161' => 'Pasport raqam',
+
+    'a162' => 'Magistratura ma\'lumoti',
+    'a163' => 'Magistratura ma\'lumotini yuklang!',
+    'a164' => 'Magistratura ma\'lumotini yuklash uchun bosing',
+
+    'a165' => 'Sizning shaxsiy ma\'lumotingizdan foydalanishimizga ruxsat berasizmi?',
 ];
 
 

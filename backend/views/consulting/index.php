@@ -58,14 +58,6 @@ $breadcrumbs['item'][] = [
                },
             ],
             [
-                'attribute' => 'code',
-                'contentOptions' => ['date-label' => 'code'],
-                'format' => 'raw',
-                'value' => function($model) {
-                    return $model->code;
-                },
-            ],
-            [
                 'attribute' => 'Domen',
                 'contentOptions' => ['date-label' => 'Domen'],
                 'format' => 'raw',
@@ -73,6 +65,41 @@ $breadcrumbs['item'][] = [
                     return "<a class='badge-table-div active' href='https://{$model->domen}'>".$model->domen."</a>";
                 },
             ],
+
+            [
+                'attribute' => 'Chala arizalar',
+                'contentOptions' => ['date-label' => 'Chala arizalar'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->chalaStudentsCount;
+                },
+            ],
+            [
+                'attribute' => 'To\'liq ro\'yhatdan o\'tganlar',
+                'contentOptions' => ['date-label' => 'To\'liq ro\'yhatdan o\'tganlar'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->studentsCount;
+                },
+            ],
+            [
+                'attribute' => 'Shartnoma tasdiqlanganlar',
+                'contentOptions' => ['date-label' => 'Shartnoma tasdiqlanganlar'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->contract;
+                },
+            ],
+
+            [
+                'attribute' => 'Shartnoma yuklab olganlar',
+                'contentOptions' => ['date-label' => 'Shartnoma yuklab olganlar'],
+                'format' => 'raw',
+                'value' => function($model) {
+                    return $model->contractLoad;
+                },
+            ],
+
             [
                 'attribute' => 'Almashish',
                 'contentOptions' => ['date-label' => 'Almashish'],

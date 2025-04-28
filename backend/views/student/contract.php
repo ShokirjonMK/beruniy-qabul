@@ -49,11 +49,114 @@ $breadcrumbs['item'][] = [
             },
         ],
         [
-            'attribute' => 'Pasport ma\'lumoti',
+            'attribute' => 'S/R & JSHSHIR',
             'contentOptions' => ['date-label' => 'Pasport ma\'lumoti' ,'class' => 'wid250'],
             'format' => 'raw',
             'value' => function($model) {
-                return $model->passport_serial.' '.$model->passport_number.' | '.$model->passport_pin;
+                return $model->passport_serial.' '.$model->passport_number." | ".$model->passport_pin;
+            },
+        ],
+        [
+            'attribute' => 'Yo\'nalishi',
+            'contentOptions' => ['date-label' => 'Yo\'nalishi' ,'class' => 'wid250'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->direction->name ?? '----';
+            },
+        ],
+        [
+            'attribute' => 'Ta\'lim turi',
+            'contentOptions' => ['date-label' => 'Ta\'lim turi'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->eduType->name_uz ?? '----';
+            },
+        ],
+        [
+            'attribute' => 'Ta\'lim shakli',
+            'contentOptions' => ['date-label' => 'Ta\'lim shakli'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->eduForm->name_uz ?? '----';
+            },
+        ],
+        [
+            'attribute' => 'Ta\'lim tili',
+            'contentOptions' => ['date-label' => 'Ta\'lim tili'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->lang->name_uz ?? '----';
+            },
+        ],
+        [
+            'attribute' => 'Shartnoma summasi',
+            'contentOptions' => ['date-label' => 'Shartnoma summasi'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->contractPrice."<br><br>".$model->contractStatus;
+            },
+        ],
+        [
+            'attribute' => 'Telefon raqami',
+            'contentOptions' => ['date-label' => 'Telefon raqami'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $user = $model->user;
+                return $user->username ?? null;
+            },
+        ],
+        [
+            'attribute' => 'CONSULTING',
+            'contentOptions' => ['date-label' => 'CONSULTING'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $cons = $model->user->cons;
+                $branch = $model->branch->name_uz ?? '- - - -';
+                return "<a href='https://{$cons->domen}' class='badge-table-div active'>".$cons->name."</a><br><div class='badge-table-div active mt-2'>".$branch."</div>";
+            },
+        ],
+        [
+            'attribute' => 'Batafsil',
+            'contentOptions' => ['date-label' => 'Status'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $readMore = '';
+                $contract = '';
+                if (permission('student', 'view')) {
+                    $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active'>Batafsil</a>";
+                }
+                if (permission('student', 'contract-load')) {
+                    $contract = "<br><a href='".Url::to(['student/contract-load' , 'id' => $model->id, 'type' => 2])."' class='badge-table-div active mt-2'>Shartnoma yuklash</a>";
+                }
+                return $readMore.$contract;
+            },
+        ],
+    ]; ?>
+
+    <?php $data2 = [
+        ['class' => 'yii\grid\SerialColumn'],
+        [
+            'attribute' => 'F.I.O',
+            'contentOptions' => ['date-label' => 'F.I.O' ,'class' => 'wid250'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->fullName;
+            },
+        ],
+        [
+            'attribute' => 'Pasport seriya raqam',
+            'contentOptions' => ['date-label' => 'Pasport ma\'lumoti' ,'class' => 'wid250'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->passport_serial.' '.$model->passport_number;
+            },
+        ],
+        [
+            'attribute' => 'JSHSHIR',
+            'contentOptions' => ['date-label' => 'Pasport ma\'lumoti' ,'class' => 'wid250'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->passport_pin;
             },
         ],
         [
@@ -105,6 +208,14 @@ $breadcrumbs['item'][] = [
             },
         ],
         [
+            'attribute' => 'Shartnoma yuklab olgan sana',
+            'contentOptions' => ['date-label' => 'Shartnoma yuklab olgan sana'],
+            'format' => 'raw',
+            'value' => function($model) {
+                return $model->contractDownDate;
+            },
+        ],
+        [
             'attribute' => 'Bosqich',
             'contentOptions' => ['date-label' => 'F.I.O' ,'class' => 'Ta\'lim shakli'],
             'format' => 'raw',
@@ -139,19 +250,15 @@ $breadcrumbs['item'][] = [
             'format' => 'raw',
             'value' => function($model) {
                 $cons = $model->user->cons;
-                $branch = $model->branch->name_uz ?? '- - - -';
-                return "<a href='https://{$cons->domen}' class='badge-table-div active'>".$cons->domen."</a><br><div class='badge-table-div active mt-2'>".$branch."</div>";
+                return $cons->name;
             },
         ],
         [
-            'attribute' => 'Batafsil',
-            'contentOptions' => ['date-label' => 'Status'],
+            'attribute' => 'Filial',
+            'contentOptions' => ['date-label' => 'Filial'],
             'format' => 'raw',
             'value' => function($model) {
-                if (permission('student', 'view')) {
-                    $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active mt-2'>Batafsil</a>";
-                    return $readMore;
-                }
+                return $model->branch->name_uz ?? '- - - -';
             },
         ],
     ]; ?>
@@ -164,7 +271,7 @@ $breadcrumbs['item'][] = [
                     <div>
                         <?php echo ExportMenu::widget([
                             'dataProvider' => $dataProvider,
-                            'columns' => $data,
+                            'columns' => $data2,
                             'asDropdown' => false,
                         ]); ?>
                     </div>

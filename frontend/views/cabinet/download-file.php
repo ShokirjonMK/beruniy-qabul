@@ -9,6 +9,7 @@ use common\models\Exam;
 use common\models\Course;
 use common\models\StudentDtm;
 use common\models\PaymeUz;
+use common\models\StudentMaster;
 
 /** @var Student $student */
 /** @var Direction $direction */
@@ -52,9 +53,18 @@ if ($student->edu_type_id == 1) {
     if ($dtm->file_status == 2) {
         $t = true;
     }
+} elseif ($student->edu_type_id == 4) {
+    $master = StudentMaster::findOne([
+        'student_id' => $student->id,
+        'edu_direction_id' => $eduDirection->id,
+        'status' => 1,
+        'is_deleted' => 0
+    ]);
+    if ($master->file_status == 2) {
+        $t = true;
+    }
 }
 ?>
-
 
 <div class="ika_page_box">
     <div class="ika_page_box_item">
@@ -64,7 +74,11 @@ if ($student->edu_type_id == 1) {
                 <span></span>
             </div>
             <?php if ($t && $online) : ?>
-                <?= $this->render('_contract') ; ?>
+                <?php if ($student->edu_type_id == 1) : ?>
+                    <?= $this->render('_contract'); ?>
+                <?php else: ?>
+                    <?= $this->render('_no-contract'); ?>
+                <?php endif; ?>
             <?php else: ?>
                 <div class="down_box top30">
                     <div class="page_notfound">

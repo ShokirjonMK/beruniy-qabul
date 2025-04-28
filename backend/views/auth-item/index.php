@@ -82,7 +82,7 @@ $breadcrumbs['item'][] = [
                 'format' => 'raw',
                 'value' => function($model) {
                     if (permission('actions', 'permission')) {
-                        return "<a href='". Url::to(['actions/permission' , 'name' => $model->name]) ."' class='badge-table-div active'><span>Ruxsatlar</span></a>";
+                        return "<a href='". Url::to(['actions/permission' , 'role' => $model->name]) ."' class='badge-table-div active'><span>Ruxsatlar</span></a>";
                     }
                 },
             ],

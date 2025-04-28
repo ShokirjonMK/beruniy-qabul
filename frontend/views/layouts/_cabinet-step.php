@@ -35,8 +35,8 @@ if (!Yii::$app->user->isGuest) {
         <?php $this->registerCsrfMetaTags() ?>
         <title><?= Html::encode($this->title) ?></title>
         <?php $this->head() ?>
-        <link href="/frontend/web/images/beruniy_logo_oq.png" rel="icon">
-        <link href="/frontend/web/images/beruniy_logo_oq.png" rel="apple-touch-icon">
+        <link href="/frontend/web/images/logo_blue.svg" rel="icon">
+        <link href="/frontend/web/images/logo_blue.svg" rel="apple-touch-icon">
     </head>
     <body>
     <?php $this->beginBody() ?>
@@ -51,7 +51,7 @@ if (!Yii::$app->user->isGuest) {
                         <div class="cstep_head_box">
                             <div class="cstep_head_left">
                                 <a href="<?= $url ?>">
-                                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
+                                    <img src="/frontend/web/images/new_logo.png" alt="">
                                 </a>
                             </div>
                             <div class="cstep_head_right">

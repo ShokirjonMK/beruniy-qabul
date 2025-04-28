@@ -248,7 +248,7 @@ if ($model->eduType != null) {
                     <?= Html::a(Yii::t('app', 'Tahrirlash'), ['info', 'id' => $model->id],
                         [
                             "data-bs-toggle" => "modal",
-                            "data-bs-target" => "#studentInfo",
+                            "data-bs-target" => "#studentInfoDate",
                         ])
                     ?>
                 </h6>
@@ -419,14 +419,13 @@ if ($model->eduType != null) {
                             ?>
                         </h6>
                     <?php endif; ?>
-
-                    <?php if (permission('student', 'direction')): ?>
-                        <h6 class="title-link">
-                            <?= Html::a(Yii::t('app', 'Tahrirlash'), ['direction', 'id' => $model->id],
-                                ["data-bs-toggle" => "modal", "data-bs-target" => "#studentInfo"])
-                            ?>
-                        </h6>
-                    <?php endif; ?>
+                <?php endif; ?>
+                <?php if (permission('student', 'direction')): ?>
+                    <h6 class="title-link">
+                        <?= Html::a(Yii::t('app', 'Tahrirlash'), ['direction', 'id' => $model->id],
+                            ["data-bs-toggle" => "modal", "data-bs-target" => "#studentInfo"])
+                        ?>
+                    </h6>
                 <?php endif; ?>
             </div>
         </div>
@@ -862,6 +861,20 @@ if ($model->eduType != null) {
     </div>
 </div>
 
+<div class="modal fade" id="studentInfoDate" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="form-section">
+                <div class="form-section_item">
+                    <div class="modal-body" id="studentInfoBodyDate">
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <?php
 $js = <<<JS
 $(document).ready(function() {
@@ -870,7 +883,13 @@ $(document).ready(function() {
         var button = $(e.relatedTarget);
         var url = button.attr('href');
         $(this).find('#studentInfoBody').load(url);
-        $('.datepicker').datepicker('refresh');
+    });
+    
+    $('#studentInfoDate').on('show.bs.modal', function (e) {
+        // $(this).find('#studentInfoBody').empty();
+        var button = $(e.relatedTarget);
+        var url = button.attr('href');
+        $(this).find('#studentInfoBodyDate').load(url);
     });
 });
 JS;

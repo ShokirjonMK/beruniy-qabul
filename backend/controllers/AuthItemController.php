@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use backend\models\UserUpdate;
 use common\models\AuthItem;
 use common\models\AuthItemSearch;
 use common\models\CrmPush;

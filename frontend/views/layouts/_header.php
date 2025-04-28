@@ -27,7 +27,7 @@ $flagMap = [
         <div class="mb_head d-flex justify-content-between align-items-center">
             <div class="mb_head_left">
                 <a href="<?= Url::to(['site/index']) ?>">
-                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
+                    <img src="/frontend/web/images/logo_new.svg" alt="">
                 </a>
             </div>
             <div class="mb_head_right">
@@ -107,14 +107,14 @@ $flagMap = [
             <div class="mb_menu_list">
                 <p><?= Yii::t("app", "a5") ?></p>
                 <ul>
-                    <li><a href="https://www.instagram.com/arbu_rasmiy"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://t.me/ARBU_RASMIY"><i class="fa-brands fa-telegram"></i></a></li>
-                    <li><a href="https://www.facebook.com/share/1Ee5NUp3fb/?mibextid=wwXIfr"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="https://youtube.com/@arbu_rasmiy"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="https://www.instagram.com/tgfu_uz/?igshid=MzRlODBiNWFlZA%3D%3D"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://t.me/tgfu_uzb"><i class="fa-brands fa-telegram"></i></a></li>
+                    <li><a href="https://www.facebook.com/tgfu.uz?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="https://youtube.com/@tgfuofficial?si=teblBgMHa0fG-nus"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
 
-            <!-- <img src="/frontend/web/images/beruniy_logo_oq.png" class="mb_vector_img"> -->
+            <img src="/frontend/web/images/logo_new.svg" class="mb_vector_img">
         </div>
     </div>
 </div>
@@ -128,24 +128,19 @@ $flagMap = [
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modalBody">
-                        <img src="/frontend/web/images/beruniy_logo_oq.png" alt="" width="200px">
+                        <img src="/frontend/web/images/logo_new.svg" alt="" width="100px">
                         <div class="ik_connection">
                             <h5><?= Yii::t("app", "a6") ?></h5>
                             <ul>
                                 <li><p><?= Yii::t("app", "a7") ?></p></li>
-                                <li><a href="tel:+998557047070">+998 55 704-70-70</a></li>
+                                <li><a href="tel:+998788886666">+998 78 888-66-66</a></li>
                             </ul>
-
-<!--                            <ul>-->
-<!--                                <li><p>--><?php //= Yii::t("app", "a8") ?><!--</p></li>-->
-<!--                                <li><a href="tel:+998945055250">+998 (94) 505-52-50</a></li>-->
-<!--                            </ul>-->
 
                             <ul>
                                 <li><p><?= Yii::t("app", "a9") ?></p></li>
                                 <li>
-                                    <a href="https://bit.ly/samlokatsiya">
-                                        Samarqand kampusi: Samarqand viloyati, Samarqand shahar, Xo'ja Ahror Valiy ko'chasi, 23-uy
+                                    <a href="#">
+                                        Toshkent shahri, Yangixayot tumani, Choshtepa MFY, Choshtepa ko’chasi, 381-uy
                                     </a>
                                 </li>
                             </ul>
@@ -153,8 +148,8 @@ $flagMap = [
                             <ul>
                                 <li><p><?= Yii::t("app", "a9") ?></p></li>
                                 <li>
-                                    <a href="https://bit.ly/buxlokatsiya">
-                                        Buxoro kampusi: Buxoro viloyati, Buxoro shahar, Qayum Murtazoyev ko'chasi, 13A-uy
+                                    <a href="#">
+                                        Qoraqalpogʻiston Respublikasi, Toʻrtkoʻl tumani, Guliston MFY, Beruniy tup koʻchasi 146-uy
                                     </a>
                                 </li>
                             </ul>
@@ -175,7 +170,7 @@ $flagMap = [
         <div class="offSidebarItemSecond">
             <div class="offcanvas-header">
                 <h5 id="offcanvasRightLabel">
-                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
+                    <img src="/frontend/web/images/logo_blue.svg" alt="" width="90px">
                 </h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>
