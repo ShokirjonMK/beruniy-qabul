@@ -27,7 +27,7 @@ $flagMap = [
         <div class="mb_head d-flex justify-content-between align-items-center">
             <div class="mb_head_left">
                 <a href="<?= Url::to(['site/index']) ?>">
-                    <img src="/frontend/web/images/logo_new.svg" alt="">
+                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
                 </a>
             </div>
             <div class="mb_head_right">
@@ -114,7 +114,7 @@ $flagMap = [
                 </ul>
             </div>
 
-            <img src="/frontend/web/images/logo_new.svg" class="mb_vector_img">
+            <!-- <img src="/frontend/web/images/beruniy_logo_oq.png" class="mb_vector_img"> -->
         </div>
     </div>
 </div>
@@ -128,7 +128,7 @@ $flagMap = [
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modalBody">
-                        <img src="/frontend/web/images/logo_new.svg" alt="" width="100px">
+                        <img src="/frontend/web/images/beruniy_logo_oq.png" alt="" width="100px">
                         <div class="ik_connection">
                             <h5><?= Yii::t("app", "a6") ?></h5>
                             <ul>
@@ -170,7 +170,7 @@ $flagMap = [
         <div class="offSidebarItemSecond">
             <div class="offcanvas-header">
                 <h5 id="offcanvasRightLabel">
-                    <img src="/frontend/web/images/logo_blue.svg" alt="" width="90px">
+                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="" width="90px">
                 </h5>
                 <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
             </div>

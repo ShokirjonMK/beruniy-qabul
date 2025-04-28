@@ -33,7 +33,7 @@ AppAsset::register($this);
                     <div class="login_top">
                         <div class="login_top_left">
                             <a href="#">
-                                <img src="/frontend/web/images/logo_blue.svg" alt="">
+                                <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
                             </a>
                         </div>
                         <div class="login_top_right">

@@ -23,7 +23,7 @@ $user = $student->user;
 $cons = Consulting::findOne($user->cons_id);
 $eduDirection = $student->eduDirection;
 $direction = $eduDirection->direction;
-$full_name = $student->last_name.' '.$student->first_name.' '.$student->middle_name;
+$full_name = $student->last_name . ' ' . $student->first_name . ' ' . $student->middle_name;
 $code = '';
 $joy = '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 $date = '';
@@ -36,10 +36,10 @@ if ($student->edu_type_id == 1) {
         'status' => 3,
         'is_deleted' => 0
     ]);
-    $code = 'Q2/'.$cons->code.'/'.$contract->id;
-    $date = date("Y-m-d H:i" , $contract->confirm_date);
-    $link = '1&id='.$contract->id;
-    $con2 = '2'.$contract->invois;
+    $code = 'Q2/' . $cons->code . '/' . $contract->id;
+    $date = date("Y-m-d H:i", $contract->confirm_date);
+    $link = '1&id=' . $contract->id;
+    $con2 = '2' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 2) {
@@ -49,10 +49,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'P2/'.$cons->code.'/'.$contract->id;
-    $date = date("Y-m-d H:i" , $contract->confirm_date);
-    $link = '2&id='.$contract->id;
-    $con2 = '2'.$contract->invois;
+    $code = 'P2/' . $cons->code . '/' . $contract->id;
+    $date = date("Y-m-d H:i", $contract->confirm_date);
+    $link = '2&id=' . $contract->id;
+    $con2 = '2' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 3) {
@@ -62,10 +62,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'D2/'.$cons->code.'/'.$contract->id;
-    $date = date("Y-m-d H:i:s" , $contract->confirm_date);
-    $link = '3&id='.$contract->id;
-    $con2 = '2'.$contract->invois;
+    $code = 'D2/' . $cons->code . '/' . $contract->id;
+    $date = date("Y-m-d H:i:s", $contract->confirm_date);
+    $link = '3&id=' . $contract->id;
+    $con2 = '2' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 4) {
@@ -75,10 +75,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'M2/'.$cons->code.'/'.$contract->id;
-    $date = date("Y-m-d H:i:s" , $contract->confirm_date);
-    $link = '4&id='.$contract->id;
-    $con2 = '2'.$contract->invois;
+    $code = 'M2/' . $cons->code . '/' . $contract->id;
+    $date = date("Y-m-d H:i:s", $contract->confirm_date);
+    $link = '4&id=' . $contract->id;
+    $con2 = '2' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 }
@@ -90,7 +90,7 @@ $student->update(false);
 
 $filial = Branch::findOne($student->branch_id);
 
-$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key=' . $link.'&type=2'))->setSize(120, 120)
+$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key=' . $link . '&type=2'))->setSize(120, 120)
     ->setMargin(10);
 $img = $qr->writeDataUri();
 
@@ -107,21 +107,25 @@ $limg = $lqr->writeDataUri();
     <tr>
         <td colspan="4" style="text-align: center">
             <b>
-                Toshkent gumanitar fanlar  universitetida oʻqitish uchun <br>
+                ABU RAYHON BERUNIY universitetida oʻqitish uchun <br>
                 toʻlov-kontrakt <br><br>
-                SHARTNOMA № <?= $student->passport_serial.$student->passport_number ?>
+                SHARTNOMA № <?= $student->passport_serial . $student->passport_number ?>
             </b>
         </td>
     </tr>
 
-    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
 
     <tr>
         <td colspan="2"><?= $date ?></td>
         <td colspan="2" style="text-align: right"><span><?= $filial->name_uz ?></span></td>
     </tr>
 
-    <tr><td>&nbsp;</td></tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -148,7 +152,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            1.1. Mazkur Shartnomaga asosan Taʻlim tashkiloti Talabani 2025/2026 oʻquv yili davomida <b><?= $direction->code.' '.$direction->name_uz ?></b> ta’lim yo‘nalishi bo‘yicha <b style="text-transform: uppercase"><?= $eduDirection->eduForm->name_uz ?></b> ta’lim shaklida bakalavr qilib tayyorlash dasturi bo‘yicha o‘quv jarayonini (keyingi o‘rinlarda “o‘qitish”) amalga oshirish majburiyatini o‘z zimmasiga oladi, Talaba/to‘lovchi esa Shartnomaning 3-bobida koʻrsatilgan tartib va miqdordagi toʻlovni amalga oshirish majburiyatini oladi. Talabaning ta’lim ma’lumotlari quyidagicha:
+            1.1. Mazkur Shartnomaga asosan Taʻlim tashkiloti Talabani 2025/2026 oʻquv yili davomida <b><?= $direction->code . ' ' . $direction->name_uz ?></b> ta’lim yo‘nalishi bo‘yicha <b style="text-transform: uppercase"><?= $eduDirection->eduForm->name_uz ?></b> ta’lim shaklida bakalavr qilib tayyorlash dasturi bo‘yicha o‘quv jarayonini (keyingi o‘rinlarda “o‘qitish”) amalga oshirish majburiyatini o‘z zimmasiga oladi, Talaba/to‘lovchi esa Shartnomaning 3-bobida koʻrsatilgan tartib va miqdordagi toʻlovni amalga oshirish majburiyatini oladi. Talabaning ta’lim ma’lumotlari quyidagicha:
         </td>
     </tr>
 
@@ -177,11 +181,11 @@ $limg = $lqr->writeDataUri();
                 </tr>
                 <tr>
                     <td colspan="2">O‘qish muddati:</td>
-                    <td colspan="2"><b><?= $eduDirection->duration .' yil' ?></b></td>
+                    <td colspan="2"><b><?= $eduDirection->duration . ' yil' ?></b></td>
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: justify">
-                        Ta’lim yo‘nalishi: <b><?= $direction->code.' '.$direction->name_uz ?></b> Mazkur Shartnoma bo‘yicha to‘lov amalga oshirilgach, bank to‘lov topshiriqnomasi yoki kvitansiya nusхasi Ta’lim tashkilotiga taqdim etilganidan so‘ng to‘lovning Ta’lim tashkilotining hisob raqamiga kеlib tushganligi tasdiqlanishi bilan Talabaning o‘qishga qabul qilinganligi to‘g‘risida Ta’lim tashkiloti tomonidan buyruq chiqariladi.
+                        Ta’lim yo‘nalishi: <b><?= $direction->code . ' ' . $direction->name_uz ?></b> Mazkur Shartnoma bo‘yicha to‘lov amalga oshirilgach, bank to‘lov topshiriqnomasi yoki kvitansiya nusхasi Ta’lim tashkilotiga taqdim etilganidan so‘ng to‘lovning Ta’lim tashkilotining hisob raqamiga kеlib tushganligi tasdiqlanishi bilan Talabaning o‘qishga qabul qilinganligi to‘g‘risida Ta’lim tashkiloti tomonidan buyruq chiqariladi.
                     </td>
                 </tr>
             </table>
@@ -210,7 +214,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.1.1.  Talaba/to‘lovchi tomonidan o‘z majburiyatlarining bajarilishi ustidan doimiy monitoring olib borish.
+            2.1.1. Talaba/to‘lovchi tomonidan o‘z majburiyatlarining bajarilishi ustidan doimiy monitoring olib borish.
         </td>
     </tr>
 
@@ -284,7 +288,7 @@ $limg = $lqr->writeDataUri();
     </tr>
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.5. Talaba bakalavriat bosqichining <?= $direction->code.' '.$direction->name_uz ?> yoʻnalishini muvaffaqiyatli tamomlaganda belgilangan tartibda diplom berish.
+            2.2.5. Talaba bakalavriat bosqichining <?= $direction->code . ' ' . $direction->name_uz ?> yoʻnalishini muvaffaqiyatli tamomlaganda belgilangan tartibda diplom berish.
         </td>
     </tr>
 
@@ -450,7 +454,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            3.1. 2025/2026-oʻquv yilida ta’lim olish uchun Talaba tomonidan toʻlanishi lozim boʻlgan toʻlov summasi <?= number_format((int)$contract->contract_price, 0, '', ' ') . ' (' . Contract::numUzStr($contract->contract_price) . ')'?> soʻmni tashkil etadi va quyidagi tartibda toʻlanadi:
+            3.1. 2025/2026-oʻquv yilida ta’lim olish uchun Talaba tomonidan toʻlanishi lozim boʻlgan toʻlov summasi <?= number_format((int)$contract->contract_price, 0, '', ' ') . ' (' . Contract::numUzStr($contract->contract_price) . ')' ?> soʻmni tashkil etadi va quyidagi tartibda toʻlanadi:
         </td>
     </tr>
 
@@ -620,7 +624,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            4.2. Shartnoma Tomonlarning oʻzaro roziligi bilan oʻzgartiriladi,  2.1.5, 2.1.6-bandlarda koʻrsatilgan holatlar bundan mustasno.
+            4.2. Shartnoma Tomonlarning oʻzaro roziligi bilan oʻzgartiriladi, 2.1.5, 2.1.6-bandlarda koʻrsatilgan holatlar bundan mustasno.
         </td>
     </tr>
 
@@ -756,15 +760,15 @@ $limg = $lqr->writeDataUri();
                             <b><?= $filial->name_uz ?></b> <br>
                             <b>Manzili:</b> <?= $filial->address_uz ?> <br>
                             <b>H/R:</b> <?= $cons->hr ?> <br>
-                            <b>Bank:</b> <?= $cons->bank_name_uz ?>  <br>
-                            <b>Bank kodi (MFO):</b> <?= $cons->mfo ?>  <br>
+                            <b>Bank:</b> <?= $cons->bank_name_uz ?> <br>
+                            <b>Bank kodi (MFO):</b> <?= $cons->mfo ?> <br>
                             <b>STIR (INN):</b> <?= $cons->inn ?> <br>
                             <b>Tel:</b> <?= $cons->tel1 ?> <br>
                             <b>Rеktor:</b> ______________ <?= $filial->rector_uz ?> <br>
                         </td>
                         <td colspan="2" style="vertical-align: top">
                             <b>Talabaning F.I.O.:</b> <?= $full_name ?> <br>
-                            <b>Pasport ma’lumotlari:</b> <?= $student->passport_serial.' '.$student->passport_number ?> <br>
+                            <b>Pasport ma’lumotlari:</b> <?= $student->passport_serial . ' ' . $student->passport_number ?> <br>
                             <b>JShShIR raqami:</b> <?= $student->passport_pin ?> <br>
                             <b>Tеlefon raqami: </b> <?= $student->user->username ?> <br>
                             <b>Talaba imzosi: </b> ______________ <br>
@@ -807,20 +811,20 @@ $limg = $lqr->writeDataUri();
                             <b>Pochta manzili:</b> _____________________________________ <br>
                             ________________________________________________________ <br>
                             <b>H/R:</b> _________________________________________________ <br>
-                            <b>Bank:</b> _________________________________________________  <br>
-                            <b>Bank kodi (MFO):</b> ____________________________________  <br>
+                            <b>Bank:</b> _________________________________________________ <br>
+                            <b>Bank kodi (MFO):</b> ____________________________________ <br>
                             <b>STIR (INN):</b> __________________________________________ <br>
                             <b>Tel:</b> ___________________________________________________ <br>
                             <b>Rahbar:</b> _______________________________________________ <br>
                         </td>
                         <td colspan="2" style="vertical-align: top">
-                            <b>Pasport sеriyasi va raqami/ID karta raqami:</b>  <br>
+                            <b>Pasport sеriyasi va raqami/ID karta raqami:</b> <br>
                             ___________________________________________________________ <br>
                             ___________________________________________________________ <br>
                             <b>JShShIR:</b> ____________________________________________ <br>
                             <b>Doimiy yashash joyi: </b> ____________________________________ <br>
                             ___________________________________________________________ <br>
-                            <b>To‘lovchi   imzosi: </b> _____________________________________________ <br>
+                            <b>To‘lovchi imzosi: </b> _____________________________________________ <br>
                             <span style="font-style: italic; text-align: center;">
                                 “Shartnomaning mazmuni bilan to‘liq tanishib chiqdim va uning barcha bandlarini e’tirof etgan holda tuzishga roziman”
                             </span>
