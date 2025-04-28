@@ -51,7 +51,7 @@ if (!Yii::$app->user->isGuest) {
                         <div class="cstep_head_box">
                             <div class="cstep_head_left">
                                 <a href="<?= $url ?>">
-                                    <img src="/frontend/web/images/new_logo.png" alt="">
+                                    <img src="/frontend/web/images/beruniy_logo_oq.png" alt="">
                                 </a>
                             </div>
                             <div class="cstep_head_right">
