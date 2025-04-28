@@ -36,10 +36,10 @@ if ($student->edu_type_id == 1) {
         'status' => 3,
         'is_deleted' => 0
     ]);
-    $code = 'Q2/' . $cons->code . '/' . $contract->id;
+    $code = 'Q3/' . $cons->code . '/' . $contract->id;
     $date = date("Y-m-d H:i", $contract->confirm_date);
     $link = '1&id=' . $contract->id;
-    $con2 = '2' . $contract->invois;
+    $con2 = '3' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 2) {
@@ -49,10 +49,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'P2/' . $cons->code . '/' . $contract->id;
+    $code = 'P3/' . $cons->code . '/' . $contract->id;
     $date = date("Y-m-d H:i", $contract->confirm_date);
     $link = '2&id=' . $contract->id;
-    $con2 = '2' . $contract->invois;
+    $con2 = '3' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 3) {
@@ -62,10 +62,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'D2/' . $cons->code . '/' . $contract->id;
+    $code = 'D3/' . $cons->code . '/' . $contract->id;
     $date = date("Y-m-d H:i:s", $contract->confirm_date);
     $link = '3&id=' . $contract->id;
-    $con2 = '2' . $contract->invois;
+    $con2 = '3' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 } elseif ($student->edu_type_id == 4) {
@@ -75,10 +75,10 @@ if ($student->edu_type_id == 1) {
         'file_status' => 2,
         'is_deleted' => 0
     ]);
-    $code = 'M2/' . $cons->code . '/' . $contract->id;
+    $code = 'M3/' . $cons->code . '/' . $contract->id;
     $date = date("Y-m-d H:i:s", $contract->confirm_date);
     $link = '4&id=' . $contract->id;
-    $con2 = '2' . $contract->invois;
+    $con2 = '3' . $contract->invois;
     $contract->down_time = time();
     $contract->save(false);
 }
@@ -90,7 +90,7 @@ $student->update(false);
 
 $filial = Branch::findOne($student->branch_id);
 
-$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key=' . $link . '&type=2'))->setSize(120, 120)
+$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key=' . $link . '&type=3'))->setSize(120, 120)
     ->setMargin(10);
 $img = $qr->writeDataUri();
 
@@ -107,7 +107,7 @@ $limg = $lqr->writeDataUri();
     <tr>
         <td colspan="4" style="text-align: center">
             <b>
-                To‘lov shartnoma (ikki tomonlama) asosida mutaxassis tayyorlash to‘g‘risida<br>
+                To‘lov shartnoma (uch tomonlama) asosida mutaxassis tayyorlash to‘g‘risida<br>
                 № <?= $student->passport_pin ?> - sonli SHARTNOMA (bakalavr)
             </b>
         </td>
@@ -128,10 +128,9 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            «Abu Rayhon Beruniy Universiteti» nodavlat oliy ta’lim muassasasi oliy ta’lim faoliyatini amalga oshirish
-            uchun O’zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan 21.08.2024-yilda
-            berilgan № 363695-sonli Litsenziya va Universitet ustavga binoan <?= $filial->rector_uz ?> rahbarligi ostida faoliyat yuritadi,
-            va bundan keyin «Universitet» deb yuritiladi, bir tomondan <?= $full_name ?> bundan keyin «Talaba» deb yuritiladi, ikkinchi tomondan, ushbu shartnomani quyidagicha tuzdilar:
+            «Abu Rayhon Beruniy Universiteti» nodavlat oliy ta’lim muassasasi oliy ta’lim faoliyatini amalga oshirish uchun O’zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar
+            vazirligi tomonidan 21.08.2024 yilda berilgan № 363695-sonli Litsenziya va Universitet ustavga binoan <?= $filial->rector_uz ?> rahbarligi ostida faoliyat yuritadi, va bundan keyin «Universitet» deb yuritiladi,
+            bir tomondan <?= $full_name ?> bundan keyin «Talaba» deb yuritiladi, ikkinchi tomondan, va (Тashkilotning nomi) ____________________________________ (asosida faoliyat yuritadigan) bundan keyin «To‘lovchi» deb yuritiladi, uchinchi tomondan, ushbu shartnomani quyidagicha tuzdilar:
         </td>
     </tr>
 
@@ -250,9 +249,9 @@ $limg = $lqr->writeDataUri();
             <?php if ($student->edu_type_id == 2) : ?>
                 <?php $course = Course::findOne(['id' => ($student->course_id + 1)])->name_uz ?>
             <?php else: ?>
-                <td colspan="2"><b><?php $course = '1 - kurs' ?></b></td>
-            <?php endif; ?>
-            2.1.5.	Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
+        <td colspan="2"><b><?php $course = '1 - kurs' ?></b></td>
+        <?php endif; ?>
+        2.1.5.	Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
         </td>
     </tr>
 
@@ -719,6 +718,26 @@ $limg = $lqr->writeDataUri();
                     <tr>
                         <td>&nbsp;</td>
                     </tr>
+
+                    <tr>
+                        <td colspan="2" style="vertical-align: top">
+                            <b>TO’LOVCHI</b> <br>
+                            <b>Nomi:</b> ___________________________________________________________ <br>
+                            <b>Manzili:</b> ___________________________________________________________ <br>
+                            <b>Bank:</b> ___________________________________________________________ <br>
+                            <b>H/R:</b> ___________________________________________________________ <br>
+                            <b>Bank kodi (MFO):</b> ___________________________________________________________ <br>
+                            <b>STIR (INN):</b> ___________________________________________________________ <br>
+                            <b>Telefon:</b> ___________________________________________________________ <br>
+                            <b>Direktor:</b>  ___________________________________________________________ <br>
+                            <b>Imzo:</b>  ___________________________________________________________ <br>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td>&nbsp;</td>
+                    </tr>
+
 
                     <tr>
                         <td colspan="2" style="vertical-align: top;">

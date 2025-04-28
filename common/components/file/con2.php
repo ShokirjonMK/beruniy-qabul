@@ -250,9 +250,9 @@ $limg = $lqr->writeDataUri();
             <?php if ($student->edu_type_id == 2) : ?>
                 <?php $course = Course::findOne(['id' => ($student->course_id + 1)])->name_uz ?>
             <?php else: ?>
-                <td colspan="2"><b><?php $course = '1 - kurs' ?></b></td>
-            <?php endif; ?>
-            2.1.5.	Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
+        <td colspan="2"><b><?php $course = '1 - kurs' ?></b></td>
+        <?php endif; ?>
+        2.1.5.	Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
         </td>
     </tr>
 

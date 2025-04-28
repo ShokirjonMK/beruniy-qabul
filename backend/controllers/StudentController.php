@@ -617,7 +617,16 @@ class StudentController extends Controller
 
         $eduDirection = $student->eduDirection;
         if ($eduDirection->edu_type_id != 4) {
-            $action = 'contract';
+            $action = '';
+            if ($type == 2) {
+                $action = 'con2';
+            } elseif ($type == 3) {
+                $action = 'con3';
+            } else {
+                $errors[] = ['Type not\'g\'ri tanlandi!'];
+                \Yii::$app->session->setFlash('error' , $errors);
+                return $this->redirect(\Yii::$app->request->referrer);
+            }
         } else {
             $errors[] = ['Shartnoma mavjud emas!'];
             \Yii::$app->session->setFlash('error' , $errors);
