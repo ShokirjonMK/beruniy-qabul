@@ -42,7 +42,7 @@ $this->title = 'Tizimga kirish';
                 </div>
             </div>
             <div class="login_left">
-                <img src="/frontend/web/images/logo_b2.svg" alt="" class="login_logo_img">
+                <img src="/frontend/web/images/login_logo.svg" alt="" class="login_logo_img">
             </div>
         </div>
     </div>

@@ -167,7 +167,7 @@ $limg = $lqr->writeDataUri();
                 </tr>
                 <tr>
                     <td colspan="4" style="text-align: justify">
-                        Ta’lim yo‘nalishi: <b><?= $direction->code . ' ' . $direction->name_uz ?></b> Mazkur Shartnoma bo‘yicha to‘lov amalga oshirilgach, bank to‘lov topshiriqnomasi yoki kvitansiya nusхasi Ta’lim tashkilotiga taqdim etilganidan so‘ng to‘lovning Ta’lim tashkilotining hisob raqamiga kеlib tushganligi tasdiqlanishi bilan Talabaning o‘qishga qabul qilinganligi to‘g‘risida Ta’lim tashkiloti tomonidan buyruq chiqariladi.
+                        Ta’lim yo‘nalishi: <b><?= $direction->code . ' ' . $direction->name_uz ?></b>
                     </td>
                 </tr>
                 <tr>
