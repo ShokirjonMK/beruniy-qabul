@@ -107,10 +107,10 @@ $flagMap = [
             <div class="mb_menu_list">
                 <p><?= Yii::t("app", "a5") ?></p>
                 <ul>
-                    <li><a href="https://www.instagram.com/tgfu_uz/?igshid=MzRlODBiNWFlZA%3D%3D"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://t.me/tgfu_uzb"><i class="fa-brands fa-telegram"></i></a></li>
-                    <li><a href="https://www.facebook.com/tgfu.uz?mibextid=ZbWKwL"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="https://youtube.com/@tgfuofficial?si=teblBgMHa0fG-nus"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://t.me/ABRU2024"><i class="fa-brands fa-telegram"></i></a></li>
+                    <li><a href="https://www.facebook.com/profile.php?id=61564858386951"><i class="fa-brands fa-facebook"></i></a></li>
+                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
 
@@ -133,23 +133,19 @@ $flagMap = [
                             <h5><?= Yii::t("app", "a6") ?></h5>
                             <ul>
                                 <li><p><?= Yii::t("app", "a7") ?></p></li>
-                                <li><a href="tel:+998788886666">+998 78 888-66-66</a></li>
+                                <li><a href="tel:+998952467007">+998 (95) 246-70-07</a></li>
+                            </ul>
+
+                            <ul>
+                                <li><p><?= Yii::t("app", "a7") ?></p></li>
+                                <li><a href="tel:+998952407007">+998 (95) 240-70-07</a></li>
                             </ul>
 
                             <ul>
                                 <li><p><?= Yii::t("app", "a9") ?></p></li>
                                 <li>
                                     <a href="#">
-                                        Toshkent shahri, Yangixayot tumani, Choshtepa MFY, Choshtepa ko’chasi, 381-uy
-                                    </a>
-                                </li>
-                            </ul>
-
-                            <ul>
-                                <li><p><?= Yii::t("app", "a9") ?></p></li>
-                                <li>
-                                    <a href="#">
-                                        Qoraqalpogʻiston Respublikasi, Toʻrtkoʻl tumani, Guliston MFY, Beruniy tup koʻchasi 146-uy
+                                        Toshkent viloyati, Quyi Chirchiq tumani, Beruniy MFY, Bunyodkor ko'chasi, 61 uy
                                     </a>
                                 </li>
                             </ul>
