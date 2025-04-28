@@ -198,7 +198,7 @@
 
 .mainPage {
     /*margin-top: -40px;*/
-    background-image: url("/frontend/web/images/new_bino.jpg");
+    background-image: url("/frontend/web/images/new_bino.webp");
     background-size: cover;
     background-repeat: no-repeat;
     height: 100vh;
@@ -206,7 +206,7 @@
 .ban_content {
     width: 100%;
     height: 100%;
-    background: rgba(2, 27, 102, 0.7);
+    background: rgba(17, 54, 70, 0.7);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -391,8 +391,8 @@
     display: block;
     position: relative;
     overflow: hidden;
-    background: #FDB338;
-    background: linear-gradient(0deg,rgba(253, 179, 56, 1) 0%, rgba(2, 27, 102, 1) 2%);
+    background: #EE7A1B;
+    background: linear-gradient(0deg,rgba(238, 122, 27, 1) 0%, rgba(17, 54, 70, 1) 2%);
 }
 
 .mb_head_left img {
