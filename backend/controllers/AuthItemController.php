@@ -3,17 +3,27 @@
 namespace backend\controllers;
 
 use backend\models\UserUpdate;
+use common\models\AuthAssignment;
 use common\models\AuthItem;
 use common\models\AuthItemSearch;
 use common\models\CrmPush;
 use common\models\Direction;
+use common\models\DirectionCourse;
+use common\models\DirectionSubject;
 use common\models\EduDirection;
 use common\models\Employee;
+use common\models\Exam;
 use common\models\ExamDate;
+use common\models\ExamStudentQuestions;
+use common\models\ExamSubject;
+use common\models\IkIp;
 use common\models\Questions;
 use common\models\Status;
 use common\models\Student;
+use common\models\StudentDtm;
+use common\models\StudentMaster;
 use common\models\StudentOferta;
+use common\models\StudentPerevot;
 use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -33,6 +43,30 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
+        $students = Student::find()->all();
+        foreach ($students as $student) {
+            DirectionSubject::deleteAll();
+            DirectionCourse::deleteAll();
+            CrmPush::deleteAll();
+            ExamStudentQuestions::deleteAll();
+            ExamSubject::deleteAll();
+            Exam::deleteAll();
+//            Options::deleteAll();
+//            Questions::deleteAll();
+//            Subjects::deleteAll();
+            StudentOferta::deleteAll();
+            StudentMaster::deleteAll();
+            StudentPerevot::deleteAll();
+            StudentDtm::deleteAll();
+            IkIp::deleteAll();
+
+            AuthAssignment::deleteAll(['user_id' => $student->user_id]);
+            $user = $student->user;
+            $student->delete();
+            $user->delete();
+            Direction::deleteAll();
+        }
+        dd(2323232);
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
