@@ -42,7 +42,7 @@ class Message extends \yii\db\ActiveRecord
         $token = $data->token;
         $from = "4546";
         $url = 'http://notify.eskiz.uz/api/message/sms/send';
-        $textNew = "SARBON UNIVERSITETI qabul saytiga ro'yxatdan o'tish uchun tasdiqlash kodi: " . $text;
+        $textNew = "ABU RAYHON BERUNIY UNIVERSITETI qabul saytiga ro'yxatdan o'tish uchun tasdiqlash kodi: " . $text;
         $response = $client->createRequest()
             ->setFormat(Client::FORMAT_JSON)
             ->setMethod("POST")
