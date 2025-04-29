@@ -60,12 +60,12 @@ class AuthItemController extends Controller
             StudentDtm::deleteAll();
             IkIp::deleteAll();
             EduDirection::deleteAll();
-
+            Direction::deleteAll();
+            
             AuthAssignment::deleteAll(['user_id' => $student->user_id]);
             $user = $student->user;
             $student->delete();
             $user->delete();
-            Direction::deleteAll();
         }
         dd(2323232);
         $searchModel = new AuthItemSearch();
