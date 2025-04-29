@@ -70,32 +70,32 @@ class StepThree extends Model
             $oferta->save(false);
         }
 
-//        if ($student->edu_type_id === Student::QABUL) {
-//            $directionSubjects = DirectionSubject::find()
-//                ->where(['edu_direction_id' => $new->edu_direction_id, 'status' => 1, 'is_deleted' => 0])
-//                ->all();
-//
-//            if (count($directionSubjects) !== 2) {
-//                $errors[] = ['Fanlar yetarli emas.'];
-//            }
-//
-//            foreach ($directionSubjects as $directionSubject) {
-//                $subject = new ExamSubject();
-//                $subject->setAttributes([
-//                    'exam_id' => $new->id,
-//                    'user_id' => $student->user_id,
-//                    'student_id' => $student->id,
-//                    'edu_type_id' => $student->edu_type_id,
-//                    'edu_form_id' => $student->edu_form_id,
-//                    'language_id' => $student->lang_id,
-//                    'edu_direction_id' => $student->edu_direction_id,
-//                    'direction_id' => $student->direction_id,
-//                    'direction_subject_id' => $directionSubject->id,
-//                    'subject_id' => $directionSubject->subject_id,
-//                ]);
-//                $subject->save(false);
-//            }
-//        }
+        if ($student->edu_type_id === Student::QABUL) {
+            $directionSubjects = DirectionSubject::find()
+                ->where(['edu_direction_id' => $new->edu_direction_id, 'status' => 1, 'is_deleted' => 0])
+                ->all();
+
+            if (count($directionSubjects) !== 2) {
+                $errors[] = ['Fanlar yetarli emas.'];
+            }
+
+            foreach ($directionSubjects as $directionSubject) {
+                $subject = new ExamSubject();
+                $subject->setAttributes([
+                    'exam_id' => $new->id,
+                    'user_id' => $student->user_id,
+                    'student_id' => $student->id,
+                    'edu_type_id' => $student->edu_type_id,
+                    'edu_form_id' => $student->edu_form_id,
+                    'language_id' => $student->lang_id,
+                    'edu_direction_id' => $student->edu_direction_id,
+                    'direction_id' => $student->direction_id,
+                    'direction_subject_id' => $directionSubject->id,
+                    'subject_id' => $directionSubject->subject_id,
+                ]);
+                $subject->save(false);
+            }
+        }
         if (count($errors) == 0) {
             return ['is_ok' => true];
         }
