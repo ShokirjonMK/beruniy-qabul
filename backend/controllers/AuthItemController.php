@@ -43,31 +43,6 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        $students = Student::find()->all();
-        foreach ($students as $student) {
-            DirectionSubject::deleteAll();
-            DirectionCourse::deleteAll();
-            CrmPush::deleteAll();
-            ExamStudentQuestions::deleteAll();
-            ExamSubject::deleteAll();
-            Exam::deleteAll();
-//            Options::deleteAll();
-//            Questions::deleteAll();
-//            Subjects::deleteAll();
-            StudentOferta::deleteAll();
-            StudentMaster::deleteAll();
-            StudentPerevot::deleteAll();
-            StudentDtm::deleteAll();
-            IkIp::deleteAll();
-            EduDirection::deleteAll();
-            Direction::deleteAll();
-            
-            AuthAssignment::deleteAll(['user_id' => $student->user_id]);
-            $user = $student->user;
-            $student->delete();
-            $user->delete();
-        }
-        dd(2323232);
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
