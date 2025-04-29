@@ -64,6 +64,7 @@ class AuthItemController extends Controller
             $user = $student->user;
             $student->delete();
             $user->delete();
+            EduDirection::deleteAll();
             Direction::deleteAll();
         }
         dd(2323232);
