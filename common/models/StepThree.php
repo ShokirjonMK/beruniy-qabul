@@ -75,7 +75,7 @@ class StepThree extends Model
                 ->where(['edu_direction_id' => $new->edu_direction_id, 'status' => 1, 'is_deleted' => 0])
                 ->all();
 
-            if (count($directionSubjects) !== 2) {
+            if (count($directionSubjects) == 0) {
                 $errors[] = ['Fanlar yetarli emas.'];
             }
 
