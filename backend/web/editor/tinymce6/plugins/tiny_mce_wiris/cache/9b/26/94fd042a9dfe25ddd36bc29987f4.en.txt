@@ -1,0 +1,1 @@
+{"result":{"text":"d m squared"},"status":"ok"}
