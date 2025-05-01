@@ -167,8 +167,11 @@ $limg = $lqr->writeDataUri();
                     <td colspan="2"><b>Bakalavr</b></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: justify">
-                        Ta’lim yo‘nalishi: <b><?= $direction->code . ' ' . $direction->name_uz ?></b>
+                    <td colspan="2">
+                        Ta’lim yo‘nalishi:
+                    </td>
+                    <td colspan="2">
+                        <b><?= $direction->code . ' ' . $direction->name_uz ?></b>
                     </td>
                 </tr>
                 <tr>
