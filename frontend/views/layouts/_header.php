@@ -107,10 +107,10 @@ $flagMap = [
             <div class="mb_menu_list">
                 <p><?= Yii::t("app", "a5") ?></p>
                 <ul>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://t.me/ABRU2024"><i class="fa-brands fa-telegram"></i></a></li>
+                    <li><a href="https://www.instagram.com/arbu_rasmiy"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://t.me/arbu_rasmiy"><i class="fa-brands fa-telegram"></i></a></li>
                     <li><a href="https://www.facebook.com/profile.php?id=61564858386951"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="https://www.youtube.com/@AbuRayhonBeruniyUniversiteti"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
 

@@ -40,8 +40,14 @@ class ExamStudentQuestionsSearch extends ExamStudentQuestions
     public function search($params , $exam)
     {
         $query = ExamStudentQuestions::find()
-            ->where(['exam_id' => $exam->id, 'status' => 1, 'is_deleted' => 0])
-            ->orderBy('order asc');
+            ->joinWith('examSubject') // modeldagi relation nomi
+            ->where([
+                'exam_student_questions.exam_id' => $exam->id,
+                'exam_student_questions.status' => 1,
+                'exam_student_questions.is_deleted' => 0,
+            ])
+            ->andWhere(['!=', 'exam_subject.file_status', 2])
+            ->orderBy(['exam_student_questions.order' => SORT_ASC]);
 
         // add conditions that should always apply here
 

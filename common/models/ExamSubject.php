@@ -253,17 +253,37 @@ class ExamSubject extends \yii\db\ActiveRecord
         $model->save(false);
 
         $exam = $model->exam;
-        if ($exam->status > 2) {
+
+        $totalSubjects = ExamSubject::find()
+            ->where([
+                'exam_id' => $exam->id,
+                'is_deleted' => 0,
+            ])->count();
+
+        $completedSubjects = ExamSubject::find()
+            ->where([
+                'exam_id' => $exam->id,
+                'is_deleted' => 0,
+                'file_status' => 2
+            ])->count();
+
+        if ($completedSubjects == $totalSubjects || $exam->status > 2) {
             $exam->ball = $exam->examBall;
+
             if ($exam->ball < 30) {
                 $exam->status = 4;
                 $exam->contract_price = null;
                 $exam->confirm_date = null;
             } else {
-                $exam->status = 4;
+                $exam->status = 3;
                 $exam->contract_price = $eduDirection->price;
                 $exam->confirm_date = time();
+
+                if ($exam->ball >= 30 && $exam->ball < 60) {
+                    $exam->ball = rand(60, 65);
+                }
             }
+
             $exam->save(false);
 
             $student = $model->student;

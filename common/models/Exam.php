@@ -34,6 +34,7 @@ use Yii;
  * @property EduForm $eduForm
  * @property EduType $eduType
  * @property ExamSubject[] $examSubjects
+ * @property ExamSubject[] $examSubjectsIsCheck
  * @property Lang $language
  * @property Student $student
  * @property User $user
@@ -140,6 +141,11 @@ class Exam extends \yii\db\ActiveRecord
     public function getExamSubjects()
     {
         return $this->hasMany(ExamSubject::class, ['exam_id' => 'id']);
+    }
+
+    public function getExamSubjectsIsCheck()
+    {
+        return $this->hasMany(ExamSubject::class, ['exam_id' => 'id'])->where(['!=', 'file_status', 2]);
     }
 
     public function getExamBall()
