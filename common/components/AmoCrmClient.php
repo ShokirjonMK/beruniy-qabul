@@ -51,7 +51,7 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
         try {
             $pipelinesService = $this->apiClient->pipelines();
             $pipelines =  $pipelinesService->get();
-            $pipelineArray = ArrayHelper::map($pipelines, 'id', 'name');
+//            $pipelineArray = ArrayHelper::map($pipelines, 'id', 'name');
             return $pipelines;
         } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
             throw new \Exception('Error fetching pipelines: ' . $e->getMessage());
