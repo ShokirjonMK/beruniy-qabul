@@ -85,8 +85,8 @@ class CrmPushController extends Controller
             $leadName = $phoneNumber;
             $message = '';
             $tags = ['arbu'];
-            $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
-            $statusId = $model->lead_status;
+            $pipelineId = (string)AmoCrmClient::DEFAULT_PIPELINE_ID;
+            $statusId = (string)$model->lead_status;
             $leadPrice = 0;
 
             $customFields = [];
@@ -103,7 +103,7 @@ class CrmPushController extends Controller
 
     public static function addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice)
     {
-//        try {
+        try {
             $amoCrmClient = Yii::$app->ikAmoCrm;
             $newLead = $amoCrmClient->addLeadToPipeline(
                 $phoneNumber,
@@ -115,11 +115,10 @@ class CrmPushController extends Controller
                 $statusId,
                 $leadPrice
             );
-            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
-//        } catch (\Exception $e) {
-//            return ['is_ok' => false];
-//        }
+        } catch (\Exception $e) {
+            return ['is_ok' => false];
+        }
     }
 
     public static function updateItem($model)
