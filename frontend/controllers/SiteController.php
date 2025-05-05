@@ -79,8 +79,6 @@ class SiteController extends Controller
 
     public function actionIndex()
     {
-//        $amoCrmClient = Yii::$app->ikAmoCrm->getPipelines();
-//        dd($amoCrmClient);
         return $this->render('index');
     }
 
