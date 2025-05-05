@@ -132,12 +132,17 @@ $flagMap = [
                         <div class="ik_connection">
                             <h5><?= Yii::t("app", "a6") ?></h5>
                             <ul>
-                                <li><p><?= Yii::t("app", "a7") ?></p></li>
+                                <li><p>Aloqa markazi</p></li>
+                                <li><a href="tel:+998559037007">+998 (55) 903-70-07</a></li>
+                            </ul>
+
+                            <ul>
+                                <li><p>Universitet</p></li>
                                 <li><a href="tel:+998952467007">+998 (95) 246-70-07</a></li>
                             </ul>
 
                             <ul>
-                                <li><p><?= Yii::t("app", "a7") ?></p></li>
+                                <li><p>Universitet</p></li>
                                 <li><a href="tel:+998952407007">+998 (95) 240-70-07</a></li>
                             </ul>
 
