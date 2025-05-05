@@ -100,7 +100,7 @@ class AuthItemController extends Controller
             $message = '';
             $tags = ['arbu-edu.uz'];
             $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
-            $statusId = 76101186;
+            $statusId = $model->lead_status;
             $leadPrice = 0;
 
             $customFields = [];
