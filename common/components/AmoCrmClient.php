@@ -37,7 +37,6 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
         parent::init();
 
         $this->apiClient = new AmoCRMApiClient(self::CLIENT_ID, self::CLIENT_SECRET, self::REDIRECT_URL);
-        dd($this->apiClient);
         $accessToken = new AccessToken([
             'access_token' => self::ACCESS_TOKEN_VALUE,
             'refresh_token' => null,
