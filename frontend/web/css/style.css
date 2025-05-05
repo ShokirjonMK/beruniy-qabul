@@ -249,6 +249,8 @@
     display: flex;
     align-items: center;
     gap: 40px;
+    text-transform: uppercase;
+    font-weight: 600;
     transition: all 0.2s linear;
 }
 .banner-link a span {
