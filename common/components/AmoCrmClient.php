@@ -194,6 +194,8 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
              // Link the contact to the lead
              $newLead->setContacts($contactsCollection);
 
+             dd($newLead);
+
             $addedLead = $this->apiClient->leads()->addOne($newLead);
             return $addedLead;
          } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
