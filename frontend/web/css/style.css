@@ -480,6 +480,7 @@
     text-transform: uppercase;
     font-weight: 600;
 }
+.ik_header_li_a i,
 .ik_header_li_a span {
     color: var(--red-color);
 }
