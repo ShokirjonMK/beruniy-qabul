@@ -476,8 +476,12 @@
     padding: 5px 10px;
 }
 .mb_menu_list2 ul li a span {
-    font-size: 12px;
+    font-size: 14px;
     text-transform: uppercase;
+    font-weight: 600;
+}
+.ik_header_li_a span {
+    color: var(--red-color);
 }
 .mb_menu_list ul li a {
     width: 100%;
