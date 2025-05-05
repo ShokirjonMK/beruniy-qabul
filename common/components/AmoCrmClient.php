@@ -194,8 +194,9 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
              // Link the contact to the lead
              $newLead->setContacts($contactsCollection);
 
+             dd($this->apiClient->leads());
+
             $addedLead = $this->apiClient->leads()->addOne($newLead);
-            dd($addedLead);
             return $addedLead;
          } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
              throw new \Exception('Leadni yangilashda xatolik:' . $e->getMessage());

@@ -117,7 +117,7 @@ class AuthItemController extends Controller
 
     public static function addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice)
     {
-        try {
+//        try {
             $amoCrmClient = \Yii::$app->ikAmoCrm;
             $newLead = $amoCrmClient->addLeadToPipeline(
                 $phoneNumber,
@@ -129,10 +129,11 @@ class AuthItemController extends Controller
                 $statusId,
                 $leadPrice
             );
+            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
-        } catch (\Exception $e) {
-            return ['is_ok' => false];
-        }
+//        } catch (\Exception $e) {
+//            return ['is_ok' => false];
+//        }
     }
 
     public static function updateItem($model)
