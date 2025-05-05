@@ -96,7 +96,7 @@ class AuthItemController extends Controller
         $student = Student::findOne($model->student_id);
         if ($student) {
             $phoneNumber = preg_replace('/[^\d+]/', '', $student->username);
-            $leadName = (string)$phoneNumber;
+            $leadName = $phoneNumber;
             $message = '';
             $tags = ['arbu-edu.uz'];
             $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
