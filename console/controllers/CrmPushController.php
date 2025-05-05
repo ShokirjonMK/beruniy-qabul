@@ -50,6 +50,7 @@ class CrmPushController extends Controller
             foreach ($query as $item) {
                 if ($item->type == 1) {
                     $result = self::createItem($item);
+                    dd($result);
                 } else {
                     $result = self::updateItem($item);
                 }
@@ -115,7 +116,6 @@ class CrmPushController extends Controller
                 $statusId,
                 $leadPrice
             );
-            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
         } catch (\Exception $e) {
             return ['is_ok' => false];
