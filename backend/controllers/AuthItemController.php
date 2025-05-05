@@ -109,7 +109,7 @@ class AuthItemController extends Controller
                 $customFields[$key] = (string)$value;
             }
 
-            dd($customFields);
+            dd($leadName);
 
             return self::addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice);
         } else {
