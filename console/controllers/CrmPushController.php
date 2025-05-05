@@ -94,7 +94,6 @@ class CrmPushController extends Controller
             foreach ($jsonData as $key => $value) {
                 $customFields[$key] = (string)$value;
             }
-            dd(2121212);
 
             return self::addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice);
         } else {
@@ -104,7 +103,7 @@ class CrmPushController extends Controller
 
     public static function addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice)
     {
-        try {
+//        try {
             $amoCrmClient = Yii::$app->ikAmoCrm;
             $newLead = $amoCrmClient->addLeadToPipeline(
                 $phoneNumber,
@@ -116,10 +115,11 @@ class CrmPushController extends Controller
                 $statusId,
                 $leadPrice
             );
+            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
-        } catch (\Exception $e) {
-            return ['is_ok' => false];
-        }
+//        } catch (\Exception $e) {
+//            return ['is_ok' => false];
+//        }
     }
 
     public static function updateItem($model)
