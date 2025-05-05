@@ -50,7 +50,6 @@ class CrmPushController extends Controller
             foreach ($query as $item) {
                 if ($item->type == 1) {
                     $result = self::createItem($item);
-                    dd($result);
                 } else {
                     $result = self::updateItem($item);
                 }
@@ -95,6 +94,7 @@ class CrmPushController extends Controller
             foreach ($jsonData as $key => $value) {
                 $customFields[$key] = (string)$value;
             }
+            dd(2121212);
 
             return self::addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice);
         } else {
