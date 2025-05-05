@@ -170,29 +170,29 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
                  $newLead->setCustomFieldsValues($customFieldsCollection);
              }
 
-//             $contact = new ContactModel();
-//             $contact->setName($leadName); // Set the contact name if needed
-//
-//             $customFieldsValues = new \AmoCRM\Collections\CustomFieldsValuesCollection();
-//             $phoneFieldModel = (new \AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel())
-//                 ->setFieldCode('PHONE') // or use setFieldId() if you have the field ID
-//                 ->setValues(
-//                     (new \AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection())
-//                         ->add(
-//                             (new \AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel())
-//                                 ->setValue($phoneNumber) // Set the phone number here
-//                                 ->setEnum('WORK') // Specify the phone type (WORK, HOME, etc.)
-//                         )
-//                 );
-//             $customFieldsValues->add($phoneFieldModel);
-//             $contact->setCustomFieldsValues($customFieldsValues);
-//
-//             $contactsCollection = new \AmoCRM\Collections\ContactsCollection();
-//             $contactsCollection->add($contact);
-//             $this->apiClient->contacts()->add($contactsCollection);
-//
-//             // Link the contact to the lead
-//             $newLead->setContacts($contactsCollection);
+             $contact = new ContactModel();
+             $contact->setName($leadName); // Set the contact name if needed
+
+             $customFieldsValues = new \AmoCRM\Collections\CustomFieldsValuesCollection();
+             $phoneFieldModel = (new \AmoCRM\Models\CustomFieldsValues\MultitextCustomFieldValuesModel())
+                 ->setFieldCode('PHONE') // or use setFieldId() if you have the field ID
+                 ->setValues(
+                     (new \AmoCRM\Models\CustomFieldsValues\ValueCollections\MultitextCustomFieldValueCollection())
+                         ->add(
+                             (new \AmoCRM\Models\CustomFieldsValues\ValueModels\MultitextCustomFieldValueModel())
+                                 ->setValue($phoneNumber) // Set the phone number here
+                                 ->setEnum('WORK') // Specify the phone type (WORK, HOME, etc.)
+                         )
+                 );
+             $customFieldsValues->add($phoneFieldModel);
+             $contact->setCustomFieldsValues($customFieldsValues);
+
+             $contactsCollection = new \AmoCRM\Collections\ContactsCollection();
+             $contactsCollection->add($contact);
+             $this->apiClient->contacts()->add($contactsCollection);
+
+             // Link the contact to the lead
+             $newLead->setContacts($contactsCollection);
 
 //             dd($newLead);
 

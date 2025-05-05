@@ -96,9 +96,9 @@ class AuthItemController extends Controller
         $student = Student::findOne($model->student_id);
         if ($student) {
             $phoneNumber = preg_replace('/[^\d+]/', '', $student->username);
-            $leadName = $phoneNumber;
+            $leadName = (string)$phoneNumber;
             $message = '';
-            $tags = ['arbu'];
+            $tags = ['arbu-edu.uz'];
             $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
             $statusId = $model->lead_status;
             $leadPrice = 0;
@@ -129,7 +129,6 @@ class AuthItemController extends Controller
                 $statusId,
                 $leadPrice
             );
-            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
 //        } catch (\Exception $e) {
 //            return ['is_ok' => false];
