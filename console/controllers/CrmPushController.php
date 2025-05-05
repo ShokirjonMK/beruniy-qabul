@@ -115,6 +115,7 @@ class CrmPushController extends Controller
                 $statusId,
                 $leadPrice
             );
+            dd($newLead);
             return ['is_ok' => true, 'data' => $newLead];
         } catch (\Exception $e) {
             return ['is_ok' => false];
