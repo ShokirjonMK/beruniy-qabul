@@ -12,7 +12,7 @@ interface AmoCrmSettings
     const DEFAULT_TAGS = ['Ik test' , 'ik'];
 
 
-    const DEFAULT_RESPONSIBLE_USER_ID = 32372114;
+    const DEFAULT_RESPONSIBLE_USER_ID = 12406318;
     const CLIENT_ID = 'c5859adb-bfdf-467b-ad2e-f7b0f4a659ba';
     const CLIENT_SECRET = 'kbJhoZ6QFBUmZcp1PwoeIc72HoH6ZFU83uOlCql94VRmNW8ZGoQYCYoM1yNx13PY';
     const REDIRECT_URL = 'https://arbu-edu.uz';

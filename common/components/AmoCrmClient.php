@@ -122,7 +122,7 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
 
     public function addLeadToPipeline(string $phoneNumber, string $leadName, string $message, array $tags, array $customFields, int $pipelineId = 0, int $statusId = 0, int $leadPrice = 0)
     {
-//         try {
+         try {
             if($pipelineId == 0 ){
                 $pipelineId = self::DEFAULT_PIPELINE_ID;
             }
@@ -194,13 +194,11 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
              // Link the contact to the lead
              $newLead->setContacts($contactsCollection);
 
-//             dd($newLead);
-
             $addedLead = $this->apiClient->leads()->addOne($newLead);
             return $addedLead;
-//         } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
-//             throw new \Exception('Leadni yangilashda xatolik:' . $e->getMessage());
-//         }
+         } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
+             throw new \Exception('Leadni yangilashda xatolik:' . $e->getMessage());
+         }
     }
 
 
