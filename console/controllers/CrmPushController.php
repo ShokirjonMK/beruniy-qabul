@@ -36,7 +36,7 @@ class CrmPushController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
 
         $query = CrmPush::find()
-            ->where(['status' => 0, 'is_deleted' => 0])
+            ->where(['status' => 0, 'is_deleted' => 0, 'student_id' => 602])
             ->andWhere([
                 'or',
                 ['and', ['type' => 1], ['lead_id' => null]],  // type 1 uchun lead_id null bo'lishi kerak
