@@ -4,7 +4,7 @@ return [
     'a1' => 'Pages',
     'a2' => 'Communication',
     'a3' => 'Directions',
-    'a4' => 'Submit an application',
+    'a4' => 'Submit documents',
     'a5' => 'SOCIAL NETWORKS',
     'a6' => 'CONTACT US',
     'a7' => 'Phone number',

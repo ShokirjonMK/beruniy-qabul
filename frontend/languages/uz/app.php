@@ -4,7 +4,7 @@ return [
     'a1' => 'Sahifalar',
     'a2' => 'Aloqa',
     'a3' => 'Yo\'nalishlar',
-    'a4' => 'Ariza topshirish',
+    'a4' => 'Hujjat topshirish',
     'a5' => 'IJTIMOIY TARMOQLAR',
     'a6' => 'BIZ BILAN BOG‘LANISH',
     'a7' => 'Telefon raqam',
