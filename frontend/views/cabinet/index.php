@@ -5,6 +5,7 @@ use yii\helpers\Url;
 use common\models\StudentPerevot;
 use common\models\StudentDtm;
 use common\models\StudentMaster;
+use yii\helpers\Html;
 
 /** @var $student */
 
@@ -59,6 +60,7 @@ if ($student->edu_type_id == 1) {
         $t = true;
     }
 }
+$session = Yii::$app->session;
 ?>
 
 <div class="ika_page_box">
@@ -138,3 +140,41 @@ if ($student->edu_type_id == 1) {
         </div>
     </div>
 </div>
+
+<?php if ($session->has('exam_modal_show')) : ?>
+    <div class="modal fade" id="showExamModal" data-bs-backdrop="static" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body" id="perOferta">
+                    <div class="alert_question">
+                        <div class="alert_danger_circle">
+                            <div class="alert_danger_box">
+                                <i class="fa-solid fa-question"></i>
+                            </div>
+                        </div>
+                        <p style="text-transform: unset">
+                            <?= Yii::t("app" , "a165") ?>
+                        </p>
+                    </div>
+                    <div class="d-flex justify-content-around align-items-center top30">
+                        <?= Html::button(Yii::t("app" , "a73"), ['class' => 'step_left_btn step_btn', 'data-bs-dismiss' => 'modal']) ?>
+                        <?= Html::submitButton(Yii::t("app" , "a37"), ['class' => 'step_right_btn step_btn', 'name' => 'login-button']) ?>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<?php
+$js = <<<JS
+var examModal = new bootstrap.Modal(document.getElementById('showExamModal'));
+examModal.show();
+JS;
+$this->registerJs($js);
+Yii::$app->session->remove('exam_modal_show');
+?>
+<?php endif; ?>
+
+
+
+
