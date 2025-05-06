@@ -186,6 +186,8 @@ return [
     'a164' => 'Click to upload Master\'s information',
 
     'a165' => 'Do you allow us to use your personal information?',
+
+    'a166' => 'Do you want to go to the exam section and start the test?',
 ];
 
 

@@ -153,12 +153,12 @@ $session = Yii::$app->session;
                             </div>
                         </div>
                         <p style="text-transform: unset">
-                            <?= Yii::t("app" , "a165") ?>
+                            <?= Yii::t("app" , "a166") ?>
                         </p>
                     </div>
                     <div class="d-flex justify-content-around align-items-center top30">
-                        <?= Html::button(Yii::t("app" , "a73"), ['class' => 'step_left_btn step_btn', 'data-bs-dismiss' => 'modal']) ?>
-                        <?= Html::submitButton(Yii::t("app" , "a37"), ['class' => 'step_right_btn step_btn', 'name' => 'login-button']) ?>
+                        <?= Html::button(Yii::t("app" , "a110"), ['class' => 'step_left_btn step_btn', 'data-bs-dismiss' => 'modal']) ?>
+                        <?= Html::a(Yii::t("app", "a111"), ['cabinet/exam'], ['class' => 'step_right_btn step_btn']) ?>
                     </div>
                 </div>
             </div>

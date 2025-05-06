@@ -185,6 +185,7 @@ return [
     'a164' => 'Magistratura ma\'lumotini yuklash uchun bosing',
 
     'a165' => 'Sizning shaxsiy ma\'lumotingizdan foydalanishimizga ruxsat berasizmi?',
+    'a166' => 'Imtixon bo\'limiga o\'tib testni boshlamoqchimsiz?',
 ];
 
 
