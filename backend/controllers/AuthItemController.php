@@ -44,8 +44,6 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        CrmPush::deleteAll();
-        dd(3223);
 //        $query = CrmPush::find()
 //            ->where(['status' => 0, 'student_id' => 603])
 //            ->andWhere([
