@@ -44,42 +44,42 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
-        $query = CrmPush::find()
-            ->where(['status' => 0, 'student_id' => 603])
-            ->andWhere([
-                'or',
-                ['and', ['type' => 1], ['lead_id' => null]],  // type 1 uchun lead_id null bo'lishi kerak
-                ['and', ['<>', 'type', 1], ['is not', 'lead_id', null]]  // boshqalar uchun lead_id null emas
-            ])
-            ->orderBy('id asc')
-            ->limit(6)
-            ->all();
-
-        if (!empty($query)) {
-            foreach ($query as $item) {
-                if ($item->type == 1) {
-                    $result = self::createItem($item);
-                } else {
-                    $result = self::updateItem($item);
-                }
-                if ($result !== null && $result['is_ok']) {
-                    $amo = $result['data'];
-                    $item->status = 1;
-                    if ($item->type == 1) {
-                        $item->lead_id = $amo->id;
-                        $student = Student::findOne($item->student_id);
-                        $user = $student->user;
-                        CrmPush::updateAll(['lead_id' => $amo->id], ['student_id' => $item->student_id]);
-                        $user->lead_id = $item->lead_id;
-                        $user->save(false);
-                    }
-                } else {
-                    $item->is_deleted = 1;
-                }
-                $item->push_time = time();
-                $item->save(false);
-            }
-        }
+//        $query = CrmPush::find()
+//            ->where(['status' => 0, 'student_id' => 603])
+//            ->andWhere([
+//                'or',
+//                ['and', ['type' => 1], ['lead_id' => null]],  // type 1 uchun lead_id null bo'lishi kerak
+//                ['and', ['<>', 'type', 1], ['is not', 'lead_id', null]]  // boshqalar uchun lead_id null emas
+//            ])
+//            ->orderBy('id asc')
+//            ->limit(6)
+//            ->all();
+//
+//        if (!empty($query)) {
+//            foreach ($query as $item) {
+//                if ($item->type == 1) {
+//                    $result = self::createItem($item);
+//                } else {
+//                    $result = self::updateItem($item);
+//                }
+//                if ($result !== null && $result['is_ok']) {
+//                    $amo = $result['data'];
+//                    $item->status = 1;
+//                    if ($item->type == 1) {
+//                        $item->lead_id = $amo->id;
+//                        $student = Student::findOne($item->student_id);
+//                        $user = $student->user;
+//                        CrmPush::updateAll(['lead_id' => $amo->id], ['student_id' => $item->student_id]);
+//                        $user->lead_id = $item->lead_id;
+//                        $user->save(false);
+//                    }
+//                } else {
+//                    $item->is_deleted = 1;
+//                }
+//                $item->push_time = time();
+//                $item->save(false);
+//            }
+//        }
 
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);

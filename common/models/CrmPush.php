@@ -26,15 +26,15 @@ class CrmPush extends \yii\db\ActiveRecord
 {
     use ResourceTrait;
 
-    const TEL = 828769;
+    const TEL = 856543;
     const FILIAL = 851879;
     const FAMILYA = 828767;
     const ISM = 851881;
     const OTASI = 828765;
     const SERIYA = 828763;
-    const NOMER = 828761;
-    const BIRTHDAY = 828773;
-    const QABUL_TURI = 828771;
+    const NOMER = 856547;
+    const BIRTHDAY = 856549;
+    const QABUL_TURI = 856551;
     const TALIM_SHAKLI = 851883;
     const TALIM_TILI = 851885;
     const TALIM_KODI = 851887;
