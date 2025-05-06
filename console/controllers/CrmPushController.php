@@ -84,7 +84,7 @@ class CrmPushController extends Controller
             $phoneNumber = preg_replace('/[^\d+]/', '', $student->username);
             $leadName = $phoneNumber;
             $message = '';
-            $tags = ['zarmed'];
+            $tags = ['arbu-edu.uz'];
             $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
             $statusId = $model->lead_status;
             $leadPrice = 0;
