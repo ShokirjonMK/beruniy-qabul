@@ -430,6 +430,7 @@ class Student extends \yii\db\ActiveRecord
 
     public function getChalaStatus() {
         $user = $this->user;
+        $text = '';
         if ($user->status == 9 && $user->step > 0) {
             $text = 'Parol tiklashda SMS parol tasdiqlamaan';
         } elseif ($user->status == 9 && $user->step == 0) {
