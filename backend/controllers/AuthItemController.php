@@ -3,6 +3,7 @@
 namespace backend\controllers;
 
 use backend\models\UserUpdate;
+use common\components\AmoCrmClient;
 use common\models\AuthAssignment;
 use common\models\AuthItem;
 use common\models\AuthItemSearch;
@@ -43,6 +44,43 @@ class AuthItemController extends Controller
      */
     public function actionIndex()
     {
+//        $query = CrmPush::find()
+//            ->where(['status' => 0, 'student_id' => 603])
+//            ->andWhere([
+//                'or',
+//                ['and', ['type' => 1], ['lead_id' => null]],  // type 1 uchun lead_id null bo'lishi kerak
+//                ['and', ['<>', 'type', 1], ['is not', 'lead_id', null]]  // boshqalar uchun lead_id null emas
+//            ])
+//            ->orderBy('id asc')
+//            ->limit(6)
+//            ->all();
+//
+//        if (!empty($query)) {
+//            foreach ($query as $item) {
+//                if ($item->type == 1) {
+//                    $result = self::createItem($item);
+//                } else {
+//                    $result = self::updateItem($item);
+//                }
+//                if ($result !== null && $result['is_ok']) {
+//                    $amo = $result['data'];
+//                    $item->status = 1;
+//                    if ($item->type == 1) {
+//                        $item->lead_id = $amo->id;
+//                        $student = Student::findOne($item->student_id);
+//                        $user = $student->user;
+//                        CrmPush::updateAll(['lead_id' => $amo->id], ['student_id' => $item->student_id]);
+//                        $user->lead_id = $item->lead_id;
+//                        $user->save(false);
+//                    }
+//                } else {
+//                    $item->is_deleted = 1;
+//                }
+//                $item->push_time = time();
+//                $item->save(false);
+//            }
+//        }
+
         $searchModel = new AuthItemSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
@@ -50,6 +88,85 @@ class AuthItemController extends Controller
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
+    }
+
+
+    public static function createItem($model)
+    {
+        $student = Student::findOne($model->student_id);
+        if ($student) {
+            $phoneNumber = preg_replace('/[^\d+]/', '', $student->username);
+            $leadName = $phoneNumber;
+            $message = '';
+            $tags = ['arbu-edu.uz'];
+            $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
+            $statusId = $model->lead_status;
+            $leadPrice = 0;
+
+            $customFields = [];
+            $jsonData = json_decode($model->data, true);
+            foreach ($jsonData as $key => $value) {
+                $customFields[$key] = (string)$value;
+            }
+
+            return self::addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice);
+        } else {
+            return ['is_ok' => false];
+        }
+    }
+
+    public static function addItem($phoneNumber, $leadName, $message, $tags, $customFields, $pipelineId, $statusId, $leadPrice)
+    {
+        try {
+            $amoCrmClient = \Yii::$app->ikAmoCrm;
+            $newLead = $amoCrmClient->addLeadToPipeline(
+                $phoneNumber,
+                $leadName,
+                $message,
+                $tags,
+                $customFields,
+                $pipelineId,
+                $statusId,
+                $leadPrice
+            );
+            return ['is_ok' => true, 'data' => $newLead];
+        } catch (\Exception $e) {
+            return ['is_ok' => false];
+        }
+    }
+
+    public static function updateItem($model)
+    {
+        try {
+            $amoCrmClient = \Yii::$app->ikAmoCrm;
+            $leadId = $model->lead_id;
+            $tags = [];
+            $message = '';
+            $customFields = [];
+            $updatedFields = [];
+
+            if ($model->pipeline_id != null) {
+                $updatedFields['pipelineId'] = (string)$model->pipeline_id;
+            }
+
+            if ($model->lead_status != null) {
+                $updatedFields['statusId'] = $model->lead_status;
+            }
+
+            if ($model->data != null) {
+                $jsonData = json_decode($model->data, true);
+                foreach ($jsonData as $key => $value) {
+                    if ($key == CrmPush::TEL) {
+                        $updatedFields['name'] = (string)$value;
+                    }
+                    $customFields[$key] = (string)$value;
+                }
+            }
+            $updatedLead = $amoCrmClient->updateLead($leadId, $updatedFields, $tags, $message, $customFields);
+            return ['is_ok' => true, 'data' => $updatedLead];
+        } catch (\Exception $e) {
+            return ['is_ok' => false];
+        }
     }
 
     /**

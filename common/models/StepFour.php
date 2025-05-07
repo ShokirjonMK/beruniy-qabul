@@ -97,6 +97,10 @@ class StepFour extends Model
                 $transaction->rollBack();
                 return ['is_ok' => false , 'errors' => $amo['errors']];
             }
+            if ($student->edu_type_id == 1) {
+                $session = Yii::$app->session;
+                $session->set('exam_modal_show', true);
+            }
 
             $transaction->commit();
             return ['is_ok' => true];

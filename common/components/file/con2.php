@@ -90,7 +90,7 @@ $student->update(false);
 
 $filial = Branch::findOne($student->branch_id);
 
-$qr = (new QrCode('https://qabul.tgfu.uz/site/contract?key=' . $link . '&type=2'))->setSize(120, 120)
+$qr = (new QrCode('https://qabul.arbu-edu.uz/site/contract?key=' . $link . '&type=2'))->setSize(120, 120)
     ->setMargin(10);
 $img = $qr->writeDataUri();
 
@@ -102,7 +102,7 @@ $limg = $lqr->writeDataUri();
 ?>
 
 
-<table width="100%" style="font-family: 'Times New Roman'; font-size: 12px; border-collapse: collapse;">
+<table width="100%" style="font-family: 'Times New Roman'; font-size: 14px; border-collapse: collapse;">
 
     <tr>
         <td colspan="4" style="text-align: center">
@@ -167,8 +167,11 @@ $limg = $lqr->writeDataUri();
                     <td colspan="2"><b>Bakalavr</b></td>
                 </tr>
                 <tr>
-                    <td colspan="4" style="text-align: justify">
-                        Ta’lim yo‘nalishi: <b><?= $direction->code . ' ' . $direction->name_uz ?></b>
+                    <td colspan="2">
+                        Ta’lim yo‘nalishi:
+                    </td>
+                    <td colspan="2">
+                        <b><?= $direction->code . ' ' . $direction->name_uz ?></b>
                     </td>
                 </tr>
                 <tr>
@@ -727,7 +730,7 @@ $limg = $lqr->writeDataUri();
                         <td colspan="2" style="vertical-align: top">
                             <img src="<?= $limg ?>" width="120px"> <br>
                             <b>Litsenziya berilgan sana va raqami</b> <br>
-                            30.12.2022 <b>№ 222840</b>
+                            21.08.2024 <b>№ 363695</b>
                         </td>
                     </tr>
 

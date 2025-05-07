@@ -21,7 +21,7 @@ $lang = Yii::$app->language;
 $this->title = Yii::t("app" , "a141");
 $questionData = $dataProvider->getModels();
 $finishTime = (date("m/d/Y H:i:s", $exam->finish_time));
-$examSubjects = $exam->examSubjects;
+$examSubjects = $exam->examSubjectsIsCheck;
 $direction = $student->direction;
 ?>
 
@@ -230,6 +230,7 @@ $direction = $student->direction;
 
                                 <?php if (count($examSubjects) > 0) : ?>
                                     <?php foreach ($examSubjects as $examSubject) : ?>
+                                        <?php $directionSubject = $examSubject->directionSubject ?>
                                         <?php $subjectQuestions = $examSubject->studentQuestions; ?>
                                         <?php $qCount = count($subjectQuestions); ?>
                                         <?php $startCount = '-'; ?>
@@ -250,7 +251,7 @@ $direction = $student->direction;
                                         <p class="subject-title"><?= $examSubject->subject['name_'.$lang] ?></p>
                                         <div class="subject-info">
                                             <p><span>Savollar soni: <?= $qCount ?> ta &nbsp; | &nbsp; <?= $startCount ?>-<?= $endCount ?> gacha</span></p>
-                                            <p><span>Har bir savolga beriladigan bal: <?= $examSubject->ball ?></span></p>
+                                            <p><span>Har bir savolga beriladigan bal: <?= $directionSubject->ball ?></span></p>
                                         </div>
                                         <?php if ($qCount > 0) : ?>
                                             <div class="subject-question-number">

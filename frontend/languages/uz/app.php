@@ -4,7 +4,7 @@ return [
     'a1' => 'Sahifalar',
     'a2' => 'Aloqa',
     'a3' => 'Yo\'nalishlar',
-    'a4' => 'Ariza topshirish',
+    'a4' => 'Hujjat topshirish',
     'a5' => 'IJTIMOIY TARMOQLAR',
     'a6' => 'BIZ BILAN BOG‘LANISH',
     'a7' => 'Telefon raqam',
@@ -185,6 +185,7 @@ return [
     'a164' => 'Magistratura ma\'lumotini yuklash uchun bosing',
 
     'a165' => 'Sizning shaxsiy ma\'lumotingizdan foydalanishimizga ruxsat berasizmi?',
+    'a166' => 'Imtixon bo\'limiga o\'tib testni boshlamoqchimsiz?',
 ];
 
 

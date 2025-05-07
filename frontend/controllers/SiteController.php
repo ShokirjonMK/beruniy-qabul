@@ -257,22 +257,25 @@ class SiteController extends Controller
         $contract = false;
 
         if ($type == 2) {
-            if ($key == 3) {
-                $action = 'contract';
-                $contract = StudentDtm::findOne($id);
-            } elseif ($key == 2) {
-                $action = 'contract';
-                $contract = StudentPerevot::findOne($id);
-            } elseif ($key == 1) {
-                $action = 'contract';
-                $contract = Exam::findOne($id);
-            } else {
-                $errors[] = ['Shartnoma mavjud emas!'];
-                \Yii::$app->session->setFlash('error' , $errors);
-                return $this->redirect(\Yii::$app->request->referrer);
-            }
+            $action = 'con2';
+        } elseif ($type == 3) {
+            $action = 'con3';
         } else {
             $errors[] = ['Type not\'g\'ri tanlandi!'];
+            \Yii::$app->session->setFlash('error' , $errors);
+            return $this->redirect(\Yii::$app->request->referrer);
+        }
+
+        if ($key == 3) {
+            $contract = StudentDtm::findOne($id);
+        } elseif ($key == 2) {
+            $contract = StudentPerevot::findOne($id);
+        } elseif ($key == 1) {
+            $contract = Exam::findOne($id);
+        } elseif ($key == 4) {
+            $contract = StudentMaster::findOne($id);
+        } else {
+            $errors[] = ['Shartnoma mavjud emas!'];
             \Yii::$app->session->setFlash('error' , $errors);
             return $this->redirect(\Yii::$app->request->referrer);
         }

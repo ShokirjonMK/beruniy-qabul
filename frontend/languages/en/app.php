@@ -4,7 +4,7 @@ return [
     'a1' => 'Pages',
     'a2' => 'Communication',
     'a3' => 'Directions',
-    'a4' => 'Submit an application',
+    'a4' => 'Submit documents',
     'a5' => 'SOCIAL NETWORKS',
     'a6' => 'CONTACT US',
     'a7' => 'Phone number',
@@ -186,6 +186,8 @@ return [
     'a164' => 'Click to upload Master\'s information',
 
     'a165' => 'Do you allow us to use your personal information?',
+
+    'a166' => 'Do you want to go to the exam section and start the test?',
 ];
 
 

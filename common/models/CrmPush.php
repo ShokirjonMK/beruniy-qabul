@@ -26,28 +26,28 @@ class CrmPush extends \yii\db\ActiveRecord
 {
     use ResourceTrait;
 
-    const TEL = 889851;
-    const FILIAL = 889831;
-    const FAMILYA = 889817;
-    const ISM = 889819;
-    const OTASI = 889821;
-    const SERIYA = 889823;
-    const NOMER = 889825;
-    const BIRTHDAY = 889827;
-    const QABUL_TURI = 889829;
-    const TALIM_SHAKLI = 889833;
-    const TALIM_TILI = 889835;
-    const TALIM_KODI = 889837;
-    const TALIM_YONALISH = 889839;
-    const BOSQICH = 889843;
-    const EXAM_TYPE = 889841;
-    const EXAM_DATE = 891599;
-    const EXAM_BALL = 891601;
-    const IMTIXON_XOLATI = 891603;
-    const OFERTA_XOLATI = 891605;
-    const TRANSKRIPT_XOLATI = 891607;
-    const DTM_XOLATI = 891609;
-    const MASTER_XOLATI = 891611;
+    const TEL = 856543;
+    const FILIAL = 851879;
+    const FAMILYA = 828767;
+    const ISM = 851881;
+    const OTASI = 828765;
+    const SERIYA = 828763;
+    const NOMER = 856547;
+    const BIRTHDAY = 856549;
+    const QABUL_TURI = 856551;
+    const TALIM_SHAKLI = 851883;
+    const TALIM_TILI = 851885;
+    const TALIM_KODI = 851887;
+    const TALIM_YONALISH = 851889;
+    const BOSQICH = 851891;
+    const EXAM_TYPE = 851893;
+    const EXAM_DATE = 851895;
+    const EXAM_BALL = 851897;
+    const IMTIXON_XOLATI = 851899;
+    const OFERTA_XOLATI = 851901;
+    const TRANSKRIPT_XOLATI = 851903;
+    const DTM_XOLATI = 851905;
+    const MASTER_XOLATI = 851907;
 
     /**
      * {@inheritdoc}
@@ -101,73 +101,73 @@ class CrmPush extends \yii\db\ActiveRecord
         $errors = [];
         switch ($id) {
             case 1:
-                $pipelineId = 9163250;
-                $statusId = 73649594;
+                $pipelineId = 9519534;
+                $statusId = 76101186;
                 // Ro'yhatdan o'tishda sms parol kiritmaganlar
                 self::notEnteredSmsPassword($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 2:
-                $pipelineId = 9163250;
-                $statusId = 73649598;
+                $pipelineId = 9519534;
+                $statusId = 76101190;
                 // Pasport ma'lumotini kiritmaganlar
                 self::notEnteredPassport($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 3:
-                $pipelineId = 9163250;
-                $statusId = 73649602;
+                $pipelineId = 9519534;
+                $statusId = 76272930;
                 // Qabul turini kiritmaganlar
                 self::notEnteredAdmissionType($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 4:
-                $pipelineId = 9163250;
-                $statusId = 73649898;
+                $pipelineId = 9519534;
+                $statusId = 76101194;
                 // Yo'nalish tanlamaganlar
                 self::notSelectedDirection($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 5:
-                $pipelineId = 9163250;
-                $statusId = 73649902;
+                $pipelineId = 9519534;
+                $statusId = 76101198;
                 // Tasdiqlamaganlar
                 self::notConfirmed($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 6:
-                $pipelineId = 9163250;
-                $statusId = 75233838;
+                $pipelineId = 9519534;
+                $statusId = 76101202;
                 // Tasdiqlandi
                 self::notContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 7:
-                $pipelineId = 9163250;
-                $statusId = 73649918;
+                $pipelineId = 9519534;
+                $statusId = 76423610;
                 // Shartnoma bekor qilindi
                 self::receivedContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 8:
-                $pipelineId = 9163250;
+                $pipelineId = 9519534;
                 $statusId = 142;
                 // Shartnoma tasdiqlandi
                 self::confirmContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 9:
-                $pipelineId = 9343514;
-                $statusId = 74898898;
+                $pipelineId = 9517518;
+                $statusId = 76086722;
                 // Shartnoma Yuklab oldi
                 self::loadContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 10:
-                $pipelineId = 9163250;
+                $pipelineId = 9519534;
                 $statusId = 142;
                 // To'lov qildi
                 self::confirmContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 11:
-                $pipelineId = 9163250;
+                $pipelineId = 9519534;
                 $statusId = 142;
                 // Yopildi
                 self::confirmContract($pipelineId, $statusId, $student, $user , $id);
                 break;
             case 12:
-                $pipelineId = 9163250;
+                $pipelineId = 9519534;
                 $statusId = 143;
                 // Arxivlanganlar
                 self::archived($pipelineId, $statusId, $student, $user , $id);
@@ -378,13 +378,13 @@ class CrmPush extends \yii\db\ActiveRecord
                 $examStatus = Status::getExamTestStatus($exam->status);
                 if ($exam->status < 3) {
                     $check = false;
-                    if ($student->exam_type == 0) {
-                        $statusId = 73649906;
-                    } elseif ($student->exam_type == 1) {
-                        $statusId = 73649910;
-                    }
+//                    if ($student->exam_type == 0) {
+//                        $statusId = 73649906;
+//                    } elseif ($student->exam_type == 1) {
+//                        $statusId = 73649910;
+//                    }
                 } elseif ($exam->status == 4) {
-                    $statusId = 73649918;
+                    $statusId = 76423610;
                     $check = false;
                 }
                 $ball = $exam->ball;
@@ -402,7 +402,7 @@ class CrmPush extends \yii\db\ActiveRecord
                 $perevotStatus = Status::fileStatus($perevot->file_status);
                 if ($perevot->file_status != 2) {
                     if ($perevot->file_status == 3) {
-                        $statusId = 73649918;
+                        $statusId = 76423610;
                     }
                     $check = false;
                 }
@@ -420,7 +420,7 @@ class CrmPush extends \yii\db\ActiveRecord
                 $dtmStatus = Status::fileStatus($dtm->file_status);
                 if ($dtm->file_status != 2) {
                     if ($dtm->file_status == 3) {
-                        $statusId = 73649918;
+                        $statusId = 76423610;
                     }
                     $check = false;
                 }
@@ -438,7 +438,7 @@ class CrmPush extends \yii\db\ActiveRecord
                 $masterStatus = Status::fileStatus($master->file_status);
                 if ($master->file_status != 2) {
                     if ($master->file_status == 3) {
-                        $statusId = 73649918;
+                        $statusId = 76423610;
                     }
                     $check = false;
                 }

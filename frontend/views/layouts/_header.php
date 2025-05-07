@@ -86,7 +86,7 @@ $flagMap = [
                     </li>
                     <?php if ($con != "cabinet"): ?>
                         <li>
-                            <a href="<?= Url::to([$user ? 'cabinet/index' : 'site/login']) ?>">
+                            <a href="<?= Url::to([$user ? 'cabinet/index' : 'site/login']) ?>" class="ik_header_li_a">
                                 <i class="fa-solid fa-user"></i>
                                 <span><?= Yii::t("app", $user ? "Kabinetga kirish" : "a4") ?></span>
                             </a>
@@ -107,10 +107,10 @@ $flagMap = [
             <div class="mb_menu_list">
                 <p><?= Yii::t("app", "a5") ?></p>
                 <ul>
-                    <li><a href="#"><i class="fa-brands fa-instagram"></i></a></li>
-                    <li><a href="https://t.me/ABRU2024"><i class="fa-brands fa-telegram"></i></a></li>
+                    <li><a href="https://www.instagram.com/arbu_rasmiy"><i class="fa-brands fa-instagram"></i></a></li>
+                    <li><a href="https://t.me/arbu_rasmiy"><i class="fa-brands fa-telegram"></i></a></li>
                     <li><a href="https://www.facebook.com/profile.php?id=61564858386951"><i class="fa-brands fa-facebook"></i></a></li>
-                    <li><a href="#"><i class="fa-brands fa-youtube"></i></a></li>
+                    <li><a href="https://www.youtube.com/@AbuRayhonBeruniyUniversiteti"><i class="fa-brands fa-youtube"></i></a></li>
                 </ul>
             </div>
 
@@ -132,12 +132,17 @@ $flagMap = [
                         <div class="ik_connection">
                             <h5><?= Yii::t("app", "a6") ?></h5>
                             <ul>
-                                <li><p><?= Yii::t("app", "a7") ?></p></li>
+                                <li><p>Aloqa markazi</p></li>
+                                <li><a href="tel:+998559037007">+998 (55) 903-70-07</a></li>
+                            </ul>
+
+                            <ul>
+                                <li><p>Universitet</p></li>
                                 <li><a href="tel:+998952467007">+998 (95) 246-70-07</a></li>
                             </ul>
 
                             <ul>
-                                <li><p><?= Yii::t("app", "a7") ?></p></li>
+                                <li><p>Universitet</p></li>
                                 <li><a href="tel:+998952407007">+998 (95) 240-70-07</a></li>
                             </ul>
 
