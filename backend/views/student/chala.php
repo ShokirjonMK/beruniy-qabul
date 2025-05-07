@@ -36,6 +36,12 @@ $breadcrumbs['item'][] = [
         </ol>
     </nav>
 
+    <?php if (permission('student', 'create')): ?>
+        <div class="mb-3 mt-4">
+            <?= Html::a(Yii::t('app', 'Qo\'shish'), ['create'], ['class' => 'b-btn b-primary']) ?>
+        </div>
+    <?php endif; ?>
+
     <?= $this->render('_searchChala', ['model' => $searchModel]); ?>
 
     <?php $data = [

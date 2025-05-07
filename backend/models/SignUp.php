@@ -147,16 +147,16 @@ class SignUp extends Model
                 $newAuth->created_at = time();
                 $newAuth->save(false);
 
-                $newStudent = new Student();
-                $newStudent->user_id = $user->id;
-                $newStudent->username = $user->username;
-                $newStudent->password = $password;
-                $newStudent->branch_id = $this->filial_id;
-                $newStudent->created_by = 0;
-                $newStudent->updated_by = 0;
-                $newStudent->save(false);
+                $student = new Student();
+                $student->user_id = $user->id;
+                $student->username = $user->username;
+                $student->password = $password;
+                $student->branch_id = $this->filial_id;
+                $student->created_by = 0;
+                $student->updated_by = 0;
+                $student->save(false);
 
-                $amo = CrmPush::processType(1, $newStudent, $user);
+                $amo = CrmPush::processType(1, $student, $user);
                 if (!$amo['is_ok']) {
                     $transaction->rollBack();
                     return ['is_ok' => false , 'errors' => $amo['errors']];
@@ -168,7 +168,7 @@ class SignUp extends Model
 
         if (count($errors) == 0) {
             $transaction->commit();
-            return ['is_ok' => true , 'user' => $user];
+            return ['is_ok' => true , 'student' => $student];
         }else {
             $transaction->rollBack();
             return ['is_ok' => false , 'errors' => $errors];

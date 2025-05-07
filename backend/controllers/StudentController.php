@@ -25,6 +25,7 @@ use common\models\StudentMaster;
 use common\models\StudentOferta;
 use common\models\StudentPerevot;
 use common\models\StudentSearch;
+use frontend\models\SignUp;
 use kartik\mpdf\Pdf;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -187,11 +188,18 @@ class StudentController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Student();
+        $model = new SignUp();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post())) {
+                $result = $model->signup();
+                if ($result['is_ok']) {
+                    \Yii::$app->session->setFlash('success');
+                    return $this->redirect(['view' , 'id' => $result['student']->id]);
+                } else {
+                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                }
+                return $this->redirect(\Yii::$app->request->referrer);
             }
         } else {
             $model->loadDefaultValues();
