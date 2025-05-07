@@ -25,7 +25,7 @@ use common\models\StudentMaster;
 use common\models\StudentOferta;
 use common\models\StudentPerevot;
 use common\models\StudentSearch;
-use frontend\models\SignUp;
+use backend\models\SignUp;
 use kartik\mpdf\Pdf;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
