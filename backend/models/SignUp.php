@@ -87,6 +87,9 @@ class SignUp extends Model
             if ($user->status == 10) {
                 $errors[] = ['Telefon nomer avval ro\'yhatdan o\'tgan.'];
             } elseif ($user->status == 9) {
+                if ($user->step == 0) {
+                    $user->step = 1;
+                }
                 $user->setPassword($password);
                 $user->generateAuthKey();
                 $user->generateEmailVerificationToken();
@@ -99,6 +102,14 @@ class SignUp extends Model
                 $student->password = $password;
                 $student->branch_id = $this->filial_id;
                 $student->update(false);
+
+                if ($user->step == 1) {
+                    $amo = CrmPush::processType(2, $student, $user);
+                    if (!$amo['is_ok']) {
+                        $transaction->rollBack();
+                        return ['is_ok' => false , 'errors' => $amo['errors']];
+                    }
+                }
             } else {
                 $errors[] = ['Raqamingiz tizim tomonidan blocklangan.'];
             }
@@ -112,6 +123,7 @@ class SignUp extends Model
             $user->generateEmailVerificationToken();
             $user->generatePasswordResetToken();
             $user->status = 10;
+            $user->step = 1;
 
             $branch = Branch::findOne([
                 'id' => $this->filial_id,
@@ -156,7 +168,7 @@ class SignUp extends Model
                 $student->updated_by = 0;
                 $student->save(false);
 
-                $amo = CrmPush::processType(1, $student, $user);
+                $amo = CrmPush::processType(2, $student, $user);
                 if (!$amo['is_ok']) {
                     $transaction->rollBack();
                     return ['is_ok' => false , 'errors' => $amo['errors']];
