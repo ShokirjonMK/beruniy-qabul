@@ -201,8 +201,6 @@ class StudentController extends Controller
                 }
                 return $this->redirect(\Yii::$app->request->referrer);
             }
-        } else {
-            $model->loadDefaultValues();
         }
 
         return $this->render('create', [
