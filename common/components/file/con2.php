@@ -151,7 +151,10 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            1.1. Mazkur Shartnomaga asosan Ta’lim muassasasi 2025-2026 o‘quv yili davomida belgilangan ta’lim standartlari va o‘quv dasturlariga muvofiq o‘quv jarayonlarini tashkil etadi, talaba esa shartnomaning ko‘rsatilgan tartib va miqdordagi to‘lovni amalga oshiradi hamda talaba ta’lim muassasasida belgilangan ichki-tartib qoidaga muvofiq ta’lim olish majburiyatini oladi.
+            1.1. Mazkur Shartnomaga asosan Ta’lim muassasasi 2025-2026 o‘quv yili davomida belgilangan ta’lim standartlari va
+            o‘quv dasturlariga muvofiq o‘quv jarayonlarini tashkil etadi, talaba esa shartnomaning ko‘rsatilgan tartib
+            va miqdordagi to‘lovni amalga oshiradi hamda talaba ta’lim muassasasida belgilangan ichki-tartib qoidaga
+            muvofiq ta’lim olish majburiyatini oladi.
         </td>
     </tr>
 
@@ -226,25 +229,25 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.1.1.	O‘qitish uchun O‘zbekiston Respublikasining amaldagi “Ta’lim to‘g‘risida”gi Qonuniga muvofiq Ta’lim muassasasi Ustavi va boshqa ichki hujjatlarida nazarda tutilgan zarur shart-sharoitlarni yaratadi.
+            2.1.1. O‘qitish uchun O‘zbekiston Respublikasining amaldagi “Ta’lim to‘g‘risida”gi Qonuniga muvofiq Ta’lim muassasasi Ustavi va boshqa ichki hujjatlarida nazarda tutilgan zarur shart-sharoitlarni yaratadi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.1.2.	Talabalarning qonun hujjatlarida belgilangan huquqlarining bajarilishini ta’minlaydi.
+            2.1.2. Talabalarning qonun hujjatlarida belgilangan huquqlarining bajarilishini ta’minlaydi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.1.3.	Talabani tasdiqlangan o‘quv reja va dasturlarga muvofiq darajada o‘qitadi.
+            2.1.3. Talabani tasdiqlangan o‘quv reja va dasturlarga muvofiq darajada o‘qitadi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.1.4.	Talaba bakalavriat yo‘nalishini muvaffaqiyatli tamomlaganda, belgilangan tartibda O‘zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan davlat namunasidagi diplom beradi.
+            2.1.4. Talaba bakalavriat yo‘nalishini muvaffaqiyatli tamomlaganda, belgilangan tartibda O‘zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar vazirligi tomonidan davlat namunasidagi diplom beradi.
         </td>
     </tr>
 
@@ -254,9 +257,9 @@ $limg = $lqr->writeDataUri();
                 <?php $course = Course::findOne(['id' => ($student->course_id + 1)])->name_uz ?>
             <?php else: ?>
         <td colspan="2"><b><?php $course = '1 - kurs' ?></b></td>
-        <?php endif; ?>
-        2.1.5.	Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
-        </td>
+    <?php endif; ?>
+    2.1.5. Abituriyent o‘quv yilining birinchi yarmi uchun 50 % yoki toliq to‘lovni amalga oshirganidan so‘ng uni <?= $course ?> talabalar safiga qabul qilinadi.
+    </td>
     </tr>
 
 
@@ -269,97 +272,97 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.1.	Talabadan shartnomaviy majburiyatlari bajarilishini, shu jumladan ta’lim muassasasining ichki hujjatlarida belgilangan qoidalarga rioya qilishni, o‘quv mashg‘ulotlarida muntazam qatnashishni, shartnoma bo‘yicha to‘lovlarni o‘z vaqtida amalga oshirishni talab qilish.
+            2.2.1. Talabadan shartnomaviy majburiyatlari bajarilishini, shu jumladan ta’lim muassasasining ichki hujjatlarida belgilangan qoidalarga rioya qilishni, o‘quv mashg‘ulotlarida muntazam qatnashishni, shartnoma bo‘yicha to‘lovlarni o‘z vaqtida amalga oshirishni talab qilish.
         </td>
     </tr>
 
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.2.	Talaba ta’lim muassasasining ichki hujjatlarida belgilangan qoidalarga rioya qilmagan, bir semestr davomida darslarni uzrli sabablarsiz, 74 soatdan ortiq qoldirgan yoki talaba o‘qitish uchun belgilangan miqdordagi to‘lovni o‘z vaqtida amalga oshirmagan bo‘lsa ta’lim muassasasi talabaga nisbatan belgilangan tartibda talabalar safidan chetlashtirish, tegishli kursda qoldirish yoki boshqa choralarni qo‘llash.
+            2.2.2. Talaba ta’lim muassasasining ichki hujjatlarida belgilangan qoidalarga rioya qilmagan, bir semestr davomida darslarni uzrli sabablarsiz, 74 soatdan ortiq qoldirgan yoki talaba o‘qitish uchun belgilangan miqdordagi to‘lovni o‘z vaqtida amalga oshirmagan bo‘lsa ta’lim muassasasi talabaga nisbatan belgilangan tartibda talabalar safidan chetlashtirish, tegishli kursda qoldirish yoki boshqa choralarni qo‘llash.
         </td>
     </tr>
 
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.3.	Talaba quyidagi sabablarga ko‘ra talabalar safidan chetlashtirilganda oliy ta’lim muassasasi tomonidan o‘quv yili uchun oldindan amalga oshirilgan to‘lovning qolgan qismini shartnomaning tegishli tarafi talabaning o‘qigan muddati uchun haqiqatda sarflangan xarajatlar chegirilgan xolda tegishli o‘quv yili yoki semestr uchun oldindan amalga oshirilgan to‘lovning qolgan qismi shartnomaning tegishli tarafi yozma murojaatiga ko‘ra qaytarib beriladi: <br>
-            O‘z xoxishiga binoan o‘qishni boshqa ta’lim muassasasiga ko‘chirilishi munosabati bilan, salomatligi tufayli (tibbiy komissiya ma’lumotnomasi asosida), talaba sud tomonidan ozodlikdan maxrum etilganligi munosabati bilan, vafot etganligi sababli. Bunda to‘lov shartnoma asosida talabalikka qabul qilinganlar talabalar safidan chetlashtirilganda qaytariladigan to‘lov miqdori birinchi kurslar talabalikga qabul qilish (ikkinchi va undan yuqori kurslar kursdan kursga ko‘chirish) to‘g‘risidagi rektor buyrug‘i chiqqan kundan boshlab o‘quv yilining qolgan qismiga yillik to‘lov Shartnoma miqdorini teng taqsimlanish orqali aniqlanadi va shartnomaning tegishli tarafi talabaning (vafot etgan holatda tegishli tartibda vafot etganligi haqida ma’lumotnoma nusxasi taqdim etilganda) yozma murojaatiga ko‘ra  qaytarib beriladi.
+            2.2.3. Talaba quyidagi sabablarga ko‘ra talabalar safidan chetlashtirilganda oliy ta’lim muassasasi tomonidan o‘quv yili uchun oldindan amalga oshirilgan to‘lovning qolgan qismini shartnomaning tegishli tarafi talabaning o‘qigan muddati uchun haqiqatda sarflangan xarajatlar chegirilgan xolda tegishli o‘quv yili yoki semestr uchun oldindan amalga oshirilgan to‘lovning qolgan qismi shartnomaning tegishli tarafi yozma murojaatiga ko‘ra qaytarib beriladi: <br>
+            O‘z xoxishiga binoan o‘qishni boshqa ta’lim muassasasiga ko‘chirilishi munosabati bilan, salomatligi tufayli (tibbiy komissiya ma’lumotnomasi asosida), talaba sud tomonidan ozodlikdan maxrum etilganligi munosabati bilan, vafot etganligi sababli. Bunda to‘lov shartnoma asosida talabalikka qabul qilinganlar talabalar safidan chetlashtirilganda qaytariladigan to‘lov miqdori birinchi kurslar talabalikga qabul qilish (ikkinchi va undan yuqori kurslar kursdan kursga ko‘chirish) to‘g‘risidagi rektor buyrug‘i chiqqan kundan boshlab o‘quv yilining qolgan qismiga yillik to‘lov Shartnoma miqdorini teng taqsimlanish orqali aniqlanadi va shartnomaning tegishli tarafi talabaning (vafot etgan holatda tegishli tartibda vafot etganligi haqida ma’lumotnoma nusxasi taqdim etilganda) yozma murojaatiga ko‘ra qaytarib beriladi.
         </td>
     </tr>
 
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.4.	Istisno tariqasida shartnoma bo‘yicha to‘lov muddatlarini uzaytirish (Ta’lim muassasasining buyrug‘i orqali).
+            2.2.4. Istisno tariqasida shartnoma bo‘yicha to‘lov muddatlarini uzaytirish (Ta’lim muassasasining buyrug‘i orqali).
         </td>
     </tr>
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.2.5.	Talaba shartnomaning ko‘rsatilgan to‘lov summa miqdorini o‘z vaqtida amalga oshirmaganida, talabani barcha o‘quv va imtihon jarayonlariga qo‘ymaslik.
+            2.2.5. Talaba shartnomaning ko‘rsatilgan to‘lov summa miqdorini o‘z vaqtida amalga oshirmaganida, talabani barcha o‘quv va imtihon jarayonlariga qo‘ymaslik.
         </td>
     </tr>
     <tr>
         <td colspan="4" style="text-align: justify">
-            <b>2.3.	Talabaning huquqlari:</b>
+            <b>2.3. Talabaning huquqlari:</b>
         </td>
     </tr>
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.3.1.	Ta’lim muassasasidan shartnomaviy majburiyatlari bajarilishini talab qilish.
-        </td>
-    </tr>
-
-    <tr>
-        <td colspan="4" style="text-align: justify">
-            2.3.2.	Ta’lim muassasasida tasdiqlangan o‘quv reja va dasturlarga muvofiq darajada ta’lim olish.
+            2.3.1. Ta’lim muassasasidan shartnomaviy majburiyatlari bajarilishini talab qilish.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.3.3.	Ta’lim muassasasining ta’lim jarayonlarini yaxshilashga doir takliflar berish.
+            2.3.2. Ta’lim muassasasida tasdiqlangan o‘quv reja va dasturlarga muvofiq darajada ta’lim olish.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.3.4.	O‘qish uchun to‘lov turini tanlash.
+            2.3.3. Ta’lim muassasasining ta’lim jarayonlarini yaxshilashga doir takliflar berish.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            <b>2.4.	Talabaning majburiyatlari:</b>
-        </td>
-    </tr>
-    <tr>
-        <td colspan="4" style="text-align: justify">
-            2.4.1.	Talaba mazkur bakalavriyat darajasida ta’lim olish uchun qonunchilik asosida talab etiladigan bundan oldingi ta’lim bosqichini tamomlaganligini tasdiqlovchi hujjatlarning mavjudligi va haqqoniyligi uchun to‘liq javobgarlikni o‘z zimmasiga oladi.
+            2.3.4. O‘qish uchun to‘lov turini tanlash.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.2.	Talaba joriy o‘quv yili uchun belgilangan o‘qitish qiymatini shartnomaning 3-bobida ko‘rsatilgan tartib va miqdorda o‘z vaqtida to‘laydi.
+            <b>2.4. Talabaning majburiyatlari:</b>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.1. Talaba mazkur bakalavriyat darajasida ta’lim olish uchun qonunchilik asosida talab etiladigan bundan oldingi ta’lim bosqichini tamomlaganligini tasdiqlovchi hujjatlarning mavjudligi va haqqoniyligi uchun to‘liq javobgarlikni o‘z zimmasiga oladi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.3.	Universitet Ustavi va boshqa ichki-tartib qoida talablariga qat’iy rioya qiladi.
+            2.4.2. Talaba joriy o‘quv yili uchun belgilangan o‘qitish qiymatini shartnomaning 3-bobida ko‘rsatilgan tartib va miqdorda o‘z vaqtida to‘laydi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.4.	Talaba o‘quv mashg‘ulotlarida muntazam qatnashadi.
+            2.4.3. Universitet Ustavi va boshqa ichki-tartib qoida talablariga qat’iy rioya qiladi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.5.	Talaba ta’lim muassasasida belgilangan tartib va qoidaga asosan ta’lim oladi hamda ushbu jarayonda bilim darajasini oshirib boradi.
+            2.4.4. Talaba o‘quv mashg‘ulotlarida muntazam qatnashadi.
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.5. Talaba ta’lim muassasasida belgilangan tartib va qoidaga asosan ta’lim oladi hamda ushbu jarayonda bilim darajasini oshirib boradi.
         </td>
     </tr>
 
@@ -649,7 +652,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            8.7. Talaba tomonidan taqdim qilingan barcha hujjatlar, hujjatlardagi ma’lumotlarning ishonchliligi, to’g’riligi, haqqoniyligi bo‘yicha javobgarlik talaba zimmasiga yuklanadi. Talaba tomonidan hujjatlarni qalbakilashtirish huquqbuzarligi ta’lim muassasasi tomonidan aniqlanganda darhol huquqni muhofaza qiluvchi organlarga xabar beriladi, talabalar safidan chetlashtiriladi hamda talaba to’lagan  to’lov-shartnoma summasi qaytarilmaydi va Universitet xisob-raqamida qoladi. Bunday holatlar uchun jinoyiy javobgarlik mavjudligini ma’lum qilamiz. Agar bunday holat Talaba ta’lim muassasasidan bakalavr diplomini u taqdim qilgan qalbaki hujjat(-lar) yoki hujjatlardagi qalbakilashtirilgan ma’lumotlar asosida olgan bo’lsa, unda diplom haqiqiy emas deb topiladi va ushbu holat yuzasidan huquqni muhofaza qiluvchi organlarga xabar beriladi.
+            8.7. Talaba tomonidan taqdim qilingan barcha hujjatlar, hujjatlardagi ma’lumotlarning ishonchliligi, to’g’riligi, haqqoniyligi bo‘yicha javobgarlik talaba zimmasiga yuklanadi. Talaba tomonidan hujjatlarni qalbakilashtirish huquqbuzarligi ta’lim muassasasi tomonidan aniqlanganda darhol huquqni muhofaza qiluvchi organlarga xabar beriladi, talabalar safidan chetlashtiriladi hamda talaba to’lagan to’lov-shartnoma summasi qaytarilmaydi va Universitet xisob-raqamida qoladi. Bunday holatlar uchun jinoyiy javobgarlik mavjudligini ma’lum qilamiz. Agar bunday holat Talaba ta’lim muassasasidan bakalavr diplomini u taqdim qilgan qalbaki hujjat(-lar) yoki hujjatlardagi qalbakilashtirilgan ma’lumotlar asosida olgan bo’lsa, unda diplom haqiqiy emas deb topiladi va ushbu holat yuzasidan huquqni muhofaza qiluvchi organlarga xabar beriladi.
         </td>
     </tr>
 
@@ -701,14 +704,14 @@ $limg = $lqr->writeDataUri();
 
                     <tr>
                         <td colspan="2" style="vertical-align: top">
-                            <b><?= $filial->name_uz ?></b> <br>
+                            <b>ABU RAYHON BERUNIY UNIVERSITETI </b> <br>
                             <b>Manzili:</b> <?= $filial->address_uz ?> <br>
                             <b>H/R:</b> <?= $cons->hr ?> <br>
                             <b>Bank:</b> <?= $cons->bank_name_uz ?> <br>
                             <b>Bank kodi (MFO):</b> <?= $cons->mfo ?> <br>
                             <b>STIR (INN):</b> <?= $cons->inn ?> <br>
                             <b>Tel:</b> <?= $cons->tel1 ?> <br>
-                            <b>Direktor:</b>  <?= $filial->rector_uz ?> <br>
+                            <b>Direktor:</b> <?= $filial->rector_uz ?> <br>
                         </td>
                         <td colspan="2" style="vertical-align: top">
                             <b>Talabaning F.I.O.:</b> <?= $full_name ?> <br>
