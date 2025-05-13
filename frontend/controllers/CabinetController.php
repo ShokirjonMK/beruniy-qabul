@@ -268,9 +268,9 @@ class CabinetController extends Controller
         $user = Yii::$app->user->identity;
         $student = $user->student;
 
-        $errors[] = ['Shartnomani vaqtinchalik yuklab bo\'lmaydi!'];
-        \Yii::$app->session->setFlash('error' , $errors);
-        return $this->redirect(\Yii::$app->request->referrer);
+//        $errors[] = ['Shartnomani vaqtinchalik yuklab bo\'lmaydi!'];
+//        \Yii::$app->session->setFlash('error' , $errors);
+//        return $this->redirect(\Yii::$app->request->referrer);
 
         $eduDirection = $student->eduDirection;
         if ($eduDirection->edu_type_id != 4) {
