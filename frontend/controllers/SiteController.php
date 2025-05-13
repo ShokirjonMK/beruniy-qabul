@@ -256,6 +256,10 @@ class SiteController extends Controller
         $errors = [];
         $contract = false;
 
+        $errors[] = ['Shartnomani vaqtinchalik yuklab bo\'lmaydi!'];
+        \Yii::$app->session->setFlash('error' , $errors);
+        return $this->redirect(['site/index']);
+
         if ($type == 2) {
             $action = 'con2';
         } elseif ($type == 3) {
