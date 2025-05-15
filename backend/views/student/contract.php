@@ -126,7 +126,7 @@ $breadcrumbs['item'][] = [
                     $readMore = "<a href='".Url::to(['student/view' , 'id' => $model->id])."' class='badge-table-div active'>Batafsil</a>";
                 }
                 if (permission('student', 'contract-load')) {
-                    $contract = "<br><a href='".Url::to(['student/contract-load' , 'id' => $model->id, 'type' => 2])."' class='badge-table-div active mt-2'>Shartnoma yuklash</a>";
+                    $contract = "<br><a href='".Url::to(['student/contract-load' , 'id' => $model->id, 'type' => 3])."' class='badge-table-div active mt-2'>Shartnoma yuklash</a>";
                 }
                 return $readMore.$contract;
             },
