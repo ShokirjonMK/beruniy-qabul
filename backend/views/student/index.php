@@ -149,11 +149,7 @@ $breadcrumbs['item'][] = [
                             'dataProvider' => $dataProvider,
                             'columns' => $data,
                             'asDropdown' => false,
-                            'exportConfig' => [
-                                ExportMenu::FORMAT_EXCEL_X => [
-                                    'filename' => $eduType->name_uz . date('Y-m-d_H-i-s'),
-                                ],
-                            ],
+                            'filename' => $eduType->name_uz . date('Y-m-d_H-i-s'),
                         ]); ?>
                     </div>
                 </div>
