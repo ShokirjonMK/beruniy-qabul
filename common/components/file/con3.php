@@ -90,7 +90,7 @@ $student->update(false);
 
 $filial = Branch::findOne($student->branch_id);
 
-$qr = (new QrCode('https://qabul.arbu-edu.uz/site/contract?key=' . $link . '&type=3'))->setSize(120, 120)
+$qr = (new QrCode('https://arbu-edu.uz/site/contract?key=' . $link . '&type=3'))->setSize(120, 120)
     ->setMargin(10);
 $img = $qr->writeDataUri();
 
@@ -102,7 +102,7 @@ $limg = $lqr->writeDataUri();
 ?>
 
 
-<table width="100%" style="font-family: 'Times New Roman'; font-size: 14px; border-collapse: collapse;">
+<table width="100%" style="font-family: 'Times New Roman'; font-size: 16px; border-collapse: collapse;">
 
     <tr>
         <td colspan="4" style="text-align: center">
@@ -610,7 +610,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            8.1. Shartnoma bevosita tomonlar tomonidan imzolangan kundan e’tiboran kuchga kiradi.
+            8.1. Shartnoma  2025 yil 2 iyun kunidan e’tiboran kuchga kiradi.
         </td>
     </tr>
 

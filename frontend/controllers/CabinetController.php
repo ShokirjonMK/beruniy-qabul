@@ -275,9 +275,7 @@ class CabinetController extends Controller
         $eduDirection = $student->eduDirection;
         if ($eduDirection->edu_type_id != 4) {
             $action = '';
-            if ($type == 2) {
-                $action = 'con2';
-            } elseif ($type == 3) {
+            if ($type == 3) {
                 $action = 'con3';
             } else {
                 $errors[] = ['Type not\'g\'ri tanlandi!'];

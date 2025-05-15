@@ -822,20 +822,21 @@ if ($model->eduType != null) {
                         <div class="form-section">
                             <div class="form-section_item">
                                 <div class="row">
+<!--                                    <div class="col-md-6 col-12">-->
+<!--                                        <div class="view-info-right">-->
+<!--                                            <p>Ikki tomonlama shartnoma &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; --><?php //= number_format((int)$contract_price, 0, '', ' ') .' so‘m' ?><!-- </p>-->
+<!--                                            <h6><a href="--><?php //= Url::to(['student/contract-load' , 'id' => $model->id , 'type' => 2]) ?><!--">Yuklash uchun bosing</a></h6>-->
+<!--                                        </div>-->
+<!--                                    </div>-->
+<!--                                    -->
                                     <div class="col-md-6 col-12">
                                         <div class="view-info-right">
-                                            <p>Ikki tomonlama shartnoma &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <?= number_format((int)$contract_price, 0, '', ' ') .' so‘m' ?> </p>
-                                            <h6><a href="<?= Url::to(['student/contract-load' , 'id' => $model->id , 'type' => 2]) ?>">Yuklash uchun bosing</a></h6>
+                                            <p>Uch tomonlama shartnoma &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; <?= number_format((int)$contract_price, 0, '', ' ') .' so‘m' ?></p>
+                                            <h6>
+                                                <h6><a href="<?= Url::to(['student/contract-load' , 'id' => $model->id , 'type' => 3]) ?>">Yuklash uchun bosing</a></h6>
+                                            </h6>
                                         </div>
                                     </div>
-                                    <!--                                <div class="col-md-6 col-12">-->
-                                    <!--                                    <div class="view-info-right">-->
-                                    <!--                                        <p>Uch tomonlama shartnoma &nbsp;&nbsp;&nbsp; | &nbsp;&nbsp;&nbsp; --><?php //= number_format((int)$contract_price, 0, '', ' ') .' so‘m' ?><!--</p>-->
-                                    <!--                                        <h6>-->
-                                    <!--                                            <h6><a href="--><?php //= Url::to(['student/contract-load' , 'id' => $model->id , 'type' => 3]) ?><!--">Yuklash uchun bosing</a></h6>-->
-                                    <!--                                        </h6>-->
-                                    <!--                                    </div>-->
-                                    <!--                                </div>-->
                                 </div>
                             </div>
                         </div>
