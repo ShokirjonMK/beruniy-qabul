@@ -20,7 +20,7 @@ use common\models\ExamDate;
 
 $lang = Yii::$app->language;
 $languages = Lang::find()->where(['is_deleted' => 0 , 'status' => 1])->all();
-$eduForms = EduForm::find()->where(['is_deleted' => 0 , 'status' => 1])->all();
+$eduForms = EduForm::find()->where(['id' => 1,'is_deleted' => 0 , 'status' => 1])->all();
 
 $model->filial_id = $student->branch_id;
 $model->lang_id = $student->lang_id;

@@ -158,7 +158,7 @@ $session = Yii::$app->session;
                     </div>
                     <div class="d-flex justify-content-around align-items-center top30">
                         <?= Html::button(Yii::t("app" , "a110"), ['class' => 'step_left_btn step_btn', 'data-bs-dismiss' => 'modal']) ?>
-                        <?= Html::a(Yii::t("app", "a111"), ['cabinet/exam'], ['class' => 'step_right_btn step_btn']) ?>
+                        <?= Html::a(Yii::t("app", "a111"), ['cabinet/test'], ['class' => 'step_right_btn step_btn']) ?>
                     </div>
                 </div>
             </div>
