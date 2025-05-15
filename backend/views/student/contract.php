@@ -273,6 +273,7 @@ $breadcrumbs['item'][] = [
                             'dataProvider' => $dataProvider,
                             'columns' => $data2,
                             'asDropdown' => false,
+                            'filename' => 'shartnomalar___' . date('Y-m-d_H-i-s'),
                         ]); ?>
                     </div>
                 </div>

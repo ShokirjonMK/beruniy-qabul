@@ -147,6 +147,7 @@ $breadcrumbs['item'][] = [
                             'dataProvider' => $dataProvider,
                             'columns' => $data,
                             'asDropdown' => false,
+                            'filename' => 'offline___' . date('Y-m-d_H-i-s'),
                         ]); ?>
                     </div>
                 </div>

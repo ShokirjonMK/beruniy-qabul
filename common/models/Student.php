@@ -472,9 +472,9 @@ class Student extends \yii\db\ActiveRecord
             1 => "<div class='badge-table-div active'><span>Test ishlamagan</span></div>",
             2 => "<div class='badge-table-div active'><span>Testda</span></div>",
             3 => $eduExam->down_time !== null
-                ? "<div class='badge-table-div active'><span>Yakunlab shartnoma oldi</span></div>"
-                : "<div class='badge-table-div active'><span>Yakunlab shartnoma olmadi</span></div>",
-            4 => "<div class='badge-table-div active'><span>Testdan o'tolmadi</span></div>",
+                ? "<div class='badge-table-div active'><span>Yakunlab shartnoma oldi</span></div><div class='badge-table-div active mt-1'><span>| &nbsp;&nbsp; ".$eduExam->ball." -ball &nbsp;&nbsp; |</span></div>"
+                : "<div class='badge-table-div active'><span>Yakunlab shartnoma olmadi</span></div><div class='badge-table-div active mt-1'><span>| &nbsp;&nbsp; ".$eduExam->ball." -ball &nbsp;&nbsp; |</span></div>",
+            4 => "<div class='badge-table-div active'><span>Testdan o'tolmadi</span></div><div class='badge-table-div active mt-1'><span>| &nbsp;&nbsp; ".$eduExam->ball." -ball &nbsp;&nbsp; |</span></div>",
         ];
 
         return $statuses[$eduExam->status] ?? "-----";
