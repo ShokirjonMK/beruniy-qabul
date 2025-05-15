@@ -182,18 +182,9 @@ class Test extends Model
             $examSubject->save(false);
         }
 
-        if ($model->ball < 30) {
-            $model->status = self::FAILED;
-            $model->contract_price = null;
-            $model->confirm_date = null;
-        } elseif ($model->ball >= 30 && $model->ball <= 59) {
-            $model->ball = rand(60 , 65);
-            $model->contract_price = $direction->price;
-            $model->confirm_date = time();
-        } else {
-            $model->contract_price = $direction->price;
-            $model->confirm_date = time();
-        }
+        $model->ball = 60;
+        $model->contract_price = $direction->price;
+        $model->confirm_date = time();
 
         $student->is_down = 0;
         $student->update(false);
