@@ -22,7 +22,7 @@ use yii\helpers\Url;
 <!--                </a>-->
 <!--            </div>-->
             <div class="col-lg-6 col-md-6 col-sm-12">
-                <a href="<?= Url::to(['file/contract' , 'type' => 3]) ?>" class="down_content_box">
+                <a href="<?= Url::to(['abinet/contract-load' , 'type' => 3]) ?>" class="down_content_box">
                     <div class="down_content_box_left">
                         <i class="fa-solid fa-file-arrow-down"></i>
                     </div>
