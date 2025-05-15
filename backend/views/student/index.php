@@ -149,7 +149,7 @@ $breadcrumbs['item'][] = [
                             'dataProvider' => $dataProvider,
                             'columns' => $data,
                             'asDropdown' => false,
-                            'filename' => $eduType->name_uz . date('Y-m-d_H-i-s'),
+                            'filename' => $eduType->name_uz.'___' . date('Y-m-d_H-i-s'),
                         ]); ?>
                     </div>
                 </div>
