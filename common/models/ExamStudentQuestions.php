@@ -33,6 +33,7 @@ use Yii;
  */
 class ExamStudentQuestions extends \yii\db\ActiveRecord
 {
+    use ResourceTrait;
     /**
      * {@inheritdoc}
      */

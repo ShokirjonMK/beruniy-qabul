@@ -42,6 +42,7 @@ use yii\web\UploadedFile;
  */
 class StudentOferta extends \yii\db\ActiveRecord
 {
+    use ResourceTrait;
     public $file_pdf;
     public $fileMaxSize = 1024 * 1000 * 5;
 

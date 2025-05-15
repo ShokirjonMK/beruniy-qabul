@@ -42,6 +42,7 @@ use Yii;
  */
 class StudentPerevot extends \yii\db\ActiveRecord
 {
+    use ResourceTrait;
     public $file_pdf;
 
     /**

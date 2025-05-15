@@ -74,7 +74,7 @@ class SerCreate extends Model
                     if (!file_exists(\Yii::getAlias($photoFolderName))) {
                         mkdir(\Yii::getAlias($photoFolderName), 0777, true);
                     }
-                    $photoName = $student->id ."_". time() . \Yii::$app->security->generateRandomString(20). '.' . $photoFile->extension;
+                    $photoName = $student->id ."_". time()."_".current_user_id()."_". \Yii::$app->security->generateRandomString(5). '.' . $photoFile->extension;
                     if ($photoFile->saveAs($photoFolderName."/".$photoName)) {
                         $examSubject->file = $photoName;
                         $examSubject->file_status = 1;

@@ -38,6 +38,7 @@ use Yii;
  */
 class StudentDtm extends \yii\db\ActiveRecord
 {
+    use ResourceTrait;
     public $file_pdf;
 
     /**

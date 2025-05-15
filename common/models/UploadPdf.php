@@ -61,7 +61,7 @@ class UploadPdf extends \yii\db\ActiveRecord
         ];
     }
 
-    public static function upload($model) {
+    public static function upload($model , $studentFile) {
         $transaction = Yii::$app->db->beginTransaction();
         $errors = [];
 
@@ -71,21 +71,21 @@ class UploadPdf extends \yii\db\ActiveRecord
             return ['is_ok' => false , 'errors' => $errors];
         }
 
-        if ($model->file_status == 2) {
+        if ($studentFile->file_status == 2) {
             $errors[] = ['Avval yuklangan fayl tasdiqlangan'];
         } else {
             $photoFile = UploadedFile::getInstance($model, 'file_pdf');
             if ($photoFile) {
                 if (isset($photoFile->size)) {
-                    $photoFolderName = '@frontend/web/uploads/'. $model->student_id .'/';
+                    $photoFolderName = '@frontend/web/uploads/'. $studentFile->student_id .'/';
                     if (!file_exists(\Yii::getAlias($photoFolderName))) {
                         mkdir(\Yii::getAlias($photoFolderName), 0777, true);
                     }
-                    $photoName = $model->student_id ."_". time() . \Yii::$app->security->generateRandomString(20). '.' . $photoFile->extension;
+                    $photoName = $studentFile->student_id ."_". time()."_".current_user_id()."_ik" . \Yii::$app->security->generateRandomString(5). '.' . $photoFile->extension;
                     if ($photoFile->saveAs($photoFolderName."/".$photoName)) {
-                        $model->file = $photoName;
-                        $model->file_status = 1;
-                        $model->save(false);
+                        $studentFile->file = $photoName;
+                        $studentFile->file_status = 1;
+                        $studentFile->save(false);
                     }
                 }
             } else {
@@ -94,7 +94,7 @@ class UploadPdf extends \yii\db\ActiveRecord
         }
 
         if (count($errors) == 0) {
-            $student = $model->student;
+            $student = $studentFile->student;
             $user = $student->user;
             if ($user->step == 5) {
                 $amo = CrmPush::processType(6, $student, $user);
@@ -111,6 +111,7 @@ class UploadPdf extends \yii\db\ActiveRecord
             return ['is_ok' => false , 'errors' => $errors];
         }
     }
+
 
     public static function confirm($model, $old) {
         $transaction = Yii::$app->db->beginTransaction();
