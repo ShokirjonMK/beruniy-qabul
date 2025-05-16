@@ -660,67 +660,66 @@ $limg = $lqr->writeDataUri();
     </tr>
 
 
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: center;">
+            <b>9. TOMONLARNING YURIDIK MANZILLARI</b>
+        </td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td colspan="2">
+            <b>To‘lov oluvchi:</b>
+        </td>
+        <td colspan="2">
+            <b>Talaba</b>
+        </td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
+        <td colspan="2" style="vertical-align: top">
+            <b><?= $filial->name_uz ?></b> <br>
+            <b>Manzili:</b> <?= $filial->address_uz ?> <br>
+            <b>H/R:</b> <?= $cons->hr ?> <br>
+            <b>Bank:</b> <?= $cons->bank_name_uz ?> <br>
+            <b>Bank kodi (MFO):</b> <?= $cons->mfo ?> <br>
+            <b>STIR (INN):</b> <?= $cons->inn ?> <br>
+            <b>Tel:</b> <?= $cons->tel1 ?> <br>
+            <b>Direktor:</b>  <?= $filial->rector_uz ?> <br>
+        </td>
+        <td colspan="2" style="vertical-align: top">
+            <b>Talabaning F.I.O.:</b> <?= $full_name ?> <br>
+            <b>Pasport ma’lumotlari:</b> <?= $student->passport_serial . ' ' . $student->passport_number ?> <br>
+            <b>JShShIR raqami:</b> <?= $student->passport_pin ?> <br>
+            <b>Tеlefon raqami: </b> <?= $student->user->username ?> <br>
+            <b>Talaba imzosi: </b> ______________ <br>
+        </td>
+    </tr>
+
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
 
 
     <tr>
         <td colspan="4">
             <div>
                 <table width="100%">
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="4" style="text-align: center;">
-                            <b>9. TOMONLARNING YURIDIK MANZILLARI</b>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2">
-                            <b>To‘lov oluvchi:</b>
-                        </td>
-                        <td colspan="2">
-                            <b>Talaba</b>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td colspan="2" style="vertical-align: top">
-                            <b><?= $filial->name_uz ?></b> <br>
-                            <b>Manzili:</b> <?= $filial->address_uz ?> <br>
-                            <b>H/R:</b> <?= $cons->hr ?> <br>
-                            <b>Bank:</b> <?= $cons->bank_name_uz ?> <br>
-                            <b>Bank kodi (MFO):</b> <?= $cons->mfo ?> <br>
-                            <b>STIR (INN):</b> <?= $cons->inn ?> <br>
-                            <b>Tel:</b> <?= $cons->tel1 ?> <br>
-                            <b>Direktor:</b>  <?= $filial->rector_uz ?> <br>
-                        </td>
-                        <td colspan="2" style="vertical-align: top">
-                            <b>Talabaning F.I.O.:</b> <?= $full_name ?> <br>
-                            <b>Pasport ma’lumotlari:</b> <?= $student->passport_serial . ' ' . $student->passport_number ?> <br>
-                            <b>JShShIR raqami:</b> <?= $student->passport_pin ?> <br>
-                            <b>Tеlefon raqami: </b> <?= $student->user->username ?> <br>
-                            <b>Talaba imzosi: </b> ______________ <br>
-                        </td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
 
                     <tr>
                         <td colspan="2" style="vertical-align: top">
