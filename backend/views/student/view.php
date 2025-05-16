@@ -566,11 +566,14 @@ if ($model->eduType != null) {
                                         </div>
                                     </div>
                                     <?php if ($eduModel->status == 3) : ?>
+                                        <?php
+                                        $user1 = \common\models\User::findOne($eduModel->updated_by);
+                                        ?>
                                         <div class="col-md-4 col-12">
                                             <div class="view-info-right">
                                                 <p>To'plangan ball</p>
                                                 <h6>
-                                                    <?= $eduModel->ball ?? '0' ?> ball
+                                                    <?= $eduModel->ball ?? '0' ?> ball | <?= $user1 ? $user->username : '---'; ?>
                                                 </h6>
                                             </div>
                                         </div>
