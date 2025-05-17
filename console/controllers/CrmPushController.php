@@ -86,7 +86,7 @@ class CrmPushController extends Controller
             $message = '';
             $tags = ['arbu-edu.uz'];
             $pipelineId = AmoCrmClient::DEFAULT_PIPELINE_ID;
-            $statusId = $model->lead_status;
+            $statusId = (int)$model->lead_status;
             $leadPrice = 0;
 
             $customFields = [];
