@@ -622,7 +622,7 @@ $limg = $lqr->writeDataUri();
                             <b>Talaba</b>
                         </td>
                     </tr>
-                    
+
                     <tr>
                         <td colspan="2" style="vertical-align: top">
                             <b><?= $filial->name_uz ?></b> <br>
@@ -649,10 +649,6 @@ $limg = $lqr->writeDataUri();
     </tr>
 
     <tr>
-        <td>&nbsp;</td>
-    </tr>
-
-    <tr>
         <td colspan="4" style="vertical-align: top">
             <b>TO’LOVCHI</b> <br><br>
             <b>Nomi:</b> ______________________________________________________________________________________ <br>
@@ -665,10 +661,6 @@ $limg = $lqr->writeDataUri();
             <b>Direktor:</b>  _________________________________________________________________________________ <br>
             <b>Imzo:</b>  _____________________________________________________________________________________ <br>
         </td>
-    </tr>
-
-    <tr>
-        <td>&nbsp;</td>
     </tr>
 
     <tr>
