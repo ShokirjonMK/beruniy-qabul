@@ -3,8 +3,10 @@
 namespace backend\controllers;
 
 use common\models\AuthItem;
+use common\models\CrmPush;
 use common\models\Menu;
 use common\models\MenuSearch;
+use common\models\Student;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -18,6 +20,21 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
+        $crmPushs = CrmPush::find()
+            ->where(['type' => 1, 'is_deleted' => 1])
+            ->all();
+
+        foreach ($crmPushs as $crmPush) {
+            $student = Student::findOne($crmPush->student_id);
+            if ($student) {
+                $user = $student->user;
+                if ($user->status == 10 || $user->status == 9) {
+                    $crmPush->is_deleted = 0;
+                    $crmPush->save(false);
+                }
+            }
+        }
+        dd(2222);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
