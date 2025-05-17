@@ -609,21 +609,9 @@ $limg = $lqr->writeDataUri();
                 <table width="100%">
 
                     <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
                         <td colspan="4" style="text-align: center;">
                             <b>9. TOMONLARNING YURIDIK MANZILLARI</b>
                         </td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
                     </tr>
 
                     <tr>
@@ -634,11 +622,7 @@ $limg = $lqr->writeDataUri();
                             <b>Talaba</b>
                         </td>
                     </tr>
-
-                    <tr>
-                        <td>&nbsp;</td>
-                    </tr>
-
+                    
                     <tr>
                         <td colspan="2" style="vertical-align: top">
                             <b><?= $filial->name_uz ?></b> <br>
