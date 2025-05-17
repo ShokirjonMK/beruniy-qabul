@@ -113,18 +113,12 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="2"><?= $date ?></td>
         <td colspan="2" style="text-align: right"><span><?= $filial->name_uz ?></span></td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -134,9 +128,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center">
@@ -144,9 +135,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -154,9 +142,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="border: 1px solid #000000; padding: 5px;">
@@ -203,9 +188,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center">
@@ -213,9 +195,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -363,9 +342,6 @@ $limg = $lqr->writeDataUri();
     </tr>
 
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center">
@@ -373,9 +349,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -410,9 +383,6 @@ $limg = $lqr->writeDataUri();
     </tr>
 
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center;">
@@ -420,9 +390,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
 
     <tr>
@@ -475,9 +442,6 @@ $limg = $lqr->writeDataUri();
     </tr>
 
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center;">
@@ -485,9 +449,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
@@ -502,9 +463,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center;">
@@ -512,9 +470,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
 
     <tr>
@@ -547,9 +502,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center;">
@@ -557,9 +509,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
 
     <tr>
@@ -593,9 +542,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
     <tr>
         <td colspan="4" style="text-align: center;">
@@ -603,9 +549,6 @@ $limg = $lqr->writeDataUri();
         </td>
     </tr>
 
-    <tr>
-        <td>&nbsp;</td>
-    </tr>
 
 
     <tr>
@@ -743,7 +686,6 @@ $limg = $lqr->writeDataUri();
     <tr>
         <td>&nbsp;</td>
     </tr>
-
 
     <tr>
         <td colspan="2" style="vertical-align: top;">
