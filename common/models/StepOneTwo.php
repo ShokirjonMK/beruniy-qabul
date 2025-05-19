@@ -84,14 +84,14 @@ class StepOneTwo extends Model
             if ($response->isOk) {
                 $responseData = $response->data;
                 $passport = $responseData['data']['info']['data'];
-                $student->first_name = $passport['name'];
-                $student->last_name = $passport['sur_name'];
-                $student->middle_name = $passport['patronymic_name'];
+                $student->first_name = $passport['name'] ?? null;
+                $student->last_name = $passport['sur_name'] ?? null;
+                $student->middle_name = $passport['patronymic_name'] ?? null;
                 $student->passport_number = $this->number;
                 $student->passport_serial = $this->seria;
-                $student->passport_pin = (string)$passport['pinfl'];
+                $student->passport_pin = (string)$passport['pinfl'] ?? null;
                 $student->birthday = date("Y-m-d" , strtotime($this->birthday));
-                $student->gender = $passport['gender'];
+                $student->gender = $passport['gender'] ?? null;
 
                 if (!$student->validate()){
                     $errors[] = $this->simple_errors($student->errors);
