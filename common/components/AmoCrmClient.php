@@ -274,7 +274,7 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
             return $updatedLead;
 
         } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
-
+            throw new \Exception('Leadni yangilashda xatolik:' . $e->getMessage());
         }
     }
 
