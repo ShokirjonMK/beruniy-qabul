@@ -95,6 +95,8 @@ class StepOneTwo extends Model
 
                 if (!$student->validate()){
                     $errors[] = $this->simple_errors($student->errors);
+                    $transaction->rollBack();
+                    return ['is_ok' => false, 'errors' => $errors];
                 }
 
                 if (in_array(null, [
@@ -108,7 +110,11 @@ class StepOneTwo extends Model
                     $student->gender,
                 ], true)) {
                     $errors[] = ['Pasport ma\'lumot yuklashda xatolik'];
+                    $transaction->rollBack();
+                    return ['is_ok' => false, 'errors' => $errors];
                 }
+
+                $student->save(false);
 
                 $query = Student::find()
                     ->joinWith('user')
