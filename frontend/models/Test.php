@@ -182,7 +182,9 @@ class Test extends Model
             $examSubject->save(false);
         }
 
-        $model->ball = 60;
+        if ($model->ball < 60) {
+            $model->ball = rand(60, 65);
+        }
         $model->contract_price = $direction->price;
         $model->confirm_date = time();
 
