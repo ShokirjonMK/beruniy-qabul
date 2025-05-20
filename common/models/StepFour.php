@@ -87,24 +87,6 @@ class StepFour extends Model
             checkFileStatus($model, $fileChecks[$student->edu_type_id]['message'], $errors);
         }
 
-        if ($student->edu_type_id == 1) {
-            $exam = Exam::findOne([
-                'edu_direction_id' => $direction->id,
-                'student_id' => $student->id,
-                'status' => 1,
-                'is_deleted' => 0
-            ]);
-            if (!$exam) {
-                $errors[] = ['Imtixon mavjud emas!'];
-            } else {
-                $exam->contract_price = $direction->price;
-                $exam->confirm_date = time();
-                $exam->ball = 60;
-                $exam->status = 3;
-                $exam->save(false);
-            }
-        }
-
         $user->step = self::STEP;
         $user->is_confirm = time();
         $user->save(false);
