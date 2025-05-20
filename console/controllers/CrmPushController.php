@@ -77,6 +77,48 @@ class CrmPushController extends Controller
     }
 
 
+    public function actionIkPush()
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+
+        $query = CrmPush::find()
+            ->where(['status' => 0, 'is_deleted' => 0 , 'lead_id' => 25749785])
+            ->andWhere(['<>', 'type', 1])
+            ->orderBy('id asc')
+//            ->limit(6)
+            ->all();
+
+        if (!empty($query)) {
+            foreach ($query as $item) {
+                if ($item->type == 1) {
+                    $result = self::createItem($item);
+                } else {
+                    $result = self::updateItem($item);
+                }
+                if ($result !== null && $result['is_ok']) {
+                    $amo = $result['data'];
+                    $item->status = 1;
+                    if ($item->type == 1) {
+                        $item->lead_id = $amo->id;
+                        $student = Student::findOne($item->student_id);
+                        $user = $student->user;
+                        CrmPush::updateAll(['lead_id' => $amo->id], ['student_id' => $item->student_id]);
+                        $user->lead_id = $item->lead_id;
+                        $user->save(false);
+                    }
+                } else {
+                    $item->is_deleted = 1;
+                }
+                $item->push_time = time();
+                $item->save(false);
+            }
+        }
+
+        $transaction->commit();
+        echo "MK! pushed to Crm \n";
+    }
+
+
     public static function createItem($model)
     {
         $student = Student::findOne($model->student_id);
