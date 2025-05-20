@@ -671,10 +671,10 @@ $limg = $lqr->writeDataUri();
     </tr>
 
     <tr>
-        <td colspan="2" style="vertical-align: top;">
+        <td colspan="1" style="vertical-align: top;">
             <img src="<?= $img ?>" width="100px">
         </td>
-        <td colspan="2" style="vertical-align: top">
+        <td colspan="3" style="vertical-align: top">
             <img src="<?= $limg ?>" width="100px"> <br>
             <b>Litsenziya berilgan sana va raqami</b> <br>
             21.08.2024 <b>№ 363695</b>
