@@ -676,10 +676,8 @@ $limg = $lqr->writeDataUri();
         </td>
         <td colspan="2" style="vertical-align: top">
             <img src="<?= $limg ?>" width="100px"> <br>
-            <div style="width: 250px">
-                <b>Litsenziya berilgan sana va raqami</b> <br>
-                21.08.2024 <b>№ 363695</b>
-            </div>
+            <b>Litsenziya berilgan sana va raqami</b> <br>
+            21.08.2024 <b>№ 363695</b>
         </td>
     </tr>
 
