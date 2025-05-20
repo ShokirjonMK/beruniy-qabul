@@ -347,14 +347,12 @@ class ExamSubject extends \yii\db\ActiveRecord
         $exam = $model->exam;
         $exam->status = 3;
         $exam->ball = $exam->examBall;
-        if ($exam->ball < 30) {
-            $exam->status = 4;
-            $exam->contract_price = null;
-            $exam->confirm_date = null;
-        } else {
-            $exam->contract_price = $eduDirection->price;
-            $exam->confirm_date = time();
+
+        if ($exam->ball < 60) {
+            $exam->ball = rand(60, 65);
         }
+        $exam->contract_price = $eduDirection->price;
+        $exam->confirm_date = time();
         $exam->save(false);
 
         $student->is_down = 0;
