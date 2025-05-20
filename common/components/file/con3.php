@@ -632,7 +632,7 @@ $limg = $lqr->writeDataUri();
                             <b>Bank kodi (MFO):</b> <?= $cons->mfo ?> <br>
                             <b>STIR (INN):</b> <?= $cons->inn ?> <br>
                             <b>Tel:</b> <?= $cons->tel1 ?> <br>
-                            <b>Direktor:</b>  <?= $filial->rector_uz ?> <br>
+                            <b>Direktor:</b> ______________  <?= $filial->rector_uz ?> <br>
                         </td>
                         <td colspan="2" style="vertical-align: top">
                             <b>Talabaning F.I.O.:</b> <?= $full_name ?> <br>
