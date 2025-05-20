@@ -649,6 +649,13 @@ $limg = $lqr->writeDataUri();
     </tr>
 
     <tr>
+        <td>&nbsp;</td>
+    </tr>
+    <tr>
+        <td>&nbsp;</td>
+    </tr>
+
+    <tr>
         <td colspan="4" style="vertical-align: top">
             <b>TO’LOVCHI</b> <br><br>
             <b>Nomi:</b> ______________________________________________________________________________________ <br>
@@ -665,10 +672,10 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="2" style="vertical-align: top;">
-            <img src="<?= $img ?>" width="120px">
+            <img src="<?= $img ?>" width="100px">
         </td>
         <td colspan="2" style="vertical-align: top">
-            <img src="<?= $limg ?>" width="120px"> <br>
+            <img src="<?= $limg ?>" width="100px"> <br>
             <b>Litsenziya berilgan sana va raqami</b> <br>
             21.08.2024 <b>№ 363695</b>
         </td>
