@@ -657,7 +657,7 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="vertical-align: top">
-            <b>TO’LOVCHI</b> <br><br>
+            <b>TO’LOVCHI</b> <br>
             <b>Nomi:</b> ______________________________________________________________________________________ <br>
             <b>Manzili:</b> ___________________________________________________________________________________ <br>
             <b>Bank:</b> ______________________________________________________________________________________ <br>
@@ -671,13 +671,15 @@ $limg = $lqr->writeDataUri();
     </tr>
 
     <tr>
-        <td colspan="1" style="vertical-align: top;">
+        <td colspan="2" style="vertical-align: top;">
             <img src="<?= $img ?>" width="100px">
         </td>
-        <td colspan="3" style="vertical-align: top">
+        <td colspan="2" style="vertical-align: top">
             <img src="<?= $limg ?>" width="100px"> <br>
-            <b>Litsenziya berilgan sana va raqami</b> <br>
-            21.08.2024 <b>№ 363695</b>
+            <div style="width: 250px">
+                <b>Litsenziya berilgan sana va raqami</b> <br>
+                21.08.2024 <b>№ 363695</b>
+            </div>
         </td>
     </tr>
 
