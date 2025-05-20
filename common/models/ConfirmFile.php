@@ -81,6 +81,10 @@ class ConfirmFile extends \yii\db\ActiveRecord
         if ($model->file_status == 2) {
             $model->contract_price = $direction->price;
             $model->confirm_date = time();
+
+            $text = "Hurmatli talaba ".$student->passport_pin." sonli ariza asosida o'qishni ko'chirish boyicha arizangiz muvaffaqiyatli qabul qilindi. Shartnomani quyidagi havola orqali yuklab olishingiz mumkin https://arbu-edu.uz";
+            $phone = $user->username;
+            Message::sendSmsText($phone, $text);
         }
         if ($direction->is_oferta == 1) {
             $oferta = StudentOferta::findOne([
