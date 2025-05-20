@@ -82,7 +82,7 @@ class CrmPushController extends Controller
         $transaction = Yii::$app->db->beginTransaction();
 
         $query = CrmPush::find()
-            ->where(['status' => 0, 'is_deleted' => 0 , 'lead_id' => 25749785])
+            ->where([ 'is_deleted' => 0 , 'lead_id' => 25749785])
             ->andWhere(['<>', 'type', 1])
             ->orderBy('id asc')
 //            ->limit(6)
