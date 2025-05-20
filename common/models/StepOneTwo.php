@@ -60,26 +60,13 @@ class StepOneTwo extends Model
 
             self::deleteNull($student->id);
 
-//            $integration = new Integration();
-//            $integration->birthDate = date("d-m-Y" , strtotime($this->birthday));
-//            $integration->series = $this->seria;
-//            $integration->number = $this->number;
-//            $data = $integration->checkPassport();
-
-
-            $client = new Client();
-            $url = 'https://api.online-mahalla.uz/api/v1/public/tax/passport';
-            $params = [
-                'series' => $this->seria,
-                'number' => $this->number,
-                'birth_date' => date("Y-m-d" , strtotime($this->birthday)),
-            ];
-            $response = $client->createRequest()
-                ->setMethod('GET')
-                ->setUrl($url)
-                ->setData($params)
-                ->send();
-
+            $result = self::getPasport($this->seria, $this->number, $this->birthday);
+            if ($result['is_ok']) {
+                $response = $result['response'];
+            } else {
+                $transaction->rollBack();
+                return ['is_ok' => false , 'errors' => $result['errors']];
+            }
 
             if ($response->isOk) {
                 $responseData = $response->data;
@@ -141,61 +128,6 @@ class StepOneTwo extends Model
                 $transaction->rollBack();
                 return ['is_ok' => false, 'errors' => $errors];
             }
-
-
-//            if ($data['is_ok']) {
-////                $data = $data['data'];
-////                $student->first_name = $data['first_name'];
-////                $student->last_name = $data['last_name'];
-////                $student->middle_name = $data['middle_name'];
-////                $student->passport_number = $data['passport_number'];
-////                $student->passport_serial = $data['passport_serial'];
-////                $student->passport_pin = (string)$data['passport_pin'];
-////                $student->birthday = $data['birthday'];
-////                $student->gender = $data['gender'];
-////
-////                if (!$student->validate()){
-////                    $errors[] = $this->simple_errors($student->errors);
-////                }
-////
-////                if (in_array(null, [
-////                    $student->first_name,
-////                    $student->last_name,
-////                    $student->middle_name,
-////                    $student->passport_number,
-////                    $student->passport_serial,
-////                    $student->passport_pin,
-////                    $student->birthday,
-////                    $student->gender,
-////                ], true)) {
-////                    $errors[] = ['Pasport ma\'lumot yuklashda xatolik'];
-////                }
-//
-//                $query = Student::find()
-//                    ->joinWith('user')
-//                    ->where(['passport_pin' => $student->passport_pin])
-//                    ->andWhere(['user.status' => [9, 10]])
-//                    ->one();
-//
-//                if ($query) {
-//                    $queryUser = $query->user;
-//                    if ($queryUser->id != $user->id) {
-//                        $errors[] = ['Bu pasport ma\'lumot avval ro\'yhatdan o\'tgan. Tel:' . $queryUser->username];
-//                        $transaction->rollBack();
-//                        return ['is_ok' => false, 'errors' => $errors];
-//                    }
-//                }
-//
-//                $amo = CrmPush::processType(3, $student, $user);
-//                if (!$amo['is_ok']) {
-//                    $transaction->rollBack();
-//                    return ['is_ok' => false , 'errors' => $amo['errors']];
-//                }
-//            } else {
-//                $errors[] = ['Ma\'lumotlarni olishda xatolik yuz berdi.'];
-//                $transaction->rollBack();
-//                return ['is_ok' => false, 'errors' => $errors];
-//            }
         }
 
         $student->update(false);
@@ -208,6 +140,29 @@ class StepOneTwo extends Model
         }
         $transaction->rollBack();
         return ['is_ok' => false, 'errors' => $errors];
+    }
+
+    public static function getPasport($seria, $number, $birthday)
+    {
+        $errors = [];
+        try {
+            $client = new Client();
+            $url = 'https://api.online-mahalla.uz/api/v1/public/tax/passport';
+            $params = [
+                'series' => $seria,
+                'number' => $number,
+                'birth_date' => date("Y-m-d" , strtotime($birthday)),
+            ];
+            $response = $client->createRequest()
+                ->setMethod('GET')
+                ->setUrl($url)
+                ->setData($params)
+                ->send();
+            return ['is_ok' => true, 'response' => $response];
+        } catch (\Throwable $e) {
+            $errors[] = ['Pasport ma\'lumotini yuklashda xatolik.'];
+            return ['is_ok' => false, 'errors' => $errors];
+        }
     }
 
     public static function deleteNull($studentId)
