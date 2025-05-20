@@ -192,7 +192,7 @@ class CrmPush extends \yii\db\ActiveRecord
         $new->lead_status = $statusId;
         $new->lead_id = $user->lead_id;
         $new->data = json_encode([
-            self::TEL => (string)$student->username,
+            self::TEL => (string)preg_replace('/[^\d+]/', '', $student->username),
             self::FILIAL => $student->branch->name_uz
         ], JSON_UNESCAPED_UNICODE);
         $new->save(false);

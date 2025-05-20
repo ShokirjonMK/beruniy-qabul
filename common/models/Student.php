@@ -640,7 +640,7 @@ class Student extends \yii\db\ActiveRecord
         $new->type = 101;
         $new->lead_id = $user->lead_id;
         $new->data = json_encode([
-            CrmPush::TEL => $user->username,
+            CrmPush::TEL => (string)preg_replace('/[^\d+]/', '', $user->username),
         ], JSON_UNESCAPED_UNICODE);
         $new->save(false);
 
