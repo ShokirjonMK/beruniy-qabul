@@ -625,7 +625,7 @@ $limg = $lqr->writeDataUri();
 
                     <tr>
                         <td colspan="2" style="vertical-align: top">
-                            <b><?= $filial->name_uz ?></b> <br>
+                            <b>ABU RAYHON BERUNIY UNIVERSITETI</b> <br>
                             <b>Manzili:</b> <?= $filial->address_uz ?> <br>
                             <b>H/R:</b> <?= $cons->hr ?> <br>
                             <b>Bank:</b> <?= $cons->bank_name_uz ?> <br>
