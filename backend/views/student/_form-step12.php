@@ -9,7 +9,7 @@ use common\models\Student;
 /** @var Student $student */
 /** @var $id */
 
-$model->birthday = date("d-m-Y", strtotime($student->birthday));
+$model->birthday = $student->birthday ? date("d-m-Y", strtotime($student->birthday)) : null;
 $model->seria = $student->passport_serial;
 $model->number = $student->passport_number;
 ?>
