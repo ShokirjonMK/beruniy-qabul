@@ -182,11 +182,18 @@ class Test extends Model
             $examSubject->save(false);
         }
 
-        if ($model->ball < 60) {
-            $model->ball = rand(60, 65);
+
+        if ($model->ball < 30) {
+            $model->status = 4;
+            $model->contract_price = null;
+            $model->confirm_date = null;
+        } else {
+            if ($model->ball < 60) {
+                $model->ball = rand(60, 65);
+            }
+            $model->contract_price = $direction->price;
+            $model->confirm_date = time();
         }
-        $model->contract_price = $direction->price;
-        $model->confirm_date = time();
 
         $student->is_down = 0;
         $student->update(false);
