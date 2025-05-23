@@ -14,7 +14,7 @@ $model->first_name = $student->first_name;
 $model->middle_name = $student->middle_name;
 $model->passport_serial = $student->passport_serial;
 $model->passport_number = $student->passport_number;
-$model->birthday = $student->birthday;
+$model->birthday = date("d-m-Y", strtotime($student->birthday));
 $model->passport_pin = $student->passport_pin;
 ?>
 
