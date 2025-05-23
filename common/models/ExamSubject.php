@@ -366,6 +366,8 @@ class ExamSubject extends \yii\db\ActiveRecord
             $exam->contract_price = $eduDirection->price;
             $exam->confirm_date = time();
         }
+        $exam->update(false);
+
 
         $student->is_down = 0;
         $student->update(false);
