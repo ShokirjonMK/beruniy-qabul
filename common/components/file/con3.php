@@ -124,7 +124,7 @@ $limg = $lqr->writeDataUri();
         <td colspan="4" style="text-align: justify">
             «Abu Rayhon Beruniy Universiteti» nodavlat oliy ta’lim muassasasi oliy ta’lim faoliyatini amalga oshirish uchun O’zbekiston Respublikasi Oliy ta’lim, fan va innovatsiyalar
             vazirligi tomonidan 21.08.2024 yilda berilgan № 363695-sonli Litsenziya va Universitet ustavga binoan <?= $filial->rector_uz ?> rahbarligi ostida faoliyat yuritadi, va bundan keyin «Universitet» deb yuritiladi,
-            bir tomondan <?= $full_name ?> bundan keyin «Talaba» deb yuritiladi, ikkinchi tomondan, va (Тashkilotning nomi) ____________________________________ (asosida faoliyat yuritadigan) bundan keyin «To‘lovchi» deb yuritiladi, uchinchi tomondan, ushbu shartnomani quyidagicha tuzdilar:
+            bir tomondan, <?= $full_name ?> bundan keyin «Talaba» deb yuritiladi, ikkinchi tomondan, va (Тashkilotning nomi) ____________________________________ (asosida faoliyat yuritadigan) bundan keyin «To‘lovchi» deb yuritiluvchi, uchinchi tomondan, ushbu shartnomani quyidagicha tuzdilar:
         </td>
     </tr>
 
@@ -319,25 +319,70 @@ $limg = $lqr->writeDataUri();
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.2.	Talaba joriy o‘quv yili uchun belgilangan o‘qitish qiymatini shartnomaning 3-bobida ko‘rsatilgan tartib va miqdorda o‘z vaqtida to‘laydi.
+            2.4.2. Talaba quyidagi hujjatlarni universitetning qabul bo‘limiga taqdim etishi shart:
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.3.	Universitet Ustavi va boshqa ichki-tartib qoida talablariga qat’iy rioya qiladi.
+            <b>Bakalavriyat uchun:</b>
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.4.	Talaba o‘quv mashg‘ulotlarida muntazam qatnashadi.
+            - Rektor nomiga аrizа. <br>
+            - Pasport yoki ID-karta nusxasi. <br>
+            - 3x4 hajmdagi 8 dona fotosurat. <br>
+            - Diplom yoki attestat (ilovasi bilan birga) asl nusxasi. <br>
+            - Nikoh guvohnomasi nusxasi(familiya o‘zgargan bo‘lsa). <br>
+            - Bilim va malakalarini baholash agentligi ruxsatnomasi va javoblar varaqasi(agar bo‘lsa). <br>
+            - Hujjatlar yig‘ma jildi.
         </td>
     </tr>
 
     <tr>
         <td colspan="4" style="text-align: justify">
-            2.4.5.	Talaba ta’lim muassasasida belgilangan tartib va qoidaga asosan ta’lim oladi hamda ushbu jarayonda bilim darajasini oshirib boradi.
+            <b>O‘qishni ko‘chirish uchun:</b>
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            - Talabani OTMga qabul qilish bo‘yicha buyruqdan ko‘chirma (OTM Qabul komissiyasi tasdiqlagan
+            bo‘lishi zarur). <br>
+            - Kursdan kursga o'tish haqidagi buyruqdan ko'chirma. <br>
+            - Talabani universitetdan chetlashtirish to‘g‘risidagi buyruqdan ko‘chirma. <br>
+            - Akademik sertifikat (transkript). <br>
+            - Umumiy o‘rta yoki o‘rta maxsus kasb-hunar ta’limini tugatganligi to‘g‘risidagi hujjat (Attestat yoki
+            Diplom ilovasi bilan). <br>
+            - Universitet litsenziyasi nusxalari. <br>
+            - Universitetning davlat akkreditatsiyasi to‘g‘risidagi guvohnoma. <br>
+            -  Fotosurat (3,5 x 4,5).
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.3.	Talaba joriy o‘quv yili uchun belgilangan o‘qitish qiymatini shartnomaning 3-bobida ko‘rsatilgan tartib va miqdorda o‘z vaqtida to‘laydi.
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.4.	Universitet Ustavi va boshqa ichki-tartib qoida talablariga qat’iy rioya qiladi.
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.5.	Talaba o‘quv mashg‘ulotlarida muntazam qatnashadi.
+        </td>
+    </tr>
+
+    <tr>
+        <td colspan="4" style="text-align: justify">
+            2.4.6.	Talaba ta’lim muassasasida belgilangan tartib va qoidaga asosan ta’lim oladi hamda ushbu jarayonda bilim darajasini oshirib boradi.
         </td>
     </tr>
 
