@@ -102,7 +102,7 @@ $limg = $lqr->writeDataUri();
 ?>
 
 
-<table width="100%" style="font-family: 'Times New Roman'; font-size: 16px; border-collapse: collapse;">
+<table width="100%" style="font-family: 'Times New Roman'; font-size: 17px; border-collapse: collapse;">
 
     <tr>
         <td colspan="4" style="text-align: center">
