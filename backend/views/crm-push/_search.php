@@ -53,6 +53,11 @@ use yii\widgets\ActiveForm;
                         <?= $form->field($model, 'status') ?>
                     </div>
                 </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="form-group">
+                        <?= $form->field($model, 'is_deleted') ?>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
