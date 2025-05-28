@@ -1868,9 +1868,9 @@ class Bot extends Model
             return ['is_ok' => false, 'data' => 2]; // 2 → Hech qanday fayl topilmadi
         }
 
-        $fileId = $document->file_id ?? null;
-        $fileSize = $document->file_size ?? 0;
-        $fileName = $document->file_name ?? 'file.pdf';
+        $fileId = $document['file_id'] ?? null;
+        $fileSize = $document['file_size'] ?? 0;
+        $fileName = $document['file_name'] ?? 'file.pdf';
 
         if (!$fileId) {
             return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
