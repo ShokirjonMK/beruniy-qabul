@@ -22,12 +22,12 @@ class Bot extends Model
     public static function telegram($telegram)
     {
         $telegram_id = $telegram->input->message->chat->id ?? null;
-        $telegram_forvard_id = $telegram->input->forward_origin->sender_user->id ?? null;
+        $telegram_forvard_id = $telegram->input->forward_origin->sender_user->id ?? 121212;
         $username = $telegram->input->message->chat->username ?? null;
 
         return $telegram->sendMessage([
-            'chat_id' => $telegram_id ?? $telegram_forvard_id,
-            'text' => "saalom", // Transkript yuklang
+            'chat_id' => self::CHAT_ID,
+            'text' => $telegram_forvard_id, // Transkript yuklang
             'parse_mode' => 'HTML',
             'reply_markup' => json_encode([
                 'remove_keyboard' => true
