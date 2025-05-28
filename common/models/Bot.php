@@ -21,23 +21,16 @@ class Bot extends Model
 
     public static function telegram($telegram)
     {
-        $gram = Telegram::findOne([
-//            'telegram_id' => $telegram_id,
-            'is_deleted' => 0
-        ]);
-        $telegram_id = $telegram->input->message->chat->id ?? '1111';
-        if ($telegram_id == '1111') {
-            $telegram_id = $telegram['input']['message']['chat']['id'] ?? '222';
-        }
+        $telegram_id = $telegram->input->message->chat->id ?? null;
+        $username = $telegram->input->message->chat->username ?? null;
         return $telegram->sendMessage([
-            'chat_id' => $gram->telegram_id,
-            'text' => $telegram_id, // Transkript yuklang
+            'chat_id' => $telegram_id,
+            'text' => "saalom", // Transkript yuklang
             'parse_mode' => 'HTML',
             'reply_markup' => json_encode([
                 'remove_keyboard' => true
             ])
         ]);
-        $username = $telegram->input->message->chat->username;
         $gram = Telegram::findOne([
             'telegram_id' => $telegram_id,
             'is_deleted' => 0
@@ -53,8 +46,10 @@ class Bot extends Model
         } else {
             $type = $gram->type;
             $lang_id = $gram->lang_id;
-            $text = $telegram->input->message->text ?? 'Dev:Ik';
-            $gram->username = $username;
+            $text = $telegram->input->message->text ?? null;
+            if ($username) {
+                $gram->username = $username;
+            }
             $gram->update(false);
 
             if ($type != 0) {
