@@ -338,11 +338,11 @@ class Bot extends Model
     public static function sendPhone($telegram, $gram)
     {
         try {
-            $photoUrl = "https://qabul.sarbon.university/frontend/web/images/new_bino.jpg";
+            $photoUrl = "https://arbu-edu.uz/frontend/web/images/new_bino.webp";
             return $telegram->sendPhoto([
                 'chat_id' => $gram->telegram_id,
                 'photo' => $photoUrl,
-                'caption' => "🇺🇿 *TASHKENT SARBON UNIVERSITY* haqida rasm\n\nTelefon raqamingizni yuboring",
+                'caption' => "🇺🇿 *ABU RAYHON BERUNIY UNIVERSITETI* haqida rasm\n\nTelefon raqamingizni yuboring",
                 'parse_mode' => 'Markdown',
                 'reply_markup' => json_encode([
                     'keyboard' => [[
@@ -712,8 +712,6 @@ class Bot extends Model
 
         $backOptions = [
             1 => self::getT("a37", $lang_id),
-            2 => self::getT("a39", $lang_id),
-            3 => self::getT("a38", $lang_id),
         ];
 
         // Agar talim tili to‘g‘ri kiritgan bo‘lsa
@@ -1772,7 +1770,7 @@ class Bot extends Model
         // Matnlar
         $messages = [
             1 => [ // O'zbek tili
-                'title' => "🏫 <b>SARBON UNIVERSITETI</b>\n\n",
+                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
                 'success' => "Arizangiz muvaffaqiyatli yuborildi😊"."\n\n",
                 'fio' => "🎓 <b>F.I.O:</b> ",
                 'passport' => "📑 <b>Pasport ma'lumoti:</b> ",
@@ -1787,7 +1785,7 @@ class Bot extends Model
                 'note' => "<i>Arizangiz ko'rib chiqilib, tez orada siz bilan 👩‍💻 operatorlarimiz bog'lanishadi.\n\nAloqa uchun: " . self::PHONE . "</i>"
             ],
             2 => [ // English
-                'title' => "🏫 <b>SARBON UNIVERSITETI</b>\n\n",
+                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
                 'success' => "Your application has been successfully submitted😊"."\n\n",
                 'fio' => "🎓 <b>Full Name:</b> ",
                 'passport' => "📑 <b>Passport Info:</b> ",
@@ -1802,7 +1800,7 @@ class Bot extends Model
                 'note' => "<i>Your application will be reviewed and our 👩‍💻 operators will contact you soon.\n\nContact: " . self::PHONE . "</i>"
             ],
             3 => [ // Русский
-                'title' => "🏫 <b>SARBON UNIVERSITETI</b>\n\n",
+                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
                 'success' => "Ваша заявка успешно отправлена😊"."\n\n",
                 'fio' => "🎓 <b>Ф.И.О.:</b> ",
                 'passport' => "📑 <b>Паспортные данные:</b> ",
@@ -2034,12 +2032,13 @@ class Bot extends Model
             'keyboard' => [
                 [
                     ['text' => self::getT("a37", $lang_id)],
-                    ['text' => self::getT("a38", $lang_id)],
-                ],
-                [
-                    ['text' => self::getT("a39", $lang_id)],
                     ['text' => $backText],
+//                    ['text' => self::getT("a38", $lang_id)],
                 ],
+//                [
+//                    ['text' => self::getT("a39", $lang_id)],
+//                    ['text' => $backText],
+//                ],
             ],
             'resize_keyboard' => true,
         ]);
