@@ -1899,6 +1899,8 @@ class Bot extends Model
                 } else {
                     return ['is_ok' => false, 'data' => 3];
                 }
+            } else {
+                return ['is_ok' => false, 'data' => 3];
             }
         } else {
             return ['is_ok' => false, 'data' => 0];
