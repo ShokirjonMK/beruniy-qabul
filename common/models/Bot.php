@@ -38,7 +38,7 @@ class Bot extends Model
         } else {
             $type = $gram->type;
             $lang_id = $gram->lang_id;
-            $text = $telegram->input->message->text;
+            $text = $telegram->input->message->text ?? 'Dev:Ik';
             $gram->username = $username;
             $gram->update(false);
 
