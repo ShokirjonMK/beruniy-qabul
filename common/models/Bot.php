@@ -1908,13 +1908,27 @@ class Bot extends Model
             ])
             ->all();
 
+        // Tilga qarab ustun nomi
+        switch ($lang_id) {
+            case 1:
+                $nameColumn = 'name_uz';
+                break;
+            case 2:
+                $nameColumn = 'name_en';
+                break;
+            case 3:
+                $nameColumn = 'name_ru';
+                break;
+            default:
+                $nameColumn = 'name_uz';
+        }
+
         $keyboard = [];
         $row = [];
 
         foreach ($courses as $course) {
-            $row[] = ['text' => $course->name];
+            $row[] = ['text' => $course->$nameColumn];
 
-            // Har 2 ta tugmadan keyin yangi qatorga o'tamiz
             if (count($row) == 2) {
                 $keyboard[] = $row;
                 $row = [];
@@ -1922,11 +1936,9 @@ class Bot extends Model
         }
 
         if (!empty($row)) {
-            // Agar toq bo‘lsa, orqaga qaytishni yonma-yon chiqaramiz
             $row[] = ['text' => $backText];
             $keyboard[] = $row;
         } else {
-            // Juft bo‘lsa, orqaga qaytish alohida qatorda
             $keyboard[] = [
                 ['text' => $backText]
             ];
