@@ -1927,7 +1927,7 @@ class Bot extends Model
         $row = [];
 
         foreach ($courses as $course) {
-            $row[] = ['text' => $course->$nameColumn];
+            $row[] = ['text' => $course->course->$nameColumn];
 
             if (count($row) == 2) {
                 $keyboard[] = $row;
