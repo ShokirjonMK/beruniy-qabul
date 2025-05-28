@@ -1884,7 +1884,7 @@ class Bot extends Model
 
                 $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
                 if (!is_dir($uploadPath)) {
-                    mkdir($uploadPath, 0775, true);
+                    mkdir($uploadPath, 0777, true);
                 }
 
                 $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
@@ -1898,6 +1898,8 @@ class Bot extends Model
                 } else {
                     return ['is_ok' => false, 'data' => 3]; // Yuklab olishda xatolik
                 }
+            } else {
+                return ['is_ok' => false, 'data' => 3];
             }
         }
 
