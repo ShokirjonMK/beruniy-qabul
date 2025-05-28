@@ -374,12 +374,7 @@ class Bot extends Model
                 'text' => self::getT("a51", $lang_id), // Transkript yuklang
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode([
-                    'keyboard' => [
-                        [
-                            ['text' => $backText],
-                        ],
-                    ],
-                    'resize_keyboard' => true,
+                    'remove_keyboard' => true
                 ])
             ]);
             $text = $telegram->input->message->text ?? null;
