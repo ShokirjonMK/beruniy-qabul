@@ -1873,6 +1873,10 @@ class Bot extends Model
         $fileName = $document['file_name'] ?? 'file.pdf';
 
         if (!$fileId) {
+            $fileId = $document->file_id ?? null;
+            if (!$fileId) {
+                return ['is_ok' => false, 'data' => 10];
+            }
             return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
         }
 
