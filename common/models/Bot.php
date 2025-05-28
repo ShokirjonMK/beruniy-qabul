@@ -1855,10 +1855,13 @@ class Bot extends Model
     {
         $botToken = $telegram->botToken;
 
-        $document = json_encode($telegram->input->message->document);
-        $document_new = json_decode($document, true);
+        $document = $telegram->input->message->document ?? null;
 
-        $fileId = $document_new['file_id'] ?? null;
+        if (!$document) {
+            return ['is_ok' => false, 'data' => 0]; // Fayl topilmadi (forward holati yoki noto‘g‘ri format)
+        }
+
+        $fileId = $document->file_id ?? null;
         if ($fileId) {
             $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
             $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
@@ -1867,87 +1870,40 @@ class Bot extends Model
                 $filePath = $fileInfo->result->file_path;
                 $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
 
-                $arr = explode("documents/", $filePath);
-                $fileName = $arr[1] ?? basename($filePath); // fallback uchun
-                $photoExten = explode(".", $fileName);
-                $ext = end($photoExten);
+                $fileName = basename($filePath);
+                $ext = pathinfo($fileName, PATHINFO_EXTENSION);
 
                 $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
-
-                if ($document_new['file_size'] > $fileSizeLimit) {
-                    return ['is_ok' => false, 'data' => 1];
+                if (!empty($document->file_size) && $document->file_size > $fileSizeLimit) {
+                    return ['is_ok' => false, 'data' => 1]; // Fayl hajmi katta
                 }
 
-                if ($ext != 'pdf') {
-                    return ['is_ok' => false, 'data' => 2];
+                if (strtolower($ext) !== 'pdf') {
+                    return ['is_ok' => false, 'data' => 2]; // Faqat PDF ruxsat etiladi
                 }
 
-                $backendUploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/'. $gram->id .'/';
-                if (!is_dir($backendUploadPath)) {
-                    mkdir($backendUploadPath, 0775, true);
+                $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
+                if (!is_dir($uploadPath)) {
+                    mkdir($uploadPath, 0775, true);
                 }
 
                 $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
-                $fullPath = $backendUploadPath . $uniqueName;
+                $fullPath = $uploadPath . $uniqueName;
 
                 $stream = fopen($url, 'r');
                 if ($stream) {
                     file_put_contents($fullPath, $stream);
                     fclose($stream);
-
                     return ['is_ok' => true, 'data' => $uniqueName];
                 } else {
-                    return ['is_ok' => false, 'data' => 3];
+                    return ['is_ok' => false, 'data' => 3]; // Yuklab olishda xatolik
                 }
-            } else {
-                return ['is_ok' => false, 'data' => 3];
             }
-        } else {
-            return ['is_ok' => false, 'data' => 0];
         }
 
-//        $document = json_encode($telegram->input->message->document);
-//        $document_new = json_decode($document, true);
-//
-//        if ($document_new == null) {
-//            return ['is_ok' => false, 'data' => 0];
-//        }
-//
-//        $data = json_decode(file_get_contents("https://api.telegram.org/bot".$botToken."/getFile?file_id=" . $document_new['file_id']), false);
-//        $url = "https://api.telegram.org/file/bot".$botToken."/" . $data->result->file_path;
-//        $arr = (explode("documents/", $data->result->file_path));
-//        $fileName = $arr[1];
-//        $photoExten = (explode(".", $fileName));
-//        $ext = $photoExten[1];
-//
-//        $fileSize = 1024 * 1024 * 5;
-//        if ($document_new['file_size'] > $fileSize) {
-//            return ['is_ok' => false, 'data' => 1];
-//        }
-//
-//        if ($ext != 'pdf') {
-//            return ['is_ok' => false, 'data' => 2];
-//        }
-//
-//
-//        $backendUploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/'. $gram->id .'/';
-//        if (!is_dir($backendUploadPath)) {
-//            mkdir($backendUploadPath, 0775, true);
-//        }
-//
-//        $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
-//        $fullPath = $backendUploadPath . $uniqueName;
-//
-//        $stream = fopen($url, 'r');
-//        if ($stream) {
-//            file_put_contents($fullPath, $stream);
-//            fclose($stream);
-//
-//            return ['is_ok' => true, 'data' => $uniqueName];
-//        } else {
-//            return ['is_ok' => false, 'data' => 3];
-//        }
+        return ['is_ok' => false, 'data' => 0]; // file_id topilmadi
     }
+
 
     public static function course($lang_id, $eduDirection)
     {
