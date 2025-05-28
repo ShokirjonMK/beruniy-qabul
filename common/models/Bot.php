@@ -65,6 +65,9 @@ class Bot extends Model
                 case 0:
                     self::main($telegram, $lang_id, $gram);
                     break;
+                case 1:
+                    self::sendHome($telegram, $lang_id, $gram);
+                    break;
                 case 10:
                     self::signUp($telegram, $lang_id, $gram);
                     break;
