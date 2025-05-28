@@ -1855,7 +1855,10 @@ class Bot extends Model
     {
         $botToken = $telegram->botToken;
 
-        $fileId = $telegram->input->message->document->file_id ?? null;
+        $document = json_encode($telegram->input->message->document);
+        $document_new = json_decode($document, true);
+
+        $fileId = $document_new['file_id'] ?? null;
         if ($fileId) {
             $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
             $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
