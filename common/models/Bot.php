@@ -1854,47 +1854,94 @@ class Bot extends Model
     public static function fileUpload($telegram, $gram)
     {
         $botToken = $telegram->botToken;
-        $document = json_encode($telegram->input->message->document);
-        $document_new = json_decode($document, true);
 
-        if ($document_new == null) {
+        $fileId = $document_new['file_id'] ?? null;
+        if ($fileId) {
+            $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
+            $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
+
+            if (!empty($fileInfo->ok) && !empty($fileInfo->result->file_path)) {
+                $filePath = $fileInfo->result->file_path;
+                $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
+
+                $arr = explode("documents/", $filePath);
+                $fileName = $arr[1] ?? basename($filePath); // fallback uchun
+                $photoExten = explode(".", $fileName);
+                $ext = end($photoExten);
+
+                $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
+
+                if ($document_new['file_size'] > $fileSizeLimit) {
+                    return ['is_ok' => false, 'data' => 1];
+                }
+
+                if ($ext != 'pdf') {
+                    return ['is_ok' => false, 'data' => 2];
+                }
+
+                $backendUploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/'. $gram->id .'/';
+                if (!is_dir($backendUploadPath)) {
+                    mkdir($backendUploadPath, 0775, true);
+                }
+
+                $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
+                $fullPath = $backendUploadPath . $uniqueName;
+
+                $stream = fopen($url, 'r');
+                if ($stream) {
+                    file_put_contents($fullPath, $stream);
+                    fclose($stream);
+
+                    return ['is_ok' => true, 'data' => $uniqueName];
+                } else {
+                    return ['is_ok' => false, 'data' => 3];
+                }
+            }
+        } else {
             return ['is_ok' => false, 'data' => 0];
         }
 
-        $data = json_decode(file_get_contents("https://api.telegram.org/bot".$botToken."/getFile?file_id=" . $document_new['file_id']), false);
-        $url = "https://api.telegram.org/file/bot".$botToken."/" . $data->result->file_path;
-        $arr = (explode("documents/", $data->result->file_path));
-        $fileName = $arr[1];
-        $photoExten = (explode(".", $fileName));
-        $ext = $photoExten[1];
-
-        $fileSize = 1024 * 1024 * 5;
-        if ($document_new['file_size'] > $fileSize) {
-            return ['is_ok' => false, 'data' => 1];
-        }
-
-        if ($ext != 'pdf') {
-            return ['is_ok' => false, 'data' => 2];
-        }
-
-
-        $backendUploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/'. $gram->id .'/';
-        if (!is_dir($backendUploadPath)) {
-            mkdir($backendUploadPath, 0775, true);
-        }
-
-        $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
-        $fullPath = $backendUploadPath . $uniqueName;
-
-        $stream = fopen($url, 'r');
-        if ($stream) {
-            file_put_contents($fullPath, $stream);
-            fclose($stream);
-
-            return ['is_ok' => true, 'data' => $uniqueName];
-        } else {
-            return ['is_ok' => false, 'data' => 3];
-        }
+//        $document = json_encode($telegram->input->message->document);
+//        $document_new = json_decode($document, true);
+//
+//        if ($document_new == null) {
+//            return ['is_ok' => false, 'data' => 0];
+//        }
+//
+//        $data = json_decode(file_get_contents("https://api.telegram.org/bot".$botToken."/getFile?file_id=" . $document_new['file_id']), false);
+//        $url = "https://api.telegram.org/file/bot".$botToken."/" . $data->result->file_path;
+//        $arr = (explode("documents/", $data->result->file_path));
+//        $fileName = $arr[1];
+//        $photoExten = (explode(".", $fileName));
+//        $ext = $photoExten[1];
+//
+//        $fileSize = 1024 * 1024 * 5;
+//        if ($document_new['file_size'] > $fileSize) {
+//            return ['is_ok' => false, 'data' => 1];
+//        }
+//
+//        if ($ext != 'pdf') {
+//            return ['is_ok' => false, 'data' => 2];
+//        }
+//
+//
+//        $backendUploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/'. $gram->id .'/';
+//        if (!is_dir($backendUploadPath)) {
+//            mkdir($backendUploadPath, 0775, true);
+//        }
+//
+//        $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
+//        $fullPath = $backendUploadPath . $uniqueName;
+//
+//        $stream = fopen($url, 'r');
+//        if ($stream) {
+//            file_put_contents($fullPath, $stream);
+//            fclose($stream);
+//
+//            return ['is_ok' => true, 'data' => $uniqueName];
+//        } else {
+//            return ['is_ok' => false, 'data' => 3];
+//        }
     }
 
     public static function course($lang_id, $eduDirection)
