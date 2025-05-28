@@ -25,10 +25,10 @@ class Bot extends Model
 //            'telegram_id' => $telegram_id,
             'is_deleted' => 0
         ]);
-        $telegram_id = $telegram->input->message->chat['id'];
+        $telegram_id = $telegram->input->message->chat->id ?? '1111';
         return $telegram->sendMessage([
             'chat_id' => $gram->telegram_id,
-            'text' => "saalom", // Transkript yuklang
+            'text' => $telegram_id, // Transkript yuklang
             'parse_mode' => 'HTML',
             'reply_markup' => json_encode([
                 'remove_keyboard' => true
