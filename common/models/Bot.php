@@ -22,8 +22,6 @@ class Bot extends Model
     public static function telegram($telegram)
     {
         $telegram_id = $telegram->input->message->chat->id;
-        $username = $telegram->input->message->chat->username;
-
         return $telegram->sendMessage([
             'chat_id' => $telegram_id,
             'text' => "saalom", // Transkript yuklang
@@ -32,6 +30,7 @@ class Bot extends Model
                 'remove_keyboard' => true
             ])
         ]);
+        $username = $telegram->input->message->chat->username;
         $gram = Telegram::findOne([
             'telegram_id' => $telegram_id,
             'is_deleted' => 0
