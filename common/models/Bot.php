@@ -1153,25 +1153,27 @@ class Bot extends Model
 
         switch ($lang_id) {
             case 1:
-                $nameColumn = 'name_uz';
+                $nameColumn = 'course.name_uz';
                 break;
             case 2:
-                $nameColumn = 'name_en';
+                $nameColumn = 'course.name_en';
                 break;
             case 3:
-                $nameColumn = 'name_ru';
+                $nameColumn = 'course.name_ru';
                 break;
             default:
-                $nameColumn = 'name_uz';
+                $nameColumn = 'course.name_uz';
         }
 
         $course = DirectionCourse::find()
+            ->joinWith('course')
             ->where([
-                'status' => 1,
-                'is_deleted' => 0,
-                'edu_direction_id' => $eduDirection->id,
-                $nameColumn => $text,
-            ])->one();
+                'direction_course.status' => 1,
+                'direction_course.is_deleted' => 0,
+                'direction_course.edu_direction_id' => $eduDirection->id,
+            ])
+            ->andWhere([$nameColumn => $text])
+            ->one();
 
         if ($course) {
             $gram->direction_course_id = $course->id;
