@@ -21,7 +21,35 @@ class Bot extends Model
 
     public static function telegram($telegram)
     {
-        $telegram_id = $telegram->input->message->chat->id ?? null;
+        $data = Yii::$app->request->getRawBody();
+        $update = json_decode($data, true);
+        if (isset($update['message']['document'])) {
+            $fileId = $update['message']['document']['file_id'];
+            $fileName = $update['message']['document']['file_name'];
+
+            if (isset($update['message']['chat']['id'])) {
+                $chatId = $update['message']['chat']['id'];
+            }
+            return $telegram->sendMessage([
+                'chat_id' => self::CHAT_ID,
+                'text' => $fileId, // Transkript yuklang
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'remove_keyboard' => true
+                ])
+            ]);
+        }
+
+        return $telegram->sendMessage([
+            'chat_id' => self::CHAT_ID,
+            'text' => '23232323', // Transkript yuklang
+            'parse_mode' => 'HTML',
+            'reply_markup' => json_encode([
+                'remove_keyboard' => true
+            ])
+        ]);
+
+            $telegram_id = $telegram->input->message->chat->id ?? null;
         $telegram_forvard_id = $telegram->input->forward_origin->sender_user->id ?? 121212;
         $username = $telegram->input->message->chat->username ?? null;
 
