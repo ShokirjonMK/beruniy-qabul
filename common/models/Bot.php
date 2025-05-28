@@ -369,6 +369,19 @@ class Bot extends Model
     public static function signUp($telegram, $lang_id, $gram)
     {
         try {
+            return $telegram->sendMessage([
+                'chat_id' => $gram->telegram_id,
+                'text' => self::getT("a51", $lang_id), // Transkript yuklang
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'keyboard' => [
+                        [
+                            ['text' => $backText],
+                        ],
+                    ],
+                    'resize_keyboard' => true,
+                ])
+            ]);
             $text = $telegram->input->message->text ?? null;
             $gram->type = 10;
             $gram->update(false);
