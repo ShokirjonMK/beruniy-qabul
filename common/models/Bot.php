@@ -1858,48 +1858,47 @@ class Bot extends Model
 
         $input = $telegram->input ?? null;
         if (!$input || empty($input->message)) {
-            return ['is_ok' => false, 'data' => 0]; // No input (yoki message bo‘sh)
+            return ['is_ok' => false, 'data' => 1]; // 1 → Xabar mavjud emas
         }
 
         $message = $input->message;
 
-        // Forward qilingan yoki oddiy fayl
         $document = $message->document ?? null;
-
-        // Agar document bo‘lmasa, foydalanuvchi forward qilgan bo‘lishi mumkin
         if (!$document) {
-            return ['is_ok' => false, 'data' => 4]; // Fayl forward qilingan yoki umuman document yo‘q
+            return ['is_ok' => false, 'data' => 2]; // 2 → Hech qanday fayl topilmadi
         }
 
         $fileId = $document->file_id ?? null;
+        $fileSize = $document->file_size ?? 0;
+        $fileName = $document->file_name ?? 'file.pdf';
+
         if (!$fileId) {
-            return ['is_ok' => false, 'data' => 1]; // file_id yo‘q
+            return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
         }
 
-        // Telegramdan file_path olish
+        // getFile orqali file path olish
         $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
         $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
 
         if (empty($fileInfo->ok) || empty($fileInfo->result->file_path)) {
-            return ['is_ok' => false, 'data' => 3]; // file_path topilmadi
+            return ['is_ok' => false, 'data' => 4]; // 4 → Telegramdan fayl ma’lumotlari olinmadi
         }
 
         $filePath = $fileInfo->result->file_path;
-        $fileName = basename($filePath);
+        $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
+
         $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
-        // Fayl hajmi cheklovi (forward qilinganda bu qiymat bo‘lmasligi mumkin)
         $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
-        if (!empty($document->file_size) && $document->file_size > $fileSizeLimit) {
-            return ['is_ok' => false, 'data' => 2]; // Fayl hajmi katta
+        if ($fileSize > $fileSizeLimit) {
+            return ['is_ok' => false, 'data' => 5]; // 5 → Fayl hajmi ruxsat etilganidan katta
         }
 
-        // Faqat PDF ruxsat etiladi
         if ($ext !== 'pdf') {
-            return ['is_ok' => false, 'data' => 5]; // Format noto‘g‘ri
+            return ['is_ok' => false, 'data' => 6]; // 6 → Faqat PDF fayllar ruxsat etilgan
         }
 
-        // Fayl saqlash yo‘li
+        // Faylni saqlash joyi
         $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
         if (!is_dir($uploadPath)) {
             mkdir($uploadPath, 0777, true);
@@ -1908,16 +1907,14 @@ class Bot extends Model
         $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
         $fullPath = $uploadPath . $uniqueName;
 
-        $fileUrl = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
-
-        $stream = fopen($fileUrl, 'r');
+        $stream = fopen($url, 'r');
         if ($stream) {
             file_put_contents($fullPath, $stream);
             fclose($stream);
-            return ['is_ok' => true, 'data' => $uniqueName];
+            return ['is_ok' => true, 'data' => $uniqueName]; // muvaffaqiyatli saqlandi
+        } else {
+            return ['is_ok' => false, 'data' => 7]; // 7 → Faylni yuklab olishda xatolik
         }
-
-        return ['is_ok' => false, 'data' => 6]; // Yuklab olishda xatolik
     }
 
 
