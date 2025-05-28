@@ -1447,7 +1447,7 @@ class Bot extends Model
                 'reply_markup' => self::confirm($lang_id)
             ]);
         } else {
-            $data = $result['is_ok'];
+            $data = $result['data'];
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
                 'text' => $data, // Fayl noto'g'ri
