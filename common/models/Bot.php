@@ -23,6 +23,15 @@ class Bot extends Model
     {
         $telegram_id = $telegram->input->message->chat->id;
         $username = $telegram->input->message->chat->username;
+
+        return $telegram->sendMessage([
+            'chat_id' => $telegram_id,
+            'text' => "saalom", // Transkript yuklang
+            'parse_mode' => 'HTML',
+            'reply_markup' => json_encode([
+                'remove_keyboard' => true
+            ])
+        ]);
         $gram = Telegram::findOne([
             'telegram_id' => $telegram_id,
             'is_deleted' => 0
@@ -369,15 +378,7 @@ class Bot extends Model
     public static function signUp($telegram, $lang_id, $gram)
     {
         try {
-            return $telegram->sendMessage([
-                'chat_id' => $gram->telegram_id,
-                'text' => self::getT("a51", $lang_id), // Transkript yuklang
-                'parse_mode' => 'HTML',
-                'reply_markup' => json_encode([
-                    'remove_keyboard' => true
-                ])
-            ]);
-            $text = $telegram->input->message->text ?? null;
+            $text = $telegram->input->message->text;
             $gram->type = 10;
             $gram->update(false);
             $step = $gram->step;
