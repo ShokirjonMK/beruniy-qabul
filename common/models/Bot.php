@@ -29,15 +29,15 @@ class Bot extends Model
 
             if (isset($update['message']['chat']['id'])) {
                 $chatId = $update['message']['chat']['id'];
+                return $telegram->sendMessage([
+                    'chat_id' => $chatId,
+                    'text' => $fileId, // Transkript yuklang
+                    'parse_mode' => 'HTML',
+                    'reply_markup' => json_encode([
+                        'remove_keyboard' => true
+                    ])
+                ]);
             }
-            return $telegram->sendMessage([
-                'chat_id' => self::CHAT_ID,
-                'text' => $fileId, // Transkript yuklang
-                'parse_mode' => 'HTML',
-                'reply_markup' => json_encode([
-                    'remove_keyboard' => true
-                ])
-            ]);
         }
 
         return $telegram->sendMessage([
