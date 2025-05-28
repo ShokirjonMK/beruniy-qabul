@@ -22,45 +22,11 @@ class Bot extends Model
     public static function telegram($telegram)
     {
         $data = Yii::$app->request->getRawBody();
-        $update = json_decode($data, true);
-        if (isset($update['message']['document'])) {
-            $fileId = $update['message']['document']['file_id'];
-            $fileName = $update['message']['document']['file_name'];
+        $telegramArray = json_decode($data, true);
 
-            if (isset($update['message']['chat']['id'])) {
-                $chatId = $update['message']['chat']['id'];
-                return $telegram->sendMessage([
-                    'chat_id' => $chatId,
-                    'text' => $fileId, // Transkript yuklang
-                    'parse_mode' => 'HTML',
-                    'reply_markup' => json_encode([
-                        'remove_keyboard' => true
-                    ])
-                ]);
-            }
-        }
+        $telegram_id = $telegramArray['message']['chat']['id'] ?? null;
+        $username = $telegramArray['message']['chat']['username'] ?? null;
 
-        return $telegram->sendMessage([
-            'chat_id' => self::CHAT_ID,
-            'text' => '23232323', // Transkript yuklang
-            'parse_mode' => 'HTML',
-            'reply_markup' => json_encode([
-                'remove_keyboard' => true
-            ])
-        ]);
-
-            $telegram_id = $telegram->input->message->chat->id ?? null;
-        $telegram_forvard_id = $telegram->input->forward_origin->sender_user->id ?? 121212;
-        $username = $telegram->input->message->chat->username ?? null;
-
-        return $telegram->sendMessage([
-            'chat_id' => self::CHAT_ID,
-            'text' => $telegram_forvard_id, // Transkript yuklang
-            'parse_mode' => 'HTML',
-            'reply_markup' => json_encode([
-                'remove_keyboard' => true
-            ])
-        ]);
         $gram = Telegram::findOne([
             'telegram_id' => $telegram_id,
             'is_deleted' => 0
@@ -76,7 +42,7 @@ class Bot extends Model
         } else {
             $type = $gram->type;
             $lang_id = $gram->lang_id;
-            $text = $telegram->input->message->text ?? null;
+            $text = $telegramArray['message']['text'] ?? null;
             if ($username) {
                 $gram->username = $username;
             }
@@ -409,7 +375,10 @@ class Bot extends Model
     public static function signUp($telegram, $lang_id, $gram)
     {
         try {
-            $text = $telegram->input->message->text;
+            $data = Yii::$app->request->getRawBody();
+            $update = json_decode($data, true);
+            $text = $update['message']['text'] ?? null;
+
             $gram->type = 10;
             $gram->update(false);
             $step = $gram->step;
@@ -1424,20 +1393,6 @@ class Bot extends Model
     {
         $backText = self::getT("a12", $lang_id); // "Orqaga" tugmasi matni
 
-        return $telegram->sendMessage([
-            'chat_id' => $gram->telegram_id,
-            'text' => self::getT("a51", $lang_id), // Transkript yuklang
-            'parse_mode' => 'HTML',
-            'reply_markup' => json_encode([
-                'keyboard' => [
-                    [
-                        ['text' => $backText],
-                    ],
-                ],
-                'resize_keyboard' => true,
-            ])
-        ]);
-
         $eduDirection = EduDirection::findOne($gram->edu_direction_id);
         if ($text === '/signup' || $text === self::getT("a3", $lang_id)) {
             return $telegram->sendMessage([
@@ -1910,69 +1865,63 @@ class Bot extends Model
     {
         $botToken = $telegram->botToken;
 
-        $input = $telegram->input ?? null;
-        if (!$input || empty($input->message)) {
-            return ['is_ok' => false, 'data' => 1]; // 1 → Xabar mavjud emas
+        $data = Yii::$app->request->getRawBody();
+        $update = json_decode($data, true);
+
+        if (isset($update['message']['document'])) {
+            $fileId = $update['message']['document']['file_id'] ?? null;
+            $fileName = $update['message']['document']['file_name'] ?? null;
+            $fileSize = $update['message']['document']['file_size'] ?? null;
+
+            if (!$fileId) {
+                return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
+            }
+
+            // getFile orqali file path olish
+            $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
+            $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
+
+            if (empty($fileInfo->ok) || empty($fileInfo->result->file_path)) {
+                return ['is_ok' => false, 'data' => 4]; // 4 → Telegramdan fayl ma’lumotlari olinmadi
+            }
+
+            $filePath = $fileInfo->result->file_path;
+            $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
+
+            if (!$fileName) {
+                return ['is_ok' => false, 'data' => 11];
+            }
+
+            $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
+
+            $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
+            if ($fileSize > $fileSizeLimit) {
+                return ['is_ok' => false, 'data' => 5]; // 5 → Fayl hajmi ruxsat etilganidan katta
+            }
+
+            if ($ext !== 'pdf') {
+                return ['is_ok' => false, 'data' => 6]; // 6 → Faqat PDF fayllar ruxsat etilgan
+            }
+
+            // Faylni saqlash joyi
+            $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
+            if (!is_dir($uploadPath)) {
+                mkdir($uploadPath, 0777, true);
+            }
+
+            $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
+            $fullPath = $uploadPath . $uniqueName;
+
+            $stream = fopen($url, 'r');
+            if ($stream) {
+                file_put_contents($fullPath, $stream);
+                fclose($stream);
+                return ['is_ok' => true, 'data' => $uniqueName]; // muvaffaqiyatli saqlandi
+            } else {
+                return ['is_ok' => false, 'data' => 7]; // 7 → Faylni yuklab olishda xatolik
+            }
         }
-
-        $message = $input->message;
-
-        $document = $message->document ?? null;
-        if (!$document) {
-            return ['is_ok' => false, 'data' => 2]; // 2 → Hech qanday fayl topilmadi
-        }
-
-        $fileId = $document['file_id'] ?? null;
-        $fileSize = $document['file_size'] ?? 0;
-        $fileName = $document['file_name'] ?? null;
-
-        if (!$fileId) {
-            return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
-        }
-
-        // getFile orqali file path olish
-        $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
-        $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
-
-        if (empty($fileInfo->ok) || empty($fileInfo->result->file_path)) {
-            return ['is_ok' => false, 'data' => 4]; // 4 → Telegramdan fayl ma’lumotlari olinmadi
-        }
-
-        $filePath = $fileInfo->result->file_path;
-        $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
-
-        if (!$fileName) {
-            return ['is_ok' => false, 'data' => 11];
-        }
-
-        $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
-
-        $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
-        if ($fileSize > $fileSizeLimit) {
-            return ['is_ok' => false, 'data' => 5]; // 5 → Fayl hajmi ruxsat etilganidan katta
-        }
-
-        if ($ext !== 'pdf') {
-            return ['is_ok' => false, 'data' => 6]; // 6 → Faqat PDF fayllar ruxsat etilgan
-        }
-
-        // Faylni saqlash joyi
-        $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
-        if (!is_dir($uploadPath)) {
-            mkdir($uploadPath, 0777, true);
-        }
-
-        $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
-        $fullPath = $uploadPath . $uniqueName;
-
-        $stream = fopen($url, 'r');
-        if ($stream) {
-            file_put_contents($fullPath, $stream);
-            fclose($stream);
-            return ['is_ok' => true, 'data' => $uniqueName]; // muvaffaqiyatli saqlandi
-        } else {
-            return ['is_ok' => false, 'data' => 7]; // 7 → Faylni yuklab olishda xatolik
-        }
+        return ['is_ok' => false, 'data' => 0];
     }
 
 
