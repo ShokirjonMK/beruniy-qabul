@@ -1870,7 +1870,7 @@ class Bot extends Model
 
         $fileId = $document['file_id'] ?? null;
         $fileSize = $document['file_size'] ?? 0;
-        $fileName = $document['file_name'] ?? 'file.pdf';
+        $fileName = $document['file_name'] ?? null;
 
         if (!$fileId) {
             return ['is_ok' => false, 'data' => 3]; // 3 → file_id mavjud emas
@@ -1886,6 +1886,10 @@ class Bot extends Model
 
         $filePath = $fileInfo->result->file_path;
         $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
+
+        if (!$fileName) {
+            return ['is_ok' => false, 'data' => 11];
+        }
 
         $ext = strtolower(pathinfo($fileName, PATHINFO_EXTENSION));
 
