@@ -21,9 +21,13 @@ class Bot extends Model
 
     public static function telegram($telegram)
     {
-        $telegram_id = $telegram->input->message->chat->id;
+        $gram = Telegram::findOne([
+//            'telegram_id' => $telegram_id,
+            'is_deleted' => 0
+        ]);
+//        $telegram_id = $telegram->input->message->chat->id;
         return $telegram->sendMessage([
-            'chat_id' => $telegram_id,
+            'chat_id' => $gram->telegram_id,
             'text' => "saalom", // Transkript yuklang
             'parse_mode' => 'HTML',
             'reply_markup' => json_encode([
