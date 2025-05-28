@@ -1873,7 +1873,7 @@ class Bot extends Model
 
         $fileId = $document->file_id ?? null;
         if (!$fileId) {
-            return ['is_ok' => false, 'data' => 0]; // file_id yo‘q
+            return ['is_ok' => false, 'data' => 1]; // file_id yo‘q
         }
 
         // Telegramdan file_path olish
@@ -1891,12 +1891,12 @@ class Bot extends Model
         // Fayl hajmi cheklovi (forward qilinganda bu qiymat bo‘lmasligi mumkin)
         $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
         if (!empty($document->file_size) && $document->file_size > $fileSizeLimit) {
-            return ['is_ok' => false, 'data' => 1]; // Fayl hajmi katta
+            return ['is_ok' => false, 'data' => 2]; // Fayl hajmi katta
         }
 
         // Faqat PDF ruxsat etiladi
         if ($ext !== 'pdf') {
-            return ['is_ok' => false, 'data' => 2]; // Format noto‘g‘ri
+            return ['is_ok' => false, 'data' => 5]; // Format noto‘g‘ri
         }
 
         // Fayl saqlash yo‘li
@@ -1917,7 +1917,7 @@ class Bot extends Model
             return ['is_ok' => true, 'data' => $uniqueName];
         }
 
-        return ['is_ok' => false, 'data' => 3]; // Yuklab olishda xatolik
+        return ['is_ok' => false, 'data' => 6]; // Yuklab olishda xatolik
     }
 
 
