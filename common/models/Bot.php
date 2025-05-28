@@ -26,6 +26,9 @@ class Bot extends Model
             'is_deleted' => 0
         ]);
         $telegram_id = $telegram->input->message->chat->id ?? '1111';
+        if ($telegram_id == '1111') {
+            $telegram_id = $telegram->input->message->chat['id'] ?? '222';
+        }
         return $telegram->sendMessage([
             'chat_id' => $gram->telegram_id,
             'text' => $telegram_id, // Transkript yuklang
