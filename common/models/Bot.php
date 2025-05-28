@@ -1447,9 +1447,10 @@ class Bot extends Model
                 'reply_markup' => self::confirm($lang_id)
             ]);
         } else {
+            $data = $result['is_ok'];
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
-                'text' => self::getT("a55", $lang_id), // Fayl noto'g'ri
+                'text' => $data, // Fayl noto'g'ri
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode([
                     'keyboard' => [
