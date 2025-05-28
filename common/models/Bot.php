@@ -369,7 +369,7 @@ class Bot extends Model
     public static function signUp($telegram, $lang_id, $gram)
     {
         try {
-            $text = $telegram->input->message->text;
+            $text = $telegram->input->message->text ?? null;
             $gram->type = 10;
             $gram->update(false);
             $step = $gram->step;
