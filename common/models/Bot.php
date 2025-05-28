@@ -1384,6 +1384,20 @@ class Bot extends Model
     {
         $backText = self::getT("a12", $lang_id); // "Orqaga" tugmasi matni
 
+        return $telegram->sendMessage([
+            'chat_id' => $gram->telegram_id,
+            'text' => self::getT("a51", $lang_id), // Transkript yuklang
+            'parse_mode' => 'HTML',
+            'reply_markup' => json_encode([
+                'keyboard' => [
+                    [
+                        ['text' => $backText],
+                    ],
+                ],
+                'resize_keyboard' => true,
+            ])
+        ]);
+
         $eduDirection = EduDirection::findOne($gram->edu_direction_id);
         if ($text === '/signup' || $text === self::getT("a3", $lang_id)) {
             return $telegram->sendMessage([
