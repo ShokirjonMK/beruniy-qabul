@@ -1853,63 +1853,55 @@ class Bot extends Model
 
     public static function fileUpload($telegram, $gram)
     {
-        try {
-            $botToken = $telegram->botToken;
+        $botToken = $telegram->botToken;
 
-            $document = $telegram->input->message->document ?? null;
+        $document = $telegram->input->message->document ?? null;
 
-            if (!$document) {
-                return ['is_ok' => false, 'data' => 0]; // Fayl topilmadi (forward holati yoki noto‘g‘ri format)
-            }
+        if (!$document) {
+            return ['is_ok' => false, 'data' => 0]; // Fayl topilmadi (forward holati yoki noto‘g‘ri format)
+        }
 
-            $fileId = $document->file_id ?? null;
-            if ($fileId) {
-                $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
-                $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
+        $fileId = $document->file_id ?? null;
+        if ($fileId) {
+            $fileInfoUrl = "https://api.telegram.org/bot{$botToken}/getFile?file_id={$fileId}";
+            $fileInfo = json_decode(file_get_contents($fileInfoUrl), false);
 
-                if (!empty($fileInfo->ok) && !empty($fileInfo->result->file_path)) {
-                    $filePath = $fileInfo->result->file_path;
-                    $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
+            if (!empty($fileInfo->ok) && !empty($fileInfo->result->file_path)) {
+                $filePath = $fileInfo->result->file_path;
+                $url = "https://api.telegram.org/file/bot{$botToken}/{$filePath}";
 
-                    $fileName = basename($filePath);
-                    $ext = pathinfo($fileName, PATHINFO_EXTENSION);
+                $fileName = basename($filePath);
+                $ext = pathinfo($fileName, PATHINFO_EXTENSION);
 
-                    $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
-                    if (!empty($document->file_size) && $document->file_size > $fileSizeLimit) {
-                        return ['is_ok' => false, 'data' => 1]; // Fayl hajmi katta
-                    }
+                $fileSizeLimit = 1024 * 1024 * 5; // 5 MB
+                if (!empty($document->file_size) && $document->file_size > $fileSizeLimit) {
+                    return ['is_ok' => false, 'data' => 1]; // Fayl hajmi katta
+                }
 
-                    if (strtolower($ext) !== 'pdf') {
-                        return ['is_ok' => false, 'data' => 2]; // Faqat PDF ruxsat etiladi
-                    }
+                if (strtolower($ext) !== 'pdf') {
+                    return ['is_ok' => false, 'data' => 2]; // Faqat PDF ruxsat etiladi
+                }
 
-                    $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
-                    if (!is_dir($uploadPath)) {
-                        mkdir($uploadPath, 0777, true);
-                    }
+                $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $gram->id . '/';
+                if (!is_dir($uploadPath)) {
+                    mkdir($uploadPath, 0777, true);
+                }
 
-                    $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
-                    $fullPath = $uploadPath . $uniqueName;
+                $uniqueName = sha1($fileName) . "_" . time() . "." . $ext;
+                $fullPath = $uploadPath . $uniqueName;
 
-                    $stream = fopen($url, 'r');
-                    if ($stream) {
-                        file_put_contents($fullPath, $stream);
-                        fclose($stream);
-                        return ['is_ok' => true, 'data' => $uniqueName];
-                    } else {
-                        return ['is_ok' => false, 'data' => 3]; // Yuklab olishda xatolik
-                    }
+                $stream = fopen($url, 'r');
+                if ($stream) {
+                    file_put_contents($fullPath, $stream);
+                    fclose($stream);
+                    return ['is_ok' => true, 'data' => $uniqueName];
+                } else {
+                    return ['is_ok' => false, 'data' => 3]; // Yuklab olishda xatolik
                 }
             }
-
-            return ['is_ok' => false, 'data' => 0]; // file_id topilmadi
-        } catch (\Exception $e) {
-            return $telegram->sendMessage([
-                'chat_id' => self::CHAT_ID,
-                'text' => ['Ik main :( ' . $e->getMessage()],
-                'parse_mode' => 'HTML',
-            ]);
         }
+
+        return ['is_ok' => false, 'data' => 0]; // file_id topilmadi
     }
 
 
