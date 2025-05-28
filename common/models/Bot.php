@@ -1177,7 +1177,6 @@ class Bot extends Model
 
         if ($course) {
             $gram->direction_course_id = $course->id;
-            $gram->course_id = $course->course_id;
             $gram->step = 11;
             $gram->save(false);
 
