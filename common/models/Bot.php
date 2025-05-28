@@ -1856,14 +1856,14 @@ class Bot extends Model
     {
         $botToken = $telegram->botToken;
 
-        $input = $telegram->input ?? null;
-        if (!$input || empty($input->message)) {
+        $input = $telegram['input'] ?? null;
+        if (!$input || empty($input['message'])) {
             return ['is_ok' => false, 'data' => 1]; // 1 → Xabar mavjud emas
         }
 
-        $message = $input->message;
+        $message = $input['message'];
 
-        $document = $message->document ?? null;
+        $document = $message['document'] ?? null;
         if (!$document) {
             return ['is_ok' => false, 'data' => 2]; // 2 → Hech qanday fayl topilmadi
         }
