@@ -196,4 +196,66 @@ class CrmPushController extends Controller
             return ['is_ok' => false];
         }
     }
+
+
+    public function actionStd()
+    {
+        $transaction = Yii::$app->db->beginTransaction();
+        $errors = [];
+
+        $users = User::find()
+            ->where([
+                'user_role' => 'student',
+                'lead_id' => null,
+                'status' => [5,9,10]
+            ])->all();
+
+        foreach ($users as $user) {
+            $student = $user->student;
+
+            $query = CrmPush::findOne([
+                'type' => 1,
+                'student_id' => $student->id
+            ]);
+            if (!$query) {
+                if ($user->step == 0) {
+                    CrmPush::processType(1, $student, $user);
+                } elseif ($user->step == 1) {
+                    CrmPush::processType(1, $student, $user);
+                    CrmPush::processType(2, $student, $user);
+                } elseif ($user->step == 2) {
+                    CrmPush::processType(1, $student, $user);
+                    CrmPush::processType(2, $student, $user);
+                    CrmPush::processType(3, $student, $user);
+                } elseif ($user->step == 3) {
+                    CrmPush::processType(1, $student, $user);
+                    CrmPush::processType(2, $student, $user);
+                    CrmPush::processType(3, $student, $user);
+                    CrmPush::processType(4, $student, $user);
+                } elseif ($user->step == 4) {
+                    CrmPush::processType(1, $student, $user);
+                    CrmPush::processType(2, $student, $user);
+                    CrmPush::processType(3, $student, $user);
+                    CrmPush::processType(4, $student, $user);
+                    CrmPush::processType(5, $student, $user);
+                } elseif ($user->step == 5) {
+                    CrmPush::processType(1, $student, $user);
+                    CrmPush::processType(2, $student, $user);
+                    CrmPush::processType(3, $student, $user);
+                    CrmPush::processType(4, $student, $user);
+                    CrmPush::processType(5, $student, $user);
+                    CrmPush::processType(6, $student, $user);
+
+                    if ($student->is_down == 1) {
+                        CrmPush::processType(9, $student, $user);
+                    }
+                }
+            }
+        }
+
+        if (count($errors) == 0) {
+            $transaction->commit();
+            dd(count($users));
+        }
+    }
 }

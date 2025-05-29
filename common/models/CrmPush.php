@@ -311,7 +311,7 @@ class CrmPush extends \yii\db\ActiveRecord
         } else {
             $examType = '----';
         }
-        $direction = $student->direction;
+        $direction = $student->eduDirection->direction;
         $new = new CrmPush();
         $new->student_id = $student->id;
         $new->pipeline_id = $pipelineId;
