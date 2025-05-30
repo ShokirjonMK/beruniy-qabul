@@ -528,8 +528,41 @@ class Bot extends Model
             $passport = self::passport($gram);
             if ($passport['is_ok']) {
                 $gram = $passport['gram'];
-                $gram->save(false);
 
+                if (in_array(null, [
+                    $gram->first_name,
+                    $gram->last_name,
+                    $gram->middle_name,
+                    $gram->passport_number,
+                    $gram->passport_serial,
+                    $gram->passport_pin,
+                    $gram->birthday,
+                    $gram->gender,
+                ], true)) {
+                    $telegram->sendMessage([
+                        'chat_id' => $gram->telegram_id,
+                        'text' => self::getT("a19", $lang_id), // Pasport ma'lumoti yuklashda xatolik
+                        'parse_mode' => 'HTML',
+                        'reply_markup' => json_encode([
+                            'remove_keyboard' => true
+                        ])
+                    ]);
+                    return $telegram->sendMessage([
+                        'chat_id' => $gram->telegram_id,
+                        'text' => self::getT("a15", $lang_id), // Tug‘ilgan sanani kiriting
+                        'parse_mode' => 'HTML',
+                        'reply_markup' => json_encode([
+                            'keyboard' => [
+                                [
+                                    ['text' => $backText],
+                                ],
+                            ],
+                            'resize_keyboard' => true,
+                        ])
+                    ]);
+                }
+
+                $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,
                     'text' => self::getT("a21", $lang_id), // Qabul turini tanlang
@@ -2023,10 +2056,10 @@ class Bot extends Model
         if ($response->isOk) {
             $responseData = $response->data;
             $passport = $responseData['data']['info']['data'];
-            $gram->first_name = $passport['name'];
-            $gram->last_name = $passport['sur_name'];
-            $gram->middle_name = $passport['patronymic_name'];
-            $gram->passport_pin = (string)$passport['pinfl'];
+            $gram->first_name = $passport['name'] ?? null;
+            $gram->last_name = $passport['sur_name'] ?? null;
+            $gram->middle_name = $passport['patronymic_name'] ?? null;
+            $gram->passport_pin = isset($passport['pinfl']) ? (string)$passport['pinfl'] : null;
 
             $gram->gender = 1;
             return ['is_ok' => true, 'gram' => $gram];
