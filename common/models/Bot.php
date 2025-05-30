@@ -526,7 +526,7 @@ class Bot extends Model
             $gram->step = ($i + 1);
 
             $passport = self::passport($gram);
-            if ($passport['is_ok']) { 
+            if ($passport['is_ok']) {
                 $gram = $passport['gram'];
 
                 if (in_array(null, [
