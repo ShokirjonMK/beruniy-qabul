@@ -32,6 +32,10 @@ class IkBotController extends Controller
         // Xamkor yozib ketiladi, eslab qolish uchun;
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
         $telegram = Yii::$app->telegram2;
+
+        $data = Yii::$app->request->getRawBody();
+        $telegramArray = json_decode($data, true);
+
         $telegram_id = $telegramArray['message']['chat']['id'] ?? null;
 
         return $telegram->sendMessage([
