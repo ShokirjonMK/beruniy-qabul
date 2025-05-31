@@ -29,16 +29,13 @@ class IkBotController extends Controller
 
     public function actionCons2()
     {
+        // Xamkor yozib ketiladi, eslab qolish uchun;
         Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
-
         $telegram = Yii::$app->telegram2;
-
-        // Foydalanuvchi Telegram ID sini olish:
-        $telegramUpdate = $telegram->getWebhookUpdate();
-        $chatId = $telegramUpdate->getMessage()->getChat()->getId();
+        $telegram_id = $telegramArray['message']['chat']['id'] ?? null;
 
         return $telegram->sendMessage([
-            'chat_id' => $chatId,
+            'chat_id' => $telegram_id,
             'text' => "Ro'yhatdan o'tish uchun quyidagi tugmani bosing:",
             'reply_markup' => json_encode([
                 'inline_keyboard' => [
