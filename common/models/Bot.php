@@ -36,6 +36,12 @@ class Bot extends Model
             $gram->telegram_id = $telegram_id;
             $gram->username = $username;
             $gram->lang_id = 1;
+            $gram->branch_id = 1;
+            if (self::CONS != 0) {
+                $gram->cons_id = self::CONS;
+            } else {
+                $gram->cons_id = 1;
+            }
             $gram->save(false);
 
             self::sendPhone($telegram, $gram);
@@ -121,6 +127,42 @@ class Bot extends Model
 
                     $gram->phone = $formatted;
                     $gram->type = 1;
+
+                    $user = User::findOne([
+                        'username' => $formatted
+                    ]);
+                    if (!$user) {
+                        $user = new User();
+                        $user->username = $formatted;
+                        $user->user_role = 'student';
+                        $password = 'bot'.rand(1000, 9999);
+                        $user->setPassword($password);
+                        $user->generateAuthKey();
+                        $user->generateEmailVerificationToken();
+                        $user->generatePasswordResetToken();
+                        $user->cons_id = $gram->cons_id;
+                        $user->status = 10;
+                        $user->step = 1;
+                        $user->save(false);
+
+                        $newAuth = new AuthAssignment();
+                        $newAuth->item_name = 'student';
+                        $newAuth->user_id = $user->id;
+                        $newAuth->created_at = time();
+                        $newAuth->save(false);
+
+                        $newStudent = new Student();
+                        $newStudent->user_id = $user->id;
+                        $newStudent->username = $user->username;
+                        $newStudent->password = $password;
+                        $newStudent->branch_id = $gram->branch_id;
+                        $newStudent->created_by = time();
+                        $newStudent->updated_by = 0;
+                        $newStudent->save(false);
+
+                        CrmPush::processType(1, $newStudent, $user);
+                        CrmPush::processType(2, $newStudent, $user);
+                    }
                     $gram->save(false);
 
                     return $telegram->sendMessage([
@@ -1266,7 +1308,6 @@ class Bot extends Model
         ]);
     }
 
-
     public static function step10($telegram, $lang_id, $gram, $text)
     {
         $i = 9;
@@ -1421,7 +1462,6 @@ class Bot extends Model
         }
     }
 
-
     public static function step11($telegram, $lang_id, $gram, $text)
     {
         $backText = self::getT("a12", $lang_id); // "Orqaga" tugmasi matni
@@ -1504,7 +1544,6 @@ class Bot extends Model
             ]);
         }
     }
-
 
     public static function step12($telegram, $lang_id, $gram, $text)
     {
@@ -2314,6 +2353,75 @@ class Bot extends Model
         ]);
     }
 
+    public static function telegramUser($gram)
+    {
+        $user = self::getUser($gram);
+        $student = $user->student;
+        if ($user->step < 5) {
+            if ($gram->step == 2) {
+                $student->first_name = $gram->first_name;
+                $student->last_name = $gram->last_name;
+                $student->middle_name = $gram->middle_name;
+                $student->passport_number = $gram->passport_number;
+                $student->passport_serial = $gram->passport_serial;
+                $student->passport_pin = $gram->passport_pin;
+                $student->birthday = $gram->birthday;
+                $student->gender = $gram->gender;
+                $student->save(false);
+            } elseif ($gram->step == 3) {
+                $student->first_name = $gram->first_name;
+                $student->last_name = $gram->last_name;
+                $student->middle_name = $gram->middle_name;
+                $student->passport_number = $gram->passport_number;
+                $student->passport_serial = $gram->passport_serial;
+                $student->passport_pin = $gram->passport_pin;
+                $student->birthday = $gram->birthday;
+                $student->gender = $gram->gender;
+                $student->edu_type_id = $gram->edu_type_id;
+                $student->save(false);
+            }
+        }
+    }
+
+    public static function getUser($gram)
+    {
+        $user = User::findOne([
+            'username' => $gram->phone
+        ]);
+        if (!$user) {
+            $user = new User();
+            $user->username = $gram->phone;
+            $user->user_role = 'student';
+            $password = 'bot'.rand(1000, 9999);
+            $user->setPassword($password);
+            $user->generateAuthKey();
+            $user->generateEmailVerificationToken();
+            $user->generatePasswordResetToken();
+            $user->cons_id = $gram->cons_id;
+            $user->status = 10;
+            $user->step = 1;
+            $user->save(false);
+
+            $newAuth = new AuthAssignment();
+            $newAuth->item_name = 'student';
+            $newAuth->user_id = $user->id;
+            $newAuth->created_at = time();
+            $newAuth->save(false);
+
+            $newStudent = new Student();
+            $newStudent->user_id = $user->id;
+            $newStudent->username = $user->username;
+            $newStudent->password = $password;
+            $newStudent->branch_id = $gram->branch_id;
+            $newStudent->created_by = time();
+            $newStudent->updated_by = 0;
+            $newStudent->save(false);
+
+            CrmPush::processType(1, $newStudent, $user);
+            CrmPush::processType(2, $newStudent, $user);
+        }
+        return $user;
+    }
 
     public static function getT($text, $lang_id)
     {

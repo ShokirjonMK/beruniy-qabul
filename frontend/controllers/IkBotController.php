@@ -27,4 +27,33 @@ class IkBotController extends Controller
         Bot::telegram($telegram);
     }
 
+    public function actionCons2()
+    {
+        Yii::$app->response->format = \yii\web\Response::FORMAT_JSON;
+
+        $telegram = Yii::$app->telegram2;
+
+        // Foydalanuvchi Telegram ID sini olish:
+        $telegramUpdate = $telegram->getWebhookUpdate();
+        $chatId = $telegramUpdate->getMessage()->getChat()->getId();
+
+        return $telegram->sendMessage([
+            'chat_id' => $chatId,
+            'text' => "Ro'yhatdan o'tish uchun quyidagi tugmani bosing:",
+            'reply_markup' => json_encode([
+                'inline_keyboard' => [
+                    [
+                        [
+                            'text' => "Ro'yhatdan o'tish",
+                            'web_app' => [
+                                'url' => 'https://arbu-edu.uz'
+                            ]
+                        ]
+                    ]
+                ]
+            ])
+        ]);
+    }
+
+
 }
