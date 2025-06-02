@@ -17,7 +17,7 @@ class Bot extends Model
 
     const IMG = '/frontend/web/images/bot_univer.jpg';
 
-    const CONS = 0;
+    const CONS = 1;
 
     public static function telegram($telegram)
     {
@@ -36,12 +36,8 @@ class Bot extends Model
             $gram->telegram_id = $telegram_id;
             $gram->username = $username;
             $gram->lang_id = 1;
-            $gram->branch_id = 1;
-            if (self::CONS != 0) {
-                $gram->cons_id = self::CONS;
-            } else {
-                $gram->cons_id = 1;
-            }
+            $gram->branch_id = 2;
+            $gram->cons_id = self::CONS;
             $gram->save(false);
 
             self::sendPhone($telegram, $gram);
@@ -127,7 +123,6 @@ class Bot extends Model
 
                     $gram->phone = $formatted;
                     $gram->type = 1;
-
                     $user = User::findOne([
                         'username' => $formatted
                     ]);
@@ -424,6 +419,8 @@ class Bot extends Model
             $gram->type = 10;
             $gram->update(false);
             $step = $gram->step;
+
+            self::getUser($gram);
 
             if ($step == 0) {
                 self::step0($telegram, $lang_id, $gram, $text);
@@ -2353,36 +2350,6 @@ class Bot extends Model
         ]);
     }
 
-    public static function telegramUser($gram)
-    {
-        $user = self::getUser($gram);
-        $student = $user->student;
-        if ($user->step < 5) {
-            if ($gram->step == 2) {
-                $student->first_name = $gram->first_name;
-                $student->last_name = $gram->last_name;
-                $student->middle_name = $gram->middle_name;
-                $student->passport_number = $gram->passport_number;
-                $student->passport_serial = $gram->passport_serial;
-                $student->passport_pin = $gram->passport_pin;
-                $student->birthday = $gram->birthday;
-                $student->gender = $gram->gender;
-                $student->save(false);
-            } elseif ($gram->step == 3) {
-                $student->first_name = $gram->first_name;
-                $student->last_name = $gram->last_name;
-                $student->middle_name = $gram->middle_name;
-                $student->passport_number = $gram->passport_number;
-                $student->passport_serial = $gram->passport_serial;
-                $student->passport_pin = $gram->passport_pin;
-                $student->birthday = $gram->birthday;
-                $student->gender = $gram->gender;
-                $student->edu_type_id = $gram->edu_type_id;
-                $student->save(false);
-            }
-        }
-    }
-
     public static function getUser($gram)
     {
         $user = User::findOne([
@@ -2429,282 +2396,279 @@ class Bot extends Model
         $array = [
             "a1" => [
                 "uz" => "🏫 Universitet haqida",
-                "ru" => "",
-                "en" => "",
+                "en" => "🏫 About the University",
+                "ru" => "🏫 Об университете",
             ],
             "a2" => [
                 "uz" => "🪧 Mavjud yo'nalishlar",
-                "ru" => "",
-                "en" => "",
+                "en" => "🪧 Available Programs",
+                "ru" => "🪧 Доступные направления",
             ],
             "a3" => [
                 "uz" => "👨‍🎓 Ro'yhatdan o'tish",
-                "ru" => "",
-                "en" => "",
+                "en" => "👨‍🎓 Register",
+                "ru" => "👨‍🎓 Регистрация",
             ],
             "a4" => [
                 "uz" => "🔄 Bot tilini o'zgartirish",
-                "ru" => "",
-                "en" => "",
+                "en" => "🔄 Change Bot Language",
+                "ru" => "🔄 Изменить язык бота",
             ],
             "a5" => [
                 "uz" => "🏠 Bosh sahifa",
-                "ru" => "",
-                "en" => "",
+                "en" => "🏠 Home Page",
+                "ru" => "🏠 Главная страница",
             ],
             "a6" => [
-                "uz" => "❌ Arizani faqat UZB telefon raqamlari orqali qoldirishingiz mumkin. \n\n<i>Aloqa uchun: ".self::PHONE."</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌ Arizani faqat UZB telefon raqamlari orqali qoldirishingiz mumkin.\n\n<i>Aloqa uchun: ".self::PHONE."</i>",
+                "en" => "❌ Applications can only be submitted using UZB phone numbers.\n\n<i>Contact: ".self::PHONE."</i>",
+                "ru" => "❌ Заявки можно подавать только с номеров телефонов Узбекистана.\n\n<i>Контакт: ".self::PHONE."</i>",
             ],
             "a7" => [
                 "uz" => "☎️",
-                "ru" => "",
-                "en" => "",
+                "en" => "☎️",
+                "ru" => "☎️",
             ],
             "a8" => [
                 "uz" => "❌ Ma'lumotni noto'g'ri yubordingiz.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "en" => "❌ Incorrect information submitted.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌ Отправлена неверная информация.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
-
             "a9" => [
                 "uz" => "🇺🇿 O'zbek tili",
-                "ru" => "",
-                "en" => "",
+                "en" => "🇺🇿 Uzbek Language",
+                "ru" => "🇺🇿 Узбекский язык",
             ],
             "a10" => [
                 "uz" => "🇷🇺 Rus tili",
-                "ru" => "",
-                "en" => "",
+                "en" => "🇷🇺 Russian Language",
+                "ru" => "🇷🇺 Русский язык",
             ],
             "a11" => [
-                "uz" => "🏴󠁧󠁢󠁥󠁮󠁧󠁿 Ingliz tili",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🏴 Ingliz tili",
+                "en" => "🏴 English Language",
+                "ru" => "🏴 Английский язык",
             ],
             "a12" => [
                 "uz" => "🔙 Orqaga",
-                "ru" => "",
-                "en" => "",
+                "en" => "🔙 Back",
+                "ru" => "🔙 Назад",
             ],
-
             "a13" => [
-                "uz" => "🤖 Bot tilini tanlang! \n\n Shunda bot siz tanlagan tilda javob berishni boshlaydi 😊",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🤖 Bot tilini tanlang!\n\nShunda bot siz tanlagan tilda javob berishni boshlaydi 😊",
+                "en" => "🤖 Choose the bot language!\n\nThe bot will start responding in your selected language 😊",
+                "ru" => "🤖 Выберите язык бота!\n\nБот начнет отвечать на выбранном вами языке 😊",
             ],
             "a14" => [
                 "uz" => "❌:( Raqamingizni ro'yhatdan o'tkazib bo'lmadi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "en" => "❌:( Unable to register your number.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Не удалось зарегистрировать ваш номер.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a15" => [
                 "uz" => "📅 Tug'ilgan sanangizni (yil-oy-sana ko'rinishida) yozing.\n\n<i>Masalan: 2001-10-16</i>",
-                "ru" => "",
-                "en" => "",
+                "en" => "📅 Enter your date of birth in the format (year-month-day).\n\n<i>Example: 2001-10-16</i>",
+                "ru" => "📅 Введите дату рождения в формате (год-месяц-день).\n\n<i>Пример: 2001-10-16</i>",
             ],
             "a16" => [
                 "uz" => "📄 Pasportingiz seriyasi va raqamini yozing.\n\n<i>Masalan: AB1234567</i>",
-                "ru" => "",
-                "en" => "",
+                "en" => "📄 Enter your passport series and number.\n\n<i>Example: AB1234567</i>",
+                "ru" => "📄 Введите серию и номер паспорта.\n\n<i>Пример: AB1234567</i>",
             ],
             "a17" => [
-                "uz" => "📄❌ Pasportingiz seriyasi va raqamini namunada ko'rsatilgan formatda yuboring .\n\n<i>Masalan: AB1234567</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📄❌ Pasportingiz seriyasi va raqamini namunada ko'rsatilgan formatda yuboring.\n\n<i>Masalan: AB1234567</i>",
+                "en" => "📄❌ Please send your passport series and number in the format shown.\n\n<i>Example: AB1234567</i>",
+                "ru" => "📄❌ Пожалуйста, отправьте серию и номер паспорта в указанном формате.\n\n<i>Пример: AB1234567</i>",
             ],
             "a18" => [
                 "uz" => "📅❌:( Tug'ilgan sanangiz namunada ko'rsatilgandek yuboring.\n\n<i>Masalan: 2001-10-16</i>",
-                "ru" => "",
-                "en" => "",
+                "en" => "📅❌:( Please send your date of birth as shown in the example.\n\n<i>Example: 2001-10-16</i>",
+                "ru" => "📅❌:( Пожалуйста, отправьте дату рождения, как показано в примере.\n\n<i>Пример: 2001-10-16</i>",
             ],
             "a19" => [
-                "uz" => "❌:( Pasport ma'lumotini yuklashda xatolik sodir bo'ldi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Pasport ma'lumotini yuklashda xatolik sodir bo'ldi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( An error occurred while uploading passport information.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Произошла ошибка при загрузке информации о паспорте.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a20" => [
                 "uz" => "😊 Bosh sahifaga xush kelibsiz.",
-                "ru" => "",
-                "en" => "",
+                "en" => "😊 Welcome to the home page.",
+                "ru" => "😊 Добро пожаловать на главную страницу.",
             ],
             "a21" => [
                 "uz" => "Qabul turini tanlang",
-                "ru" => "",
-                "en" => "",
+                "en" => "Select the type of admission",
+                "ru" => "Выберите тип приема",
             ],
             "a22" => [
                 "uz" => "Qabul 2025",
-                "ru" => "",
-                "en" => "",
+                "en" => "Admission 2025",
+                "ru" => "Прием 2025",
             ],
             "a23" => [
                 "uz" => "O'qishni ko'chirish",
-                "ru" => "",
-                "en" => "",
+                "en" => "Transfer Studies",
+                "ru" => "Перевод обучения",
             ],
             "a24" => [
                 "uz" => "UZBMB (DTM) natija",
-                "ru" => "",
-                "en" => "",
+                "en" => "UZBMB (DTM) Result",
+                "ru" => "Результат UZBMB (DTM)",
             ],
             "a25" => [
                 "uz" => "Magistratura",
-                "ru" => "",
-                "en" => "",
+                "en" => "Master's Degree",
+                "ru" => "Магистратура",
             ],
             "a26" => [
                 "uz" => "Ta'lim shaklini tanlang.",
-                "ru" => "",
-                "en" => "",
+                "en" => "Select the form of education.",
+                "ru" => "Выберите форму обучения.",
             ],
             "a27" => [
                 "uz" => "Ta'lim tilini tanlang.",
-                "ru" => "",
-                "en" => "",
+                "en" => "Select the language of instruction.",
+                "ru" => "Выберите язык обучения.",
             ],
             "a28" => [
                 "uz" => "Kunduzgi",
-                "ru" => "",
-                "en" => "",
+                "en" => "Full-time",
+                "ru" => "Очное",
             ],
             "a29" => [
                 "uz" => "Sirtqi",
-                "ru" => "",
-                "en" => "",
+                "en" => "Part-time",
+                "ru" => "Заочное",
             ],
             "a30" => [
                 "uz" => "Kechki",
-                "ru" => "",
-                "en" => "",
+                "en" => "Evening",
+                "ru" => "Вечернее",
             ],
             "a31" => [
                 "uz" => "Masofaviy",
-                "ru" => "",
-                "en" => "",
+                "en" => "Distance Learning",
+                "ru" => "Дистанционное обучение",
             ],
             "a32" => [
                 "uz" => "Masofaviy",
-                "ru" => "",
-                "en" => "",
+                "en" => "Distance Learning",
+                "ru" => "Дистанционное обучение",
             ],
-
             "a33" => [
-                "uz" => "❌:( Qabul turi noto'g'ri tanlandi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Qabul turi noto'g'ri tanlandi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( Incorrect admission type selected.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Неправильно выбран тип приёма.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a34" => [
-                "uz" => "❌:( Ta'lim shakli noto'g'ri tanlandi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Ta'lim shakli noto'g'ri tanlandi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( Incorrect education form selected.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Неправильно выбрана форма обучения.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a35" => [
-                "uz" => "❌:( Ta'lim tili noto'g'ri tanlandi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Ta'lim tili noto'g'ri tanlandi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( Incorrect language of instruction selected.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Неправильно выбран язык обучения.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a37" => [
-                "uz" => "O‘zbek tili",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🇺🇿 O‘zbek tili",
+                "en" => "🇺🇿 Uzbek Language",
+                "ru" => "🇺🇿 Узбекский язык",
             ],
             "a38" => [
-                "uz" => "Rus tili",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🇷🇺 Rus tili",
+                "en" => "🇷🇺 Russian Language",
+                "ru" => "🇷🇺 Русский язык",
             ],
             "a39" => [
-                "uz" => "Ingliz tili",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🏴 Ingliz tili",
+                "en" => "🏴 English Language",
+                "ru" => "🏴 Английский язык",
             ],
             "a40" => [
-                "uz" => "Filial tanlang",
-                "ru" => "",
-                "en" => "",
+                "uz" => "🏢 Filial tanlang",
+                "en" => "🏢 Select a Branch",
+                "ru" => "🏢 Выберите филиал",
             ],
             "a41" => [
-                "uz" => "❌:( Filial noto'g'ri tanlandi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Filial noto'g'ri tanlandi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( Incorrect branch selected.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Неправильно выбран филиал.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a42" => [
-                "uz" => "Ta'lim yo'nalishlaridan birini tanlang.",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📚 Ta'lim yo'nalishlaridan birini tanlang.",
+                "en" => "📚 Select one of the education programs.",
+                "ru" => "📚 Выберите одно из направлений обучения.",
             ],
             "a43" => [
-                "uz" => "❌:( Ta'lim yo'nalishi noto'g'ri tanlandi .\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌:( Ta'lim yo'nalishi noto'g'ri tanlandi.\n\n<i>Aloqa uchun: " . self::PHONE . "</i>",
+                "en" => "❌:( Incorrect education program selected.\n\n<i>Contact: " . self::PHONE . "</i>",
+                "ru" => "❌:( Неправильно выбрано направление обучения.\n\n<i>Контакт: " . self::PHONE . "</i>",
             ],
             "a44" => [
-                "uz" => "Imtixon turini tanlang.",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📝 Imtixon turini tanlang.",
+                "en" => "📝 Select the type of exam.",
+                "ru" => "📝 Выберите тип экзамена.",
             ],
             "a45" => [
-                "uz" => "Offline imtixon sanasini tanlang.",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📅 Offline imtixon sanasini tanlang.",
+                "en" => "📅 Select the date for the offline exam.",
+                "ru" => "📅 Выберите дату очного экзамена.",
             ],
             "a46" => [
-                "uz" => "Ma'lumotni tasdiqlaysizmi?",
-                "ru" => "",
-                "en" => "",
+                "uz" => "✅ Ma'lumotni tasdiqlaysizmi?",
+                "en" => "✅ Do you confirm the information?",
+                "ru" => "✅ Вы подтверждаете информацию?",
             ],
             "a47" => [
-                "uz" => "Ha",
-                "ru" => "",
-                "en" => "",
+                "uz" => "✔️ Ha",
+                "en" => "✔️ Yes",
+                "ru" => "✔️ Да",
             ],
             "a48" => [
-                "uz" => "Yo'q",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌ Yo'q",
+                "en" => "❌ No",
+                "ru" => "❌ Нет",
             ],
             "a49" => [
-                "uz" => "5 yillik staj faylini yuklang",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📁 5 yillik staj faylini yuklang",
+                "en" => "📁 Upload your 5-year experience document",
+                "ru" => "📁 Загрузите файл с 5-летним стажем",
             ],
             "a50" => [
-                "uz" => "Imtixon sanasini noto'g'ri tanladingiz",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌ Imtixon sanasini noto'g'ri tanladingiz",
+                "en" => "❌ You selected an incorrect exam date",
+                "ru" => "❌ Вы выбрали неправильную дату экзамена",
             ],
             "a51" => [
-                "uz" => "Transkript fayl yuboring",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📄 Transkript fayl yuboring",
+                "en" => "📄 Send the transcript file",
+                "ru" => "📄 Отправьте файл с транскриптом",
             ],
             "a52" => [
-                "uz" => "Bosqichni noto'g'ri tanladingiz",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌ Bosqichni noto'g'ri tanladingiz",
+                "en" => "❌ Incorrect stage selected",
+                "ru" => "❌ Неправильно выбран этап",
             ],
             "a53" => [
-                "uz" => "Imtixon turini noto'g'ri tanladingiz",
-                "ru" => "",
-                "en" => "",
+                "uz" => "❌ Imtixon turini noto'g'ri tanladingiz",
+                "en" => "❌ Incorrect exam type selected",
+                "ru" => "❌ Неправильно выбран тип экзамена",
             ],
             "a54" => [
-                "uz" => "Bosqich tanlang",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📚 Bosqich tanlang",
+                "en" => "📚 Select the stage",
+                "ru" => "📚 Выберите этап",
             ],
             "a55" => [
-                "uz" => "Fayl pdf formatda va 5 mbdan oshmagan holatda yuklanishi shart!",
-                "ru" => "",
-                "en" => "",
+                "uz" => "📎 Fayl pdf formatda va 5 mbdan oshmagan holatda yuklanishi shart!",
+                "en" => "📎 File must be in PDF format and less than 5 MB!",
+                "ru" => "📎 Файл должен быть в формате PDF и не превышать 5 МБ!",
             ],
             "a56" => [
-                "uz" => "Ma'lumot tasdiqlashda Ha yoki yo'q deb javob berishingiz kerak.",
-                "ru" => "",
-                "en" => "",
-            ],
+                "uz" => "✅ Ma'lumot tasdiqlashda Ha yoki Yo'q deb javob berishingiz kerak.",
+                "en" => "✅ You must answer Yes or No to confirm the information.",
+                "ru" => "✅ Для подтверждения информации необходимо ответить Да или Нет.",
+            ]
         ];
         if (isset($array[$text])) {
             return isset($array[$text][$lang]) ? $array[$text][$lang] : $text;
