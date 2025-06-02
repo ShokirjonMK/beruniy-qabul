@@ -229,6 +229,7 @@ class Bot extends Model
     {
         try {
             $text = $telegram->input->message->text;
+            121212
 
             if ($text == self::getT("a9", $lang_id)) {
                 // O'zbek tili
