@@ -11,6 +11,7 @@ use common\models\Course;
 use yii\helpers\Url;
 use common\models\Telegram;
 use common\models\DirectionCourse;
+use common\models\Branch;
 
 
 /** @var yii\web\View $this */
@@ -346,6 +347,21 @@ if ($telegramEduDirection) {
                                                     </h6>
                                                 </div>
                                             </div>
+
+                                            <?php if ($telegram->step > 5): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Filial:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <?php
+                                                                Branch::findOne($telegram->branch_id)->name_uz ?? '---';
+                                                            ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
 
 
                                             <!-- Ta'lim yo'nalishi -->
