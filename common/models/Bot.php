@@ -238,12 +238,12 @@ class Bot extends Model
             } elseif ($text == self::getT("a10", $lang_id)) {
                 // Ingliz tili
                 $gram->type = 1;
-                $gram->lang_id = 2;
+                $gram->lang_id = 3;
                 $gram->save(false);
             } elseif ($text == self::getT("a11", $lang_id)) {
                 // Rus tili
                 $gram->type = 1;
-                $gram->lang_id = 3;
+                $gram->lang_id = 2;
                 $gram->save(false);
             } elseif ($text == self::getT("a12", $lang_id)) {
                 $gram->type = 1;
