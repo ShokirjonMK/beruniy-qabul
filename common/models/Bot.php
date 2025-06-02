@@ -480,6 +480,25 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = 0;
+            $gram->first_name = null;
+            $gram->last_name = null;
+            $gram->middle_name = null;
+            $gram->gender = null;
+            $gram->passport_serial = null;
+            $gram->passport_number = null;
+            $gram->birthday = null;
+            $gram->passport_pin = null;
+            $gram->edu_type_id = null;
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -548,6 +567,25 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->first_name = null;
+            $gram->last_name = null;
+            $gram->middle_name = null;
+            $gram->gender = null;
+            $gram->passport_serial = null;
+            $gram->passport_number = null;
+            $gram->birthday = null;
+            $gram->passport_pin = null;
+            $gram->edu_type_id = null;
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -666,6 +704,23 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->first_name = null;
+            $gram->last_name = null;
+            $gram->middle_name = null;
+            $gram->gender = null;
+            $gram->birthday = null;
+            $gram->passport_pin = null;
+            $gram->edu_type_id = null;
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -729,6 +784,17 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->edu_type_id = null;
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -785,6 +851,16 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -839,6 +915,15 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -904,6 +989,25 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->first_name = null;
+            $gram->last_name = null;
+            $gram->middle_name = null;
+            $gram->gender = null;
+            $gram->passport_serial = null;
+            $gram->passport_number = null;
+            $gram->birthday = null;
+            $gram->passport_pin = null;
+            $gram->edu_type_id = null;
+            $gram->edu_form_id = null;
+            $gram->edu_lang_id = null;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1066,6 +1170,14 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1150,6 +1262,12 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1223,6 +1341,14 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = 6;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1333,6 +1459,13 @@ class Bot extends Model
                 if ($gram->exam_type == 0) {
                     // Imtixon turlari
                     $gram->step = 7;
+
+                    $gram->exam_type = 0;
+                    $gram->exam_date_id = null;
+                    $gram->oferta = null;
+                    $gram->tr = null;
+                    $gram->dtm = null;
+                    $gram->master = null;
                     $gram->save(false);
                     return $telegram->sendMessage([
                         'chat_id' => $gram->telegram_id,
@@ -1343,6 +1476,11 @@ class Bot extends Model
                 } else {
                     // offline sanalari
                     $gram->step = 8;
+                    $gram->exam_date_id = null;
+                    $gram->oferta = null;
+                    $gram->tr = null;
+                    $gram->dtm = null;
+                    $gram->master = null;
                     $gram->save(false);
                     return $telegram->sendMessage([
                         'chat_id' => $gram->telegram_id,
@@ -1354,6 +1492,13 @@ class Bot extends Model
             } elseif ($gram->edu_type_id == 2) {
                 // Yonalish bosqichlariga
                 $gram->step = 9;
+                $gram->direction_course_id = null;
+                $gram->exam_type = 0;
+                $gram->exam_date_id = null;
+                $gram->oferta = null;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,
@@ -1363,6 +1508,14 @@ class Bot extends Model
                 ]);
             } else {
                 $gram->step = 6;
+                $gram->edu_direction_id = null;
+                $gram->direction_course_id = null;
+                $gram->exam_type = 0;
+                $gram->exam_date_id = null;
+                $gram->oferta = null;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,
@@ -1484,6 +1637,10 @@ class Bot extends Model
         if ($text === $backText) {
             if ($eduDirection->is_oferta == 1) {
                 $gram->step = 10;
+                $gram->oferta = null;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
 
                 return $telegram->sendMessage([
@@ -1502,6 +1659,13 @@ class Bot extends Model
             }
 
             $gram->step = 9;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1567,6 +1731,10 @@ class Bot extends Model
         if ($text === $backText) {
             if ($eduDirection->is_oferta == 1) {
                 $gram->step = 10;
+                $gram->oferta = null;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
 
                 return $telegram->sendMessage([
@@ -1585,6 +1753,14 @@ class Bot extends Model
             }
 
             $gram->step = 6;
+            $gram->edu_direction_id = null;
+            $gram->direction_course_id = null;
+            $gram->exam_type = 0;
+            $gram->exam_date_id = null;
+            $gram->oferta = null;
+            $gram->tr = null;
+            $gram->dtm = null;
+            $gram->master = null;
             $gram->save(false);
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -1650,6 +1826,10 @@ class Bot extends Model
         if ($text === $backText) {
             if ($eduDirection->is_oferta == 1) {
                 $gram->step = 10;
+                $gram->oferta = null;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
 
                 return $telegram->sendMessage([
@@ -1727,6 +1907,10 @@ class Bot extends Model
             if ($gram->edu_type_id == 1) {
                 if ($eduDirection->is_oferta == 1) {
                     $gram->step = 10;
+                    $gram->oferta = null;
+                    $gram->tr = null;
+                    $gram->dtm = null;
+                    $gram->master = null;
                     $gram->save(false);
                     return $telegram->sendMessage([
                         'chat_id' => $gram->telegram_id,
@@ -1745,6 +1929,12 @@ class Bot extends Model
                 if ($gram->exam_type == 0) {
                     // Imtixon turlari
                     $gram->step = 7;
+                    $gram->exam_type = 0;
+                    $gram->exam_date_id = null;
+                    $gram->oferta = null;
+                    $gram->tr = null;
+                    $gram->dtm = null;
+                    $gram->master = null;
                     $gram->save(false);
                     return $telegram->sendMessage([
                         'chat_id' => $gram->telegram_id,
@@ -1755,6 +1945,11 @@ class Bot extends Model
                 } else {
                     // offline sanalari
                     $gram->step = 8;
+                    $gram->exam_date_id = null;
+                    $gram->oferta = null;
+                    $gram->tr = null;
+                    $gram->dtm = null;
+                    $gram->master = null;
                     $gram->save(false);
                     return $telegram->sendMessage([
                         'chat_id' => $gram->telegram_id,
@@ -1765,6 +1960,9 @@ class Bot extends Model
                 }
             } elseif ($gram->edu_type_id == 2) {
                 $gram->step = 11;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,
@@ -1781,6 +1979,9 @@ class Bot extends Model
                 ]);
             }  elseif ($gram->edu_type_id == 3) {
                 $gram->step = 12;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,
@@ -1797,6 +1998,9 @@ class Bot extends Model
                 ]);
             }elseif ($gram->edu_type_id == 4) {
                 $gram->step = 13;
+                $gram->tr = null;
+                $gram->dtm = null;
+                $gram->master = null;
                 $gram->save(false);
                 return $telegram->sendMessage([
                     'chat_id' => $gram->telegram_id,

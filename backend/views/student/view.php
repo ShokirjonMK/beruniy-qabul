@@ -10,6 +10,7 @@ use common\models\StudentDtm;
 use common\models\Course;
 use yii\helpers\Url;
 use common\models\Telegram;
+use common\models\DirectionCourse;
 
 
 /** @var yii\web\View $this */
@@ -90,6 +91,13 @@ $telegram = Telegram::findOne([
     'phone' => $model->username,
     'is_deleted' => 0
 ]);
+$isOferta = 0;
+$telegramEduDirection = $telegram->eduDirection;
+if ($telegramEduDirection) {
+    if ($telegramEduDirection->is_oferta == 1) {
+        $isOferta = 1;
+    }
+}
 
 \yii\web\YiiAsset::register($this);
 ?>
@@ -239,7 +247,7 @@ $telegram = Telegram::findOne([
                                 <?php if ($telegram) : ?>
                                     <div class="view-info-right">
                                         <div class="subject_box">
-                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <div class="d-flex justify-content-between align-items-center">
                                                 <div class="subject_box_left">
                                                     <p>Telefon raqam:</p>
                                                 </div>
@@ -250,19 +258,18 @@ $telegram = Telegram::findOne([
 
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div class="subject_box_left">
-                                                    <p>F.I.O:</p>
-                                                </div>
-                                                <div class="subject_box_right">
-                                                    <h6><?= $telegram->last_name ?? '-'." ".$telegram->first_name ?? '-'." ".$telegram->middle_name ?? '-' ?></h6>
-                                                </div>
-                                            </div>
-
-                                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                                <div class="subject_box_left">
                                                     <p>Pasport ma'lumoti:</p>
                                                 </div>
                                                 <div class="subject_box_right">
-                                                    <h6><?= $telegram->passport_serial." ".$telegram->passport_number ?></h6>
+                                                    <h6>
+                                                        <?php
+                                                        if ($telegram->step > 0) {
+                                                            echo $telegram->passport_serial." ".$telegram->passport_number;
+                                                        } else {
+                                                            echo '---';
+                                                        }
+                                                        ?>
+                                                    </h6>
                                                 </div>
                                             </div>
 
@@ -271,27 +278,165 @@ $telegram = Telegram::findOne([
                                                     <p>Tug'ilgan sana:</p>
                                                 </div>
                                                 <div class="subject_box_right">
-                                                    <h6><?= $telegram->birthday ?></h6>
+                                                    <h6>
+                                                        <?php
+                                                        if ($telegram->step > 1) {
+                                                            echo $telegram->birthday;
+                                                        } else {
+                                                            echo '---';
+                                                        }
+                                                        ?>
+                                                    </h6>
                                                 </div>
                                             </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>F.I.O:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6>
+                                                        <?php
+                                                            if ($telegram->step > 1) {
+                                                                echo $telegram->last_name ?? '-'." ".$telegram->first_name ?? '-'." ".$telegram->middle_name ?? '-';
+                                                            } else {
+                                                                echo '---';
+                                                            }
+                                                        ?>
+                                                    </h6>
+                                                </div>
+                                            </div>
+
 
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div class="subject_box_left">
                                                     <p>Qabul turi | Talim shakli | Ta'lim tili:</p>
                                                 </div>
                                                 <div class="subject_box_right">
-                                                    <h6><?= $telegram->eduType->name_uz ?? '---' ?> | <?= $telegram->eduForm->name_uz ?? '---' ?> | <?= $telegram->lang->name_uz ?? '---' ?></h6>
+                                                    <h6>
+                                                        <?php
+                                                        $qabulTuri = ($telegram->step > 2) ? ($telegram->eduType->name_uz ?? '---') : '---';
+                                                        $taLimShakli = ($telegram->step > 3) ? ($telegram->eduForm->name_uz ?? '---') : '---';
+                                                        $taLimTili = ($telegram->step > 4) ? ($telegram->lang->name_uz ?? '---') : '---';
+
+                                                        echo $qabulTuri . ' | ' . $taLimShakli . ' | ' . $taLimTili;
+                                                        ?>
+                                                    </h6>
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                                <div class="subject_box_left">
-                                                    <p>Ta'lim yo'nalishi:</p>
+
+                                            <!-- Ta'lim yo'nalishi -->
+                                            <?php if ($telegram->step > 6): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Ta'lim yo'nalishi:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6><?= $telegram->eduDirection->direction->name_uz ?? '---' ?></h6>
+                                                    </div>
                                                 </div>
-                                                <div class="subject_box_right">
-                                                    <h6><?= $telegram->eduDirection->direction->name_uz ?? '---' ?></h6>
+                                            <?php endif; ?>
+
+                                            <!-- Oferta -->
+                                            <?php if ($isOferta && $telegram->step > 9): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Oferta:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <?php if ($telegram->oferta == null) : ?>
+                                                                Yuklanmagan
+                                                            <?php else: ?>
+                                                                <a target="_blank" href="/frontend/web/uploads/<?= $telegram->id ?>/<?= $telegram->oferta ?>">Kelib tushdi</a>
+                                                            <?php endif; ?>
+                                                        </h6>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            <?php endif; ?>
+
+                                            <!-- Imtixon turi -->
+                                            <?php if ($telegram->edu_type_id == 1 && $telegram->step > 6): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Imtixon turi:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <?php if ($telegram->exam_type == 0) : ?>
+                                                                Online
+                                                            <?php else: ?>
+                                                                Offline | Sana: <?= $telegram->examDate->date ?? '---' ?>
+                                                            <?php endif; ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <!-- Bosqich + Transkript -->
+                                            <?php if ($telegram->edu_type_id == 2 && $telegram->step > 8): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Bosqich:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6><?= DirectionCourse::findOne($telegram->direction_course_id)->course->name_uz ?? '---'; ?></h6>
+                                                    </div>
+                                                </div>
+
+                                                <?php if ($telegram->step > 10): ?>
+                                                    <div class="d-flex justify-content-between align-items-center mt-3">
+                                                        <div class="subject_box_left">
+                                                            <p>Transkript:</p>
+                                                        </div>
+                                                        <div class="subject_box_right">
+                                                            <h6>
+                                                                <?php if ($telegram->tr == null) : ?>
+                                                                    Yuklanmagan
+                                                                <?php else: ?>
+                                                                    <a target="_blank" href="/frontend/web/uploads/<?= $telegram->id ?>/<?= $telegram->tr ?>">Kelib tushdi</a>
+                                                                <?php endif; ?>
+                                                            </h6>
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                            <?php endif; ?>
+
+                                            <!-- DTM -->
+                                            <?php if ($telegram->edu_type_id == 3 && $telegram->step > 11): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>DTM:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <?php if ($telegram->dtm == null) : ?>
+                                                                Yuklanmagan
+                                                            <?php else: ?>
+                                                                <a target="_blank" href="/frontend/web/uploads/<?= $telegram->id ?>/<?= $telegram->dtm ?>">Kelib tushdi</a>
+                                                            <?php endif; ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
+
+                                            <?php if ($telegram->edu_type_id == 4 && $telegram->step > 12): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>MASTER:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <?php if ($telegram->master == null) : ?>
+                                                                Yuklanmagan
+                                                            <?php else: ?>
+                                                                <a target="_blank" href="/frontend/web/uploads/<?= $telegram->id ?>/<?= $telegram->master ?>">Kelib tushdi</a>
+                                                            <?php endif; ?>
+                                                        </h6>
+                                                    </div>
+                                                </div>
+                                            <?php endif; ?>
 
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div class="subject_box_left">
