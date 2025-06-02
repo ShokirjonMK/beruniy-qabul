@@ -258,6 +258,24 @@ if ($telegramEduDirection) {
 
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div class="subject_box_left">
+                                                    <p>Telegram ID:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->telegram_id ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Telegram username:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->username ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
                                                     <p>Pasport ma'lumoti:</p>
                                                 </div>
                                                 <div class="subject_box_right">
