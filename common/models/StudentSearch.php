@@ -180,7 +180,7 @@ class StudentSearch extends Student
                 'u.user_role' => 'student',
             ])
             ->andWhere(getConsIk())
-            ->andWhere(['<', 'step' ,5])->orderBy('s.id desc');
+            ->andWhere(['<', 'u.step' ,5])->orderBy('s.id desc');
 
         // Ma'lumotlarni chiqarish uchun ActiveDataProvider
         $dataProvider = new ActiveDataProvider([
