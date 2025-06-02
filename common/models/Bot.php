@@ -2164,8 +2164,6 @@ class Bot extends Model
     public static function fileUpload($telegram, $gram)
     {
         $botToken = $telegram->botToken;
-        $user = self::getUser($gram);
-        $student = $user->student;
         $data = Yii::$app->request->getRawBody();
         $update = json_decode($data, true);
 
@@ -2205,7 +2203,7 @@ class Bot extends Model
             }
 
             // Faylni saqlash joyi
-            $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/' . $student->id . '/';
+            $uploadPath = dirname(Yii::getAlias('@frontend')) . '/frontend/web/uploads/bot/' . $gram->id . '/';
             if (!is_dir($uploadPath)) {
                 mkdir($uploadPath, 0777, true);
             }
