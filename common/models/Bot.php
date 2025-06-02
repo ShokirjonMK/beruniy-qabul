@@ -229,7 +229,6 @@ class Bot extends Model
     {
         try {
             $text = $telegram->input->message->text;
-            121212
 
             if ($text == self::getT("a9", $lang_id)) {
                 // O'zbek tili
@@ -259,7 +258,7 @@ class Bot extends Model
 
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
-                'text' => self::getT("a20", $lang_id),
+                'text' => self::getT("a20", $gram->lang_id),
                 'parse_mode' => 'HTML',
                 'reply_markup' => json_encode([
                     'keyboard' => [
