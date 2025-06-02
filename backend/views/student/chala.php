@@ -10,6 +10,7 @@ use common\models\Course;
 use common\models\Status;
 use kartik\export\ExportMenu;
 use yii\widgets\LinkPager;
+use common\models\Telegram;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentSearch $searchModel */
@@ -82,6 +83,21 @@ $breadcrumbs['item'][] = [
             'format' => 'raw',
             'value' => function($model) {
                 return date("Y-m-d H:i:s" , $model->user->created_at);
+            },
+        ],
+        [
+            'attribute' => 'BOT STATUS',
+            'contentOptions' => ['date-label' => 'BOT STATUS'],
+            'format' => 'raw',
+            'value' => function($model) {
+                $telegram = Telegram::findOne([
+                    'phone' => $model->username,
+                    'is_deleted' => 0
+                ]);
+                if ($telegram) {
+                    return "<div class='badge-table-div active'>".$telegram->statusName."</div>";
+                }
+                return "<div class='badge-table-div danger'>Mavjud emas</div>";
             },
         ],
         [
