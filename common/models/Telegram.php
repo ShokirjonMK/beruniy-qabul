@@ -101,4 +101,73 @@ class Telegram extends \yii\db\ActiveRecord
         ];
     }
 
+
+    public function getEduDirection()
+    {
+        return $this->hasOne(EduDirection::class, ['id' => 'edu_direction_id']);
+    }
+
+    /**
+     * Gets query for [[EduForm]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEduForm()
+    {
+        return $this->hasOne(EduForm::class, ['id' => 'edu_form_id']);
+    }
+
+    /**
+     * Gets query for [[EduType]].
+     *
+     * @return \yii\db\ActiveQuery
+     */
+    public function getEduType()
+    {
+        return $this->hasOne(EduType::class, ['id' => 'edu_type_id']);
+    }
+
+    public function getLang()
+    {
+        return $this->hasOne(Lang::class, ['id' => 'lang_id']);
+    }
+
+    public function getStatusName()
+    {
+        if ($this->step == 0) {
+            $text = 'Pasport seriya va raqamini kiritmagan';
+        } elseif ($this->step == 1) {
+            $text = 'Tug\'ilgan sana kiritmagan';
+        } elseif ($this->step == 2) {
+            $text = 'Qabul turini kiritmagan';
+        } elseif ($this->step == 3) {
+            $text = 'Ta\'lim shaklini kiritmagan';
+        } elseif ($this->step == 4) {
+            $text = 'Ta\'lim tilini kiritmagan';
+        } elseif ($this->step == 5) {
+            $text = 'Filial kiritmagan';
+        } elseif ($this->step == 6) {
+            $text = 'Ta\'lim yo\'nalishini kiritmagan';
+        } elseif ($this->step == 7) {
+            $text = 'Imtixon turini kiritmagan';
+        } elseif ($this->step == 8) {
+            $text = 'Offline imtixon sanasini kiritmagan';
+        } elseif ($this->step == 9) {
+            $text = 'Boshqich kiritmagan';
+        } elseif ($this->step == 10) {
+            $text = 'Oferta kiritmagan';
+        } elseif ($this->step == 11) {
+            $text = 'Transkript kiritmagan';
+        } elseif ($this->step == 12) {
+            $text = 'DTM kiritmagan';
+        } elseif ($this->step == 13) {
+            $text = 'MASTER kiritmagan';
+        } elseif ($this->step == 14) {
+            $text = 'Ma\'lumotlarni tasdiqlamagan';
+        } else {
+            $text = 'Tasdiqlangan';
+        }
+        return $text;
+    }
+
 }

@@ -9,6 +9,7 @@ use common\models\StudentMaster;
 use common\models\StudentDtm;
 use common\models\Course;
 use yii\helpers\Url;
+use common\models\Telegram;
 
 
 /** @var yii\web\View $this */
@@ -84,6 +85,11 @@ $eduType = false;
 if ($model->eduType != null) {
     $eduType = $model->eduType;
 }
+
+$telegram = Telegram::findOne([
+    'phone' => $model->username,
+    'is_deleted' => 0
+]);
 
 \yii\web\YiiAsset::register($this);
 ?>
@@ -230,7 +236,74 @@ if ($model->eduType != null) {
                                 </div>
                             </div>
                             <div class="col-md-7">
+                                <?php if ($telegram) : ?>
+                                    <div class="view-info-right">
+                                        <div class="subject_box">
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Telefon raqam:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->phone ?></h6>
+                                                </div>
+                                            </div>
 
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>F.I.O:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->last_name ?? '-'." ".$telegram->first_name ?? '-'." ".$telegram->middle_name ?? '-' ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Pasport ma'lumoti:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->passport_serial." ".$telegram->passport_number ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Tug'ilgan sana:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->birthday ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Qabul turi | Talim shakli | Ta'lim tili:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->eduType->name_uz ?? '---' ?> | <?= $telegram->eduForm->name_uz ?? '---' ?> | <?= $telegram->lang->name_uz ?? '---' ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Ta'lim yo'nalishi:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->eduDirection->direction->name_uz ?? '---' ?></h6>
+                                                </div>
+                                            </div>
+
+                                            <div class="d-flex justify-content-between align-items-center mt-3">
+                                                <div class="subject_box_left">
+                                                    <p>Holati:</p>
+                                                </div>
+                                                <div class="subject_box_right">
+                                                    <h6><?= $telegram->statusName ?></h6>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
