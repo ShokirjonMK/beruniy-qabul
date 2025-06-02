@@ -320,10 +320,10 @@ class Bot extends Model
             $gram->save(false);
 
             $text = "🎓 <b>ABU RAYHON BERUNIY UNIVERSITETI</b> 🎓\n\n";
-            $text .= "📚 <i>Ta'lim yo'nalishlari ro'yxati:</i>\n";
+            $text .= self::getT("a58", $lang_id);
             $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
 
-            // PHP 7.4 uchun if-else bilan tanlab olish
+            // Til bo‘yicha ustunni tanlash
             if ($lang_id == 1) {
                 $nameField = 'name_uz';
             } elseif ($lang_id == 2) {
@@ -343,13 +343,14 @@ class Bot extends Model
 
             $i = 1;
             foreach ($directions as $direction) {
-                $name = $direction->{$nameField}; // Dinamik ustun
+                $name = $direction->{$nameField};
                 $text .= "📘 <b>{$i}.</b> <code>{$direction->code}</code> — {$name}\n";
                 $i++;
             }
 
             $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
-            $text .= "👇 " . self::getT('choose_next', $lang_id);
+            $text .= self::getT("a57", $lang_id);
+            $text .= "🌐 <a href='https://arbu-edu.uz'>arbu-edu.uz</a>";
 
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -2899,6 +2900,16 @@ class Bot extends Model
                 "uz" => "✅ Ma'lumot tasdiqlashda Ha yoki Yo'q deb javob berishingiz kerak.",
                 "en" => "✅ You must answer Yes or No to confirm the information.",
                 "ru" => "✅ Для подтверждения информации необходимо ответить Да или Нет.",
+            ],
+            "a57" => [
+                "uz" => "ℹ️ <i>Batafsil ma'lumotni rasmiy saytimizdan olishingiz mumkin:</i>\n",
+                "en" => "ℹ️ <i>You can find more information on our official website:</i>\n",
+                "ru" => "ℹ️ <i>Подробную информацию можно получить на нашем официальном сайте:</i>\n",
+            ],
+            "a58" => [
+                "uz" => "📚 <i>Ta'lim yo'nalishlari ro'yxati:</i>\n",
+                "en" => "📚 <i>List of educational programs:</i>\n",
+                "ru" => "📚 <i>Список образовательных направлений:</i>\n",
             ]
         ];
         if (isset($array[$text])) {
