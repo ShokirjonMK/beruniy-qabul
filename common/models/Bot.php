@@ -321,7 +321,7 @@ class Bot extends Model
 
             $text = "🎓 <b>ABU RAYHON BERUNIY UNIVERSITETI</b> 🎓\n\n";
             $text .= self::getT("a58", $lang_id);
-            $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
+            $text .= "━━━━━━━━━━━━━\n";
 
             // Til bo‘yicha ustunni tanlash
             if ($lang_id == 1) {
@@ -348,7 +348,7 @@ class Bot extends Model
                 $i++;
             }
 
-            $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
+            $text .= "━━━━━━━━━━━━━\n";
             $text .= self::getT("a57", $lang_id);
             $text .= "🌐 <a href='https://arbu-edu.uz'>arbu-edu.uz</a>";
 
