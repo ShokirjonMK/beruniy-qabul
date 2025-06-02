@@ -319,7 +319,37 @@ class Bot extends Model
             $gram->type = 1;
             $gram->save(false);
 
-            $text = "Yo'nalishlar";
+            $text = "🎓 <b>ABU RAYHON BERUNIY UNIVERSITETI</b> 🎓\n\n";
+            $text .= "📚 <i>Ta'lim yo'nalishlari ro'yxati:</i>\n";
+            $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
+
+            // PHP 7.4 uchun if-else bilan tanlab olish
+            if ($lang_id == 1) {
+                $nameField = 'name_uz';
+            } elseif ($lang_id == 2) {
+                $nameField = 'name_en';
+            } elseif ($lang_id == 3) {
+                $nameField = 'name_ru';
+            } else {
+                $nameField = 'name_uz';
+            }
+
+            $directions = Direction::find()
+                ->where([
+                    'is_deleted' => 0,
+                    'status' => 1
+                ])
+                ->all();
+
+            $i = 1;
+            foreach ($directions as $direction) {
+                $name = $direction->{$nameField}; // Dinamik ustun
+                $text .= "📘 <b>{$i}.</b> <code>{$direction->code}</code> — {$name}\n";
+                $i++;
+            }
+
+            $text .= "━━━━━━━━━━━━━━━━━━━━━━\n";
+            $text .= "👇 " . self::getT('choose_next', $lang_id);
 
             return $telegram->sendMessage([
                 'chat_id' => $gram->telegram_id,
@@ -328,12 +358,12 @@ class Bot extends Model
                 'reply_markup' => json_encode([
                     'keyboard' => [
                         [
-                            ['text' => self::getT("a1", $gram->lang_id)],
-                            ['text' => self::getT("a2", $gram->lang_id)],
+                            ['text' => self::getT("a1", $lang_id)],
+                            ['text' => self::getT("a2", $lang_id)],
                         ],
                         [
-                            ['text' => self::getT("a4", $gram->lang_id)],
-                            ['text' => self::getT("a3", $gram->lang_id)],
+                            ['text' => self::getT("a4", $lang_id)],
+                            ['text' => self::getT("a3", $lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
@@ -342,7 +372,7 @@ class Bot extends Model
         } catch (\Exception $e) {
             return $telegram->sendMessage([
                 'chat_id' => self::CHAT_ID,
-                'text' => ['Ik main :( '.$e->getMessage()],
+                'text' => 'Xatolik yuz berdi: '.$e->getMessage(),
             ]);
         }
     }
