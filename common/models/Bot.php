@@ -989,17 +989,6 @@ class Bot extends Model
         // Agar foydalanuvchi "Orqaga" tugmasini bosgan bo‘lsa
         if ($text === $backText) {
             $gram->step = ($i - 1);
-            $gram->first_name = null;
-            $gram->last_name = null;
-            $gram->middle_name = null;
-            $gram->gender = null;
-            $gram->passport_serial = null;
-            $gram->passport_number = null;
-            $gram->birthday = null;
-            $gram->passport_pin = null;
-            $gram->edu_type_id = null;
-            $gram->edu_form_id = null;
-            $gram->edu_lang_id = null;
             $gram->edu_direction_id = null;
             $gram->direction_course_id = null;
             $gram->exam_type = 0;

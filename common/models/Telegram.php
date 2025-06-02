@@ -129,7 +129,7 @@ class Telegram extends \yii\db\ActiveRecord
 
     public function getLang()
     {
-        return $this->hasOne(Lang::class, ['id' => 'lang_id']);
+        return $this->hasOne(Lang::class, ['id' => 'edu_lang_id']);
     }
 
     public function getExamDate()
