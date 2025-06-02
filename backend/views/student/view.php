@@ -272,7 +272,7 @@ if ($telegramEduDirection) {
                                                     </div>
                                                     <div class="subject_box_right">
                                                         <h6>
-                                                            <a target="_blank" href=https://t.me/<?= $telegram->username ?>">Chatga o'tish</a>
+                                                            <a target="_blank" href="https://t.me/<?= $telegram->username ?>">Chatga o'tish</a>
                                                         </h6>
                                                     </div>
                                                 </div>
