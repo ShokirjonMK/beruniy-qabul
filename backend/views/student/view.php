@@ -265,14 +265,18 @@ if ($telegramEduDirection) {
                                                 </div>
                                             </div>
 
-                                            <div class="d-flex justify-content-between align-items-center mt-3">
-                                                <div class="subject_box_left">
-                                                    <p>Telegram username:</p>
+                                            <?php if ($telegram->username != null): ?>
+                                                <div class="d-flex justify-content-between align-items-center mt-3">
+                                                    <div class="subject_box_left">
+                                                        <p>Telegram username:</p>
+                                                    </div>
+                                                    <div class="subject_box_right">
+                                                        <h6>
+                                                            <a target="_blank" href=https://t.me/<?= $telegram->username ?>">Chatga o'tish</a>
+                                                        </h6>
+                                                    </div>
                                                 </div>
-                                                <div class="subject_box_right">
-                                                    <h6><?= $telegram->username ?></h6>
-                                                </div>
-                                            </div>
+                                            <?php endif; ?>
 
                                             <div class="d-flex justify-content-between align-items-center mt-3">
                                                 <div class="subject_box_left">
