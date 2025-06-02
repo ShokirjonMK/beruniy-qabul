@@ -319,7 +319,7 @@ if ($telegramEduDirection) {
                                                 <div class="subject_box_right">
                                                     <h6>
                                                         <?php
-                                                            if ($telegram->step > 2) {
+                                                            if ($telegram->step > 1) {
                                                                 echo $telegram->last_name ." ".$telegram->first_name." ".$telegram->middle_name;
                                                             } else {
                                                                 echo '---';
