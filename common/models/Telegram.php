@@ -175,4 +175,27 @@ class Telegram extends \yii\db\ActiveRecord
         return $text;
     }
 
+
+    public static function botStepList()
+    {
+        return [
+            0 => "Pasport seriya va raqamini kiritmagan",
+            1 => "Tug'ilgan sana kiritmagan",
+            2 => "Qabul turini kiritmagan",
+            3 => "Ta'lim shaklini kiritmagan",
+            4 => "Ta'lim tilini kiritmagan",
+            5 => "Filial kiritmagan",
+            6 => "Ta'lim yo'nalishini kiritmagan",
+            7 => "Imtihon turini kiritmagan",
+            8 => "Offline imtihon sanasini kiritmagan",
+            9 => "Boshqich kiritmagan",
+            10 => "Oferta kiritmagan",
+            11 => "Transkript kiritmagan",
+            12 => "DTM kiritmagan",
+            13 => "MASTER kiritmagan",
+            14 => "Ma'lumotlarni tasdiqlamagan",
+            15 => "Tasdiqlangan",
+        ];
+    }
+
 }

@@ -14,6 +14,7 @@ use common\models\EduDirection;
 use common\models\Lang;
 use common\models\Branch;
 use common\models\Consulting;
+use common\models\Telegram;
 
 /** @var yii\web\View $this */
 /** @var common\models\StudentPerevotSearch $model */
@@ -157,6 +158,19 @@ $cons = Consulting::find()
                         ])->label('Xamkorlar <span>*</span>');; ?>
                     </div>
                 </div>
+
+                <div class="col-lg-2 col-md-6">
+                    <div class="form-group">
+                        <?= $form->field($model, 'bot_step')->widget(Select2::classname(), [
+                            'data' => Telegram::botStepList(),
+                            'options' => ['placeholder' => 'Bot stepi tanlang ...'],
+                            'pluginOptions' => [
+                                'allowClear' => true
+                            ],
+                        ])->label('Bot step <span>*</span>'); ?>
+                    </div>
+                </div>
+
             </div>
 
             <div class="form-group d-flex justify-content-end gap-2">

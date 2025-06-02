@@ -18,13 +18,14 @@ class StudentSearch extends Student
     public $exam_date_status;
     public $branch_id;
     public $cons_id;
+    public $bot_step;
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['branch_id', 'is_down','is_down', 'cons_id', 'id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
+            [['branch_id', 'bot_step', 'is_down','is_down', 'cons_id', 'id', 'exam_date_id','exam_date_status', 'user_id', 'gender', 'status', 'created_at', 'updated_at', 'created_by', 'updated_by', 'is_deleted', 'edu_type_id', 'edu_form_id', 'direction_id', 'edu_direction_id', 'lang_id', 'direction_course_id', 'course_id', 'exam_type', 'step'], 'integer'],
             [['first_name', 'last_name', 'middle_name', 'student_phone', 'username', 'password', 'birthday', 'passport_number', 'passport_serial', 'passport_pin', 'passport_issued_date', 'passport_given_date', 'passport_given_by', 'adress', 'edu_name', 'edu_direction','user_status','end_date' ,'start_date'], 'safe'],
             [['passport_serial'], 'string', 'min' => 2, 'max' => 2, 'message' => 'Pasport seria 2 xonali bo\'lishi kerak'],
             [['passport_number'], 'string', 'min' => 7, 'max' => 7, 'message' => 'Pasport raqam 7 xonali bo\'lishi kerak'],
@@ -191,6 +192,13 @@ class StudentSearch extends Student
         if (!$this->validate()) {
             return $dataProvider;
         }
+
+        if ($this->bot_step !== null) {
+            $query->innerJoin('telegram t', 't.phone = s.username AND t.is_deleted = 0 AND t.step = :step', [
+                ':step' => $this->bot_step
+            ]);
+        }
+
 
         if ($this->step != null) {
             $step = $this->step;
