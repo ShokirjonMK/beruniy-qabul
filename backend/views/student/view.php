@@ -303,7 +303,7 @@ if ($telegramEduDirection) {
                                                     <h6>
                                                         <?php
                                                         if ($telegram->step > 1) {
-                                                            echo $telegram->birthday;
+                                                            echo date("d-m-Y", strtotime($telegram->birthday));
                                                         } else {
                                                             echo '---';
                                                         }
