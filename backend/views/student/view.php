@@ -93,7 +93,7 @@ $telegram = Telegram::findOne([
     'is_deleted' => 0
 ]);
 $isOferta = 0;
-$telegramEduDirection = $telegram->eduDirection;
+$telegramEduDirection = $telegram->eduDirection ?? null;
 if ($telegramEduDirection) {
     if ($telegramEduDirection->is_oferta == 1) {
         $isOferta = 1;
