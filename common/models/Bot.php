@@ -1625,7 +1625,6 @@ class Bot extends Model
         }
     }
 
-
     public static function step13($telegram, $lang_id, $gram, $text)
     {
         $backText = self::getT("a12", $lang_id); // "Orqaga" tugmasi matni
@@ -1708,7 +1707,6 @@ class Bot extends Model
             ]);
         }
     }
-
 
     public static function step14($telegram, $lang_id, $gram, $text)
     {
@@ -1849,6 +1847,12 @@ class Bot extends Model
         $phone = preg_replace("/[^0-9]/", "", $gram->phone);
         $onOff = 'Online';
 
+        $user = self::getUser($gram);
+        $student = $user->student;
+
+        $username = $user->username;
+        $password = $student->password;
+
         // Matnlar
         $messages = [
             1 => [ // O'zbek tili
@@ -1864,7 +1868,8 @@ class Bot extends Model
                 'eduForm' => "🔘 <b>Ta'lim shakli:</b> ",
                 'lang' => "🔘 <b>Ta'lim tili:</b> ",
                 'examType' => "🔘 <b>Imtixon turi:</b> ",
-                'note' => "<i>Arizangiz ko'rib chiqilib, tez orada siz bilan 👩‍💻 operatorlarimiz bog'lanishadi.\n\nAloqa uchun: " . self::PHONE . "</i>"
+                'note' => "<i>Arizangiz ko'rib chiqilib, tez orada siz bilan 👩‍💻 operatorlarimiz bog'lanishadi.\n\nAloqa uchun: " . self::PHONE . "</i>",
+                'access' => "\n\n🔐 <b>Diqqat!</b> Siz arbu-edu.uz qabul platformasi orqali arizangiz holatini kuzatishingiz, shartnomani ko‘rishingiz va yuklab olishingiz mumkin.\n\n🧾 Tizimga kirish uchun:\n🔸 <b>Login:</b> ".$username."🔸 <b>Parol:</b> ".$password
             ],
             2 => [ // English
                 'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
@@ -1879,7 +1884,8 @@ class Bot extends Model
                 'eduForm' => "🔘 <b>Education form:</b> ",
                 'lang' => "🔘 <b>Language:</b> ",
                 'examType' => "🔘 <b>Exam type:</b> ",
-                'note' => "<i>Your application will be reviewed and our 👩‍💻 operators will contact you soon.\n\nContact: " . self::PHONE . "</i>"
+                'note' => "<i>Your application will be reviewed and our 👩‍💻 operators will contact you soon.\n\nContact: " . self::PHONE . "</i>",
+                'access' => "\n\n🔐 <b>Attention!</b> You can track your application status, view and download your contract through the admission platform arbu-edu.uz.\n\n🧾 To access the system:\n🔸 <b>Login:</b> ".$username."🔸 <b>Password:</b> ".$password
             ],
             3 => [ // Русский
                 'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
@@ -1894,7 +1900,8 @@ class Bot extends Model
                 'eduForm' => "🔘 <b>Форма обучения:</b> ",
                 'lang' => "🔘 <b>Язык обучения:</b> ",
                 'examType' => "🔘 <b>Тип экзамена:</b> ",
-                'note' => "<i>Ваша заявка будет рассмотрена, и наши 👩‍💻 операторы скоро свяжутся с вами.\n\nКонтакт: " . self::PHONE . "</i>"
+                'note' => "<i>Ваша заявка будет рассмотрена, и наши 👩‍💻 операторы скоро свяжутся с вами.\n\nКонтакт: " . self::PHONE . "</i>",
+                'access' => "\n\n🔐 <b>Внимание!</b> Вы можете отслеживать статус своей заявки, просматривать и скачивать контракт через платформу приёма arbu-edu.uz.\n\n🧾 Для входа в систему:\n🔸 <b>Логин:</b> ".$username."🔸 <b>Пароль:</b> ".$password
             ]
         ];
 
@@ -1992,7 +1999,6 @@ class Bot extends Model
         }
         return ['is_ok' => false, 'data' => 0];
     }
-
 
     public static function course($lang_id, $eduDirection)
     {
