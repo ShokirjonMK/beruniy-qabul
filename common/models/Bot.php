@@ -229,6 +229,7 @@ class Bot extends Model
     {
         try {
             $text = $telegram->input->message->text;
+            121212
 
             if ($text == self::getT("a9", $lang_id)) {
                 // O'zbek tili
@@ -274,7 +275,7 @@ class Bot extends Model
                     'resize_keyboard' => true,
                 ])
             ]);
-        } catch (\Exception $e) {
+        } catch (\Throwable $e) {
             return $telegram->sendMessage([
                 'chat_id' => self::CHAT_ID,
                 'text' => ['Ik main :( '.$e->getMessage()],
