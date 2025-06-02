@@ -355,9 +355,7 @@ if ($telegramEduDirection) {
                                                     </div>
                                                     <div class="subject_box_right">
                                                         <h6>
-                                                            <?php
-                                                                Branch::findOne($telegram->branch_id)->name_uz ?? '---';
-                                                            ?>
+                                                            <?= Branch::findOne($telegram->branch_id)->name_uz ?? '---'; ?>
                                                         </h6>
                                                     </div>
                                                 </div>
