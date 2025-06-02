@@ -1932,6 +1932,7 @@ class Bot extends Model
 
         $text .= "- - - - - -\n";
         $text .= $t['note'];
+        $text .= $t['access'];
 
         return $text;
     }
