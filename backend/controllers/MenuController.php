@@ -24,8 +24,8 @@ class MenuController extends Controller
         $user = User::find()
             ->where([
                 'user_role' => 'student',
-                'cons_id' => null
             ])
+            ->andWhere(['not in', 'cons_id', [1,17,20,22,23,25]])
             ->count();
         dd($user);
         $searchModel = new MenuSearch();
