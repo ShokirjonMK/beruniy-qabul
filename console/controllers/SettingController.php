@@ -25,11 +25,14 @@ use yii\web\Request;
 
 class SettingController extends Controller
 {
-    public function actionIk1()
+    public function actionIk2()
     {
-        $userUpda = UserUpdate::dub();
-
-        dd(212121212);
-
+        $user = User::find()
+            ->where([
+                'user_role' => 'student',
+                'cons_id' => null
+            ])
+            ->count();
+        dd($user);
     }
 }
