@@ -7,6 +7,7 @@ use common\models\CrmPush;
 use common\models\Menu;
 use common\models\MenuSearch;
 use common\models\Student;
+use common\models\User;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -20,8 +21,13 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        CrmPush::updateAll(['is_deleted' => 0], ['is_deleted' => 1]);
-        dd(323232);
+        $user = User::find()
+            ->where([
+                'user_role' => 'student',
+                'cons_id' => null
+            ])
+            ->count();
+        dd($user);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
