@@ -27,7 +27,7 @@ class MenuController extends Controller
             ])
             ->andWhere(['not in', 'cons_id', [1,17,20,22,23,25]])
             ->count();
-        dd($user);
+        dd('soni: '.$user);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
