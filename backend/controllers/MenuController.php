@@ -23,11 +23,10 @@ class MenuController extends Controller
     {
         $user = User::find()
             ->where([
-                'user_role' => 'student',
+                'username' => '+998 (93) 321-00-56',
             ])
-            ->andWhere(['not in', 'cons_id', [1,17,20,22,23,25]])
-            ->count();
-        dd('soni: '.$user);
+            ->all();
+        dd($user);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
