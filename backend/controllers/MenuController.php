@@ -25,8 +25,8 @@ class MenuController extends Controller
             ->where([
                 'username' => '+998 (93) 321-00-56',
             ])
-            ->all();
-        dd($user);
+            ->one();
+        dd($user->student);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
