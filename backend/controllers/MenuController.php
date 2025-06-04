@@ -21,17 +21,17 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        $user = User::find()
-            ->where([
-                'username' => '+998 (93) 321-00-56',
-            ])
-            ->one();
-
-        $user->username = $user->username."___ik".time();
-        $user->status = 0;
-        $user->save(false);
-
-        dd(323232);
+//        $user = User::find()
+//            ->where([
+//                'username' => '+998 (93) 321-00-56',
+//            ])
+//            ->one();
+//
+//        $user->username = $user->username."___ik".time();
+//        $user->status = 0;
+//        $user->save(false);
+//
+//        dd(323232);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
