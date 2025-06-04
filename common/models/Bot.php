@@ -785,7 +785,7 @@ class Bot extends Model
                 'chat_id' => $gram->telegram_id,
                 'text' => self::getT("a26", $lang_id), // Talim shaklini tanlang
                 'parse_mode' => 'HTML',
-                'reply_markup' => self::eduForm($lang_id)
+                'reply_markup' => self::eduForm($lang_id, $gram)
             ]);
         }
 
@@ -808,7 +808,7 @@ class Bot extends Model
                 'chat_id' => $gram->telegram_id,
                 'text' => self::getT("a26", $lang_id), // Talim shaklini tanlang
                 'parse_mode' => 'HTML',
-                'reply_markup' => self::eduForm($lang_id)
+                'reply_markup' => self::eduForm($lang_id, $gram)
             ]);
         }
 
@@ -835,10 +835,20 @@ class Bot extends Model
             ]);
         }
 
-        $backOptions = [
-            1 => self::getT("a28", $lang_id),
-            2 => self::getT("a29", $lang_id),
-        ];
+        if ($gram->edu_type_id == 1) {
+            $backOptions = [
+                1 => self::getT("a28", $lang_id),
+            ];
+        } elseif ($gram->edu_type_id == 2) {
+            $backOptions = [
+                2 => self::getT("a29", $lang_id),
+            ];
+        } else {
+            $backOptions = [
+                1 => self::getT("a28", $lang_id),
+                2 => self::getT("a29", $lang_id),
+            ];
+        }
 
         // Agar talim shakli to‘g‘ri kiritgan bo‘lsa
         if (in_array($text, $backOptions)) {
@@ -861,7 +871,7 @@ class Bot extends Model
             'chat_id' => $gram->telegram_id,
             'text' => self::getT("a34", $lang_id), // Xatolik: noto‘g‘ri
             'parse_mode' => 'HTML',
-            'reply_markup' => self::eduForm($lang_id)
+            'reply_markup' => self::eduForm($lang_id, $gram)
         ]);
     }
 
@@ -897,7 +907,7 @@ class Bot extends Model
                 'chat_id' => $gram->telegram_id,
                 'text' => self::getT("a26", $lang_id), // Talim shaklini tanlang
                 'parse_mode' => 'HTML',
-                'reply_markup' => self::eduForm($lang_id)
+                'reply_markup' => self::eduForm($lang_id, $gram)
             ]);
         }
 
@@ -2350,21 +2360,43 @@ class Bot extends Model
         ]);
     }
 
-    public static function eduForm($lang_id)
+    public static function eduForm($lang_id, $gram)
     {
         $backText = self::getT("a12", $lang_id); // "Orqaga" tugmasi matni
-        return json_encode([
-            'keyboard' => [
-                [
-                    ['text' => self::getT("a28", $lang_id)],
-                    ['text' => self::getT("a29", $lang_id)],
+        if ($gram->edu_type_id == 1) {
+            return json_encode([
+                'keyboard' => [
+                    [
+                        ['text' => self::getT("a28", $lang_id)],
+                        ['text' => $backText],
+                    ],
                 ],
-                [
-                    ['text' => $backText],
+                'resize_keyboard' => true,
+            ]);
+        } elseif ($gram->edu_type_id == 2) {
+            return json_encode([
+                'keyboard' => [
+                    [
+                        ['text' => self::getT("a29", $lang_id)],
+                        ['text' => $backText],
+                    ],
                 ],
-            ],
-            'resize_keyboard' => true,
-        ]);
+                'resize_keyboard' => true,
+            ]);
+        } else {
+            return json_encode([
+                'keyboard' => [
+                    [
+                        ['text' => self::getT("a28", $lang_id)],
+                        ['text' => self::getT("a29", $lang_id)],
+                    ],
+                    [
+                        ['text' => $backText],
+                    ],
+                ],
+                'resize_keyboard' => true,
+            ]);
+        }
     }
 
     public static function eduLang($lang_id)
