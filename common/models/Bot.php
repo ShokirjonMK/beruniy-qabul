@@ -13,7 +13,7 @@ class Bot extends Model
 {
     const CHAT_ID = 1841508935;
 
-    const PHONE = '+998 94 505 52 50';
+    const PHONE = '+998 55 903 70 07';
 
     const IMG = '/frontend/web/images/bot_univer.jpg';
 
