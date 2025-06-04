@@ -21,12 +21,21 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        $user = User::find()
+        $users = User::find()
             ->where([
-                'username' => '+998 (93) 321-00-56',
+                'user_role' => 'student'
             ])
-            ->one();
-        dd($user->student);
+            ->all();
+        $data = [];
+        foreach ($users as $user) {
+            if ($user->student == null) {
+                $data[] = $user->username;
+            }
+        }
+
+        dd($data);
+
+
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
