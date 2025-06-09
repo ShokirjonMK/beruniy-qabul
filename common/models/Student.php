@@ -85,6 +85,12 @@ class Student extends \yii\db\ActiveRecord
             [['adress'], 'string'],
             [['first_name', 'last_name', 'middle_name', 'username', 'password', 'passport_number', 'passport_serial', 'passport_pin', 'passport_issued_date', 'passport_given_date', 'passport_given_by', 'edu_name', 'edu_direction'], 'string', 'max' => 255],
             [['student_phone'], 'string', 'max' => 100],
+            [
+                'username',
+                'match',
+                'pattern' => '/^[+][0-9]{3} [(][0-9]{2}[)] [0-9]{3}-[0-9]{2}-[0-9]{2}$/',
+                'message' => 'Telefon raqamni to\'liq kiriting',
+            ],
             [['course_id'], 'exist', 'skipOnError' => true, 'targetClass' => Course::class, 'targetAttribute' => ['course_id' => 'id']],
             [['direction_course_id'], 'exist', 'skipOnError' => true, 'targetClass' => DirectionCourse::class, 'targetAttribute' => ['direction_course_id' => 'id']],
             [['direction_id'], 'exist', 'skipOnError' => true, 'targetClass' => Direction::class, 'targetAttribute' => ['direction_id' => 'id']],

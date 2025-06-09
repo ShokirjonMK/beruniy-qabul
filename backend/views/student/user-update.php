@@ -35,7 +35,13 @@ $data = ($user->status != 0) ? [
     ]); ?>
 
     <div class="form-group">
-        <?= $form->field($model, 'username')->textInput()->label('Telefon nomer <span>*</span>'); ?>
+        <?= $form->field($model, 'username')
+            ->widget(\yii\widgets\MaskedInput::class, [
+                'mask' => '+\9\9\8 (99) 999-99-99',
+                'options' => [
+                    'placeholder' => '+998 (__) ___-__-__',
+                ],
+            ])->label('Telefon nomer <span>*</span>'); ?>
     </div>
 
     <div class="form-group">
