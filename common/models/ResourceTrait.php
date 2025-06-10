@@ -43,14 +43,14 @@ trait ResourceTrait
         return $this->hasOne(User::class, ['id' => 'updated_by']);
     }
 
-    function simple_errors($errors) {
+    function simple_errors($errors)
+    {
         $result = [];
         foreach ($errors as $lev1) {
-             foreach ($lev1 as $key => $error) {
-                 $result[] = $error;
-             }
+            foreach ($lev1 as $key => $error) {
+                $result[] = $error;
+            }
         }
         return array_unique($result);
     }
-
 }

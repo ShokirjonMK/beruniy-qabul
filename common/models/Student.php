@@ -730,4 +730,28 @@ class Student extends \yii\db\ActiveRecord
         }
         return parent::beforeSave($insert);
     }
+
+    public function afterSave($insert, $changedAttributes)
+    {
+        parent::afterSave($insert, $changedAttributes);
+
+
+        $changes = [];
+        foreach ($changedAttributes as $attribute => $oldValue) {
+            $newValue = $this->getAttribute($attribute);
+            if ($oldValue != $newValue) {
+                $changes[$attribute] = [
+                    'old' => $oldValue,
+                    'new' => $newValue
+                ];
+            }
+        }
+
+        if (!empty($changes)) {
+            $history = new StudentLog();
+            $history->student_id = $this->id;
+            $history->data = $changes;
+            $history->save(false);
+        }
+    }
 }
