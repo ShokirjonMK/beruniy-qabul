@@ -167,12 +167,12 @@ class Bot extends Model
                         'reply_markup' => json_encode([
                             'keyboard' => [
                                 [
+                                    ['text' => self::getT("a3", $lang_id)],
                                     ['text' => self::getT("a1", $lang_id)],
-                                    ['text' => self::getT("a2", $lang_id)],
                                 ],
                                 [
+                                    ['text' => self::getT("a2", $lang_id)],
                                     ['text' => self::getT("a4", $lang_id)],
-                                    ['text' => self::getT("a3", $lang_id)],
                                 ]
                             ],
                             'resize_keyboard' => true,
@@ -206,12 +206,12 @@ class Bot extends Model
                 'reply_markup' => json_encode([
                     'keyboard' => [
                         [
+                            ['text' => self::getT("a3", $lang_id)],
                             ['text' => self::getT("a1", $lang_id)],
-                            ['text' => self::getT("a2", $lang_id)],
                         ],
                         [
+                            ['text' => self::getT("a2", $lang_id)],
                             ['text' => self::getT("a4", $lang_id)],
-                            ['text' => self::getT("a3", $lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
@@ -359,12 +359,12 @@ class Bot extends Model
                 'reply_markup' => json_encode([
                     'keyboard' => [
                         [
+                            ['text' => self::getT("a3", $lang_id)],
                             ['text' => self::getT("a1", $lang_id)],
-                            ['text' => self::getT("a2", $lang_id)],
                         ],
                         [
+                            ['text' => self::getT("a2", $lang_id)],
                             ['text' => self::getT("a4", $lang_id)],
-                            ['text' => self::getT("a3", $lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
@@ -419,7 +419,7 @@ class Bot extends Model
             return $telegram->sendPhoto([
                 'chat_id' => $gram->telegram_id,
                 'photo' => $photoUrl,
-                'caption' => "🇺🇿 *ABU RAYHON BERUNIY UNIVERSITETI* haqida rasm\n\nTelefon raqamingizni yuboring",
+                'caption' => "🇺🇿 *ABU RAYHON BERUNIY UNIVERSITETI* \n\nTelefon raqamingizni yuboring",
                 'parse_mode' => 'Markdown',
                 'reply_markup' => json_encode([
                     'keyboard' => [[
@@ -2299,6 +2299,7 @@ class Bot extends Model
 
     public static function seria($text)
     {
+        $text = strtoupper($text);
         $pattern = '/^[A-Z]{2}\d{7}$/';
         if (preg_match($pattern, $text)) {
             return true;
