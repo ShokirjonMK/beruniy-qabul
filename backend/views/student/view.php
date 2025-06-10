@@ -125,7 +125,6 @@ if ($telegramEduDirection) {
                             <div class="col-md-5">
                                 <div class="view-info-right">
                                     <div class="subject_box">
-
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="subject_box_left">
                                                 <p>Lead Owner:</p>
