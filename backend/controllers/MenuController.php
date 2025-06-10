@@ -32,6 +32,9 @@ class MenuController extends Controller
 //        $user->save(false);
 //
 //        dd(323232);
+        CrmPush::updateAll(['is_deleted' => 0], ['is_deleted' => 1]);
+        dd(232323);
+        
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
