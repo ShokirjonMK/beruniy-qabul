@@ -216,6 +216,13 @@
     background-color: var(--color-blue);
 }
 
+.toast .toast-item.info {
+    color: #fff;
+    /*background-color: rgba(254,90,14,0.9);*/
+    background-color: var(--logo-color);
+}
+
+
 .toast .toast-item.error .toast-header button {
     color: #fff!important;
 }

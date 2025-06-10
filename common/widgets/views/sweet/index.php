@@ -69,7 +69,7 @@
 <?php endif; ?>
 <?php if ($type == 'info') : ?>
 
-    <div id="liveToastSuc" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+    <div id="liveToastInfo" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
         <div class="toast-item info">
             <div class="toast-body d-flex align-items-center">
                 <div>
@@ -84,10 +84,10 @@
 
     <script>
         $(document).ready(function() {
-            const toastLiveExampleSuc = document.getElementById('liveToastSuc')
-            const toastBootstrapSuc = bootstrap.Toast.getOrCreateInstance(toastLiveExampleSuc)
+            const toastLiveExampleInfo = document.getElementById('liveToastInfo')
+            const toastBootstrapInfo = bootstrap.Toast.getOrCreateInstance(toastLiveExampleInfo)
             $(document).ready(function() {
-                toastBootstrapSuc.show()
+                toastBootstrapInfo.show()
             });
         })
     </script>
