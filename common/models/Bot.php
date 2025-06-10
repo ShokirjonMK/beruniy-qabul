@@ -543,6 +543,7 @@ class Bot extends Model
 
         // Agar foydalanuvchi pasport seriya va raqamini to‘g‘ri kiritgan bo‘lsa
         if (self::seria($text)) {
+            $text = strtoupper($text);
             $gram->passport_serial = substr($text, 0, 2);
             $gram->passport_number = substr($text, 2, 9);
             $gram->step = 1;
