@@ -140,7 +140,7 @@ if ($telegramEduDirection) {
                                                     if ($owner && $owner->user_role === 'student') {
                                                         $text = 'student';
                                                     } elseif ($owner) {
-                                                        $employee = Employee::findOne($owner->id);
+                                                        $employee = Employee::findOne(['user_id' => $owner->id]);
                                                         if ($employee) {
                                                             $text = $employee->last_name . ' ' . $employee->first_name . ' ' . $employee->middle_name;
                                                         }
