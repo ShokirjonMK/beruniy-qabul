@@ -190,8 +190,11 @@ class CrmPushController extends Controller
                     $customFields[$key] = (string)$value;
                 }
             }
-            $updatedLead = $amoCrmClient->updateLead($leadId, $updatedFields, $tags, $message, $customFields);
-            return ['is_ok' => true, 'data' => $updatedLead];
+            $result = $amoCrmClient->updateLead($leadId, $updatedFields, $tags, $message, $customFields);
+            if ($result['is_ok']) {
+                return ['is_ok' => true, 'data' => $result['data']];
+            }
+            return ['is_ok' => false];
         } catch (\Exception $e) {
             return ['is_ok' => false];
         }

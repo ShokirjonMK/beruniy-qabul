@@ -207,7 +207,7 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
         try {
             $lead = $this->apiClient->leads()->getOne($leadId);
             if (!$lead) {
-                throw new \Exception("Lead topilmadi.");
+                return ['is_ok' => false];
             }
 
             if (isset($updatedFields['name'])) {
@@ -271,10 +271,10 @@ class  AmoCrmClient extends Component  implements AmoCrmSettings, IAmoCrmClient
                 $notesService->addOne($note);
             }
 
-            return $updatedLead;
+            return ['is_ok' => true, 'data' => $updatedLead];
 
         } catch (\AmoCRM\Exceptions\AmoCRMApiException $e) {
-            throw new \Exception('Leadni yangilashda xatolik:' . $e->getMessage());
+            return ['is_ok' => false];
         }
     }
 
