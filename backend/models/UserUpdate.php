@@ -473,7 +473,7 @@ class UserUpdate extends Model
             $newStudent->username = $user->username;
             $newStudent->password = $password;
             $newStudent->branch_id = $filial_id;
-            $newStudent->created_by = 0;
+            $newStudent->created_by = current_user_id();
             $newStudent->updated_by = 0;
             $newStudent->save(false);
 

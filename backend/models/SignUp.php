@@ -164,7 +164,7 @@ class SignUp extends Model
                 $student->username = $user->username;
                 $student->password = $password;
                 $student->branch_id = $this->filial_id;
-                $student->created_by = 0;
+                $student->created_by = current_user_id();
                 $student->updated_by = 0;
                 $student->save(false);
 

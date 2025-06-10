@@ -173,7 +173,7 @@ class SignupForm extends Model
                 $newStudent->username = $user->username;
                 $newStudent->password = $this->password;
                 $newStudent->branch_id = $this->filial_id;
-                $newStudent->created_by = 0;
+                $newStudent->created_by = $user->id;
                 $newStudent->updated_by = 0;
                 $newStudent->save(false);
 

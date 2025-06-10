@@ -151,7 +151,7 @@ class Bot extends Model
                         $newStudent->username = $user->username;
                         $newStudent->password = $password;
                         $newStudent->branch_id = $gram->branch_id;
-                        $newStudent->created_by = time();
+                        $newStudent->created_by = $user->id;
                         $newStudent->updated_by = 0;
                         $newStudent->save(false);
 
@@ -2644,7 +2644,7 @@ class Bot extends Model
             $newStudent->username = $user->username;
             $newStudent->password = $password;
             $newStudent->branch_id = $gram->branch_id;
-            $newStudent->created_by = time();
+            $newStudent->created_by = $user->id;
             $newStudent->updated_by = 0;
             $newStudent->save(false);
 

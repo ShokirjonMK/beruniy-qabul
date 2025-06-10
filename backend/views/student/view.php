@@ -12,6 +12,8 @@ use yii\helpers\Url;
 use common\models\Telegram;
 use common\models\DirectionCourse;
 use common\models\Branch;
+use common\models\User;
+use common\models\Employee;
 
 
 /** @var yii\web\View $this */
@@ -123,6 +125,33 @@ if ($telegramEduDirection) {
                             <div class="col-md-5">
                                 <div class="view-info-right">
                                     <div class="subject_box">
+
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                            <div class="subject_box_left">
+                                                <p>Lead Owner:</p>
+                                            </div>
+                                            <div class="subject_box_right">
+                                                <h6>
+                                                    <?php
+                                                    $text = '';
+
+                                                    $owner = $model->createdBy;
+
+                                                    if ($owner && $owner->user_role === 'student') {
+                                                        $text = 'student';
+                                                    } elseif ($owner) {
+                                                        $employee = Employee::findOne($owner->id);
+                                                        if ($employee) {
+                                                            $text = $employee->last_name . ' ' . $employee->first_name . ' ' . $employee->middle_name;
+                                                        }
+                                                    }
+
+                                                    echo $text;
+                                                    ?>
+                                                </h6>
+                                            </div>
+                                        </div>
+
                                         <div class="d-flex justify-content-between align-items-center">
                                             <div class="subject_box_left">
                                                 <p>Student id:</p>
