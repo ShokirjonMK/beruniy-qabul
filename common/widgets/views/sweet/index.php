@@ -61,40 +61,25 @@
         })
     </script>
 
-
-
-
-
-
 <?php endif; ?>
-<?php if ($type == 'info') : ?>
 
-    <div id="liveToastSuc" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
-        <div class="toast-item info">
-            <div class="toast-body d-flex align-items-center">
-                <div>
-                    <i class="fa-regular fa-circle-info"></i>
-                </div>
-                <div>
-                    <p><?= $message ?></p>
-                </div>
+<?php if (isset($type) && $type === 'info' && !empty($message)) : ?>
+    <div id="liveToastInfo" class="toast align-items-center text-bg-info border-0 position-fixed bottom-0 end-0 m-3" role="alert" aria-live="assertive" aria-atomic="true" data-bs-delay="5000">
+        <div class="d-flex">
+            <div class="toast-body">
+                <i class="fa-regular fa-circle-info me-2"></i> <?= htmlspecialchars($message, ENT_QUOTES, 'UTF-8') ?>
             </div>
+            <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
         </div>
     </div>
 
     <script>
-        $(document).ready(function() {
-            const toastLiveExampleSuc = document.getElementById('liveToastSuc')
-            const toastBootstrapSuc = bootstrap.Toast.getOrCreateInstance(toastLiveExampleSuc)
-            $(document).ready(function() {
-                toastBootstrapSuc.show()
-            });
-        })
+        document.addEventListener('DOMContentLoaded', function() {
+            const toastInfo = document.getElementById('liveToastInfo');
+            if (toastInfo) {
+                const bsToast = new bootstrap.Toast(toastInfo);
+                bsToast.show();
+            }
+        });
     </script>
-
-
-
-
-
-
 <?php endif; ?>
