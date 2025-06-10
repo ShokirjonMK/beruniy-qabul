@@ -737,7 +737,10 @@ class StudentController extends Controller
                 return $model;
             }
         }
-        $result['errors'] = ['The requested page does not exist.'];
+
+        $errors[] = ['The requested page does not exist.'];
+
+        $result['errors'] = $errors;
 
         \Yii::$app->session->setFlash('error', $result['errors']);
         return $this->redirect(\Yii::$app->request->referrer);
