@@ -126,7 +126,7 @@ if ($telegramEduDirection) {
                                 <div class="view-info-right">
                                     <div class="subject_box">
 
-                                        <div class="d-flex justify-content-between align-items-center mt-3">
+                                        <div class="d-flex justify-content-between align-items-center">
                                             <div class="subject_box_left">
                                                 <p>Lead Owner:</p>
                                             </div>
@@ -142,7 +142,7 @@ if ($telegramEduDirection) {
                                                     } elseif ($owner) {
                                                         $employee = Employee::findOne(['user_id' => $owner->id]);
                                                         if ($employee) {
-                                                            $text = $employee->last_name . ' ' . $employee->first_name . ' ' . $employee->middle_name;
+                                                            $text = $employee->last_name . ' ' . $employee->first_name;
                                                         }
                                                     }
 
@@ -152,7 +152,7 @@ if ($telegramEduDirection) {
                                             </div>
                                         </div>
 
-                                        <div class="d-flex justify-content-between align-items-center">
+                                        <div class="d-flex justify-content-between align-items-center mt-3">
                                             <div class="subject_box_left">
                                                 <p>Student id:</p>
                                             </div>
