@@ -62,7 +62,7 @@ class StudentController extends Controller
     {
         $eduType = $this->eduTypeFindModel(1);
         $searchModel = new StudentSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams , $eduType);
+        $dataProvider = $searchModel->search($this->request->queryParams, $eduType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -75,7 +75,7 @@ class StudentController extends Controller
     {
         $eduType = $this->eduTypeFindModel(2);
         $searchModel = new StudentSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams , $eduType);
+        $dataProvider = $searchModel->search($this->request->queryParams, $eduType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -89,7 +89,7 @@ class StudentController extends Controller
     {
         $eduType = $this->eduTypeFindModel(3);
         $searchModel = new StudentSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams , $eduType);
+        $dataProvider = $searchModel->search($this->request->queryParams, $eduType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -102,7 +102,7 @@ class StudentController extends Controller
     {
         $eduType = $this->eduTypeFindModel(4);
         $searchModel = new StudentSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams , $eduType);
+        $dataProvider = $searchModel->search($this->request->queryParams, $eduType);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
@@ -190,9 +190,9 @@ class StudentController extends Controller
                 $result = $model->signup();
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
-                    return $this->redirect(['view' , 'id' => $result['student']->id]);
+                    return $this->redirect(['view', 'id' => $result['student']->id]);
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(\Yii::$app->request->referrer);
             }
@@ -258,17 +258,17 @@ class StudentController extends Controller
         }
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $result = $model->ikStep($user , $student);
+                $result = $model->ikStep($user, $student);
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
-                return $this->redirect(['view' , 'id' => $student->id]);
+                return $this->redirect(['view', 'id' => $student->id]);
             }
         }
 
-        return $this->renderAjax($action , [
+        return $this->renderAjax($action, [
             'model' => $model,
             'student' => $student,
         ]);
@@ -281,17 +281,17 @@ class StudentController extends Controller
         $model = new StepTwo();
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
-                $result = $model->ikStep($user , $student);
+                $result = $model->ikStep($user, $student);
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
-                return $this->redirect(['view' , 'id' => $student->id]);
+                return $this->redirect(['view', 'id' => $student->id]);
             }
         }
 
-        return $this->renderAjax('_form-step2' , [
+        return $this->renderAjax('_form-step2', [
             'model' => $model,
             'student' => $student,
         ]);
@@ -314,12 +314,12 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
-                return $this->redirect(['view' , 'id' => $model->id]);
+                return $this->redirect(['view', 'id' => $model->id]);
             }
         }
-        return $this->renderAjax('user-update' , [
+        return $this->renderAjax('user-update', [
             'model' => $model,
         ]);
     }
@@ -347,17 +347,17 @@ class StudentController extends Controller
         if ($this->request->isPost) {
             if ($model->load($this->request->post())) {
                 $model->edu_type_id = $student->edu_type_id;
-                $result = $model->ikStep($user , $student);
+                $result = $model->ikStep($user, $student);
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
-                return $this->redirect(['view' , 'id' => $student->id]);
+                return $this->redirect(['view', 'id' => $student->id]);
             }
         }
 
-        return $this->renderAjax($action , [
+        return $this->renderAjax($action, [
             'model' => $model,
             'student' => $student,
         ]);
@@ -374,7 +374,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -397,7 +397,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -421,7 +421,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $studentFile->student_id]);
             }
@@ -445,7 +445,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -469,7 +469,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $studentFile->student_id]);
             }
@@ -493,7 +493,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -517,7 +517,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $studentFile->student_id]);
             }
@@ -541,7 +541,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -565,7 +565,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $studentFile->student_id]);
             }
@@ -589,7 +589,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -612,7 +612,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $model->student_id]);
             }
@@ -635,23 +635,23 @@ class StudentController extends Controller
                 $action = 'con3';
             } else {
                 $errors[] = ['Type not\'g\'ri tanlandi!'];
-                \Yii::$app->session->setFlash('error' , $errors);
+                \Yii::$app->session->setFlash('error', $errors);
                 return $this->redirect(\Yii::$app->request->referrer);
             }
         } else {
             $errors[] = ['Shartnoma mavjud emas!'];
-            \Yii::$app->session->setFlash('error' , $errors);
+            \Yii::$app->session->setFlash('error', $errors);
             return $this->redirect(\Yii::$app->request->referrer);
         }
 
         $result = Contract::crmPush($student);
         if (!$result['is_ok']) {
-            \Yii::$app->session->setFlash('error' , $result['errors']);
+            \Yii::$app->session->setFlash('error', $result['errors']);
             return $this->redirect(\Yii::$app->request->referrer);
         }
 
         $pdf = \Yii::$app->ikPdf;
-        $content = $pdf->contract($student , $action);
+        $content = $pdf->contract($student, $action);
 
         $pdf = new Pdf([
             'mode' => Pdf::MODE_UTF8,
@@ -696,7 +696,7 @@ class StudentController extends Controller
                 if ($result['is_ok']) {
                     \Yii::$app->session->setFlash('success');
                 } else {
-                    \Yii::$app->session->setFlash('error' , $result['errors']);
+                    \Yii::$app->session->setFlash('error', $result['errors']);
                 }
                 return $this->redirect(['view', 'id' => $query->student_id]);
             }
@@ -716,7 +716,7 @@ class StudentController extends Controller
         if ($result['is_ok']) {
             \Yii::$app->session->setFlash('success');
         } else {
-            \Yii::$app->session->setFlash('error' , $result['errors']);
+            \Yii::$app->session->setFlash('error', $result['errors']);
         }
         return $this->redirect(\Yii::$app->request->referrer);
     }
@@ -737,6 +737,7 @@ class StudentController extends Controller
                 return $model;
             }
         }
+        return $this->redirect(\Yii::$app->request->referrer);
         throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
     }
 
@@ -751,7 +752,7 @@ class StudentController extends Controller
 
     protected function ofertafindModel($id)
     {
-        if (($model = StudentOferta::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = StudentOferta::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
@@ -763,7 +764,7 @@ class StudentController extends Controller
 
     protected function trFindModel($id)
     {
-        if (($model = StudentPerevot::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = StudentPerevot::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
@@ -775,7 +776,7 @@ class StudentController extends Controller
 
     protected function dtmFindModel($id)
     {
-        if (($model = StudentDtm::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = StudentDtm::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
@@ -787,7 +788,7 @@ class StudentController extends Controller
 
     protected function masterFindModel($id)
     {
-        if (($model = StudentMaster::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = StudentMaster::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
@@ -799,7 +800,7 @@ class StudentController extends Controller
 
     protected function sertificateFindModel($id)
     {
-        if (($model = ExamSubject::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = ExamSubject::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
@@ -811,7 +812,7 @@ class StudentController extends Controller
 
     protected function examFindModel($id)
     {
-        if (($model = Exam::findOne(['id' => $id , 'is_deleted' => 0])) !== null) {
+        if (($model = Exam::findOne(['id' => $id, 'is_deleted' => 0])) !== null) {
             $user = $model->student->user;
             if ($user->status == 10) {
                 return $model;
