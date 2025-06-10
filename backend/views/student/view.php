@@ -157,14 +157,7 @@ if ($telegramEduDirection) {
 
                                                         $owner = $model->updatedBy;
 
-                                                        if ($owner && $owner->user_role === 'student') {
-                                                            $text = 'student';
-                                                        } elseif ($owner) {
-                                                            $employee = Employee::findOne(['user_id' => $owner->id]);
-                                                            if ($employee) {
-                                                                $text = $employee->last_name . ' ' . $employee->first_name;
-                                                            }
-                                                        }
+                                                        $text = $owner ? ($owner->user_role === 'student' ? 'student' : $owner->getEmployeeFullName()) : '';
 
                                                         echo $text;
                                                     }
