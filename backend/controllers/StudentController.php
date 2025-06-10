@@ -740,8 +740,6 @@ class StudentController extends Controller
 
         \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
         return $this->redirect(\Yii::$app->request->referrer);
-
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
     }
 
     protected function findModelView($id)

@@ -73,7 +73,7 @@
         <div class="toast-item info">
             <div class="toast-body d-flex align-items-center">
                 <div>
-                    <i class="fa-regular fa-circle-info"></i>
+                    <i class="fa-solid fa-triangle-exclamation"></i>
                 </div>
                 <div>
                     <p><?= $message ?></p>
