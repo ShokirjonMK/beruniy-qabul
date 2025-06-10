@@ -154,7 +154,7 @@ if ($telegramEduDirection) {
 
                                         <div class="d-flex justify-content-between align-items-center mt-3">
                                             <div class="subject_box_left">
-                                                <p>Student id:</p>
+                                                <p>Lead Contract:</p>
                                             </div>
                                             <div class="subject_box_right">
                                                 <h6>
