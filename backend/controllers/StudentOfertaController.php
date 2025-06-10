@@ -38,6 +38,7 @@ class StudentOfertaController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 }

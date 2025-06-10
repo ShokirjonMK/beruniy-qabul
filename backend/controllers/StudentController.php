@@ -748,7 +748,8 @@ class StudentController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function ofertafindModel($id)
@@ -760,7 +761,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function trFindModel($id)
@@ -772,7 +774,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function dtmFindModel($id)
@@ -784,7 +787,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function masterFindModel($id)
@@ -796,7 +800,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function sertificateFindModel($id)
@@ -808,7 +813,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function examFindModel($id)
@@ -820,7 +826,8 @@ class StudentController extends Controller
             }
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 
     protected function eduTypeFindModel($id)
@@ -829,6 +836,7 @@ class StudentController extends Controller
             return $model;
         }
 
-        throw new NotFoundHttpException(\Yii::t('app', 'The requested page does not exist.'));
+        \Yii::$app->session->setFlash('info', 'The requested page does not exist.');
+        return $this->redirect(\Yii::$app->request->referrer);
     }
 }
