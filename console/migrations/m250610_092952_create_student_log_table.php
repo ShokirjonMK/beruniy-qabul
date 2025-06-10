@@ -28,7 +28,8 @@ class m250610_092952_create_student_log_table extends Migration
 
         $this->createTable('{{%student_log}}', [
             'id' => $this->primaryKey(),
-            'data' => $this->text()->null(),
+            // 'data' => $this->text()->null(),
+            'data' => $this->json()->null(),
             'student_id' => $this->integer()->null(),
             'status' => $this->integer()->defaultValue(1),
             'created_at' => $this->integer()->null(),

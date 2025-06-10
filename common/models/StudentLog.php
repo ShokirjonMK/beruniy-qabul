@@ -31,14 +31,12 @@ class StudentLog extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            ['data', 'string'],
-            ['student_id', 'integer'],
-            ['status', 'integer'],
-            ['created_at', 'integer'],
-            ['updated_at', 'integer'],
-            ['created_by', 'integer'],
-            ['updated_by', 'integer'],
-            ['is_deleted', 'integer'],
+            [['data'], 'safe'],
+            [['student_id'], 'integer'],
+            [['status'], 'integer'],
+            [['created_at', 'updated_at'], 'integer'],
+            [['created_by', 'updated_by'], 'integer'],
+            [['is_deleted'], 'integer'],
         ];
     }
 
