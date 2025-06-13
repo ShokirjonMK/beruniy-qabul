@@ -73,8 +73,12 @@ if ($student->edu_type_id == 1) {
                 <h6><?= Yii::t("app", "a112") ?></h6>
                 <span></span>
             </div>
-            <?php if ($t) : ?>
-                <?= $this->render('_contract'); ?>
+            <?php if ($t && $online) : ?>
+                <?php if ($student->edu_type_id == 1) : ?>
+                    <?= $this->render('_contract'); ?>
+                <?php else: ?>
+                    <?= $this->render('_no-contract'); ?>
+                <?php endif; ?>
             <?php else: ?>
                 <div class="down_box top30">
                     <div class="page_notfound">
