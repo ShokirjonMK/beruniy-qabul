@@ -213,11 +213,15 @@ class Exam extends \yii\db\ActiveRecord
            'student_id' => $student->id,
            'edu_direction_id' => $student->edu_direction_id,
            'is_deleted' => 0,
-           'status' => 1
         ]);
         if (!$model) {
             $errors[] = ['Imtixonga qayta ruxsat berish mumkin emas.'];
         } else {
+            if (!in_array($model->status, [2,4])) {
+                $errors[] = ['Imtixonga qayta ruxsat berish mumkin emas.'];
+                $transaction->rollBack();
+                return ['is_ok' => false , 'errors' => $errors];
+            }
             $subjects = $model->examSubjects;
             foreach ($subjects as $subject) {
                 $subject->ball = 0;
