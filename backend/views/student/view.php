@@ -757,7 +757,7 @@ if ($telegramEduDirection) {
                                         echo "Chala user";
                                     } ?> ma'lumotlari</h6>
             <div class="d-flex gap-3">
-                <?php if (isset($eduModel) && $eduType->id == 1 && $eduModel->status > 1) : ?>
+                <?php if (isset($eduModel) && $eduType->id == 1 && ($eduModel->status == 2 || $eduModel->status == 4)) : ?>
                     <?php if (permission('student', 'exam-change')): ?>
                         <h6 class="title-link">
                             <?= Html::a(
