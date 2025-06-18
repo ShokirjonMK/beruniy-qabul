@@ -23,9 +23,9 @@ class MenuController extends Controller
     {
         CrmPush::updateAll(
             ['status' => 0],
-            ['and', ['lead_id' => 25888859], ['<>', 'type', 1]]
+            ['and', ['lead_id' => 25888723], ['<>', 'type', 1]]
         );
-        dd(1111112);
+        dd(12222);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
