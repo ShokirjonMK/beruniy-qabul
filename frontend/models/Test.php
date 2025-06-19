@@ -84,7 +84,7 @@ class Test extends Model
                     } else {
                         $i = 1;
                         foreach ($subjects as $subject) {
-                            ExamStudentQuestions::updateAll(['status' => 0 , 'is_deleted' => time()] , ['user_id' => $user->id ,'exam_subject_id' => $subject->id, 'status' => 1, 'is_deleted' => 0]);
+                            ExamStudentQuestions::updateAll(['status' => 0 , 'is_deleted' => 1] , ['user_id' => $user->id ,'exam_subject_id' => $subject->id, 'status' => 1, 'is_deleted' => 0]);
                             $questionCount = $subject->directionSubject->count;
                             $query = Questions::find()
                                 ->where([
