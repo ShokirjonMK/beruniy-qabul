@@ -21,11 +21,8 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        CrmPush::updateAll(
-            ['status' => 0],
-            ['and', ['lead_id' => 25897225], ['<>', 'type', 1]]
-        );
-        dd(444);
+        CrmPush::updateAll(['is_deleted' => 0], ['is_deleted' => 1]);
+        dd(111111);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
