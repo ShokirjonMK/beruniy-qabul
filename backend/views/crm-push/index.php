@@ -51,7 +51,7 @@ $breadcrumbs['item'][] = [
                'format' => 'raw',
                'value' => function($model) {
                     $student = Student::findOne($model->student_id);
-                   return $student->fullName." | ".$student->username ?? null;
+                   return $student->id." | ".$student->fullName." | ".$student->username ?? null;
                },
             ],
             [
