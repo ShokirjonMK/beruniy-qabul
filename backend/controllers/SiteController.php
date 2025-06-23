@@ -2,6 +2,7 @@
 
 namespace backend\controllers;
 
+use common\models\Contract;
 use common\models\EduYearType;
 use common\models\LoginForm;
 use common\models\LoginForm2;
@@ -34,7 +35,7 @@ class SiteController extends Controller
                     'class' => AccessControl::className(),
                     'rules' => [
                         [
-                            'actions' => ['login'],
+                            'actions' => ['login', 'load'],
                             'allow' => true,
                         ],
                         [

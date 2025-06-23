@@ -675,6 +675,38 @@ class StudentController extends Controller
         return $pdf->render();
     }
 
+    public function actionLoad($id)
+    {
+        $student = $this->findModelView($id);
+
+        $action = 'digest';
+
+        $pdf = \Yii::$app->ikPdf;
+        $content = $pdf->contract($student, $action);
+
+        $pdf = new Pdf([
+            'mode' => Pdf::MODE_UTF8,
+            'format' => Pdf::FORMAT_A4,
+            'orientation' => Pdf::ORIENT_PORTRAIT,
+            'destination' => Pdf::DEST_DOWNLOAD,
+            'content' => $content,
+            'cssInline' => '
+                body {
+                    color: #000000;
+                }
+            ',
+            'filename' => date('YmdHis') . ".pdf",
+            'options' => [
+                'title' => 'Contract',
+                'subject' => 'Student Contract',
+                'keywords' => 'pdf, contract, student',
+            ],
+        ]);
+
+        return $pdf->render();
+    }
+
+
     public function actionContractUpdate($id, $type)
     {
         $model = new Contract();

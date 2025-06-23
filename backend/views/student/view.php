@@ -1247,6 +1247,14 @@ if ($telegramEduDirection) {
                                             </h6>
                                         </div>
                                     </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="view-info-right">
+                                            <p>Ma'lumotnoma</p>
+                                            <h6>
+                                                <h6><a href="<?= Url::to(['student/load', 'id' => $model->id]) ?>">Yuklash uchun bosing</a></h6>
+                                            </h6>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
