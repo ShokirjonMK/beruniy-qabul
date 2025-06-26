@@ -22,7 +22,12 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $chat_id = 1841508935;
-        $url  = "http://localhost/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
+        $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
+        $pdfContent = file_get_contents($url); // Faylni yuklab olish
+        if ($pdfContent === false) {
+            echo '❌ ERROR: Faylni yuklab olishda xatolik yuz berdi.' . PHP_EOL;
+            die;
+        }
         $caption=  "Test Document";
         $curl = curl_init();
         curl_setopt_array($curl, array(
