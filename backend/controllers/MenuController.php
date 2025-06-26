@@ -43,7 +43,7 @@ class MenuController extends Controller
             CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
             CURLOPT_POSTFIELDS => http_build_query([
                 'chat_id' => $chat_id,
-                'document' => new \CURLFile($tempPath),
+                'document' => $url,
                 'caption' => $caption,
             ]),
         ));
