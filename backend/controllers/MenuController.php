@@ -23,8 +23,18 @@ class MenuController extends Controller
     {
         $chat_id = 1841508935;
         $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
-        $url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
         $caption=  "Test Document";
+
+        $tempPath = \Yii::getAlias('@runtime') . '/temp_file_' . time() . '.pdf';
+        file_put_contents($tempPath, file_get_contents($url));
+
+        // Agar fayl saqlanmagan bo‘lsa, chiqib ketamiz
+        if (!file_exists($tempPath)) {
+          var_dump("Fayl saqlanmadi!");
+        }else{
+            // Fayl muvaffaqiyatli saqlandi
+            echo "Fayl muvaffaqiyatli saqlandi: " . $tempPath . PHP_EOL;
+        }
 
         $curl = curl_init();
         curl_setopt_array($curl, array(
@@ -34,7 +44,7 @@ class MenuController extends Controller
             CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
             CURLOPT_POSTFIELDS => http_build_query([
                 'chat_id' => $chat_id,
-                'document' => $url,
+                'document' => new \CURLFile($tempPath),
                 'caption' => $caption,
             ]),
         ));
