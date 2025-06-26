@@ -484,7 +484,7 @@ class Bot extends Model
 
                                 $curl = curl_init();
                                 curl_setopt_array($curl, array(
-                                    CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
+                                    CURLOPT_URL => 'https://api.telegram.org/bot'.$telegram->botToken.'/sendDocument',
                                     CURLOPT_RETURNTRANSFER => true,
                                     CURLOPT_POST => true,
                                     CURLOPT_SSL_VERIFYPEER => false,
