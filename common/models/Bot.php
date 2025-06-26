@@ -426,7 +426,14 @@ class Bot extends Model
                         if (!is_dir($uploadDir)) {
                             mkdir($uploadDir, 0777, true);
                         }
-                        $fileName = preg_replace('/[^a-zA-Z]/', '', $student->fullName).".pdf";
+                        $fullName = $student->fullName;
+
+                        $fullName = str_replace(' ', '_', $fullName);
+
+                        $cleanName = preg_replace('/[^\p{L}_]/u', '', $fullName);
+
+                        $fileName = $cleanName . "__shartnoma.pdf";
+                        
                         $filePath = $uploadDir .$fileName;
 
                         $pdf = new Pdf([
