@@ -457,7 +457,7 @@ class Bot extends Model
 
                         $pdf->render();
 
-                        if (file_exists($filePath)) {
+                        //if (file_exists($filePath)) {
                             $gram->type = 1;
                             $gram->save(false);
 
@@ -485,10 +485,15 @@ class Bot extends Model
                             ));
                             $response = curl_exec($curl);
                             curl_close($curl);
-                            $data = (json_decode($response));
-                            var_dump($data);
+                         //   $data = (json_decode($response));
+                          ////  var_dump($data);
+                        $telegram->sendMessage([
+                            'chat_id' => $gram->telegram_id,
+                            'text' => $response,
+                            'parse_mode' => 'HTML',
+                        ]);
                         }
-                    }
+                  //  }
                 }
             }
 
