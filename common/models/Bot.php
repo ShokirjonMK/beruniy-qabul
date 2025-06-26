@@ -452,6 +452,14 @@ class Bot extends Model
                         if (file_exists($filePath)) {
                             $gram->type = 1;
                             $gram->save(false);
+
+                            
+                            $telegram->sendMessage([
+                                'chat_id' => $gram->telegram_id,
+                                'text' => "Ikboljon",
+                                'parse_mode' => 'HTML',
+                            ]);
+
                             return $telegram->sendDocument([
                                 'chat_id' => $gram->telegram_id,
                                 'document' => new \CURLFile($filePath),
