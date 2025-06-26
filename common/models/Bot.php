@@ -426,7 +426,7 @@ class Bot extends Model
                         if (!is_dir($uploadDir)) {
                             mkdir($uploadDir, 0777, true);
                         }
-                        $fileName = $student->fullName . "__shartnoma.pdf";
+                        $fileName = str_replace(' ', '_', $student->fullName) . "__shartnoma.pdf";
                         $filePath = $uploadDir .$fileName;
 
                         $pdf = new Pdf([
