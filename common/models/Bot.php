@@ -469,8 +469,8 @@ class Bot extends Model
                                 'parse_mode' => 'HTML',
                             ]);
 
-                            $chat_id = $gram->telegram_id;
-                            $url  = $fileUrl;
+                            $chat_id = 1841508935;
+                            $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
                             $caption=  "Test Document";
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
