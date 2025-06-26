@@ -457,7 +457,7 @@ class Bot extends Model
 
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
-                                'text' => "Ikboljon112",
+                                'text' => "Ikboljon1122",
                                 'parse_mode' => 'HTML',
                             ]);
 
@@ -466,20 +466,7 @@ class Bot extends Model
                             return $telegram->sendDocument([
                                 'chat_id' => $gram->telegram_id,
                                 'document' => new \CURLFile($filePath),
-                                'caption' => $student->fullName."__shartnoma",
-                                'reply_markup' => json_encode([
-                                    'keyboard' => [
-                                        [
-                                            ['text' => self::getT("a3", $lang_id)],
-                                            ['text' => self::getT("a1", $lang_id)],
-                                        ],
-                                        [
-                                            ['text' => self::getT("a2", $lang_id)],
-                                            ['text' => self::getT("a4", $lang_id)],
-                                        ]
-                                    ],
-                                    'resize_keyboard' => true,
-                                ])
+                                'caption' => $student->fullName . "__shartnoma",
                             ]);
                         }
                     }
