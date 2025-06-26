@@ -2,6 +2,7 @@
 
 namespace common\models;
 
+use kartik\mpdf\Pdf;
 use Yii;
 use yii\base\Model;
 use yii\httpclient\Client;
@@ -66,6 +67,9 @@ class Bot extends Model
                 } elseif ($text == '/langupdate' || $text == self::getT("a4", $lang_id)) {
                     self::sendLang($telegram, $lang_id, $gram);
                     return true;
+                } elseif ($text == '/contract' || $text == self::getT("a59", $lang_id)) {
+                    self::sendContract($telegram, $lang_id, $gram);
+                    return true;
                 }
             }
 
@@ -80,8 +84,9 @@ class Bot extends Model
                     self::signUp($telegram, $lang_id, $gram);
                     break;
                 case 4:
-                    // Bot tilini ozgartirish
                     self::langUpdate($telegram, $lang_id, $gram);
+                case 5:
+                    self::sendContractPdf($telegram, $lang_id, $gram);
                 default:
                     break;
             }
@@ -312,6 +317,185 @@ class Bot extends Model
             ]);
         }
     }
+
+    public static function sendContract($telegram, $lang_id, $gram)
+    {
+        try {
+            $gram->type = 5;
+            $gram->save(false);
+
+            return $telegram->sendMessage([
+                'chat_id' => $gram->telegram_id,
+                'text' => self::getT("a16", $lang_id), // Pasport Seriya va raqamini kiriting
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'keyboard' => [
+                        [
+                            ['text' => self::getT("a12", $lang_id)],
+                        ],
+                    ],
+                    'resize_keyboard' => true,
+                ])
+            ]);
+        } catch (\Exception $e) {
+            return $telegram->sendMessage([
+                'chat_id' => self::CHAT_ID,
+                'text' => ['Ik main :( '.$e->getMessage()],
+            ]);
+        }
+    }
+
+    public static function sendContractPdf($telegram, $lang_id, $gram)
+    {
+        try {
+            $text = $telegram->input->message->text;
+
+            if ($text == self::getT("a12", $lang_id)) {
+                $gram->type = 1;
+                $gram->save(false);
+
+                return $telegram->sendMessage([
+                    'chat_id' => $gram->telegram_id,
+                    'text' => self::getT("a20", $gram->lang_id),
+                    'parse_mode' => 'HTML',
+                    'reply_markup' => json_encode([
+                        'keyboard' => [
+                            [
+                                ['text' => self::getT("a1", $gram->lang_id)],
+                                ['text' => self::getT("a2", $gram->lang_id)],
+                            ],
+                            [
+                                ['text' => self::getT("a4", $gram->lang_id)],
+                                ['text' => self::getT("a3", $gram->lang_id)],
+                            ]
+                        ],
+                        'resize_keyboard' => true,
+                    ])
+                ]);
+            }
+
+            if (self::seria($text)) {
+                $text = strtoupper($text);
+                $passport_serial = substr($text, 0, 2);
+                $passport_number = substr($text, 2, 9);
+
+                $student = Student::find()
+                    ->joinWith('user')
+                    ->where([
+                        'student.passport_serial' => $passport_serial,
+                        'student.passport_number' => $passport_number,
+                        'user.status' => [9,10],
+                    ])
+                    ->andWhere(['user.step' => 5])
+                    ->one();
+                if ($student) {
+                    $query = false;
+                    if ($student->edu_type_id == 1) {
+                        $query = Exam::findOne([
+                            'student_id' => $student->id,
+                            'status' => 3,
+                            'is_deleted' => 0,
+                        ]);
+                    } elseif ($student->edu_type_id == 2) {
+                        $query = StudentPerevot::findOne([
+                            'student_id' => $student->id,
+                            'file_status' => 2,
+                            'is_deleted' => 0,
+                        ]);
+                    } elseif ($student->edu_type_id == 3) {
+                        $query = StudentDtm::findOne([
+                            'student_id' => $student->id,
+                            'file_status' => 2,
+                            'is_deleted' => 0,
+                        ]);
+                    } elseif ($student->edu_type_id == 4) {
+                        $query = StudentMaster::findOne([
+                            'student_id' => $student->id,
+                            'file_status' => 2,
+                            'is_deleted' => 0,
+                        ]);
+                    }
+
+                    if ($query) {
+                        $action = 'con3';
+
+                        $pdf = \Yii::$app->ikPdf;
+                        $content = $pdf->contract($student, $action);
+
+                        $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
+                        if (!is_dir($uploadDir)) {
+                            mkdir($uploadDir, 0777, true);
+                        }
+                        $filePath = $uploadDir . $student->fullName . "__shartnoma.pdf";
+
+                        $pdf = new Pdf([
+                            'mode' => Pdf::MODE_UTF8,
+                            'format' => Pdf::FORMAT_A4,
+                            'orientation' => Pdf::ORIENT_PORTRAIT,
+                            'destination' => Pdf::DEST_FILE,
+                            'content' => $content,
+                            'cssInline' => '
+                                body {
+                                    color: #000000;
+                                }
+                            ',
+                            'filename' => $filePath,
+                            'options' => [
+                                'title' => 'Contract',
+                                'subject' => 'Student Contract',
+                                'keywords' => 'pdf, contract, student',
+                            ],
+                        ]);
+
+                        $pdf->render();
+
+                        if (file_exists($filePath)) {
+                            $gram->type = 1;
+                            $gram->save(false);
+                            return $telegram->sendDocument([
+                                'chat_id' => $gram->telegram_id,
+                                'document' => new \CURLFile($filePath),
+                                'caption' => $student->fullName."__shartnoma",
+                                'reply_markup' => json_encode([
+                                    'keyboard' => [
+                                        [
+                                            ['text' => self::getT("a3", $lang_id)],
+                                            ['text' => self::getT("a1", $lang_id)],
+                                        ],
+                                        [
+                                            ['text' => self::getT("a2", $lang_id)],
+                                            ['text' => self::getT("a4", $lang_id)],
+                                        ]
+                                    ],
+                                    'resize_keyboard' => true,
+                                ])
+                            ]);
+                        }
+                    }
+                }
+            }
+
+            return $telegram->sendMessage([
+                'chat_id' => $gram->telegram_id,
+                'text' => self::getT("a17", $lang_id),
+                'parse_mode' => 'HTML',
+                'reply_markup' => json_encode([
+                    'keyboard' => [
+                        [
+                            ['text' => self::getT("a12", $lang_id)],
+                        ],
+                    ],
+                    'resize_keyboard' => true,
+                ])
+            ]);
+        } catch (\Exception $e) {
+            return $telegram->sendMessage([
+                'chat_id' => self::CHAT_ID,
+                'text' => ['Ik main :( '.$e->getMessage()],
+            ]);
+        }
+    }
+
 
     public static function sendDirections($telegram, $lang_id, $gram)
     {
@@ -2942,7 +3126,17 @@ class Bot extends Model
                 "uz" => "📚 <i>Ta'lim yo'nalishlari ro'yxati:</i>\n",
                 "en" => "📚 <i>List of educational programs:</i>\n",
                 "ru" => "📚 <i>Список образовательных направлений:</i>\n",
-            ]
+            ],
+            "a59" => [
+                "uz" => "📄 Shartnoma olish",
+                "en" => "📄 Contract download",
+                "ru" => "📄 Скачать контракт",
+            ],
+            "a60" => [
+                "uz" => "📄 Shartnoma yuklab olish uchun ",
+                "en" => "📄 Contract download",
+                "ru" => "📄 Скачать контракт",
+            ],
         ];
         if (isset($array[$text])) {
             return isset($array[$text][$lang]) ? $array[$text][$lang] : $text;
