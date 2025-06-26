@@ -464,7 +464,7 @@ class Bot extends Model
                             $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
                             $chat_id = $gram->telegram_id;
-                            $caption=  "Test Document";
+                            $caption=  "Shartnoma";
 
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
