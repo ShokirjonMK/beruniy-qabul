@@ -473,7 +473,6 @@ class Bot extends Model
                             $url  = $fileUrl;
                             $caption=  "Test Document";
 
-
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
                                 CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
@@ -482,7 +481,7 @@ class Bot extends Model
                                 CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
                                 CURLOPT_POSTFIELDS => http_build_query([
                                     'chat_id' => $chat_id,
-                                    'document' => $url,
+                                    'document' => $fileUrl,
                                     'caption' => $caption,
                                 ]),
                             ));
