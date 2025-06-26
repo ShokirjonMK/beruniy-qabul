@@ -472,10 +472,9 @@ class Bot extends Model
                             $chat_id = $gram->telegram_id;
                             $url  = $fileUrl;
                             $caption=  "Test Document";
-                            $keyboards = null;
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://api.telegram.org/bot'.$telegram->botToken.'/sendDocument?chat_id=' . $chat_id . '&document=' . $url . '&caption=' . $caption . '&reply_markup=' . $keyboards,
+                                CURLOPT_URL => 'https://api.telegram.org/bot'.$telegram->botToken.'/sendDocument?chat_id=' . $chat_id . '&document=' . $url . '&caption=' . $caption,
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_ENCODING => '',
                                 CURLOPT_MAXREDIRS => 10,
