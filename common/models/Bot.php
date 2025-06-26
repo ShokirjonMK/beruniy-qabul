@@ -463,10 +463,7 @@ class Bot extends Model
 
                             $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
-
-
                             $chat_id = $gram->telegram_id;
-                            $url  = $fileUrl;
                             $caption=  "Test Document";
 
                             $curl = curl_init();
@@ -484,6 +481,7 @@ class Bot extends Model
                             $response = curl_exec($curl);
                             $info = curl_getinfo($curl);
                             curl_close($curl);
+                            return true;
                         }
                     }
                 }
