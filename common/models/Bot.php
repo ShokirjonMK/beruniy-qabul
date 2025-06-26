@@ -457,15 +457,15 @@ class Bot extends Model
 
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
-                                'text' => "Ikboljon11",
+                                'text' => "Ikboljon112",
                                 'parse_mode' => 'HTML',
                             ]);
 
-                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
+//                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
                             return $telegram->sendDocument([
                                 'chat_id' => $gram->telegram_id,
-                                'document' => new \CURLFile($fileUrl),
+                                'document' => new \CURLFile($filePath),
                                 'caption' => $student->fullName."__shartnoma",
                                 'reply_markup' => json_encode([
                                     'keyboard' => [
