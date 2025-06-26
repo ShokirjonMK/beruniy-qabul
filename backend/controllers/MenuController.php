@@ -22,7 +22,7 @@ class MenuController extends Controller
     public function actionIndex()
     {
         $chat_id = 1841508935;
-        $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
+        $url  = "http://localhost/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
         $caption=  "Test Document";
         $curl = curl_init();
         curl_setopt_array($curl, array(
