@@ -25,24 +25,28 @@ class MenuController extends Controller
         $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
         $url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
         $caption=  "Test Document";
-        
+
         $curl = curl_init();
         curl_setopt_array($curl, array(
             CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument?chat_id=' . $chat_id . '&document=' . $url . '&caption=' . $caption,
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST => true,
-            CURLOPT_POSTFIELDS => [
+            CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
+            CURLOPT_POSTFIELDS => http_build_query([
                 'chat_id' => $chat_id,
-                'document' => $url,
-                'caption' => $caption
-            ],
+                'document' => $documentUrl,
+                'caption' => $caption,
+            ]),
         ));
         $response = curl_exec($curl);
+        $info = curl_getinfo($curl);
 
         if ($response === false) {
             echo '❌ CURL ERROR: ' . curl_error($curl) . PHP_EOL;
+            echo '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
         } else {
             echo '✅ RESPONSE: ' . $response . PHP_EOL;
+            echo '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
         }
 
         curl_close($curl);
