@@ -308,7 +308,7 @@ class CabinetController extends Controller
                     color: #000000;
                 }
             ',
-            'filename' => date('YmdHis') . ".pdf",
+            'filename' => $student->fullName."__shartnoma.pdf",
             'options' => [
                 'title' => 'Contract',
                 'subject' => 'Student Contract',
@@ -342,7 +342,7 @@ class CabinetController extends Controller
                     color: #000000;
                 }
             ',
-            'filename' => date('YmdHis') . ".pdf",
+            'filename' => $student->fullName."__ma'lumotnoma.pdf",
             'options' => [
                 'title' => 'Contract',
                 'subject' => 'Student Contract',
