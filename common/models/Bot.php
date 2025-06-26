@@ -454,14 +454,13 @@ class Bot extends Model
                             $gram->type = 1;
                             $gram->save(false);
 
+                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
-                                'text' => "Ikboljon112232222",
+                                'text' => $fileUrl,
                                 'parse_mode' => 'HTML',
                             ]);
-
-                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
                             $chat_id = $gram->telegram_id;
                             $url  = $fileUrl;
