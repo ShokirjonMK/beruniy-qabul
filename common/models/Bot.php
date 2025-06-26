@@ -457,7 +457,7 @@ class Bot extends Model
 
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
-                                'text' => "Ikboljon11223",
+                                'text' => "Ikboljon112232222",
                                 'parse_mode' => 'HTML',
                             ]);
 
