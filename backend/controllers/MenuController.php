@@ -36,9 +36,16 @@ class MenuController extends Controller
             ],
         ));
         $response = curl_exec($curl);
+
+        if ($response === false) {
+            echo '❌ CURL ERROR: ' . curl_error($curl) . PHP_EOL;
+        } else {
+            echo '✅ RESPONSE: ' . $response . PHP_EOL;
+        }
+
         curl_close($curl);
 
-        dd($response);
+        die;
 
 
 
