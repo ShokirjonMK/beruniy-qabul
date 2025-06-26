@@ -40,7 +40,7 @@ class MenuController extends Controller
 
 
 
-        dd(121);
+        dd($response);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
