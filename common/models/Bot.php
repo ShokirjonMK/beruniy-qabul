@@ -423,93 +423,101 @@ class Bot extends Model
                     }
 
                     if ($query) {
-                        $action = 'con3';
+                        $actions = ['con3', 'digest'];
 
-                        $pdf = \Yii::$app->ikPdf;
-                        $content = $pdf->contract($student, $action);
+                        foreach ($actions as $item) {
+                            $action = $item;
+                            $pdf = \Yii::$app->ikPdf;
+                            $content = $pdf->contract($student, $action);
 
-                        $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
-                        if (!is_dir($uploadDir)) {
-                            mkdir($uploadDir, 0777, true);
-                        }
-                        $fullName = $student->fullName;
+                            $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
+                            if (!is_dir($uploadDir)) {
+                                mkdir($uploadDir, 0777, true);
+                            }
+                            $fullName = $student->fullName;
 
-                        $fullName = str_replace(' ', '_', $fullName);
+                            $fullName = str_replace(' ', '_', $fullName);
 
-                        $cleanName = preg_replace('/[^\p{L}_]/u', '', $fullName);
+                            $cleanName = preg_replace('/[^\p{L}_]/u', '', $fullName);
 
-                        $fileName = $cleanName . "__shartnoma.pdf";
+                            if ($action == 'con3') {
+                                $fileName = $cleanName . "__shartnoma.pdf";
+                                $caption=  "Shartnoma";
+                            } else {
+                                $fileName = $cleanName . "__ma'lumotnoma.pdf";
+                                $caption=  "Ma'lumotnoma";
+                            }
 
-                        $filePath = $uploadDir .$fileName;
+                            $filePath = $uploadDir .$fileName;
 
-                        $pdf = new Pdf([
-                            'mode' => Pdf::MODE_UTF8,
-                            'format' => Pdf::FORMAT_A4,
-                            'orientation' => Pdf::ORIENT_PORTRAIT,
-                            'destination' => Pdf::DEST_FILE,
-                            'content' => $content,
-                            'cssInline' => '
+                            $pdf = new Pdf([
+                                'mode' => Pdf::MODE_UTF8,
+                                'format' => Pdf::FORMAT_A4,
+                                'orientation' => Pdf::ORIENT_PORTRAIT,
+                                'destination' => Pdf::DEST_FILE,
+                                'content' => $content,
+                                'cssInline' => '
                                 body {
                                     color: #000000;
                                 }
                             ',
-                            'filename' => $filePath,
-                            'options' => [
-                                'title' => 'Contract',
-                                'subject' => 'Student Contract',
-                                'keywords' => 'pdf, contract, student',
-                            ],
-                        ]);
-
-                        $pdf->render();
-
-                        if (file_exists($filePath)) {
-                            $gram->type = 1;
-                            $gram->save(false);
-
-                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
-
-                            $chat_id = $gram->telegram_id;
-                            $caption=  "Shartnoma";
-
-                            $curl = curl_init();
-                            curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
-                                CURLOPT_RETURNTRANSFER => true,
-                                CURLOPT_POST => true,
-                                CURLOPT_SSL_VERIFYPEER => false,
-                                CURLOPT_POSTFIELDS => http_build_query([
-                                    'chat_id' => $chat_id,
-                                    'document' => $fileUrl,
-                                    'caption' => $caption,
-                                ]),
-                            ));
-                            $response = curl_exec($curl);
-                            $info = curl_getinfo($curl);
-                            curl_close($curl);
-
-                            return $telegram->sendMessage([
-                                'chat_id' => $gram->telegram_id,
-                                'text' => self::getT("a20", $gram->lang_id),
-                                'parse_mode' => 'HTML',
-                                'reply_markup' => json_encode([
-                                    'keyboard' => [
-                                        [
-                                            ['text' => self::getT("a1", $gram->lang_id)],
-                                            ['text' => self::getT("a2", $gram->lang_id)],
-                                        ],
-                                        [
-                                            ['text' => self::getT("a4", $gram->lang_id)],
-                                            ['text' => self::getT("a3", $gram->lang_id)],
-                                        ],
-                                        [
-                                            ['text' => self::getT("a59", $gram->lang_id)],
-                                        ]
-                                    ],
-                                    'resize_keyboard' => true,
-                                ])
+                                'filename' => $filePath,
+                                'options' => [
+                                    'title' => 'Contract',
+                                    'subject' => 'Student Contract',
+                                    'keywords' => 'pdf, contract, student',
+                                ],
                             ]);
+
+                            $pdf->render();
+
+                            if (file_exists($filePath)) {
+                                $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
+
+                                $chat_id = $gram->telegram_id;
+
+                                $curl = curl_init();
+                                curl_setopt_array($curl, array(
+                                    CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
+                                    CURLOPT_RETURNTRANSFER => true,
+                                    CURLOPT_POST => true,
+                                    CURLOPT_SSL_VERIFYPEER => false,
+                                    CURLOPT_POSTFIELDS => http_build_query([
+                                        'chat_id' => $chat_id,
+                                        'document' => $fileUrl,
+                                        'caption' => $caption,
+                                    ]),
+                                ));
+                                $response = curl_exec($curl);
+                                $info = curl_getinfo($curl);
+                                curl_close($curl);
+                            }
                         }
+                        
+                        $gram->type = 1;
+                        $gram->save(false);
+
+                        return $telegram->sendMessage([
+                            'chat_id' => $gram->telegram_id,
+                            'text' => self::getT("a20", $gram->lang_id),
+                            'parse_mode' => 'HTML',
+                            'reply_markup' => json_encode([
+                                'keyboard' => [
+                                    [
+                                        ['text' => self::getT("a1", $gram->lang_id)],
+                                        ['text' => self::getT("a2", $gram->lang_id)],
+                                    ],
+                                    [
+                                        ['text' => self::getT("a4", $gram->lang_id)],
+                                        ['text' => self::getT("a3", $gram->lang_id)],
+                                    ],
+                                    [
+                                        ['text' => self::getT("a59", $gram->lang_id)],
+                                    ]
+                                ],
+                                'resize_keyboard' => true,
+                            ])
+                        ]);
                     }
                 }
             }
@@ -533,6 +541,12 @@ class Bot extends Model
                 'text' => ['Ik main :( '.$e->getMessage()],
             ]);
         }
+    }
+
+
+    public static function url()
+    {
+
     }
 
 
