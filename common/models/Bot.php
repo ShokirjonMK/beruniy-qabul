@@ -516,7 +516,7 @@ class Bot extends Model
                             }
                         }
 
-                        $sendText = "Tabriklaymiz siz TIPU universiteti ".$eduDirection." yo'nalishi talabasi bo'ldingiz😊";
+                        $sendText = "Tabriklaymiz siz ARBU universiteti ".$eduDirection." yo'nalishi talabasi bo'ldingiz😊";
 
                         return $telegram->sendMessage([
                             'chat_id' => $gram->telegram_id,
