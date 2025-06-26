@@ -274,7 +274,10 @@ class Bot extends Model
                         [
                             ['text' => self::getT("a4", $gram->lang_id)],
                             ['text' => self::getT("a3", $gram->lang_id)],
-                        ]
+                        ],
+                        [
+                            ['text' => self::getT("a59", $gram->lang_id)],
+                        ],
                     ],
                     'resize_keyboard' => true,
                 ])
@@ -367,6 +370,9 @@ class Bot extends Model
                             [
                                 ['text' => self::getT("a4", $gram->lang_id)],
                                 ['text' => self::getT("a3", $gram->lang_id)],
+                            ],
+                            [
+                                ['text' => self::getT("a59", $gram->lang_id)],
                             ]
                         ],
                         'resize_keyboard' => true,
@@ -481,7 +487,7 @@ class Bot extends Model
                             $response = curl_exec($curl);
                             $info = curl_getinfo($curl);
                             curl_close($curl);
-                            
+
                             return $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
                                 'text' => self::getT("a20", $gram->lang_id),
@@ -495,6 +501,9 @@ class Bot extends Model
                                         [
                                             ['text' => self::getT("a4", $gram->lang_id)],
                                             ['text' => self::getT("a3", $gram->lang_id)],
+                                        ],
+                                        [
+                                            ['text' => self::getT("a59", $gram->lang_id)],
                                         ]
                                     ],
                                     'resize_keyboard' => true,
@@ -613,6 +622,9 @@ class Bot extends Model
                         [
                             ['text' => self::getT("a4", $gram->lang_id)],
                             ['text' => self::getT("a3", $gram->lang_id)],
+                        ],
+                        [
+                            ['text' => self::getT("a59", $gram->lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
