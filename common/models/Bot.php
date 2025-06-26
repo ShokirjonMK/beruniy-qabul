@@ -457,7 +457,7 @@ class Bot extends Model
 
                         $pdf->render();
 
-                        //if (file_exists($filePath)) {
+                        if (file_exists($filePath)) {
                             $gram->type = 1;
                             $gram->save(false);
 
@@ -469,31 +469,26 @@ class Bot extends Model
                                 'parse_mode' => 'HTML',
                             ]);
 
-                            $chat_id = 1841508935;
-                            $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
+                            $chat_id = $gram->telegram_id;
+                            $url  = $fileUrl;
                             $caption=  "Test Document";
+
+
                             $curl = curl_init();
                             curl_setopt_array($curl, array(
-                                CURLOPT_URL => 'https://api.telegram.org/bot'.$telegram->botToken.'/sendDocument?chat_id=' . $chat_id . '&document=' . $url . '&caption=' . $caption,
+                                CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_POST => true,
-                                CURLOPT_POSTFIELDS => [
+                                CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
+                                CURLOPT_POSTFIELDS => http_build_query([
                                     'chat_id' => $chat_id,
                                     'document' => $url,
-                                    'caption' => $caption
-                                ],
+                                    'caption' => $caption,
+                                ]),
                             ));
-                            $response = curl_exec($curl);
-                            curl_close($curl);
-                         //   $data = (json_decode($response));
-                          ////  var_dump($data);
-                        $telegram->sendMessage([
-                            'chat_id' => $gram->telegram_id,
-                            'text' => $response,
-                            'parse_mode' => 'HTML',
-                        ]);
+                            //bosinchi
                         }
-                  //  }
+                    }
                 }
             }
 
