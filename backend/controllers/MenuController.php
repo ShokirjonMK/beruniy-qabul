@@ -21,6 +21,26 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
+        $chat_id = 1841508935;
+        $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
+        $caption=  "Test Document";
+        $curl = curl_init();
+        curl_setopt_array($curl, array(
+            CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument?chat_id=' . $chat_id . '&document=' . $url . '&caption=' . $caption,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_ENCODING => '',
+            CURLOPT_MAXREDIRS => 10,
+            CURLOPT_TIMEOUT => 0,
+            CURLOPT_FOLLOWLOCATION => true,
+            CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+            CURLOPT_CUSTOMREQUEST => 'GET',
+        ));
+        $response = curl_exec($curl);
+        curl_close($curl);
+
+
+
+        dd(121);
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
