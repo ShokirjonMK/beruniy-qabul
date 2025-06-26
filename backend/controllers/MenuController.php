@@ -23,11 +23,8 @@ class MenuController extends Controller
     {
         $chat_id = 1841508935;
         $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
-        $pdfContent = file_get_contents($url); // Faylni yuklab olish
-        if ($pdfContent === false) {
-            echo '❌ ERROR: Faylni yuklab olishda xatolik yuz berdi.' . PHP_EOL;
-            die;
-        }
+        $url = "https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf";
+
         $caption=  "Test Document";
         $curl = curl_init();
         curl_setopt_array($curl, array(
