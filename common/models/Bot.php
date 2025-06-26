@@ -423,7 +423,7 @@ class Bot extends Model
                     }
 
                     if ($query) {
-                        $actions = ['con3', 'digest'];
+                        $actions = ['con3'];
 
                         $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
                         if (!is_dir($uploadDir)) {
