@@ -450,9 +450,7 @@ class Bot extends Model
 
                         $pdf->render();
 
-                        $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
-
-                        if (file_exists($fileUrl)) {
+                        if (file_exists($filePath)) {
                             $gram->type = 1;
                             $gram->save(false);
 
@@ -463,6 +461,7 @@ class Bot extends Model
                                 'parse_mode' => 'HTML',
                             ]);
 
+                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
                             $chat_id = $gram->telegram_id;
                             $url  = $fileUrl;
