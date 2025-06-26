@@ -500,6 +500,7 @@ class Bot extends Model
 
                         $text = self::congratulation($gram, $lang_id);
 
+                        
                         return $telegram->sendMessage([
                             'chat_id' => $gram->telegram_id,
                             'text' => $text,
