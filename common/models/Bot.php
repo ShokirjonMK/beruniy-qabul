@@ -426,7 +426,8 @@ class Bot extends Model
                         if (!is_dir($uploadDir)) {
                             mkdir($uploadDir, 0777, true);
                         }
-                        $filePath = $uploadDir . $student->fullName . "__shartnoma.pdf";
+                        $fileName = $student->fullName . "__shartnoma.pdf";
+                        $filePath = $uploadDir .$fileName;
 
                         $pdf = new Pdf([
                             'mode' => Pdf::MODE_UTF8,
@@ -453,16 +454,18 @@ class Bot extends Model
                             $gram->type = 1;
                             $gram->save(false);
 
-                            
+
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
                                 'text' => "Ikboljon",
                                 'parse_mode' => 'HTML',
                             ]);
 
+                            $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
+
                             return $telegram->sendDocument([
                                 'chat_id' => $gram->telegram_id,
-                                'document' => new \CURLFile($filePath),
+                                'document' => new \CURLFile($fileUrl),
                                 'caption' => $student->fullName."__shartnoma",
                                 'reply_markup' => json_encode([
                                     'keyboard' => [
