@@ -425,20 +425,20 @@ class Bot extends Model
                     if ($query) {
                         $actions = ['con3', 'digest'];
 
+                        $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
+                        if (!is_dir($uploadDir)) {
+                            mkdir($uploadDir, 0777, true);
+                        }
+                        $fullName = $student->fullName;
+
+                        $fullName = str_replace(' ', '_', $fullName);
+
+                        $cleanName = preg_replace('/[^\p{L}_]/u', '', $fullName);
+
                         foreach ($actions as $item) {
                             $action = $item;
                             $pdf = \Yii::$app->ikPdf;
                             $content = $pdf->contract($student, $action);
-
-                            $uploadDir = Yii::getAlias('@backend') . '/web/uploads/contract/';
-                            if (!is_dir($uploadDir)) {
-                                mkdir($uploadDir, 0777, true);
-                            }
-                            $fullName = $student->fullName;
-
-                            $fullName = str_replace(' ', '_', $fullName);
-
-                            $cleanName = preg_replace('/[^\p{L}_]/u', '', $fullName);
 
                             if ($action == 'con3') {
                                 $fileName = $cleanName . "__shartnoma.pdf";
@@ -500,10 +500,10 @@ class Bot extends Model
 
                         $text = self::congratulation($gram, $lang_id);
 
-                        
+
                         return $telegram->sendMessage([
                             'chat_id' => $gram->telegram_id,
-                            'text' => $text,
+                            'text' => 'Ik',
                             'parse_mode' => 'HTML',
                             'reply_markup' => json_encode([
                                 'keyboard' => [
