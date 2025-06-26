@@ -463,11 +463,12 @@ class Bot extends Model
 
                             $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
-                            return $telegram->sendDocument([
+                            $tt =  $telegram->sendDocument([
                                 'chat_id' => $gram->telegram_id,
                                 'document' => $fileUrl,
                                 'caption' => $student->fullName . "__shartnoma",
                             ]);
+                            var_dump($tt);
                         }
                     }
                 }
