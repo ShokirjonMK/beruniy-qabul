@@ -503,13 +503,24 @@ class Bot extends Model
                         $gram->type = 1;
                         $gram->save(false);
 
+                        $direction = $student->eduDirection->direction;
+                        if ($direction) {
+                            if ($lang_id == 1) {
+                                $eduDirection = $direction->code.' - '.$direction->name_uz;
+                            } elseif ($lang_id == 2) {
+                                $eduDirection = $direction->code.' - '.$direction->name_en;
+                            } elseif ($lang_id == 3) {
+                                $eduDirection = $direction->code.' - '.$direction->name_ru;
+                            } else {
+                                $eduDirection = '---';
+                            }
+                        }
 
-//                        $text = self::congratulation($gram, $lang_id);
-
+                        $sendText = "Tabriklaymiz siz TIPU universiteti ".$eduDirection." yo'nalishi talabasi bo'ldingiz😊";
 
                         return $telegram->sendMessage([
                             'chat_id' => $gram->telegram_id,
-                            'text' => 'Ik',
+                            'text' => $sendText,
                             'parse_mode' => 'HTML',
                             'reply_markup' => json_encode([
                                 'keyboard' => [
@@ -2413,100 +2424,6 @@ class Bot extends Model
 
         $text .= "- - - - - -\n";
         $text .= $t['note'];
-        $text .= $t['access'];
-
-        return $text;
-    }
-
-
-    public static function congratulation($gram, $lang_id)
-    {
-        $fullName = $gram->last_name . " " . $gram->first_name . " " . $gram->middle_name;
-        $eduDirection = EduDirection::findOne($gram->edu_direction_id);
-        $phone = preg_replace("/[^0-9]/", "", $gram->phone);
-        $onOff = 'Online';
-
-        $user = self::getUser($gram);
-        $student = $user->student;
-
-        $username = $user->username;
-        $password = $student->password;
-
-        // Matnlar
-        $messages = [
-            1 => [ // O'zbek tili
-                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
-                'success' => "Tabriklaymiz siz TIPU universiteti talabasi bo'ldingiz😊"."\n\n",
-                'fio' => "🎓 <b>F.I.O:</b> ",
-                'passport' => "📑 <b>Pasport ma'lumoti:</b> ",
-                'birthday' => "🗓 <b>Tug'ilgan sana:</b> ",
-                'phone' => "📞 <b>Telefon raqam:</b> ",
-                'direction' => "🔘 <b>Yo'nalish:</b> ",
-                'code' => "🔘 <b>Yo'nalish kodi:</b> ",
-                'eduType' => "🔘 <b>Qabul turi:</b> ",
-                'eduForm' => "🔘 <b>Ta'lim shakli:</b> ",
-                'lang' => "🔘 <b>Ta'lim tili:</b> ",
-                'examType' => "🔘 <b>Imtixon turi:</b> ",
-                'access' => "\n\n🔐 <b>Diqqat!</b> Siz arbu-edu.uz qabul platformasi orqali ham arizangiz holatini kuzatishingiz, shartnomani ko‘rishingiz va yuklab olishingiz mumkin.\n\n🧾 Tizimga kirish uchun:\n🔸 <b>Login:</b> ".$username."🔸 <b>Parol:</b> ".$password
-            ],
-            2 => [ // English
-                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
-                'success' => "Congratulations! You have been admitted as a student of TIPU University😊"."\n\n",
-                'fio' => "🎓 <b>Full Name:</b> ",
-                'passport' => "📑 <b>Passport Info:</b> ",
-                'birthday' => "🗓 <b>Date of Birth:</b> ",
-                'phone' => "📞 <b>Phone number:</b> ",
-                'direction' => "🔘 <b>Field:</b> ",
-                'code' => "🔘 <b>Direction code:</b> ",
-                'eduType' => "🔘 <b>Admission type:</b> ",
-                'eduForm' => "🔘 <b>Education form:</b> ",
-                'lang' => "🔘 <b>Language:</b> ",
-                'examType' => "🔘 <b>Exam type:</b> ",
-                'access' => "\n\n🔐 <b>Attention!</b> You can track your application status, view and download your contract through the admission platform arbu-edu.uz.\n\n🧾 To access the system:\n🔸 <b>Login:</b> ".$username."🔸 <b>Password:</b> ".$password
-            ],
-            3 => [ // Русский
-                'title' => "🏫 <b>ABU RAYHON BERUNIY UNIVERSITETI</b>\n\n",
-                'success' => "Поздравляем! Вы стали студентом университета TIPU😊"."\n\n",
-                'fio' => "🎓 <b>Ф.И.О.:</b> ",
-                'passport' => "📑 <b>Паспортные данные:</b> ",
-                'birthday' => "🗓 <b>Дата рождения:</b> ",
-                'phone' => "📞 <b>Номер телефона:</b> ",
-                'direction' => "🔘 <b>Направление:</b> ",
-                'code' => "🔘 <b>Код направления:</b> ",
-                'eduType' => "🔘 <b>Тип приема:</b> ",
-                'eduForm' => "🔘 <b>Форма обучения:</b> ",
-                'lang' => "🔘 <b>Язык обучения:</b> ",
-                'examType' => "🔘 <b>Тип экзамена:</b> ",
-                'access' => "\n\n🔐 <b>Внимание!</b> Вы можете отслеживать статус своей заявки, просматривать и скачивать контракт через платформу приёма arbu-edu.uz.\n\n🧾 Для входа в систему:\n🔸 <b>Логин:</b> ".$username."🔸 <b>Пароль:</b> ".$password
-            ]
-        ];
-
-        $t = $messages[$lang_id] ?? $messages[1]; // Default: Uzbek
-
-        $text = $t['title'];
-        $text .= $t['success'];
-        $text .= $t['fio'] . $fullName . "\n";
-        $text .= $t['passport'] . $gram->passport_serial . " " . $gram->passport_number . "\n";
-        $text .= $t['birthday'] . date("d-m-Y", strtotime($gram->birthday)) . "\n";
-        $text .= $t['phone'] . $phone . "\n";
-        $text .= "- - - - - -\n";
-
-        if ($gram->exam_type == 1) {
-            $examDate = ExamDate::findOne($gram->exam_date_id);
-            $onOff = "Offline <i>(" . ($lang_id == 1 ? "imtixon sanasi" : ($lang_id == 2 ? "exam date" : "дата экзамена")) . ": " . $examDate->date . ")</i>";
-        }
-
-        $text .= $t['direction'] . ($eduDirection->direction['name_'.self::getSelectLanguageText($lang_id)] ?? '----') . "\n";
-        $text .= $t['code'] . ($eduDirection->direction->code ?? '----') . "\n";
-        $text .= $t['eduType'] . ($eduDirection->eduType['name_'.self::getSelectLanguageText($lang_id)] ?? '----') . "\n";
-        $text .= $t['eduForm'] . ($eduDirection->eduForm['name_'.self::getSelectLanguageText($lang_id)] ?? '----') . "\n";
-        $text .= $t['lang'] . ($eduDirection->lang['name_'.self::getSelectLanguageText($lang_id)] ?? '----') . "\n";
-
-        if ($gram->edu_type_id == 1) {
-            $text .= $t['examType'] . $onOff . "\n";
-        }
-
-        $text .= "- - - - - -\n";
         $text .= $t['access'];
 
         return $text;
