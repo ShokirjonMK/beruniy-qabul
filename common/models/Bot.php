@@ -178,6 +178,9 @@ class Bot extends Model
                                 [
                                     ['text' => self::getT("a2", $lang_id)],
                                     ['text' => self::getT("a4", $lang_id)],
+                                ],
+                                [
+                                    ['text' => self::getT("a59", $lang_id)],
                                 ]
                             ],
                             'resize_keyboard' => true,
@@ -217,6 +220,9 @@ class Bot extends Model
                         [
                             ['text' => self::getT("a2", $lang_id)],
                             ['text' => self::getT("a4", $lang_id)],
+                        ],
+                        [
+                            ['text' => self::getT("a59", $lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
@@ -498,7 +504,7 @@ class Bot extends Model
                         $gram->save(false);
 
 
-                        $text = self::congratulation($gram, $lang_id);
+//                        $text = self::congratulation($gram, $lang_id);
 
 
                         return $telegram->sendMessage([
@@ -599,6 +605,9 @@ class Bot extends Model
                         [
                             ['text' => self::getT("a2", $lang_id)],
                             ['text' => self::getT("a4", $lang_id)],
+                        ],
+                        [
+                            ['text' => self::getT("a59", $lang_id)],
                         ]
                     ],
                     'resize_keyboard' => true,
