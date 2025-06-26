@@ -481,7 +481,25 @@ class Bot extends Model
                             $response = curl_exec($curl);
                             $info = curl_getinfo($curl);
                             curl_close($curl);
-                            return true;
+                            
+                            return $telegram->sendMessage([
+                                'chat_id' => $gram->telegram_id,
+                                'text' => self::getT("a20", $gram->lang_id),
+                                'parse_mode' => 'HTML',
+                                'reply_markup' => json_encode([
+                                    'keyboard' => [
+                                        [
+                                            ['text' => self::getT("a1", $gram->lang_id)],
+                                            ['text' => self::getT("a2", $gram->lang_id)],
+                                        ],
+                                        [
+                                            ['text' => self::getT("a4", $gram->lang_id)],
+                                            ['text' => self::getT("a3", $gram->lang_id)],
+                                        ]
+                                    ],
+                                    'resize_keyboard' => true,
+                                ])
+                            ]);
                         }
                     }
                 }
