@@ -492,7 +492,7 @@ class Bot extends Model
                             }
                             $telegram->sendMessage([
                                 'chat_id' => $gram->telegram_id,
-                                'text' => $fileUrl,
+                                'text' => $text,
                                 'parse_mode' => 'HTML',
                             ]);
                             curl_close($curl);
