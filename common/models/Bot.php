@@ -463,11 +463,7 @@ class Bot extends Model
 
                             $fileUrl = "https://arbu-edu.uz/backend/web/uploads/contract/".$fileName;
 
-                            $telegram->sendMessage([
-                                'chat_id' => $gram->telegram_id,
-                                'text' => $fileUrl,
-                                'parse_mode' => 'HTML',
-                            ]);
+
 
                             $chat_id = $gram->telegram_id;
                             $url  = $fileUrl;
@@ -485,6 +481,21 @@ class Bot extends Model
                                     'caption' => $caption,
                                 ]),
                             ));
+                            $response = curl_exec($curl);
+                            $info = curl_getinfo($curl);
+                            if ($response === false) {
+                                $text = '❌ CURL ERROR: ' . curl_error($curl) . PHP_EOL;
+                                $text.= '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
+                            } else {
+                                $text = '✅ RESPONSE: ' . $response . PHP_EOL;
+                                $text.= '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
+                            }
+                            $telegram->sendMessage([
+                                'chat_id' => $gram->telegram_id,
+                                'text' => $fileUrl,
+                                'parse_mode' => 'HTML',
+                            ]);
+                            curl_close($curl);
                             //bosinchi
                         }
                     }
