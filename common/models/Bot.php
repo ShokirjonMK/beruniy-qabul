@@ -471,7 +471,7 @@ class Bot extends Model
                                 CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
                                 CURLOPT_RETURNTRANSFER => true,
                                 CURLOPT_POST => true,
-                                CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
+                                CURLOPT_SSL_VERIFYPEER => false,
                                 CURLOPT_POSTFIELDS => http_build_query([
                                     'chat_id' => $chat_id,
                                     'document' => $fileUrl,
