@@ -483,20 +483,7 @@ class Bot extends Model
                             ));
                             $response = curl_exec($curl);
                             $info = curl_getinfo($curl);
-                            if ($response === false) {
-                                $text = '❌ CURL ERROR: ' . curl_error($curl) . PHP_EOL;
-                                $text.= '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
-                            } else {
-                                $text = '✅ RESPONSE: ' . $response . PHP_EOL;
-                                $text.= '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
-                            }
-                            $telegram->sendMessage([
-                                'chat_id' => $gram->telegram_id,
-                                'text' => $text,
-                                'parse_mode' => 'HTML',
-                            ]);
                             curl_close($curl);
-                            //bosinchi
                         }
                     }
                 }
