@@ -564,7 +564,7 @@ class StudentSearch extends Student
         }
 
         if ($this->username != '+998 (__) ___-__-__') {
-            $query->andWhere(['like', 'u.username', $this->username . '__', false]);
+            $query->andWhere(['like', 'u.username', $this->username]);
         }
 
         $query->andFilterWhere([
