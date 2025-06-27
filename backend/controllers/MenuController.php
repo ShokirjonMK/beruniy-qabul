@@ -21,49 +21,6 @@ class MenuController extends Controller
 
     public function actionIndex()
     {
-        $chat_id = 1841508935;
-        $url  = "https://arbu-edu.uz/backend/web/uploads/contract/ALIBEKOV_DIYORBEK_MURODJON_OGLI__shartnoma.pdf";
-        $caption=  "Test Document";
-        $tempPath = \Yii::getAlias('@runtime') . '/temp_file_' . time() . '.pdf';
-        file_put_contents($tempPath, file_get_contents($url));
-
-        // Agar fayl saqlanmagan bo‘lsa, chiqib ketamiz
-        if (!file_exists($tempPath)) {
-          var_dump("Fayl saqlanmadi!");
-        }else{
-            // Fayl muvaffaqiyatli saqlandi
-            echo "Fayl muvaffaqiyatli saqlandi: " . $tempPath . PHP_EOL;
-        }
-
-        $curl = curl_init();
-        curl_setopt_array($curl, array(
-            CURLOPT_URL => 'https://api.telegram.org/bot7693608040:AAE0RCzU4V96DNNJ7jgvDn72md5-Ylj9N_I/sendDocument',
-            CURLOPT_RETURNTRANSFER => true,
-            CURLOPT_POST => true,
-            CURLOPT_SSL_VERIFYPEER => false, // ⚠️ faqat test uchun!
-            CURLOPT_POSTFIELDS => http_build_query([
-                'chat_id' => $chat_id,
-                'document' => $url,
-                'caption' => $caption,
-            ]),
-        ));
-        $response = curl_exec($curl);
-        $info = curl_getinfo($curl);
-
-        if ($response === false) {
-            echo '❌ CURL ERROR: ' . curl_error($curl) . PHP_EOL;
-            echo '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
-        } else {
-            echo '✅ RESPONSE: ' . $response . PHP_EOL;
-            echo '🔍 CURL INFO:' . print_r($info, true) . PHP_EOL;
-        }
-
-        curl_close($curl);
-
-        die;
-
-
-
         $searchModel = new MenuSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 

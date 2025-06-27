@@ -449,6 +449,7 @@ class Bot extends Model
                             if ($action == 'con3') {
                                 $fileName = $cleanName . "__shartnoma.pdf";
                                 $caption=  "Shartnoma";
+                                Contract::crmPush($student);
                             } else {
                                 $fileName = $cleanName . "__ma'lumotnoma.pdf";
                                 $caption=  "Ma'lumotnoma";
